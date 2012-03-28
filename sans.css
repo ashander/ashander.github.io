@@ -1,0 +1,310 @@
+a {
+  text-decoration: none;
+  font-weight: bold;
+}
+#centercontent a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #a00;
+}
+.el a { 
+  text-decoration: none;
+  font-weight: bold;
+  color: #040;
+}
+#leftcontent a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #040;
+}
+.ot a {
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+}
+#rightcontent a {
+  text-decoration: none;
+  color: #040;
+}
+
+#cats a {
+  text-decoration: none;
+  font-weight: normal;
+  color: #040;
+}
+#cats a.leaf {
+  text-decoration: none;
+  font-weight: bold;
+  color: #040;
+}
+
+#ad {
+  padding-left: 10px;
+  padding-right: 0px;
+  position: absolute; right: 30px; top: 80px;
+  padding-top: 0px;
+  padding-bottom: 10px;
+  width: 120px;
+}
+
+#banner {
+  background: #fff;
+  /* Replace background here */
+  background-image: url("sake60.jpg");
+  background-repeat: repeat-x;
+  color: white;
+  height: 65px;
+  voice-family: "\"}\"";
+  voice-family: inherit;
+  height: 60px;
+}
+html>body #banner {
+  height: 60px;
+}
+        
+.big { font-size: 14px; }
+
+body {
+  font: 90%/1.2 Verdana, Arial, Helvetica, sans-serif;
+  background: #fff;
+  color: #000;
+  padding: 0px;
+  margin: 10px 90px 0px 90px;
+}
+
+.caption {
+  text-align: center;
+  margin-left: 85px;
+  margin-right: 85px;
+  margin-bottom: 10px;
+}
+
+#centercontent {
+  /* max-width: 450px; */
+  background: #fff;
+  margin-right: 229px;
+  padding-left: 8px;
+  padding-right: 20px;
+  padding-top: 4px;
+  /*
+  Read expl of following hack at http://www.glish.com/css/hacks.asp
+  */
+  voice-family: "\"}\"";
+  voice-family: inherit;
+  margin-right: 231px;
+}
+html>body #centercontent {
+  margin-right: 231px;
+}
+
+code { 
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 1.0em;
+}
+#centercontent code { color: #080; }
+
+.comment {
+    background: #eee;
+}
+
+.comment-a {
+    background: #eee;
+}
+.comment-b {
+    background: #ddd;
+}
+
+#commentHere {
+    text-align: center;
+    font-style: italic;
+}
+
+dfn { font-style: italic; }
+
+/* ellipses */
+.el { font-weight: bold; }
+
+.employ { 
+ font-family: Verdana, sans-serif;
+ font-size: 80%;
+ color: black;
+ text-align: center;
+}
+
+#feed {
+ text-align: left;
+ margin: 5px 20px 0px 0px;
+}
+#feedfp {
+ text-align: left;
+ margin: 10px 20px 0px 0px;
+}
+#fonts {
+ text-align: center;
+ margin: 0 20px 0px 20px;
+}
+#footer {
+  font-size: 80%;
+  text-align: center;
+}
+
+.from {
+}
+
+#banner h1 {
+  font-size: 30px;
+  font-weight: normal;
+  padding: 6px 10px 0px 10px;
+  margin: 0px;
+}
+.h2 {
+  font-family: Verdana, sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+}
+.h3 { 
+  font-family: Verdana, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.hide { display: none; }
+
+#centercontent img { margin-left: 8px; margin-top: 10px; border: 0px; }
+
+#potd img { margin-left: -4px; border: 0px; }
+
+#rightcontent img { border: 0px; }
+
+#centercontent li {
+  font-family: Verdana, sans-serif;
+  margin: 0.5em 0 0.5em 0;
+  line-height: 1.2;
+}
+
+#rightcontent li { margin-bottom: 0; }
+
+li { margin-bottom: 10px; }
+
+.loser { margin-left: 10px; color: red; }
+
+#rightcontent .misc { text-align: center; margin-bottom: 4px; }
+.misc { text-align: center; }
+
+.o { font-style: italic; }
+
+.od { color: #a00; }
+
+ol { margin-right: 40px; }
+
+.oo { font-size: 16px; margin-bottom: 4px; }
+
+#centercontent .os {
+  padding-top: 10pt;
+  text-indent: -5px;
+}
+#rightcontent .os {
+  padding-bottom: 12pt;
+  text-indent: -5px;
+}
+
+.ot { 
+  font-weight: bold;
+  font-size: 16px;
+}
+
+#centercontent p {
+  font-family: Verdana, sans-serif;
+  margin: 0.5em 0 0.5em 0;
+  line-height: 1.2;
+}
+.p1 { text-indent: -5px; }
+
+#centercontent p a.plink {
+  text-decoration: none;
+  color: #fff; /* the page background colour */
+}
+#centercontent p:hover a.plink, p a:hover.plink {
+  color: #c8a8ff;
+}
+.pn {
+  color: #C8A8FF;
+}
+
+#potd {
+  margin: 8px 0px 3px 0px;
+}
+
+.principles { 
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.principlesFront { 
+  font-size: 14px; margin-bottom: 4px;
+  margin: 4px 0 4px 0;
+}
+
+#rightcontent {
+  padding-left: 10px;
+  position: absolute; right: 90px; top: 80px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  width: 212px;
+  color: #040;
+  border-left: 1px solid #040;
+}
+
+a#sans {
+  font-weight: normal;
+  background: #fff;
+  background: #8da;
+  font-family: Verdana, sans-serif;
+}
+a#serif {
+  font-weight: bold;
+  padding: 2px;
+  font-family: Georgia, serif;
+}
+
+.score { 
+  text-align: right;
+  margin-right: 5px;
+}
+.scoreTH {
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+#search {
+  font-weight: bold;
+  position: absolute; top: 42px; right: 95px;
+}
+
+.show { display: inline; }
+
+th { background: #8da; }
+th.empty { background: #eee; }
+td { background: #eee; }
+td.etd { background: #fff }
+td.name { text-align: left }
+td.time { text-align: right }
+td.notes { text-align: left }
+td.empty { background: #fff }
+
+#rightcontent ul
+{
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+.winner { margin-left: 5px; }
+
+.wltable {
+  font-size: 120%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}

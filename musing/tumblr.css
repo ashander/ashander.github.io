@@ -1,0 +1,89 @@
+/* Tumblr */
+#tumblrFeed
+{
+	color: #333333;
+}
+#tumblrFeed a {
+	color:#aa0000;
+	text-decoration:none;
+}
+#tumblrFeed table{
+	border: 0;
+	border-bottom: 1px solid dcdcdc;
+}
+
+#tumblrFeed a:hover {
+	text-decoration:underline;
+}
+#tumblrFeed .date 
+{
+	color: #999999;
+	font-size: 0.8em;
+}
+#tumblrFeed .icon
+{
+	border:0;
+	padding:0;
+	margin:0 3px;	
+}
+#tumblrFeed .title 
+{
+	font-size: 0.95em;
+	font-weight: bold;
+}
+#tumblrFeed .body 
+{
+	font-size: 0.9em;
+}
+#tumblrFeed img 
+{
+	border:1px solid #999999;
+	padding: 4px;
+	background: #FFF;	
+	margin:5px 0;	
+	max-width: 120px;	
+}
+#tumblrFeed .quote
+{
+	font-size: 0.9em;
+	background:#F4F5F7 url(http://chris-tran.com/images/reverb/blockquote.gif) 3px 3px no-repeat;
+	padding:8px 12px 8px 36px;
+	margin:5px 0;		
+	border:1px dashed #dcdcdc;	
+}
+#tumblrFeed .quotesrc
+{
+	font-size: 0.9em;	
+	color: #999999;
+	font-style: italic;
+}
+#tumblrFeed .convlabel
+{
+	font-size: 0.9em;
+	font-weight: bold;
+	margin:5px;		
+}
+#tumblrFeed .convtext
+{
+	font-size: 0.9em;
+	background:#F4F5F7 url(http://chris-tran.com/images/reverb/blockquote.gif) 3px 3px no-repeat;
+	padding:8px 12px 8px 36px;
+	margin:5px 0;		
+	border:1px dashed #dcdcdc;
+}
+#tumblrFeed .videosrc
+{
+	font-size: 0.9em;	
+	color: #999999;
+	font-style: italic;
+}
+
+/* Expander */
+#tumblrFeed .read-more
+{
+	font-size: 0.9em;
+}
+#tumblrFeed .re-collapse
+{
+	font-size: 0.9em;
+}
