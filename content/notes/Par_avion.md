@@ -1,6 +1,5 @@
 Title: Par avion
 Date: 2009-10-23
-Category: Notes
 Tags: musing, Canada, voting abroad
 Slug: Voting-from-Canada
 Author: Jaime Ashander

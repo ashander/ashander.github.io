@@ -1,6 +1,5 @@
 Title: The Central Valley long ago
 Date: 2011-07-25
-Category: Notes
 Tags: musing, California history
 Slug: Unhealth-plain
 Author: Jaime Ashander

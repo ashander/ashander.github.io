@@ -1,6 +1,5 @@
 Title: Whisker as integral
 Date: 2009-10-25
-Category: Notes
 Tags: musing, animal movement, biogeochemical data
 Slug: Whisker-integral
 Author: Jaime Ashander

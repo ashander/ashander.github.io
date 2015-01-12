@@ -1,6 +1,5 @@
 Title: Jobless recovery and growth-signalling autonomy 
 Date: 2010-01-14
-Category: Notes
 Tags: musing, economy, finance
 Slug: Jobless-recovery
 Author: Jaime Ashander
@@ -15,6 +14,6 @@ growth, is "the logic of the cancer cell". Whether or not you buy this
 anti-captialist mumbo jumbo, there _is_ something cancerous about a
 jobless, finance-led recovery. One of the hallmarks of cancer is <a
 href="http://bit.ly/76O6uy">growth-signaling autonomy</a>. It would
-seem that Blankfein's cycle requires jobs. Thus a jobless ``recovery''
+seem that Blankfein's cycle requires jobs. Thus a jobless "recovery"
 indicates that the finance sector has developed autonomy from the
 signals of the labor market.

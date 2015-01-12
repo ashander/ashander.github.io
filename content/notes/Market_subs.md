@@ -1,6 +1,5 @@
 Title: Market substitution in aquaculture
 Date: 2009-10-15
-Category: Notes
 Tags: musing, science, inference
 Slug: Market-substitution-aquaculture
 Author: Jaime Ashander
