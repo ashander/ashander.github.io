@@ -1,0 +1,5 @@
+{% if category is defined %}
+<h1><a  href="/category/{{category.slug}}">{{category}}</a></h1>
+{% elif tag is defined %}
+<h1><a  href="/tag/{{tag.slug}}">{{tag}}</a></h1>
+{% endif %}

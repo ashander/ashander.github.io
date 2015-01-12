@@ -1,6 +1,5 @@
 Title: Science education and uncertainty
 Date: 2009-12-04
-Category: Notes
 Tags: musing, science, public, climate
 Slug: Science-is-uncertain
 Author: Jaime Ashander

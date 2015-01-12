@@ -1,6 +1,5 @@
 Title: Canadian lag
 Date: 2009-09-01
-Category: Notes
 Tags: musing, Canada
 Slug: Canadian-lag
 Author: Jaime Ashander

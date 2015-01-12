@@ -1,6 +1,5 @@
 Title: Wrong, not confused
 Date: 2009-11-10
-Category: Notes
 Tags: musing, science, models, philosophy
 Slug: Wrong-not-confused
 Author: Jaime Ashander

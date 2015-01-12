@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}{{ article.title|striptags }} - {{ SITENAME }}{% endblock %}
+{% block html_lang %}{{ article.lang }}{% endblock %}
+{% block meta %}
+    {% if article.author %}
+        <meta name="author" content="{{ article.author }}" />
+    {% else %}
+        <meta name="author" content="{{ AUTHOR }}" />
+    {% endif %}
+    {% if article.tags %}
+        <meta name="keywords" content="{{ article.tags|join(',')|striptags }}" />
+    {% endif %}
+    {% if article.summary %}
+        <meta name="description" content="{{ article.summary|striptags|escape }}" />
+    {% endif %}
+{% endblock %}
+
+{% block canonical_rel %}
+<link rel="canonical" href="{{ SITEURL }}/{{ article.url }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+            <header class="page-header">
+                <h1>
+                    <a href="{{ SITEURL }}/{{ article.url }}"
+                       rel="bookmark"
+                       title="Permalink to {{ article.title|striptags }}">
+                        {{ article.title }}
+                    </a>
+                </h1>
+            </header>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-3">
+    {% if article.results %}
+    <div class="panel-primary">
+      <div class='panel-heading'> <h3 class='panel-title'>Outputs</h3></div>
+
+        {% for tag, results in tags %}
+        {% if tag|string in article.results %}
+        {% for result in results %}
+      <div class='list-group-item'd>
+        <i class="fa fa-pencil fa-fw"></i>
+        <a class="off" href="{{ SITEURL }}/{{ result.url}}">{{ result.title }}</a>
+      </div>
+        {% endfor %}
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% include 'includes/taglistprimary.html' %}
+  </div>
+
+  <div class="col-sm-6">
+    <div class="entry-content">
+      {{ article.content }}
+    </div>
+    <!-- /.entry-content -->
+  </div>
+
+    <div class="col-sm-3">
+    {% if article.image %}
+      <div class="panel">
+        <div class="panel-body">
+            <img src={{ article.image }} />
+        </div>
+      </div>
+    {% endif %}
+    </div>
+</div>  
+</div>
+
+   {% include 'includes/etc-footer.html' %}
+{% endblock content %}

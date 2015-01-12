@@ -1,0 +1,12 @@
+        {% if article.tags %}
+      <li class="list-group-item"> 
+        
+        <span class="label label-primary">Tags</span>
+        {% for tag in article.tags %}
+        <a class="off" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>
+        {% if not loop.last %}
+        /
+        {% endif %}
+        {% endfor %}
+      </li>
+        {% endif %}

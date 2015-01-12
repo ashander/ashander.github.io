@@ -1,0 +1,14 @@
+<div>
+  <a href="{{ SITEURL }}/{{ article.url }}">
+  {% include 'includes/iconfeed.html' %}
+  </a>
+  in {% for tag in article.tags %}
+  <a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>
+  {% if not loop.last %}
+  /
+  {% endif %}
+  {% endfor %}
+  on {{article.locale_date}}
+</div>
+
+ 

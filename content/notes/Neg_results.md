@@ -1,12 +1,11 @@
 Title: Negative results or technical problems?
 Date: 2009-11-02
-Category: Notes
 Tags: musing, science, inference, ethics
 Slug: Omitting-negative-results
 Author: Jaime Ashander
 
 
-True or false: ``Non-publication of negative results is extraordinarily common in science....'' ?
+True or false: "Non-publication of negative results is extraordinarily common in science...." ?
 
 This comes from biomed world, specifically protein design, where some
 awesome claims---design of protein receptors to detect TNT (the
@@ -17,8 +16,8 @@ work](http://www.nature.com/news/2008/080509/full/453275a.html).
 
 The quotation above is from Loren Looger, who was a PhD student on the
 project. He's referrring to unreported instances where a designed
-protein didn't bind the target and concludes that the omission ``did
-not seem inappropriate.'' This brings up an important distinction, I
+protein didn't bind the target and concludes that the omission "did
+not seem inappropriate." This brings up an important distinction, I
 think, between negative results and experimental or procedural
 problems.
 
