@@ -27,7 +27,6 @@
 </div>
 
 <div class="row">
-
   {% for category, articles in categories %}
      <div class="col-sm-4">
        <h2><a  href="/category/{{category.slug}}">{{category}}</a></h2>
@@ -37,8 +36,11 @@
          <div>
            {% include 'includes/iconfeed.html' %}
           <a  href="{{ article.url }}">{{ article.title }}</a>
+           {% if category == 'results' %} ({{article.date.year}}) <i>{{ article.journal }}</i> {% endif %}
          </div>
-         <div>
+
+         {% if category == 'notes' %}
+         <div >
            in {% for tag in article.tags %}
            <a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>
            {% if not loop.last %}
@@ -47,6 +49,8 @@
            {% endfor %}
            on {{article.locale_date}}
          </div>
+         {% endif %}
+
          <div class="spacer"></div>
          {% endfor %}
     </div>
