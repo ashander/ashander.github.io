@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jaime Ashander</title><link href="http://ashander.github.io/" rel="alternate"></link><link href="http://ashander.github.io/feeds/themes.atom.xml" rel="self"></link><id>http://ashander.github.io/</id><updated>2011-06-29T00:00:00-07:00</updated><entry><title>Rapid evolution, local adaption, and model-data connections</title><link href="http://ashander.github.io/posts/2011/06/phd-initial-summary/" rel="alternate"></link><updated>2011-06-29T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:ashander.github.io,2011-06-29:posts/2011/06/phd-initial-summary/</id><summary type="html">&lt;p&gt;My Ph.D. is focused on modelling populations that exhibit rapid responses to enviornmental change.
+Potential applications include salmon, annual plants, and infectious disease.
+I'm particularly interested in transient dynamics, connecting models to data, and forecasting.&lt;/p&gt;</summary><category term="Ph.D."></category><category term="local adaptation"></category><category term="evolution"></category><category term="stochasticity"></category><category term="transient dynamics"></category></entry><entry><title>Population biology in regulated rivers -- application to regulation and restoration</title><link href="http://ashander.github.io/posts/2010/09/population-biology-in-regulated-rivers/" rel="alternate"></link><updated>2010-09-29T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:ashander.github.io,2010-09-29:posts/2010/09/population-biology-in-regulated-rivers/</id><summary type="html">&lt;ul&gt;
+&lt;li&gt;IGERT project&lt;/li&gt;
+&lt;li&gt;CO River Class&lt;/li&gt;
+&lt;/ul&gt;</summary><category term="floodplains"></category><category term="salmon"></category><category term="restoration"></category><category term="applied ecology"></category><category term="population biology"></category><category term="Grand Canyon"></category><category term="optimization"></category><category term="economics"></category></entry><entry><title>Effects of parasite exchange among farm and wild salmon</title><link href="http://ashander.github.io/posts/2010/08/parasite-exchange/" rel="alternate"></link><updated>2010-08-29T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:ashander.github.io,2010-08-29:posts/2010/08/parasite-exchange/</id><summary type="html">&lt;p&gt;My master's research focused on the evolutionary ecology of sea lice,
+   farmed and wild salmon. I'm particularly interested in the ways in
+   which the combination of wild salmon migrations and salmon farm
+   management can influence chemical resistance evoultion on farms.&lt;/p&gt;
+&lt;p&gt;Sea lice tend to proliferate on sea-cage farmed salmon, resulting in
+economic costs to the farmers. These outbreaks can also affect wild
+populations, which raises concerns about population conservation and
+the environmental costs of sea-cage aquaculture. Salmon farmers
+address these concerns with integrated pest management (IPM)
+strategies that include chemical treatments. These chemicals can
+reduce parasite numbers, but over time, parasites can develop a
+resistance to the chemicals.&lt;/p&gt;
+&lt;p&gt;In coastal B.C. new conservation regimes rely on increased use of
+  chemical treatments, which is classically associated with resistance
+  emergence. Achieving conservation goals could then actually
+  &lt;i&gt;increase&lt;/i&gt; the risk of resistance emergence; however, flow of
+  susceptible genes from lice on wild fish into populations on farms
+  could delay resistance emergence (similar to "refuge" planting in
+  agriculture).&lt;/p&gt;
+&lt;h3&gt;Wild salmon demography&lt;/h3&gt;
+&lt;p&gt;Sustained exchange of parasites between wild and farmed salmon,
+  combined with wild salmon migrations can alter dynamical patterns in
+  salmon populations. Notably, patterns of line dominance in pink
+  salmon may change in the presence of farms.  Line dominance can
+  either increase or decrease, depending on the way in which salmon
+  farms respond to infections.&lt;/p&gt;
+&lt;p&gt;In a follow-up study, coworkers and I show that sustained spill-back
+into wild reservoir hosts can result in an Allee effect in the wild
+hosts.&lt;/p&gt;
+&lt;h3&gt;Parasite evolution&lt;/h3&gt;
+&lt;p&gt;&lt;i&gt;Goal&lt;/i&gt;: Understand feedbacks between increasing chemical use,
+ conservation and resistance management in the context of sea lice,
+ wild salmon and salmon farms.&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;Hypothesis&lt;/i&gt;: Wild salmon serve as evolutionary refuges, slowing
+resistance evolution in sea lice. &lt;!--, and thus provide an
+&lt;i&gt;ecosystem service&lt;/i&gt;. --&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Questions:&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp; &lt;strong&gt;How do wild salmon migrations near farms affect time to resistance emergence?&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Specifically, how do
+  management actions (treatment, stocking density) affect time to
+  resistance?&lt;/li&gt;
+&lt;li&gt;What are the effects of biological assumptions?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;nbsp; &lt;strong&gt;How does varying synchrony of treatments on groups of farms change things?&lt;/strong&gt;&lt;/p&gt;</summary><category term="sea lice"></category><category term="salmon"></category></entry></feed>
