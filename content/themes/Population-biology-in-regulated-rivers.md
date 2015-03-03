@@ -6,6 +6,9 @@ Template: theme
 Image: /images/applied.png
 Results: Floodplain
 
-* IGERT project
-* CO River Class
+Several projects apply concepts and methods from population biology to applied issues in river management and conservation:
+
+* IGERT collaborative project on [Floodplain management: opportunities, challenges, and successes](http://reach.ucdavis.edu/programs/floodplains.html) with collaborators [Noam Ross](http://www.noamross.net/), Kelly Graveur, Megan Kelso, and Mary Mendoza.
+
+* CO River Class and Grand Canyon trip: details to come
 
