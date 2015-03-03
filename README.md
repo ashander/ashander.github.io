@@ -1,2 +1,2 @@
 # ashander.github.io
-My [website](https://www.ashander.info) revamped
+My [website](http://www.ashander.info) revamped
