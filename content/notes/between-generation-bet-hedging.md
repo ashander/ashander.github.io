@@ -3,6 +3,12 @@ Author: Jaime
 Date: 2015-01-12
 Tags: stochastic life histories, evolution, stochasticity
 
+Version of notes for discussion I led in
+[Sebastain Schreiber's](http://www.eve.ucdavis.edu/sschreiber/) for
+PBG 271 Research Conference in Ecology on "Life history evolution in
+stochastic environments".
+
+
 ### Reading Childs et al and Stearn's piece on Bernoulli
 
 [Childs, Metcalf and Rees (2010)](doi:10.1098/rspb.2010.0707) present
@@ -12,7 +18,11 @@ between conservative and diversified strategies.
 
 #### Geometic mean fitness concept
 
->When fitness is temporally variable, the appropriate measure of evolutionary success is the expected geometric mean growth rate of a genotype. This is because fitness, like population growth, is an inherently multiplicative process that is very sensitive to occasional low values. -- Childs et al 2011
+>When fitness is temporally variable, the appropriate measure of
+>evolutionary success is the expected geometric mean growth rate of a
+>genotype. This is because fitness, like population growth, is an
+>inherently multiplicative process that is very sensitive to
+>occasional low values. -- Childs et al 2011
 
 Let's remind ourselves why.
 
