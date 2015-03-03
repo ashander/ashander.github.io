@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jaime Ashander</title><link href="http://ashander.github.io/" rel="alternate"></link><link href="http://ashander.github.io/feeds/all.atom.xml" rel="self"></link><id>http://ashander.github.io/</id><updated>2015-01-12T00:00:00-08:00</updated><entry><title>Between-generation bet-hedging</title><link href="http://ashander.github.io/posts/2015/01/between-generation-bet-hedging/" rel="alternate"></link><updated>2015-01-12T00:00:00-08:00</updated><author><name>Jaime</name></author><id>tag:ashander.github.io,2015-01-12:posts/2015/01/between-generation-bet-hedging/</id><summary type="html">&lt;h3&gt;Reading Childs et al and Stearn's piece on Bernoulli&lt;/h3&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jaime Ashander</title><link href="http://ashander.github.io/" rel="alternate"></link><link href="http://ashander.github.io/feeds/all.atom.xml" rel="self"></link><id>http://ashander.github.io/</id><updated>2015-01-12T00:00:00-08:00</updated><entry><title>Between-generation bet-hedging</title><link href="http://ashander.github.io/posts/2015/01/between-generation-bet-hedging/" rel="alternate"></link><updated>2015-01-12T00:00:00-08:00</updated><author><name>Jaime</name></author><id>tag:ashander.github.io,2015-01-12:posts/2015/01/between-generation-bet-hedging/</id><summary type="html">&lt;p&gt;Version of notes for discussion I led in
+&lt;a href="http://www.eve.ucdavis.edu/sschreiber/"&gt;Sebastain Schreiber's&lt;/a&gt; for
+PBG 271 Research Conference in Ecology on "Life history evolution in
+stochastic environments".&lt;/p&gt;
+&lt;h3&gt;Reading Childs et al and Stearn's piece on Bernoulli&lt;/h3&gt;
 &lt;p&gt;&lt;a href="doi:10.1098/rspb.2010.0707"&gt;Childs, Metcalf and Rees (2010)&lt;/a&gt; present
 a plant-focused review of bet-hedging, including a review of essential
 theory.  As in many papers on bet-hedging, these authors distiguish
 between conservative and diversified strategies.&lt;/p&gt;
 &lt;h4&gt;Geometic mean fitness concept&lt;/h4&gt;
 &lt;blockquote&gt;
-&lt;p&gt;When fitness is temporally variable, the appropriate measure of evolutionary success is the expected geometric mean growth rate of a genotype. This is because fitness, like population growth, is an inherently multiplicative process that is very sensitive to occasional low values. -- Childs et al 2011&lt;/p&gt;
+&lt;p&gt;When fitness is temporally variable, the appropriate measure of
+evolutionary success is the expected geometric mean growth rate of a
+genotype. This is because fitness, like population growth, is an
+inherently multiplicative process that is very sensitive to
+occasional low values. -- Childs et al 2011&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Let's remind ourselves why.&lt;/p&gt;
 &lt;p&gt;Following roughly the notation of Frank and Slatkin (1990), let &lt;span class="math"&gt;\(x_i\)&lt;/span&gt; the frequency of genotype &lt;span class="math"&gt;\(i\)&lt;/span&gt; and &lt;span class="math"&gt;\(R_i(t)\)&lt;/span&gt; the mean fitness of genotype &lt;span class="math"&gt;\(i\)&lt;/span&gt; in year &lt;span class="math"&gt;\(t\)&lt;/span&gt;, then
