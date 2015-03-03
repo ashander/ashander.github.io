@@ -37,9 +37,13 @@ DEFAULT_PAGINATION = 10
 RELATIVE_URLS = True
 
 # static paths copied without parsing
-STATIC_PATHS = ['images', 'code', 'extra/custom.css']
+STATIC_PATHS = ['images', 'extra/custom.css', 'extra/CNAME', 
+                'extra/README.md' , 'extra/LICENSE.md' ]
 EXTRA_PATH_METADATA = {
-    'extra/custom.css': {'path': 'static/custom.css'}
+    'extra/custom.css': {'path': 'static/custom.css'},
+    'extra/CNAME': {'path': 'CNAME'},
+    'extra/README.md': {'path': 'README.md'},
+    'extra/LICENSE.md': {'path': 'LICENSE.md'}
 }
 
 ## menu setup
