@@ -1,6 +1,6 @@
 Title: Effects of parasite exchange among farm and wild salmon
 Date: 2010-08-29
-Tags: sea lice, salmon
+Tags: sea lice, salmon, resistance evolution, complex population dynamics, population biology, mathematical ecology
 Author: Jaime Ashander
 Template: theme 
 Image: /images/msc.png
@@ -24,7 +24,7 @@ resistance to the chemicals.
 In coastal B.C. new conservation regimes rely on increased use of
   chemical treatments, which is classically associated with resistance
   emergence. Achieving conservation goals could then actually
-  <i>increase</i> the risk of resistance emergence; however, flow of
+  _increase_ the risk of resistance emergence; however, flow of
   susceptible genes from lice on wild fish into populations on farms
   could delay resistance emergence (similar to "refuge" planting in
   agriculture).
@@ -45,13 +45,13 @@ hosts.
 
 ### Parasite evolution
 
-  <i>Goal</i>: Understand feedbacks between increasing chemical use,
+  _Goal_: Understand feedbacks between increasing chemical use,
  conservation and resistance management in the context of sea lice,
  wild salmon and salmon farms.
 
-<i>Hypothesis</i>: Wild salmon serve as evolutionary refuges, slowing
+_Hypothesis_: Wild salmon serve as evolutionary refuges, slowing
 resistance evolution in sea lice. <!--, and thus provide an
-<i>ecosystem service</i>. -->
+_ecosystem service_. -->
   
 _Questions:_
 
