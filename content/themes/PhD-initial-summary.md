@@ -1,6 +1,6 @@
 Title: Rapid evolution, local adaption, and model-data connections
 Date: 2011-06-29
-Tags: Ph.D., local adaptation, evolution, stochasticity, transient dynamics
+Tags: Ph.D., local adaptation, evolution, stochasticity, transient dynamics, population biology
 Author: Jaime Ashander
 Template: theme 
 Image: /images/phd.png
