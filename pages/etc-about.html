@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>This site - Jaime Ashander</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="../pages/etc-about.html">
+
+        <meta name="author" content="Jaime Ashander" />
+        <meta name="description" content="A long-overdue website redesign. My overall goal is to combine personal academic website (papers, projects, CV, etc) along with a platform for quick blog-like entries (perhaps later adding disqus integration, share buttons etc). Currently, pull data from figshare for results. Eventually I&#39;d like to automatically pull data from other ..." />
+
+    <meta property="og:site_name" content="Jaime Ashander" />
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="This site"/>
+    <meta property="og:url" content="../pages/etc-about.html"/>
+    <meta property="og:description" content="A long-overdue website redesign. My overall goal is to combine personal academic website (papers, projects, CV, etc) along with a platform for quick blog-like entries (perhaps later adding disqus integration, share buttons etc). Currently, pull data from figshare for results. Eventually I&#39;d like to automatically pull data from other ..." />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="../theme/css/bootstrap.yeti.min.css" type="text/css"/>
+    <link href="../theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="../theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="../theme/css/style.css" type="text/css"/>
+        <link href="../static/custom.css" rel="stylesheet">
+
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="../" class="navbar-brand">
+                <i class="fa fa-home fa-fw"></i>
+            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="../category/themes">Themes</a>
+                        </li>
+                        <li >
+                            <a href="../category/results">Results</a>
+                        </li>
+                        <li >
+                            <a href="../category/notes">Notes</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<script type="text/javascript">
+/*<![CDATA[*/
+var el="banner";
+var bgimg=new Array("/images/banner/bamfield.jpg", "/images/banner/bedroom.jpg", "/images/banner/\
+fir.jpg", "/images/banner/parker.jpg", "/images/banner/sunrise.jpg");
+var random=Math.round((bgimg.length-1)*Math.random());
+var cssStr="#"+el+" { background: url("+bgimg[random]+") repeat-x top left } ";
+var  style=document.createElement("style");
+
+style.setAttribute("type","text/css");
+if(style.styleSheet)
+{style.styleSheet.cssText=cssStr;}
+else
+{var cssText=document.createTextNode(cssStr);
+style.appendChild(cssText);}
+document.getElementsByTagName("head")[0].appendChild(style);
+/*]]>*/
+</script>
+
+
+<div id="banner">
+        <div class="container">
+                <div class="copy">
+                        <h1>Jaime Ashander</h1>
+                                <p class="intro">rapid evolution: theory, computation, inference</p>
+                </div>
+        </div>
+</div><!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+
+    <section id="content" class="body">
+        <h1 class="entry-title">This site</h1>
+        
+        <div class="entry-content">
+            <p>A long-overdue website redesign. My overall goal is to combine
+personal academic website (papers, projects, CV, etc) along with a
+platform for quick blog-like entries (perhaps later adding disqus
+integration, share buttons etc).</p>
+<p>Currently, pull data from figshare for results.
+Eventually I'd like to automatically pull data from other sources (eg github). </p>
+<h2>Details</h2>
+<ul>
+<li>templated (jinja2) index to pull from results (papers, preprints),
+  themes (overall project categories) and notes (blog-like)</li>
+<li>will add projects (work in progress, github repos, project descriptions) as top-level category soon</li>
+<li>these categories are repeated on top nav</li>
+<li>rotating banner image with some shots from old website</li>
+</ul>
+<h1>Engine + hosting</h1>
+<ul>
+<li>Pelican engine for a static site to generate results, projects, notes from markdown</li>
+<li>hosting on github</li>
+</ul>
+<h1>Style</h1>
+<ul>
+<li>bootstrap, using bootswatch yeti via pelican-bootstrap3</li>
+<li>very light additional css (eg padding elements)</li>
+<li>customizations to pelican-bootstrap3 include rotating banner bar
+  (via javascript in base template), limiting sidebar display to
+  blog-like (called notes here) entries, and adding neighbor arrows to blog posts</li>
+</ul>
+        </div>
+    </section>
+<div class="row">
+  <div class='col-sm-12 col-sm-offset-4'>
+    <h1>etc</h1>
+
+    <ul class='list-inline'>
+ <!-- exclude etc pages -->
+      <li><a href="../pages/etc-about.html">
+          <i class='fa fa-ellipsis-v'></i> This site
+      </a></li>
+ <!-- exclude etc pages -->
+      <li><a href="../pages/etc-background.html">
+          <i class='fa fa-ellipsis-v'></i> Background
+      </a></li>
+ <!-- exclude etc pages -->
+      <li><a href="../pages/etc-contact.html">
+          <i class='fa fa-ellipsis-v'></i> Contact
+      </a></li>
+ <!-- exclude etc pages -->
+      <li><a href="../pages/etc-funding.html">
+          <i class='fa fa-ellipsis-v'></i> Funding
+      </a></li>
+    </ul>
+  </div>
+</div>        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2009-2015 Jaime Ashander
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="../theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="../theme/js/respond.min.js"></script>
+
+    <script src="../theme/js/bodypadding.js"></script>
+
+</body>
+</html>

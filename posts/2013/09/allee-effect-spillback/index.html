@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>Allee effect from parasite spill-back - Jaime Ashander</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="../../../../posts/2013/09/allee-effect-spillback/">
+
+        <meta name="author" content="Martin Krkosek" />
+        <meta name="keywords" content="Peer reviewed,M.Sc.,Allee effect,spillback,spillover,pink salmon" />
+        <meta name="description" content="The exchange of native pathogens between wild and domesticated animals can lead to novel disease threats to wildlife. However, the dynamics of wild host-parasite systems exposed to a reservoir of domesticated hosts are not well understood. A simple mathematical model reveals that the spill-back of native parasites from domestic to ..." />
+
+    <!-- Open Graph tags -->
+        <meta property="og:site_name" content="Jaime Ashander" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="Jaime Ashander"/>
+        <meta property="og:url" content="../../../.."/>
+        <meta property="og:description" content="Jaime Ashander"/>
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="../../../../theme/css/bootstrap.yeti.min.css" type="text/css"/>
+    <link href="../../../../theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="../../../../theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../theme/css/style.css" type="text/css"/>
+        <link href="../../../../static/custom.css" rel="stylesheet">
+
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="../../../../" class="navbar-brand">
+                <i class="fa fa-home fa-fw"></i>
+            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="../../../../category/themes">Themes</a>
+                        </li>
+                        <li class="active">
+                            <a href="../../../../category/results">Results</a>
+                        </li>
+                        <li >
+                            <a href="../../../../category/notes">Notes</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<script type="text/javascript">
+/*<![CDATA[*/
+var el="banner";
+var bgimg=new Array("/images/banner/bamfield.jpg", "/images/banner/bedroom.jpg", "/images/banner/\
+fir.jpg", "/images/banner/parker.jpg", "/images/banner/sunrise.jpg");
+var random=Math.round((bgimg.length-1)*Math.random());
+var cssStr="#"+el+" { background: url("+bgimg[random]+") repeat-x top left } ";
+var  style=document.createElement("style");
+
+style.setAttribute("type","text/css");
+if(style.styleSheet)
+{style.styleSheet.cssText=cssStr;}
+else
+{var cssText=document.createTextNode(cssStr);
+style.appendChild(cssText);}
+document.getElementsByTagName("head")[0].appendChild(style);
+/*]]>*/
+</script>
+
+
+<div id="banner">
+        <div class="container">
+                <div class="copy">
+                        <h1>Jaime Ashander</h1>
+                                <p class="intro">rapid evolution: theory, computation, inference</p>
+                </div>
+        </div>
+</div><!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+            <header class="page-header">
+                <h1>
+                    <a href="../../../../posts/2013/09/allee-effect-spillback/"
+                       rel="bookmark"
+                       title="Permalink to Allee effect from parasite spill-back">
+                        Allee effect from parasite spill-back
+                    </a>
+                </h1>
+           </header>
+                <div class="entry-content">
+                  <div class="panel">
+                    <div class="panel-body">
+                      Martin Krkosek,                       Jaime Ashander,                       L Neil Frazer,                       Mark A Lewis (2013)                       The American Naturalist
+                    </div>
+                  </div>
+                </div>
+ 
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-3">
+      <li class="list-group-item"> 
+          <span class="label label-primary">DOI</span>
+          <a class="off" href="http://dx.doi.org/10.1086/673238">10.1086/673238</a>
+      </li>
+        
+        
+        
+      <li class="list-group-item"> 
+        
+        <span class="label label-primary">Tags</span>
+        <a class="off" href="../../../../tag/peer-reviewed/">Peer reviewed</a>
+        /
+        <a class="off" href="../../../../tag/msc/">M.Sc.</a>
+        /
+        <a class="off" href="../../../../tag/allee-effect/">Allee effect</a>
+        /
+        <a class="off" href="../../../../tag/spillback/">spillback</a>
+        /
+        <a class="off" href="../../../../tag/spillover/">spillover</a>
+        /
+        <a class="off" href="../../../../tag/pink-salmon/">pink salmon</a>
+      </li>
+  </div>
+                
+  <div class="col-sm-6">
+    <div class="entry-content">
+      <p>The exchange of native pathogens between wild and domesticated animals
+can lead to novel disease threats to wildlife. However, the dynamics
+of wild host-parasite systems exposed to a reservoir of domesticated
+hosts are not well understood. A simple mathematical model reveals
+that the spill-back of native parasites from domestic to wild hosts
+may cause a demographic Allee effect in the wild host population. A
+second model is tailored to the particulars of pink salmon
+(Oncorhynchus gorbuscha) and salmon lice (Lepeophtheirus salmonis),
+for which parasite spill-back is a conservation and fishery
+concern. In both models, parasite spill-back weakens the coupling of
+parasite and wild host abundance-particularly at low host
+abundance-causing parasites per host to increase as a wild host
+population declines. These findings show that parasites shared across
+host populations have effects analogous to those of generalist
+predators and can similarly cause an unstable equilibrium in a focal
+host population that separates persistence and extirpation. Allee
+effects in wildlife arising from parasite spill-back are likely to be
+most pronounced in systems where the magnitude of transmission from
+domestic to wild host populations is high because of high parasite
+abundance in domestic hosts, prolonged sympatry of domestic and wild
+hosts, a high transmission coefficient for parasites, long-lived
+parasite larvae, and proximity of domesticated populations to wildlife
+migration corridors.</p>
+    </div>
+    <!-- /.entry-content -->
+  </div>
+
+    <div class="col-sm-3">
+      <div class="panel">
+        <div class="panel-body">
+          <a class="off" href="http://dx.doi.org/10.1086/673238">
+            <img src=/images/allee-effect.png />
+          </a>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="row">
+  <div class='col-sm-12 col-sm-offset-4'>
+    <h1>etc</h1>
+
+    <ul class='list-inline'>
+ <!-- exclude etc pages -->
+      <li><a href="../../../../pages/etc-about.html">
+          <i class='fa fa-ellipsis-v'></i> This site
+      </a></li>
+ <!-- exclude etc pages -->
+      <li><a href="../../../../pages/etc-background.html">
+          <i class='fa fa-ellipsis-v'></i> Background
+      </a></li>
+ <!-- exclude etc pages -->
+      <li><a href="../../../../pages/etc-contact.html">
+          <i class='fa fa-ellipsis-v'></i> Contact
+      </a></li>
+ <!-- exclude etc pages -->
+      <li><a href="../../../../pages/etc-funding.html">
+          <i class='fa fa-ellipsis-v'></i> Funding
+      </a></li>
+    </ul>
+  </div>
+</div>        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2009-2015 Jaime Ashander
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="../../../../theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../../../../theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="../../../../theme/js/respond.min.js"></script>
+
+    <script src="../../../../theme/js/bodypadding.js"></script>
+
+</body>
+</html>
