@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jaime Ashander</title><link href="http://ashander.github.io/" rel="alternate"></link><link href="http://ashander.github.io/feeds/notes.atom.xml" rel="self"></link><id>http://ashander.github.io/</id><updated>2015-01-12T00:00:00-08:00</updated><entry><title>Between-generation bet-hedging</title><link href="http://ashander.github.io/posts/2015/01/between-generation-bet-hedging/" rel="alternate"></link><updated>2015-01-12T00:00:00-08:00</updated><author><name>Jaime</name></author><id>tag:ashander.github.io,2015-01-12:posts/2015/01/between-generation-bet-hedging/</id><summary type="html">&lt;p&gt;Version of notes for discussion I led in
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jaime Ashander</title><link href="http://www.ashander.info/" rel="alternate"></link><link href="http://www.ashander.info/feeds/notes.atom.xml" rel="self"></link><id>http://www.ashander.info/</id><updated>2015-01-12T00:00:00-08:00</updated><entry><title>Between-generation bet-hedging</title><link href="http://www.ashander.info/posts/2015/01/between-generation-bet-hedging/" rel="alternate"></link><updated>2015-01-12T00:00:00-08:00</updated><author><name>Jaime</name></author><id>tag:www.ashander.info,2015-01-12:posts/2015/01/between-generation-bet-hedging/</id><summary type="html">&lt;p&gt;Version of notes for discussion I led in
 &lt;a href="http://www.eve.ucdavis.edu/sschreiber/"&gt;Sebastain Schreiber's&lt;/a&gt; for
 PBG 271 Research Conference in Ecology on "Life history evolution in
 stochastic environments".&lt;/p&gt;
@@ -122,10 +122,10 @@ arithmetic mean fitness (if they have lower variance).&lt;/p&gt;
         "}); ";
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</summary><category term="stochastic life histories"></category><category term="evolution"></category><category term="stochasticity"></category></entry><entry><title>The Central Valley long ago</title><link href="http://ashander.github.io/posts/2011/07/Unhealth-plain/" rel="alternate"></link><updated>2011-07-25T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:ashander.github.io,2011-07-25:posts/2011/07/Unhealth-plain/</id><summary type="html">&lt;blockquote&gt;
+&lt;/script&gt;</summary><category term="stochastic life histories"></category><category term="evolution"></category><category term="stochasticity"></category></entry><entry><title>The Central Valley long ago</title><link href="http://www.ashander.info/posts/2011/07/Unhealth-plain/" rel="alternate"></link><updated>2011-07-25T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2011-07-25:posts/2011/07/Unhealth-plain/</id><summary type="html">&lt;blockquote&gt;
 &lt;p&gt;The plain is unhealthy and infested with mosquitos in incredible
 numbers and of unparalleled ferocity --- William Brewer, 1861&lt;/p&gt;
-&lt;/blockquote&gt;</summary><category term="musing"></category><category term="California history"></category></entry><entry><title>Jobless recovery and growth-signalling autonomy</title><link href="http://ashander.github.io/posts/2010/01/Jobless-recovery/" rel="alternate"></link><updated>2010-01-14T00:00:00-08:00</updated><author><name>Jaime Ashander</name></author><id>tag:ashander.github.io,2010-01-14:posts/2010/01/Jobless-recovery/</id><summary type="html">&lt;blockquote&gt;
+&lt;/blockquote&gt;</summary><category term="musing"></category><category term="California history"></category></entry><entry><title>Jobless recovery and growth-signalling autonomy</title><link href="http://www.ashander.info/posts/2010/01/Jobless-recovery/" rel="alternate"></link><updated>2010-01-14T00:00:00-08:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2010-01-14:posts/2010/01/Jobless-recovery/</id><summary type="html">&lt;blockquote&gt;
 &lt;p&gt;We help companies to grow by helping them to raise capital...
 Companies that grow create wealth. This, in turn, allows
 people to have jobs that create more growth and more wealth. It's a
@@ -138,7 +138,7 @@ jobless, finance-led recovery. One of the hallmarks of cancer is &lt;a
 href="http://bit.ly/76O6uy"&gt;growth-signaling autonomy&lt;/a&gt;. It would
 seem that Blankfein's cycle requires jobs. Thus a jobless "recovery"
 indicates that the finance sector has developed autonomy from the
-signals of the labor market.&lt;/p&gt;</summary><category term="musing"></category><category term="economy"></category><category term="finance"></category></entry><entry><title>Science education and uncertainty</title><link href="http://ashander.github.io/posts/2009/12/Science-is-uncertain/" rel="alternate"></link><updated>2009-12-04T00:00:00-08:00</updated><author><name>Jaime Ashander</name></author><id>tag:ashander.github.io,2009-12-04:posts/2009/12/Science-is-uncertain/</id><summary type="html">&lt;p&gt;A brand new "-gate" on the climate science front has me thinking about
+signals of the labor market.&lt;/p&gt;</summary><category term="musing"></category><category term="economy"></category><category term="finance"></category></entry><entry><title>Science education and uncertainty</title><link href="http://www.ashander.info/posts/2009/12/Science-is-uncertain/" rel="alternate"></link><updated>2009-12-04T00:00:00-08:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2009-12-04:posts/2009/12/Science-is-uncertain/</id><summary type="html">&lt;p&gt;A brand new "-gate" on the climate science front has me thinking about
 the relationship between science and the public. A big issue in
 communicating science stems from the fundamental disconnect between
 science as practiced and science as taught in introductory formats,
@@ -150,7 +150,7 @@ this uncertainty. Because the public doesn't understand what science
 &lt;em&gt;really&lt;/em&gt; is, the effect is to sew seeds of doubt.&lt;/p&gt;
 &lt;p&gt;A more productive focus would be to discuss quantitative measures of
 uncertainty and degrees of risk tolerance. The notion that certainty
-is possible, however, short circuits this discussion.&lt;/p&gt;</summary><category term="musing"></category><category term="science"></category><category term="public"></category><category term="climate"></category></entry><entry><title>Wrong, not confused</title><link href="http://ashander.github.io/posts/2009/11/Wrong-not-confused/" rel="alternate"></link><updated>2009-11-10T00:00:00-08:00</updated><author><name>Jaime Ashander</name></author><id>tag:ashander.github.io,2009-11-10:posts/2009/11/Wrong-not-confused/</id><summary type="html">&lt;p&gt;Quoting Turchin (1998) quoting Hull (1988) quoting Bacon (?) : &lt;/p&gt;
+is possible, however, short circuits this discussion.&lt;/p&gt;</summary><category term="musing"></category><category term="science"></category><category term="public"></category><category term="climate"></category></entry><entry><title>Wrong, not confused</title><link href="http://www.ashander.info/posts/2009/11/Wrong-not-confused/" rel="alternate"></link><updated>2009-11-10T00:00:00-08:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2009-11-10:posts/2009/11/Wrong-not-confused/</id><summary type="html">&lt;p&gt;Quoting Turchin (1998) quoting Hull (1988) quoting Bacon (?) : &lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;In science it is better to be wrong than confused.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -158,7 +158,7 @@ is possible, however, short circuits this discussion.&lt;/p&gt;</summary><catego
 reality will be wrong, one with clear definitions and assumptions can
 be helpful. Mathematical modeling is a tool to move from confusion
 about a process to making clear (if wrong) statements about that
-process.&lt;/p&gt;</summary><category term="musing"></category><category term="science"></category><category term="models"></category><category term="philosophy"></category></entry><entry><title>Negative results or technical problems?</title><link href="http://ashander.github.io/posts/2009/11/Omitting-negative-results/" rel="alternate"></link><updated>2009-11-02T00:00:00-08:00</updated><author><name>Jaime Ashander</name></author><id>tag:ashander.github.io,2009-11-02:posts/2009/11/Omitting-negative-results/</id><summary type="html">&lt;p&gt;True or false: "Non-publication of negative results is extraordinarily common in science...." ?&lt;/p&gt;
+process.&lt;/p&gt;</summary><category term="musing"></category><category term="science"></category><category term="models"></category><category term="philosophy"></category></entry><entry><title>Negative results or technical problems?</title><link href="http://www.ashander.info/posts/2009/11/Omitting-negative-results/" rel="alternate"></link><updated>2009-11-02T00:00:00-08:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2009-11-02:posts/2009/11/Omitting-negative-results/</id><summary type="html">&lt;p&gt;True or false: "Non-publication of negative results is extraordinarily common in science...." ?&lt;/p&gt;
 &lt;p&gt;This comes from biomed world, specifically protein design, where some
 awesome claims---design of protein receptors to detect TNT (the
 explosive) among other things---have &lt;a href="http://www.nature.com/news/2009/091012/full/news.2009.998.html"&gt;come under
@@ -194,14 +194,14 @@ proportion of the 10,000 runs that &lt;em&gt;ever&lt;/em&gt; reached &lt;em&gt;N
 discarded the results that never reached &lt;em&gt;N&lt;/em&gt; you would say the
 probability is 1. In this case you would be omitting &lt;em&gt;real&lt;/em&gt; (but
 negative) &lt;em&gt;results&lt;/em&gt; and mis-reporting your findings.&lt;/p&gt;
-&lt;p&gt;I wonder, to which type of "negative results" is Looger referring?&lt;/p&gt;</summary><category term="musing"></category><category term="science"></category><category term="inference"></category><category term="ethics"></category></entry><entry><title>Salish Sea</title><link href="http://ashander.github.io/posts/2009/10/Salish-sea/" rel="alternate"></link><updated>2009-10-31T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:ashander.github.io,2009-10-31:posts/2009/10/Salish-sea/</id><summary type="html">&lt;p&gt;&lt;img alt="Salish Sea from WWU" src="http://ashander.github.io/images/Freelan_SalishSea_small.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;I wonder, to which type of "negative results" is Looger referring?&lt;/p&gt;</summary><category term="musing"></category><category term="science"></category><category term="inference"></category><category term="ethics"></category></entry><entry><title>Salish Sea</title><link href="http://www.ashander.info/posts/2009/10/Salish-sea/" rel="alternate"></link><updated>2009-10-31T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2009-10-31:posts/2009/10/Salish-sea/</id><summary type="html">&lt;p&gt;&lt;img alt="Salish Sea from WWU" src="http://www.ashander.info/images/Freelan_SalishSea_small.jpg" /&gt;&lt;/p&gt;
 &lt;p&gt;"Salish Sea" is on its way to being an official name in the U.S. and
 Canada. Can &lt;a
 href="http://en.wikipedia.org/wiki/Cascadia_(independence_movement)"&gt;
 Cascadia&lt;/a&gt; be far behind?&lt;/p&gt;
 &lt;p&gt;Stefan Freelan at WWU made the beautiful map of the region here. &lt;a href="http://staff.wwu.edu/stefan/salish_sea.shtml"&gt;His
 page&lt;/a&gt; has lots
-of details about the region and the history of the term.&lt;/p&gt;</summary><category term="musing"></category><category term="PNW"></category><category term="geography"></category><category term="Cascadia"></category></entry><entry><title>Whisker as integral</title><link href="http://ashander.github.io/posts/2009/10/Whisker-integral/" rel="alternate"></link><updated>2009-10-25T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:ashander.github.io,2009-10-25:posts/2009/10/Whisker-integral/</id><summary type="html">&lt;p&gt;An NYT column reports on &lt;a
+of details about the region and the history of the term.&lt;/p&gt;</summary><category term="musing"></category><category term="PNW"></category><category term="geography"></category><category term="Cascadia"></category></entry><entry><title>Whisker as integral</title><link href="http://www.ashander.info/posts/2009/10/Whisker-integral/" rel="alternate"></link><updated>2009-10-25T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2009-10-25:posts/2009/10/Whisker-integral/</id><summary type="html">&lt;p&gt;An NYT column reports on &lt;a
 href="http://www.nytimes.com/2009/10/20/science/20obseal.html"&gt;fur
 seal whiskers&lt;/a&gt; serving as biogeochemical records. This kind of data
 is more and more common, e.g. otoliths, feathers, shells. What can
@@ -218,7 +218,7 @@ features---in some cases they record the entire lifespan. The
 combination of these integrating markers with tagging data
 (effectively 'differential' markers) is especially exciting. It would
 be cool to see cases where hypotheses (models) developed using one
-type of data were selected using the other type.&lt;/p&gt;</summary><category term="musing"></category><category term="animal movement"></category><category term="biogeochemical data"></category></entry><entry><title>Par avion</title><link href="http://ashander.github.io/posts/2009/10/Voting-from-Canada/" rel="alternate"></link><updated>2009-10-23T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:ashander.github.io,2009-10-23:posts/2009/10/Voting-from-Canada/</id><summary type="html">&lt;p&gt;Today I mailed my absentee ballot for the S.F. municipal election. The
+type of data were selected using the other type.&lt;/p&gt;</summary><category term="musing"></category><category term="animal movement"></category><category term="biogeochemical data"></category></entry><entry><title>Par avion</title><link href="http://www.ashander.info/posts/2009/10/Voting-from-Canada/" rel="alternate"></link><updated>2009-10-23T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2009-10-23:posts/2009/10/Voting-from-Canada/</id><summary type="html">&lt;p&gt;Today I mailed my absentee ballot for the S.F. municipal election. The
 Good People footed the bill to send it up here to me in Edmonton, I'm
 not sure whether they intended to spring for the return journey.&lt;/p&gt;
 &lt;p&gt;The only clue was the cryptic (to me) "U.S. Postage Paid. 39 USC
@@ -227,7 +227,7 @@ envelope.  I'm not sure why it would say 'par avion' if they weren't
 intending to pay, but if they were why would it say 'U.S' postage?
 Confusing.&lt;/p&gt;
 &lt;p&gt;In any case the Post Canada folks weren't confused and knew I had to
-pay $2.&lt;/p&gt;</summary><category term="musing"></category><category term="Canada"></category><category term="voting abroad"></category></entry><entry><title>Market substitution in aquaculture</title><link href="http://ashander.github.io/posts/2009/10/Market-substitution-aquaculture/" rel="alternate"></link><updated>2009-10-15T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:ashander.github.io,2009-10-15:posts/2009/10/Market-substitution-aquaculture/</id><summary type="html">&lt;p&gt;A recent article in &lt;a
+pay $2.&lt;/p&gt;</summary><category term="musing"></category><category term="Canada"></category><category term="voting abroad"></category></entry><entry><title>Market substitution in aquaculture</title><link href="http://www.ashander.info/posts/2009/10/Market-substitution-aquaculture/" rel="alternate"></link><updated>2009-10-15T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2009-10-15:posts/2009/10/Market-substitution-aquaculture/</id><summary type="html">&lt;p&gt;A recent article in &lt;a
 href="http://sitemaker.umich.edu/diana.lab/files/diana_2009_bioscience.pdf"&gt;BioScience&lt;/a&gt;
 [1] focused on the relationship between aquaculture and
 conservation. This topic is quite interesting to me, but it's
@@ -238,7 +238,7 @@ impacts on some ecosystems.&lt;/p&gt;
 &lt;p&gt;This paper aims to highlight broad trends in capture and culture
 fisheries and quantify effects on biodiversity. I only skimmed it and
 can't say how it does overall but one thing jumped out at me.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Image from Diana 2009" src="http://ashander.github.io/images/sub.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Image from Diana 2009" src="http://www.ashander.info/images/sub.png" /&gt;&lt;/p&gt;
 &lt;p&gt;The author, James Diana [2], describes a trend (shown in the figure
 reproduced here [3]) as "market substitution". Now, the wild capture
 (black dots) going down and the culture production (white dots) going
@@ -247,7 +247,7 @@ up makes for a tidy substitution story. But the figure uses
 href="http://www.perceptualedge.com/articles/visual_business_intelligence/dual-scaled_axes.pdf"&gt;
 never want to use &lt;/a&gt;), so the real story might look something like
 the second figure (data &lt;em&gt;simulated&lt;/em&gt; in &lt;em&gt;R&lt;/em&gt; by yerstruly):&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Simulated data" src="http://ashander.github.io/images/rsim.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Simulated data" src="http://www.ashander.info/images/rsim.png" /&gt;&lt;/p&gt;
 &lt;p&gt;The second figure makes clear that the changes in wild capture during
 1980 to 200x were mere &lt;em&gt;noise&lt;/em&gt; compared to the changes in aquaculture
 production. Seems like something more fundamental than simple market
@@ -278,7 +278,7 @@ ability to infer market &lt;em&gt;substitution&lt;/em&gt; from production data?&
 xyr = 1980:2005
 plot(xyr, exp(seq(log(14),log(4),len=length(xyr))), ylim=c(0,1400),type='o', col='black', pch=19, xlab='year', ylab='million tons')
 points(xyr,exp(seq(log(14),log(1200), len=length(xyr))), type='o')
---&gt;</summary><category term="musing"></category><category term="science"></category><category term="inference"></category></entry><entry><title>Canadian lag</title><link href="http://ashander.github.io/posts/2009/09/Canadian-lag/" rel="alternate"></link><updated>2009-09-01T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:ashander.github.io,2009-09-01:posts/2009/09/Canadian-lag/</id><summary type="html">&lt;p&gt;The
+--&gt;</summary><category term="musing"></category><category term="science"></category><category term="inference"></category></entry><entry><title>Canadian lag</title><link href="http://www.ashander.info/posts/2009/09/Canadian-lag/" rel="alternate"></link><updated>2009-09-01T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2009-09-01:posts/2009/09/Canadian-lag/</id><summary type="html">&lt;p&gt;The
  &lt;a href="http://coastalvoices.blogspot.com/2009/08/last-few-days-have-seen-flurry-of.html#comment"&gt;Coastal Voices&lt;/a&gt;
  blog at Living Oceans had an intersting post up remarking on the
  disparity between Canadian's self-image as environmental progressives
