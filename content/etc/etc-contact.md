@@ -1,7 +1,7 @@
 Title: Contact
 Template: etc
 
-![face shot and email]({filename}/images/nospam.jpg)
+![face shot and email]({filename}/images/headshot_250x250.jpeg)
 
 <h2>Campus Office </h2>
 
