@@ -1,7 +1,7 @@
 Title: Background
 Template: etc
 
-![face shot and email]({filename}/images/nospam.jpg)
+![face shot and email]({filename}/images/headshot_250x250.jpeg)
 
 In 2010 I started a PhD at <a href="http://www.ucdavis.edu">UC
 Davis</a> in the Population Biology Graduate Group. I'm working with
