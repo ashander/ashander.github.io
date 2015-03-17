@@ -100,5 +100,5 @@ PAGE_PATHS = ['pages', 'etc']
 
 # Plugins
 PLUGIN_PATHS = [ "/Users/jaime/sites/pelican-plugins", ]
-PLUGINS =  ['latex', 'neighbors', 'summary', 'related_posts', 'render_math']
+PLUGINS =  ['latex', 'neighbors', 'summary', 'related_posts', 'render_math', 'optimize_images']
 # https://github.com/getpelican/pelican-plugins/tree/master/render_math
