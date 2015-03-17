@@ -6,7 +6,7 @@ Author: Jaime Ashander
 
 
 
-![Salish Sea from WWU]({filename}/images/Freelan_SalishSea_small.jpg)
+![Salish Sea from WWU]({filename}/images/Freelan_SalishSea_small.jpeg)
 
 "Salish Sea" is on its way to being an official name in the U.S. and
 Canada. Can <a
