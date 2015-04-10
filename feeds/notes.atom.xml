@@ -1,5 +1,333 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jaime Ashander</title><link href="http://www.ashander.info/" rel="alternate"></link><link href="http://www.ashander.info/feeds/notes.atom.xml" rel="self"></link><id>http://www.ashander.info/</id><updated>2015-01-12T00:00:00-08:00</updated><entry><title>Between-generation bet-hedging</title><link href="http://www.ashander.info/posts/2015/01/between-generation-bet-hedging/" rel="alternate"></link><updated>2015-01-12T00:00:00-08:00</updated><author><name>Jaime</name></author><id>tag:www.ashander.info,2015-01-12:posts/2015/01/between-generation-bet-hedging/</id><summary type="html">&lt;p&gt;Version of notes for discussion I led in
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jaime Ashander</title><link href="http://www.ashander.info/" rel="alternate"></link><link href="http://www.ashander.info/feeds/notes.atom.xml" rel="self"></link><id>http://www.ashander.info/</id><updated>2015-04-10T00:00:00-07:00</updated><entry><title>Mixed effects viz for d-rug</title><link href="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/" rel="alternate"></link><updated>2015-04-10T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2015-04-10:posts/2015/04/D-RUG-mixed-effects-viz/</id><summary type="html">&lt;p&gt;Post is a stub with R code to walk through.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;## ----knit-opts, echo=FALSE-----------------------------------------------&lt;/span&gt;
+
+knitr&lt;span class="o"&gt;::&lt;/span&gt;opts_chunk&lt;span class="o"&gt;$&lt;/span&gt;set&lt;span class="p"&gt;(&lt;/span&gt;cache&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+
+&lt;span class="c1"&gt;## ----help----------------------------------------------------------------&lt;/span&gt;
+help&lt;span class="p"&gt;(&lt;/span&gt;package&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;lme4&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;??&lt;/span&gt;lme4
+methods&lt;span class="p"&gt;(&lt;/span&gt;class&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;merMod&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;## ----load----------------------------------------------------------------&lt;/span&gt;
+d &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; read.delim&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://datadryad.org/bitstream/handle/10255/dryad.41984/Maestre_Ecol88.txt?sequence=1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+recode &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; car&lt;span class="o"&gt;::&lt;/span&gt;recode
+
+d &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;within&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;d&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            nutrient_hetero &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; recode&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;factor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;nh&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;1=&amp;#39;homogeneous&amp;#39;; 2=&amp;#39;heterogeneous&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            nutrient_add &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; recode&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;factor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;na&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;1=&amp;#39;40 mg N&amp;#39;; 2=&amp;#39;80 mg N&amp;#39;; 3=&amp;#39;120 mg N&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            water_hetero &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; recode&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;factor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;wh&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;1=&amp;#39;homogeneous&amp;#39;; 2=&amp;#39;pulse&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            water_add &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; recode&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;factor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;wa&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;1=&amp;#39;125 mL&amp;#39;; 2=&amp;#39;250 mL&amp;#39;;3=&amp;#39;375 mL&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;})&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;## ----lme-models, warning=FALSE-------------------------------------------&lt;/span&gt;
+
+&lt;span class="c1"&gt;## riiindex --root depth allocation&lt;/span&gt;
+&lt;span class="kn"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;lme4&lt;span class="p"&gt;)&lt;/span&gt;
+
+m1 &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; lmer&lt;span class="p"&gt;(&lt;/span&gt;riiratio &lt;span class="o"&gt;~&lt;/span&gt; nutrient_add &lt;span class="o"&gt;*&lt;/span&gt; nutrient_hetero  &lt;span class="o"&gt;*&lt;/span&gt;  water_add   &lt;span class="o"&gt;+&lt;/span&gt;
+           water_hetero &lt;span class="o"&gt;+&lt;/span&gt;  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; block&lt;span class="p"&gt;),&lt;/span&gt; data&lt;span class="o"&gt;=&lt;/span&gt;d&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;## we&amp;#39;d might like to use model that includes varying sopes&lt;/span&gt;
+&lt;span class="c1"&gt;## watering seems the most likely to have block-level differences ?&lt;/span&gt;
+m2 &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; lmer&lt;span class="p"&gt;(&lt;/span&gt;riiratio  &lt;span class="o"&gt;~&lt;/span&gt; nutrient_add &lt;span class="o"&gt;*&lt;/span&gt; nutrient_hetero  &lt;span class="o"&gt;*&lt;/span&gt;  water_add &lt;span class="o"&gt;+&lt;/span&gt;  water_hetero &lt;span class="o"&gt;+&lt;/span&gt;
+               &lt;span class="p"&gt;(&lt;/span&gt;water_hetero &lt;span class="o"&gt;|&lt;/span&gt; block&lt;span class="p"&gt;),&lt;/span&gt; data&lt;span class="o"&gt;=&lt;/span&gt;d&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;## first diagnostic -- very high correlation is bad&lt;/span&gt;
+VarCorr&lt;span class="p"&gt;(&lt;/span&gt;m2&lt;span class="p"&gt;)&lt;/span&gt;
+
+plot&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; type&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;p&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;smooth&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;## concerning increase in variance with fitted&lt;/span&gt;
+plot&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; resid&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;.&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt; fitted&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;.&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; block&lt;span class="p"&gt;,&lt;/span&gt; abline&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;h&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; lty&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  type&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;p&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;smooth&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="c1"&gt;# per block&lt;/span&gt;
+plot&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;abs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;resid&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;.&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt; fitted&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;.&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; block&lt;span class="p"&gt;,&lt;/span&gt;  type&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;p&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;smooth&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# residuals look better for more complex RE structure&lt;/span&gt;
+lattice&lt;span class="o"&gt;::&lt;/span&gt;qqmath&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; id&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0.05&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; group&lt;span class="o"&gt;=&lt;/span&gt;block&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;## look at randeom effect&lt;/span&gt;
+lattice&lt;span class="o"&gt;::&lt;/span&gt;dotplot&lt;span class="p"&gt;(&lt;/span&gt;ranef&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; condVar&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="c1"&gt;#were we to have LOTS of RE, using lattice::qqmath for y axis spacing based on quantiles of standard normal -- is better to distinguish important few from &amp;quot;trivial many&amp;quot;&lt;/span&gt;
+
+&lt;span class="kp"&gt;system.time&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;m1.prall &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; profile&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="kp"&gt;system.time&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;m1.prre &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; profile&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; which&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;theta_&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="c1"&gt;#  plots&lt;/span&gt;
+&lt;span class="c1"&gt;# the &amp;#39;profile zeta plot&amp;#39;&lt;/span&gt;
+&lt;span class="c1"&gt;# linear indicatesa a quadratic likelihood profile, and so Wald approximations for CI will work well&lt;/span&gt;
+&lt;span class="c1"&gt;# random effects parameters on a standard deviation (or correlation) scale&lt;/span&gt;
+lattice&lt;span class="o"&gt;::&lt;/span&gt;xyplot&lt;span class="p"&gt;(&lt;/span&gt;m1.prre&lt;span class="p"&gt;)&lt;/span&gt;
+lattice&lt;span class="o"&gt;::&lt;/span&gt;xyplot&lt;span class="p"&gt;(&lt;/span&gt;m1.prall&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# the &amp;#39;profile density plot&amp;#39;&lt;/span&gt;
+&lt;span class="c1"&gt;# approximate probability density functinos of the parameters&lt;/span&gt;
+&lt;span class="c1"&gt;# -- distros underlying profile confidence intervals&lt;/span&gt;
+&lt;span class="c1"&gt;# linear zeta plot &amp;lt;==&amp;gt; gaussian densities&lt;/span&gt;
+lattice&lt;span class="o"&gt;::&lt;/span&gt;densityplot&lt;span class="p"&gt;(&lt;/span&gt;m1.prall&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# the &amp;#39;profile pairs plot&amp;#39;&lt;/span&gt;
+&lt;span class="c1"&gt;# bivariate confidence regions baed on profile&lt;/span&gt;
+&lt;span class="c1"&gt;# &amp;#39;profile traces&amp;#39; -- cross hairs -- are conditinoal estimates  of one parmeter given the other&lt;/span&gt;
+&lt;span class="c1"&gt;# above-diag: estimated scale&lt;/span&gt;
+&lt;span class="c1"&gt;# below-diag: &amp;#39;zeta&amp;#39; scale, some sense, the best possible set of single-parameter transformations for assessing the contours&amp;quot;&lt;/span&gt;
+lattice&lt;span class="o"&gt;::&lt;/span&gt;splom&lt;span class="p"&gt;(&lt;/span&gt;m1.prre&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+
+
+&lt;span class="c1"&gt;## ----ryo-----------------------------------------------------------------&lt;/span&gt;
+
+make_CI_df &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;modprof&lt;span class="p"&gt;,&lt;/span&gt; model&lt;span class="p"&gt;,&lt;/span&gt; BOOT&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;FALSE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;...&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  ci &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; confint&lt;span class="p"&gt;(&lt;/span&gt;model&lt;span class="p"&gt;,&lt;/span&gt; method&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Wald&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  cip &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; confint&lt;span class="p"&gt;(&lt;/span&gt;modprof&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="kr"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;BOOT&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      cib &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; confint&lt;span class="p"&gt;(&lt;/span&gt;model&lt;span class="p"&gt;,&lt;/span&gt; method&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;boot&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;...&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      cib_dat &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kt"&gt;data.frame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;cib&lt;span class="p"&gt;,&lt;/span&gt; parameter&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kp"&gt;row.names&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;cib&lt;span class="p"&gt;),&lt;/span&gt; type&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Boot&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="kp"&gt;names&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;cib_dat&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;colnames&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;cib&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+  ci_dat &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kt"&gt;data.frame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;ci&lt;span class="p"&gt;,&lt;/span&gt; parameter&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kp"&gt;row.names&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;ci&lt;span class="p"&gt;),&lt;/span&gt; type&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Wald&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="kp"&gt;names&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;ci_dat&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;colnames&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;ci&lt;span class="p"&gt;)&lt;/span&gt;
+  cip_dat &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kt"&gt;data.frame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;cip&lt;span class="p"&gt;,&lt;/span&gt; parameter&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kp"&gt;row.names&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;cip&lt;span class="p"&gt;),&lt;/span&gt; type&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Prof&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="kp"&gt;names&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;cip_dat&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;colnames&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;cip&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="kr"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;BOOT&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      ci_all_dat &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;rbind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;ci_dat&lt;span class="p"&gt;,&lt;/span&gt; cip_dat&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kr"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      ci_all_dat &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;rbind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;ci_dat&lt;span class="p"&gt;,&lt;/span&gt; cip_dat&lt;span class="p"&gt;,&lt;/span&gt; cib_dat&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+  fe_dat &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kt"&gt;data.frame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;parameter&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kp"&gt;names&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;fixef&lt;span class="p"&gt;(&lt;/span&gt;model&lt;span class="p"&gt;)),&lt;/span&gt; value&lt;span class="o"&gt;=&lt;/span&gt;fixef&lt;span class="p"&gt;(&lt;/span&gt;model&lt;span class="p"&gt;))&lt;/span&gt;
+  &lt;span class="kt"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;mean&lt;span class="o"&gt;=&lt;/span&gt;fe_dat&lt;span class="p"&gt;,&lt;/span&gt; bounds&lt;span class="o"&gt;=&lt;/span&gt;ci_all_dat&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="kr"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kn"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;ggplot2&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+    m1_ci &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; make_CI_df&lt;span class="p"&gt;(&lt;/span&gt;m1.prall&lt;span class="p"&gt;,&lt;/span&gt; m1&lt;span class="p"&gt;,&lt;/span&gt; BOOT&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; nsim&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    m1_mean &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; m1_ci&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;mean&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+    m1_bnd &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; m1_ci&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;bounds&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+
+  ggplot&lt;span class="p"&gt;(&lt;/span&gt;m1_bnd&lt;span class="p"&gt;[&lt;/span&gt;m1_bnd&lt;span class="o"&gt;$&lt;/span&gt;parameter &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;(Intercept)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+          geom_linerange&lt;span class="p"&gt;(&lt;/span&gt;aes&lt;span class="p"&gt;(&lt;/span&gt;parameter&lt;span class="p"&gt;,&lt;/span&gt; ymax&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`97.5 %`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; ymin&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`2.5 %`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; color&lt;span class="o"&gt;=&lt;/span&gt;type&lt;span class="p"&gt;),&lt;/span&gt;
+                         position&lt;span class="o"&gt;=&lt;/span&gt;position_dodge&lt;span class="p"&gt;(&lt;/span&gt;w&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;.5&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; size&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1.5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+                           geom_hline&lt;span class="p"&gt;(&lt;/span&gt;yintercept&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; linetype&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+                               coord_flip&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; theme_minimal&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+                                   geom_point&lt;span class="p"&gt;(&lt;/span&gt;aes&lt;span class="p"&gt;(&lt;/span&gt;parameter&lt;span class="p"&gt;,&lt;/span&gt; value&lt;span class="p"&gt;),&lt;/span&gt;
+                                              size&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; shape&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                                              data&lt;span class="o"&gt;=&lt;/span&gt;m1_mean&lt;span class="p"&gt;[&lt;/span&gt;m1_mean&lt;span class="o"&gt;$&lt;/span&gt;parameter &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;(Intercept)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;])&lt;/span&gt;
+
+                                                    &lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;##   strong effect ot nutreint homogenetity&lt;/span&gt;
+&lt;span class="c1"&gt;##   effect of adding lots of water&lt;/span&gt;
+   &lt;span class="c1"&gt;## nutreint has some effect&lt;/span&gt;
+
+   &lt;span class="c1"&gt;## look at consequences&lt;/span&gt;
+&lt;span class="kr"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kn"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;lsmeans&lt;span class="p"&gt;)){&lt;/span&gt;
+
+    lsmip&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt; nutrient_add  &lt;span class="o"&gt;|&lt;/span&gt; nutrient_hetero &lt;span class="o"&gt;*&lt;/span&gt; water_add&lt;span class="p"&gt;)&lt;/span&gt;
+
+    m1.lsm &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; lsmeans&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt; nutrient_add  &lt;span class="o"&gt;|&lt;/span&gt; nutrient_hetero  &lt;span class="o"&gt;*&lt;/span&gt; water_add&lt;span class="p"&gt;)&lt;/span&gt;
+    plot&lt;span class="p"&gt;(&lt;/span&gt;m1.lsm&lt;span class="p"&gt;,&lt;/span&gt; layout &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; horizontal&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;FALSE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    m1.lsm &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; lsmeans&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt; water_add &lt;span class="o"&gt;|&lt;/span&gt; nutrient_add &lt;span class="p"&gt;)&lt;/span&gt;
+    plot&lt;span class="p"&gt;(&lt;/span&gt;m1.lsm&lt;span class="p"&gt;,&lt;/span&gt; horizontal&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;FALSE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    m1.lsm &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; lsmeans&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt; nutrient_hetero &lt;span class="o"&gt;*&lt;/span&gt; water_add &lt;span class="o"&gt;|&lt;/span&gt; nutrient_add &lt;span class="p"&gt;)&lt;/span&gt;
+    plot&lt;span class="p"&gt;(&lt;/span&gt;m1.lsm&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+
+
+&lt;span class="c1"&gt;## ----latimer-fits--------------------------------------------------------&lt;/span&gt;
+
+d2 &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; read.delim&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://datadryad.org/bitstream/handle/10255/dryad.33579/Richmond%20et%20al%202011%20Datafile.txt?sequence=1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="kp"&gt;names&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;d2&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;gsub&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;\\.&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;names&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;d2&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="c1"&gt;# rescale geo dist, sizediff&lt;/span&gt;
+d2 &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;within&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;d2&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    geodist_scl &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;GeoDist &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="kp"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;GeoDist&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; var&lt;span class="p"&gt;(&lt;/span&gt;GeoDist&lt;span class="p"&gt;)&lt;/span&gt;
+    sizediff_scl2 &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;SizeDiff &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="kp"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;SizeDiff&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; var&lt;span class="p"&gt;(&lt;/span&gt;SizeDiff&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;^&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;
+    Series &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;factor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;Series&lt;span class="p"&gt;)&lt;/span&gt;
+    Female &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;factor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;Female&lt;span class="p"&gt;)&lt;/span&gt;
+    Male &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;factor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;Male&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;})&lt;/span&gt;
+
+&lt;span class="kp"&gt;system.time&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    gm0 &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; glmer&lt;span class="p"&gt;(&lt;/span&gt;cop &lt;span class="o"&gt;~&lt;/span&gt;   sizediff_scl2   &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; Series&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; Male&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; Female&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt;
+                 data&lt;span class="o"&gt;=&lt;/span&gt;d2&lt;span class="p"&gt;,&lt;/span&gt; family&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;binomial&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+gm1 &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; glmer&lt;span class="p"&gt;(&lt;/span&gt;cop &lt;span class="o"&gt;~&lt;/span&gt; geodist_scl &lt;span class="o"&gt;+&lt;/span&gt;  sizediff_scl2 &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; Series&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; Male&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; Female&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt;
+             data&lt;span class="o"&gt;=&lt;/span&gt;d2&lt;span class="p"&gt;,&lt;/span&gt; family&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;binomial&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;## ----latimer-crit--------------------------------------------------------&lt;/span&gt;
+
+anova&lt;span class="p"&gt;(&lt;/span&gt;gm1&lt;span class="p"&gt;,&lt;/span&gt; gm0&lt;span class="p"&gt;)&lt;/span&gt;
+
+plot&lt;span class="p"&gt;(&lt;/span&gt;gm0&lt;span class="p"&gt;,&lt;/span&gt; type&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;p&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;#non useful&lt;/span&gt;
+plot&lt;span class="p"&gt;(&lt;/span&gt;gm0&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;factor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;Series&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="o"&gt;~&lt;/span&gt; resid&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;.&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;  abline&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;v&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; lty&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# better than default eh&lt;/span&gt;
+plot&lt;span class="p"&gt;(&lt;/span&gt;gm0&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;abs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;resid&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;.&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt; fitted&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;.&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; Series &lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="kr"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kn"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;gridExtra&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kp"&gt;do.call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;gridExtra&lt;span class="o"&gt;::&lt;/span&gt;grid.arrange&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;lattice&lt;span class="o"&gt;::&lt;/span&gt;qqmath&lt;span class="p"&gt;(&lt;/span&gt;ranef&lt;span class="p"&gt;(&lt;/span&gt;gm0&lt;span class="p"&gt;,&lt;/span&gt; condVar&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt; &lt;span class="kt"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;nrow&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kr"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    lattice&lt;span class="o"&gt;::&lt;/span&gt;qqmath&lt;span class="p"&gt;(&lt;/span&gt;ranef&lt;span class="p"&gt;(&lt;/span&gt;gm0&lt;span class="p"&gt;,&lt;/span&gt; condVar&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="c1"&gt;## useful if you have a lot of RE to draw attention to strong ones&lt;/span&gt;
+&lt;span class="c1"&gt;## maybe latter == dot = sample size?&lt;/span&gt;
+
+&lt;span class="c1"&gt;## no reason to retain RE on Male, but also drop Female&lt;/span&gt;
+&lt;span class="c1"&gt;## no real justification, very slow profiling for many RE&lt;/span&gt;
+&lt;span class="c1"&gt;#gm0noindre &amp;lt;- glmer(cop ~   sizediff_scl2   + (1 | Series), data=d2, family=&amp;#39;binomial&amp;#39;)&lt;/span&gt;
+
+&lt;span class="kp"&gt;system.time&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    gm0.prall &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; profile&lt;span class="p"&gt;(&lt;/span&gt;gm0noindre&lt;span class="p"&gt;,&lt;/span&gt; devtol&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1e-6&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# see https://stat.ethz.ch/pipermail/r-sig-mixed-models/2014q3/022394.html&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;## ----latimer-prof, eval=FALSE--------------------------------------------&lt;/span&gt;
+&lt;span class="c1"&gt;## &lt;/span&gt;
+&lt;span class="c1"&gt;## #system.time(&lt;/span&gt;
+&lt;span class="c1"&gt;## #    gm0_full.prall &amp;lt;- profile(gm0, devtol=1e-6)&lt;/span&gt;
+&lt;span class="c1"&gt;## #)&lt;/span&gt;
+&lt;span class="c1"&gt;## #   user  system elapsed&lt;/span&gt;
+&lt;span class="c1"&gt;## #344.092   0.539 344.613&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;## ----latimer-plotting, warning=FALSE-------------------------------------&lt;/span&gt;
+
+lattice&lt;span class="o"&gt;::&lt;/span&gt;xyplot&lt;span class="p"&gt;(&lt;/span&gt;logProf&lt;span class="p"&gt;(&lt;/span&gt;gm0.prall&lt;span class="p"&gt;))&lt;/span&gt;
+lattice&lt;span class="o"&gt;::&lt;/span&gt;densityplot&lt;span class="p"&gt;(&lt;/span&gt;gm0.prall&lt;span class="p"&gt;)&lt;/span&gt;
+lattice&lt;span class="o"&gt;::&lt;/span&gt;splom&lt;span class="p"&gt;(&lt;/span&gt;gm0.prall&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;## add ci plots&lt;/span&gt;
+
+&lt;span class="kr"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kn"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;ggplot2&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  gm0_ci &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; make_CI_df&lt;span class="p"&gt;(&lt;/span&gt;gm0.prall&lt;span class="p"&gt;,&lt;/span&gt; gm0&lt;span class="p"&gt;)&lt;/span&gt;
+  gm0_mean &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; gm0_ci&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;mean&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+  gm0_bnd &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; gm0_ci&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;bounds&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+  g &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; ggplot&lt;span class="p"&gt;(&lt;/span&gt;gm0_bnd&lt;span class="p"&gt;[&lt;/span&gt;gm0_bnd&lt;span class="o"&gt;$&lt;/span&gt;parameter &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;(Intercept)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+          geom_linerange&lt;span class="p"&gt;(&lt;/span&gt;aes&lt;span class="p"&gt;(&lt;/span&gt;parameter&lt;span class="p"&gt;,&lt;/span&gt; ymax&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`97.5 %`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; ymin&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`2.5 %`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; color&lt;span class="o"&gt;=&lt;/span&gt;type&lt;span class="p"&gt;),&lt;/span&gt;
+                         position&lt;span class="o"&gt;=&lt;/span&gt;position_dodge&lt;span class="p"&gt;(&lt;/span&gt;w&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;.5&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; size&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1.5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+                           geom_hline&lt;span class="p"&gt;(&lt;/span&gt;yintercept&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; linetype&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+                               coord_flip&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; theme_minimal&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+                                   geom_point&lt;span class="p"&gt;(&lt;/span&gt;aes&lt;span class="p"&gt;(&lt;/span&gt;parameter&lt;span class="p"&gt;,&lt;/span&gt; value&lt;span class="p"&gt;),&lt;/span&gt;
+                                              size&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; shape&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                                              data&lt;span class="o"&gt;=&lt;/span&gt;gm0_mean&lt;span class="p"&gt;[&lt;/span&gt;gm0_mean&lt;span class="o"&gt;$&lt;/span&gt;parameter &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;(Intercept)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;])&lt;/span&gt;
+
+  g
+
+  &lt;span class="p"&gt;}&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;## ----low-magnitude-param, warning=FALSE----------------------------------&lt;/span&gt;
+  g &lt;span class="o"&gt;+&lt;/span&gt; scale_y_log10&lt;span class="p"&gt;()&lt;/span&gt;
+
+
+
+
+&lt;span class="c1"&gt;## ----prediction-visual---------------------------------------------------&lt;/span&gt;
+&lt;span class="c1"&gt;## predicted effect&lt;/span&gt;
+d2&lt;span class="o"&gt;$&lt;/span&gt;pred_overall_gen &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; predict&lt;span class="p"&gt;(&lt;/span&gt;gm0&lt;span class="p"&gt;,&lt;/span&gt; type&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;response&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; re.form&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;NA&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+d2&lt;span class="o"&gt;$&lt;/span&gt;pred_overall &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; predict&lt;span class="p"&gt;(&lt;/span&gt;gm0&lt;span class="p"&gt;,&lt;/span&gt; type&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;response&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+d2&lt;span class="o"&gt;$&lt;/span&gt;pred_ind &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; predict&lt;span class="p"&gt;(&lt;/span&gt;gm0&lt;span class="p"&gt;,&lt;/span&gt; type&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;response&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; re.form&lt;span class="o"&gt;=~&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;Female&lt;span class="p"&gt;))&lt;/span&gt;
+d2&lt;span class="o"&gt;$&lt;/span&gt;pred_trial &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; predict&lt;span class="p"&gt;(&lt;/span&gt;gm0&lt;span class="p"&gt;,&lt;/span&gt; type&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;response&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; re.form&lt;span class="o"&gt;=~&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;Series&lt;span class="p"&gt;))&lt;/span&gt;
+
+d2_plus_count &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;merge&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;d2&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;as.data.frame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;table&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;Series&lt;span class="o"&gt;=&lt;/span&gt;d2&lt;span class="o"&gt;$&lt;/span&gt;Series&lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="kr"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kn"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;ggplot2&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+g &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt;  ggplot&lt;span class="p"&gt;(&lt;/span&gt;d2_plus_count&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; geom_point&lt;span class="p"&gt;(&lt;/span&gt;aes&lt;span class="p"&gt;(&lt;/span&gt;SizeDiff&lt;span class="p"&gt;,&lt;/span&gt; cop&lt;span class="p"&gt;),&lt;/span&gt;
+                                         position&lt;span class="o"&gt;=&lt;/span&gt;position_jitter&lt;span class="p"&gt;(&lt;/span&gt;h&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0.05&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; w&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+    geom_line&lt;span class="p"&gt;(&lt;/span&gt;aes&lt;span class="p"&gt;(&lt;/span&gt;SizeDiff&lt;span class="p"&gt;,&lt;/span&gt; pred_trial&lt;span class="p"&gt;,&lt;/span&gt; color&lt;span class="o"&gt;=&lt;/span&gt;Series&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+    geom_point&lt;span class="p"&gt;(&lt;/span&gt;aes&lt;span class="p"&gt;(&lt;/span&gt;SizeDiff&lt;span class="p"&gt;,&lt;/span&gt; pred_ind&lt;span class="p"&gt;,&lt;/span&gt; alpha&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kp"&gt;as.numeric&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;Female&lt;span class="p"&gt;)))&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+    geom_line&lt;span class="p"&gt;(&lt;/span&gt;aes&lt;span class="p"&gt;(&lt;/span&gt;SizeDiff&lt;span class="p"&gt;,&lt;/span&gt; pred_overall_gen&lt;span class="p"&gt;),&lt;/span&gt; color&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;red&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; size&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1.5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+    theme_minimal&lt;span class="p"&gt;()&lt;/span&gt;
+g
+
+
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+
+
+
+&lt;span class="c1"&gt;## todo - figure out ls means quick vis for variety of predictor values&lt;/span&gt;
+
+
+
+
+&lt;span class="c1"&gt;## ----ugly-plot-----------------------------------------------------------&lt;/span&gt;
+
+g &lt;span class="o"&gt;+&lt;/span&gt; geom_line&lt;span class="p"&gt;(&lt;/span&gt;aes&lt;span class="p"&gt;(&lt;/span&gt;SizeDiff&lt;span class="p"&gt;,&lt;/span&gt; pred_overall&lt;span class="p"&gt;),&lt;/span&gt; color&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;darkgray&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; size&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+
+
+
+&lt;span class="c1"&gt;## ----post-pred-----------------------------------------------------------&lt;/span&gt;
+
+&lt;span class="c1"&gt;## without RE&lt;/span&gt;
+&lt;span class="kp"&gt;set.seed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1141&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+gm0.sim_wo &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; simulate&lt;span class="p"&gt;(&lt;/span&gt;gm0&lt;span class="p"&gt;,&lt;/span&gt; nsim&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; re.form&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;NA&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+sims &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;sapply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;gm0.sim_wo&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;)&lt;/span&gt;  x&lt;span class="p"&gt;)&lt;/span&gt;
+ones &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;colSums&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;sims&lt;span class="p"&gt;)&lt;/span&gt;
+zeros &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kp"&gt;colSums&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;sims&lt;span class="m"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+perc &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; ones&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="kp"&gt;nrow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;d2&lt;span class="p"&gt;)&lt;/span&gt;
+cvar &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;apply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;sims&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; var&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;## with RE&lt;/span&gt;
+gm0.sim &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; simulate&lt;span class="p"&gt;(&lt;/span&gt;gm0&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1000&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+sims &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;sapply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;gm0.sim&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;)&lt;/span&gt;  x&lt;span class="p"&gt;)&lt;/span&gt;
+re_ones &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;colSums&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;sims&lt;span class="p"&gt;)&lt;/span&gt;
+re_zeros &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kp"&gt;colSums&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;sims&lt;span class="m"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+re_perc &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; re_ones&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="kp"&gt;nrow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;d2&lt;span class="p"&gt;)&lt;/span&gt;
+re_cvar &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;apply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;sims&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; var&lt;span class="p"&gt;)&lt;/span&gt;
+
+pp_comp &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;dist&lt;span class="p"&gt;,&lt;/span&gt; cmp_fn&lt;span class="p"&gt;,&lt;/span&gt; data&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;...&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  hist&lt;span class="p"&gt;(&lt;/span&gt;dist&lt;span class="p"&gt;,&lt;/span&gt; col&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;orange&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; xlab&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;value&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;...&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  abline&lt;span class="p"&gt;(&lt;/span&gt;v&lt;span class="o"&gt;=&lt;/span&gt;cmp_fn&lt;span class="p"&gt;(&lt;/span&gt;data&lt;span class="p"&gt;),&lt;/span&gt; lwd&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; col&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;blue&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; lty&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+op &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; par&lt;span class="p"&gt;(&lt;/span&gt;mfrow&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+  pp_comp&lt;span class="p"&gt;(&lt;/span&gt;ones&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="kp"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="o"&gt;$&lt;/span&gt;cop&lt;span class="p"&gt;),&lt;/span&gt; d2&lt;span class="p"&gt;,&lt;/span&gt; main&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;ones - no RE&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; xlim&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;45&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;110&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+  pp_comp&lt;span class="p"&gt;(&lt;/span&gt;zeros&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kp"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="o"&gt;$&lt;/span&gt;cop &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; d2&lt;span class="p"&gt;,&lt;/span&gt; main&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;zeros -no RE&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; xlim&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;120&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;185&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+  pp_comp&lt;span class="p"&gt;(&lt;/span&gt;perc&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="kp"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="o"&gt;$&lt;/span&gt;cop&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="kp"&gt;nrow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;d2&lt;span class="p"&gt;),&lt;/span&gt; d2&lt;span class="p"&gt;,&lt;/span&gt; main&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;% cop - no RE&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; xlim&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;.8&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+  pp_comp&lt;span class="p"&gt;(&lt;/span&gt;cvar&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;)&lt;/span&gt; var&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="o"&gt;$&lt;/span&gt;cop&lt;span class="p"&gt;),&lt;/span&gt; d2&lt;span class="p"&gt;,&lt;/span&gt; main&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;var - no RE&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; xlim&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;.3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+  pp_comp&lt;span class="p"&gt;(&lt;/span&gt;re_ones&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="kp"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="o"&gt;$&lt;/span&gt;cop&lt;span class="p"&gt;),&lt;/span&gt; d2&lt;span class="p"&gt;,&lt;/span&gt; main&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;ones - all RE&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; xlim&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;45&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;110&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+  pp_comp&lt;span class="p"&gt;(&lt;/span&gt;re_zeros&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kp"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="o"&gt;$&lt;/span&gt;cop &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; d2&lt;span class="p"&gt;,&lt;/span&gt; main&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;zeros - all RE&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; xlim&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;120&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;185&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+  pp_comp&lt;span class="p"&gt;(&lt;/span&gt;re_perc&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="kp"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="o"&gt;$&lt;/span&gt;cop&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="kp"&gt;nrow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;d2&lt;span class="p"&gt;),&lt;/span&gt; d2&lt;span class="p"&gt;,&lt;/span&gt; main&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;% cop - RE&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; xlim&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;.8&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+  pp_comp&lt;span class="p"&gt;(&lt;/span&gt;re_cvar&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;)&lt;/span&gt; var&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="o"&gt;$&lt;/span&gt;cop&lt;span class="p"&gt;),&lt;/span&gt; d2&lt;span class="p"&gt;,&lt;/span&gt; main&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;var - all RE&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; xlim&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;.3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+par&lt;span class="p"&gt;(&lt;/span&gt;op&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+
+&lt;span class="c1"&gt;## ----glmmadmb-too, eval=FALSE--------------------------------------------&lt;/span&gt;
+&lt;span class="c1"&gt;## ## look at glmmadmb too -- not evaluated&lt;/span&gt;
+&lt;span class="c1"&gt;## gm1admb &amp;lt;- glmmadmb(cop ~ geodist_scl +  sizediff_scl2, random= ~1 | Series + 1 | Female , data=d2, family=&amp;#39;binomial&amp;#39;)&lt;/span&gt;
+&lt;span class="c1"&gt;## &lt;/span&gt;
+&lt;span class="c1"&gt;## d2 &amp;lt;- data.frame(d2, predict(gm1admb, interval=&amp;#39;confidence&amp;#39;, type=&amp;#39;link&amp;#39;))&lt;/span&gt;
+&lt;span class="c1"&gt;## &lt;/span&gt;
+&lt;span class="c1"&gt;## plot(cop ~ SizeDiff, d2, ylim = c(0, 1))&lt;/span&gt;
+&lt;span class="c1"&gt;## lines(plogis(fit) ~ SizeDiff, d2, lwd=2)&lt;/span&gt;
+&lt;span class="c1"&gt;## lines(plogis(lwr) ~ SizeDiff, d2, lty=2, lwd=2)&lt;/span&gt;
+&lt;span class="c1"&gt;## lines(plogis(upr) ~ SizeDiff, d2, lty=2, lwd=2)&lt;/span&gt;
+&lt;span class="c1"&gt;##       geom_line(aes(SizeDiff, plogis(lwr)), color=&amp;#39;red&amp;#39;, size=1, linetype=2) +&lt;/span&gt;
+&lt;span class="c1"&gt;##     geom_line(aes(SizeDiff, plogis(upr)), color=&amp;#39;red&amp;#39;, size=1, linetype=2) +&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;## ----broom-fortify-------------------------------------------------------&lt;/span&gt;
+
+
+&lt;span class="kr"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kn"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;ggplot2&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    d_fort &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; ggplot2&lt;span class="o"&gt;::&lt;/span&gt;fortify&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; d&lt;span class="p"&gt;)&lt;/span&gt;
+    str&lt;span class="p"&gt;(&lt;/span&gt;d_fort&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="kr"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kn"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;broom&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    glance&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;)&lt;/span&gt;
+    str&lt;span class="p"&gt;(&lt;/span&gt;tidy&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;))&lt;/span&gt;
+    str&lt;span class="p"&gt;(&lt;/span&gt;augment&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; d&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Between-generation bet-hedging</title><link href="http://www.ashander.info/posts/2015/01/between-generation-bet-hedging/" rel="alternate"></link><updated>2015-01-12T00:00:00-08:00</updated><author><name>Jaime</name></author><id>tag:www.ashander.info,2015-01-12:posts/2015/01/between-generation-bet-hedging/</id><summary type="html">&lt;p&gt;Version of notes for discussion I led in
 &lt;a href="http://www.eve.ucdavis.edu/sschreiber/"&gt;Sebastain Schreiber's&lt;/a&gt; for
 PBG 271 Research Conference in Ecology on "Life history evolution in
 stochastic environments".&lt;/p&gt;

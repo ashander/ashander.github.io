@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>Mixed effects viz for d-rug - Jaime Ashander</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/">
+
+        <meta name="author" content="Jaime Ashander" />
+        <meta name="description" content="Post is a stub with R code to walk through. ## ----knit-opts, echo=FALSE----------------------------------------------- knitr::opts_chunk$set(cache=TRUE) ## ----help---------------------------------------------------------------- help(package=&#39;lme4&#39;) ??lme4 methods(class=&#39;merMod&#39;) ## ----load---------------------------------------------------------------- d &lt;- read.delim(&#34;http://datadryad.org/bitstream/handle/10255/dryad.41984/Maestre_Ecol88.txt?sequence=1&#34;) recode &lt;- car::recode d &lt;- within(d, { nutrient_hetero &lt;- recode ..." />
+
+        <meta property="og:site_name" content="Jaime Ashander" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Mixed effects viz for d-rug"/>
+        <meta property="og:url" content="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/"/>
+        <meta property="og:description" content="Post is a stub with R code to walk through. ## ----knit-opts, echo=FALSE----------------------------------------------- knitr::opts_chunk$set(cache=TRUE) ## ----help---------------------------------------------------------------- help(package=&#39;lme4&#39;) ??lme4 methods(class=&#39;merMod&#39;) ## ----load---------------------------------------------------------------- d &lt;- read.delim(&#34;http://datadryad.org/bitstream/handle/10255/dryad.41984/Maestre_Ecol88.txt?sequence=1&#34;) recode &lt;- car::recode d &lt;- within(d, { nutrient_hetero &lt;- recode ..."/>
+        <meta property="article:published_time" content="2015-04-10" />
+            <meta property="article:section" content="notes" />
+            <meta property="article:author" content="Jaime Ashander" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://www.ashander.info/theme/css/bootstrap.yeti.min.css" type="text/css"/>
+    <link href="http://www.ashander.info/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://www.ashander.info/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://www.ashander.info/theme/css/style.css" type="text/css"/>
+        <link href="http://www.ashander.info/static/custom.css" rel="stylesheet">
+
+        <link href="http://www.ashander.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Jaime Ashander ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://www.ashander.info/" class="navbar-brand">
+                <i class="fa fa-home fa-fw"></i>
+            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="http://www.ashander.info/category/themes">Themes</a>
+                        </li>
+                        <li >
+                            <a href="http://www.ashander.info/category/results">Results</a>
+                        </li>
+                        <li class="active">
+                            <a href="http://www.ashander.info/category/notes">Notes</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://www.ashander.info/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<script type="text/javascript">
+/*<![CDATA[*/
+var el="banner";
+var bgimg=new Array("/images/banner/bamfield.jpeg", "/images/banner/bedroom.jpeg", "/images/banner/\
+fir.jpeg", "/images/banner/parker.jpeg", "/images/banner/sunrise.jpeg");
+var random=Math.round((bgimg.length-1)*Math.random());
+var cssStr="#"+el+" { background: url("+bgimg[random]+") repeat-x top left } ";
+var  style=document.createElement("style");
+
+style.setAttribute("type","text/css");
+if(style.styleSheet)
+{style.styleSheet.cssText=cssStr;}
+else
+{var cssText=document.createTextNode(cssStr);
+style.appendChild(cssText);}
+document.getElementsByTagName("head")[0].appendChild(style);
+/*]]>*/
+</script>
+
+
+<div id="banner">
+        <div class="container">
+                <div class="copy">
+                        <h1>Jaime Ashander</h1>
+                                <p class="intro">rapid evolution: theory, computation, inference</p>
+                </div>
+        </div>
+</div><!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/"
+                       rel="bookmark"
+                       title="Permalink to Mixed effects viz for d-rug">
+                        Mixed effects viz for d-rug
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<div>
+  <a href="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/">
+<i class="fa fa-send-o fa-fw"></i>
+  </a>
+  in   on Fri 10 April 2015
+</div>
+
+                     </div>
+                </div>
+                <p>Post is a stub with R code to walk through.</p>
+<div class="highlight"><pre><span class="c1">## ----knit-opts, echo=FALSE-----------------------------------------------</span>
+
+knitr<span class="o">::</span>opts_chunk<span class="o">$</span>set<span class="p">(</span>cache<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+
+
+
+<span class="c1">## ----help----------------------------------------------------------------</span>
+help<span class="p">(</span>package<span class="o">=</span><span class="s">&#39;lme4&#39;</span><span class="p">)</span>
+<span class="o">??</span>lme4
+methods<span class="p">(</span>class<span class="o">=</span><span class="s">&#39;merMod&#39;</span><span class="p">)</span>
+
+
+<span class="c1">## ----load----------------------------------------------------------------</span>
+d <span class="o">&lt;-</span> read.delim<span class="p">(</span><span class="s">&quot;http://datadryad.org/bitstream/handle/10255/dryad.41984/Maestre_Ecol88.txt?sequence=1&quot;</span><span class="p">)</span>
+recode <span class="o">&lt;-</span> car<span class="o">::</span>recode
+
+d <span class="o">&lt;-</span> <span class="kp">within</span><span class="p">(</span>d<span class="p">,</span> <span class="p">{</span>
+            nutrient_hetero <span class="o">&lt;-</span> recode<span class="p">(</span><span class="kp">factor</span><span class="p">(</span>nh<span class="p">),</span> <span class="s">&quot;1=&#39;homogeneous&#39;; 2=&#39;heterogeneous&#39;&quot;</span><span class="p">)</span>
+            nutrient_add <span class="o">&lt;-</span> recode<span class="p">(</span><span class="kp">factor</span><span class="p">(</span>na<span class="p">),</span> <span class="s">&quot;1=&#39;40 mg N&#39;; 2=&#39;80 mg N&#39;; 3=&#39;120 mg N&#39;&quot;</span><span class="p">)</span>
+            water_hetero <span class="o">&lt;-</span> recode<span class="p">(</span><span class="kp">factor</span><span class="p">(</span>wh<span class="p">),</span> <span class="s">&quot;1=&#39;homogeneous&#39;; 2=&#39;pulse&#39;&quot;</span><span class="p">)</span>
+            water_add <span class="o">&lt;-</span> recode<span class="p">(</span><span class="kp">factor</span><span class="p">(</span>wa<span class="p">),</span> <span class="s">&quot;1=&#39;125 mL&#39;; 2=&#39;250 mL&#39;;3=&#39;375 mL&#39;&quot;</span><span class="p">)</span>
+        <span class="p">})</span>
+
+
+<span class="c1">## ----lme-models, warning=FALSE-------------------------------------------</span>
+
+<span class="c1">## riiindex --root depth allocation</span>
+<span class="kn">library</span><span class="p">(</span>lme4<span class="p">)</span>
+
+m1 <span class="o">&lt;-</span> lmer<span class="p">(</span>riiratio <span class="o">~</span> nutrient_add <span class="o">*</span> nutrient_hetero  <span class="o">*</span>  water_add   <span class="o">+</span>
+           water_hetero <span class="o">+</span>  <span class="p">(</span><span class="m">1</span> <span class="o">|</span> block<span class="p">),</span> data<span class="o">=</span>d<span class="p">)</span>
+
+<span class="c1">## we&#39;d might like to use model that includes varying sopes</span>
+<span class="c1">## watering seems the most likely to have block-level differences ?</span>
+m2 <span class="o">&lt;-</span> lmer<span class="p">(</span>riiratio  <span class="o">~</span> nutrient_add <span class="o">*</span> nutrient_hetero  <span class="o">*</span>  water_add <span class="o">+</span>  water_hetero <span class="o">+</span>
+               <span class="p">(</span>water_hetero <span class="o">|</span> block<span class="p">),</span> data<span class="o">=</span>d<span class="p">)</span>
+<span class="c1">## first diagnostic -- very high correlation is bad</span>
+VarCorr<span class="p">(</span>m2<span class="p">)</span>
+
+plot<span class="p">(</span>m1<span class="p">,</span> type<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;p&quot;</span><span class="p">,</span> <span class="s">&quot;smooth&quot;</span><span class="p">)</span> <span class="p">)</span> <span class="c1">## concerning increase in variance with fitted</span>
+plot<span class="p">(</span>m1<span class="p">,</span> resid<span class="p">(</span><span class="m">.</span><span class="p">)</span> <span class="o">~</span> fitted<span class="p">(</span><span class="m">.</span><span class="p">)</span> <span class="o">|</span> block<span class="p">,</span> abline<span class="o">=</span><span class="kt">c</span><span class="p">(</span>h<span class="o">=</span><span class="m">0</span><span class="p">),</span> lty<span class="o">=</span><span class="m">1</span><span class="p">,</span>  type<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;p&quot;</span><span class="p">,</span> <span class="s">&quot;smooth&quot;</span><span class="p">))</span> <span class="c1"># per block</span>
+plot<span class="p">(</span>m1<span class="p">,</span> <span class="kp">sqrt</span><span class="p">(</span><span class="kp">abs</span><span class="p">(</span>resid<span class="p">(</span><span class="m">.</span><span class="p">)))</span> <span class="o">~</span> fitted<span class="p">(</span><span class="m">.</span><span class="p">)</span> <span class="o">|</span> block<span class="p">,</span>  type<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;p&quot;</span><span class="p">,</span> <span class="s">&quot;smooth&quot;</span><span class="p">))</span>
+
+
+<span class="c1"># residuals look better for more complex RE structure</span>
+lattice<span class="o">::</span>qqmath<span class="p">(</span>m1<span class="p">,</span> id<span class="o">=</span><span class="m">0.05</span><span class="p">,</span> group<span class="o">=</span>block<span class="p">)</span>
+
+<span class="c1">## look at randeom effect</span>
+lattice<span class="o">::</span>dotplot<span class="p">(</span>ranef<span class="p">(</span>m1<span class="p">,</span> condVar<span class="o">=</span><span class="kc">TRUE</span><span class="p">))</span> <span class="c1">#were we to have LOTS of RE, using lattice::qqmath for y axis spacing based on quantiles of standard normal -- is better to distinguish important few from &quot;trivial many&quot;</span>
+
+<span class="kp">system.time</span><span class="p">(</span>m1.prall <span class="o">&lt;-</span> profile<span class="p">(</span>m1<span class="p">))</span>
+<span class="kp">system.time</span><span class="p">(</span>m1.prre <span class="o">&lt;-</span> profile<span class="p">(</span>m1<span class="p">,</span> which<span class="o">=</span><span class="s">&#39;theta_&#39;</span><span class="p">))</span>
+
+<span class="c1">#  plots</span>
+<span class="c1"># the &#39;profile zeta plot&#39;</span>
+<span class="c1"># linear indicatesa a quadratic likelihood profile, and so Wald approximations for CI will work well</span>
+<span class="c1"># random effects parameters on a standard deviation (or correlation) scale</span>
+lattice<span class="o">::</span>xyplot<span class="p">(</span>m1.prre<span class="p">)</span>
+lattice<span class="o">::</span>xyplot<span class="p">(</span>m1.prall<span class="p">)</span>
+
+<span class="c1"># the &#39;profile density plot&#39;</span>
+<span class="c1"># approximate probability density functinos of the parameters</span>
+<span class="c1"># -- distros underlying profile confidence intervals</span>
+<span class="c1"># linear zeta plot &lt;==&gt; gaussian densities</span>
+lattice<span class="o">::</span>densityplot<span class="p">(</span>m1.prall<span class="p">)</span>
+
+<span class="c1"># the &#39;profile pairs plot&#39;</span>
+<span class="c1"># bivariate confidence regions baed on profile</span>
+<span class="c1"># &#39;profile traces&#39; -- cross hairs -- are conditinoal estimates  of one parmeter given the other</span>
+<span class="c1"># above-diag: estimated scale</span>
+<span class="c1"># below-diag: &#39;zeta&#39; scale, some sense, the best possible set of single-parameter transformations for assessing the contours&quot;</span>
+lattice<span class="o">::</span>splom<span class="p">(</span>m1.prre<span class="p">)</span>
+
+
+
+
+<span class="c1">## ----ryo-----------------------------------------------------------------</span>
+
+make_CI_df <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>modprof<span class="p">,</span> model<span class="p">,</span> BOOT<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
+  ci <span class="o">&lt;-</span> confint<span class="p">(</span>model<span class="p">,</span> method<span class="o">=</span><span class="s">&#39;Wald&#39;</span><span class="p">)</span>
+  cip <span class="o">&lt;-</span> confint<span class="p">(</span>modprof<span class="p">)</span>
+  <span class="kr">if</span><span class="p">(</span>BOOT<span class="p">)</span> <span class="p">{</span>
+      cib <span class="o">&lt;-</span> confint<span class="p">(</span>model<span class="p">,</span> method<span class="o">=</span><span class="s">&quot;boot&quot;</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
+      cib_dat <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span>cib<span class="p">,</span> parameter<span class="o">=</span><span class="kp">row.names</span><span class="p">(</span>cib<span class="p">),</span> type<span class="o">=</span><span class="s">&#39;Boot&#39;</span><span class="p">)</span>
+      <span class="kp">names</span><span class="p">(</span>cib_dat<span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">colnames</span><span class="p">(</span>cib<span class="p">)</span>
+  <span class="p">}</span>
+  ci_dat <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span>ci<span class="p">,</span> parameter<span class="o">=</span><span class="kp">row.names</span><span class="p">(</span>ci<span class="p">),</span> type<span class="o">=</span><span class="s">&#39;Wald&#39;</span><span class="p">)</span>
+  <span class="kp">names</span><span class="p">(</span>ci_dat<span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">colnames</span><span class="p">(</span>ci<span class="p">)</span>
+  cip_dat <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span>cip<span class="p">,</span> parameter<span class="o">=</span><span class="kp">row.names</span><span class="p">(</span>cip<span class="p">),</span> type<span class="o">=</span><span class="s">&#39;Prof&#39;</span><span class="p">)</span>
+  <span class="kp">names</span><span class="p">(</span>cip_dat<span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">colnames</span><span class="p">(</span>cip<span class="p">)</span>
+  <span class="kr">if</span> <span class="p">(</span><span class="o">!</span>BOOT<span class="p">)</span> <span class="p">{</span>
+      ci_all_dat <span class="o">&lt;-</span> <span class="kp">rbind</span><span class="p">(</span>ci_dat<span class="p">,</span> cip_dat<span class="p">)</span>
+  <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+      ci_all_dat <span class="o">&lt;-</span> <span class="kp">rbind</span><span class="p">(</span>ci_dat<span class="p">,</span> cip_dat<span class="p">,</span> cib_dat<span class="p">)</span>
+  <span class="p">}</span>
+  fe_dat <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span>parameter<span class="o">=</span><span class="kp">names</span><span class="p">(</span>fixef<span class="p">(</span>model<span class="p">)),</span> value<span class="o">=</span>fixef<span class="p">(</span>model<span class="p">))</span>
+  <span class="kt">list</span><span class="p">(</span>mean<span class="o">=</span>fe_dat<span class="p">,</span> bounds<span class="o">=</span>ci_all_dat<span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kr">if</span><span class="p">(</span><span class="kn">require</span><span class="p">(</span>ggplot2<span class="p">))</span> <span class="p">{</span>
+
+    m1_ci <span class="o">&lt;-</span> make_CI_df<span class="p">(</span>m1.prall<span class="p">,</span> m1<span class="p">,</span> BOOT<span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> nsim<span class="o">=</span><span class="m">100</span><span class="p">)</span>
+    m1_mean <span class="o">&lt;-</span> m1_ci<span class="p">[[</span><span class="s">&#39;mean&#39;</span><span class="p">]]</span>
+    m1_bnd <span class="o">&lt;-</span> m1_ci<span class="p">[[</span><span class="s">&#39;bounds&#39;</span><span class="p">]]</span>
+
+  ggplot<span class="p">(</span>m1_bnd<span class="p">[</span>m1_bnd<span class="o">$</span>parameter <span class="o">!=</span> <span class="s">&#39;(Intercept)&#39;</span><span class="p">,</span> <span class="p">])</span> <span class="o">+</span>
+          geom_linerange<span class="p">(</span>aes<span class="p">(</span>parameter<span class="p">,</span> ymax<span class="o">=</span><span class="sb">`97.5 %`</span><span class="p">,</span> ymin<span class="o">=</span><span class="sb">`2.5 %`</span><span class="p">,</span> color<span class="o">=</span>type<span class="p">),</span>
+                         position<span class="o">=</span>position_dodge<span class="p">(</span>w<span class="o">=</span><span class="m">.5</span><span class="p">),</span> size<span class="o">=</span><span class="m">1.5</span><span class="p">)</span> <span class="o">+</span>
+                           geom_hline<span class="p">(</span>yintercept<span class="o">=</span><span class="m">0</span><span class="p">,</span> linetype<span class="o">=</span><span class="m">2</span><span class="p">)</span> <span class="o">+</span>
+                               coord_flip<span class="p">()</span> <span class="o">+</span> theme_minimal<span class="p">()</span> <span class="o">+</span>
+                                   geom_point<span class="p">(</span>aes<span class="p">(</span>parameter<span class="p">,</span> value<span class="p">),</span>
+                                              size<span class="o">=</span><span class="m">3</span><span class="p">,</span> shape<span class="o">=</span><span class="m">3</span><span class="p">,</span>
+                                              data<span class="o">=</span>m1_mean<span class="p">[</span>m1_mean<span class="o">$</span>parameter <span class="o">!=</span> <span class="s">&#39;(Intercept)&#39;</span><span class="p">,</span> <span class="p">])</span>
+
+                                                    <span class="p">}</span>
+
+<span class="c1">##   strong effect ot nutreint homogenetity</span>
+<span class="c1">##   effect of adding lots of water</span>
+   <span class="c1">## nutreint has some effect</span>
+
+   <span class="c1">## look at consequences</span>
+<span class="kr">if</span><span class="p">(</span><span class="kn">require</span><span class="p">(</span>lsmeans<span class="p">)){</span>
+
+    lsmip<span class="p">(</span>m1<span class="p">,</span> <span class="o">~</span> nutrient_add  <span class="o">|</span> nutrient_hetero <span class="o">*</span> water_add<span class="p">)</span>
+
+    m1.lsm <span class="o">&lt;-</span> lsmeans<span class="p">(</span>m1<span class="p">,</span> <span class="o">~</span> nutrient_add  <span class="o">|</span> nutrient_hetero  <span class="o">*</span> water_add<span class="p">)</span>
+    plot<span class="p">(</span>m1.lsm<span class="p">,</span> layout <span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">),</span> horizontal<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+
+    m1.lsm <span class="o">&lt;-</span> lsmeans<span class="p">(</span>m1<span class="p">,</span> <span class="o">~</span> water_add <span class="o">|</span> nutrient_add <span class="p">)</span>
+    plot<span class="p">(</span>m1.lsm<span class="p">,</span> horizontal<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+
+    m1.lsm <span class="o">&lt;-</span> lsmeans<span class="p">(</span>m1<span class="p">,</span> <span class="o">~</span> nutrient_hetero <span class="o">*</span> water_add <span class="o">|</span> nutrient_add <span class="p">)</span>
+    plot<span class="p">(</span>m1.lsm<span class="p">)</span>
+
+
+<span class="p">}</span>
+
+
+
+<span class="c1">## ----latimer-fits--------------------------------------------------------</span>
+
+d2 <span class="o">&lt;-</span> read.delim<span class="p">(</span><span class="s">&quot;http://datadryad.org/bitstream/handle/10255/dryad.33579/Richmond%20et%20al%202011%20Datafile.txt?sequence=1&quot;</span><span class="p">)</span>
+<span class="kp">names</span><span class="p">(</span>d2<span class="p">)</span> <span class="o">&lt;-</span> <span class="kp">gsub</span><span class="p">(</span><span class="s">&#39;\\.&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="kp">names</span><span class="p">(</span>d2<span class="p">))</span>
+
+<span class="c1"># rescale geo dist, sizediff</span>
+d2 <span class="o">&lt;-</span> <span class="kp">within</span><span class="p">(</span>d2<span class="p">,</span> <span class="p">{</span>
+    geodist_scl <span class="o">&lt;-</span> <span class="p">(</span>GeoDist <span class="o">-</span> <span class="kp">mean</span><span class="p">(</span>GeoDist<span class="p">))</span> <span class="o">/</span> var<span class="p">(</span>GeoDist<span class="p">)</span>
+    sizediff_scl2 <span class="o">&lt;-</span> <span class="p">((</span>SizeDiff <span class="o">-</span> <span class="kp">mean</span><span class="p">(</span>SizeDiff<span class="p">))</span> <span class="o">/</span> var<span class="p">(</span>SizeDiff<span class="p">))</span><span class="o">^</span><span class="m">2</span>
+    Series <span class="o">&lt;-</span> <span class="kp">factor</span><span class="p">(</span>Series<span class="p">)</span>
+    Female <span class="o">&lt;-</span> <span class="kp">factor</span><span class="p">(</span>Female<span class="p">)</span>
+    Male <span class="o">&lt;-</span> <span class="kp">factor</span><span class="p">(</span>Male<span class="p">)</span>
+    <span class="p">})</span>
+
+<span class="kp">system.time</span><span class="p">(</span>
+    gm0 <span class="o">&lt;-</span> glmer<span class="p">(</span>cop <span class="o">~</span>   sizediff_scl2   <span class="o">+</span> <span class="p">(</span><span class="m">1</span> <span class="o">|</span> Series<span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="m">1</span> <span class="o">|</span> Male<span class="p">)</span>  <span class="o">+</span> <span class="p">(</span><span class="m">1</span> <span class="o">|</span> Female<span class="p">)</span> <span class="p">,</span>
+                 data<span class="o">=</span>d2<span class="p">,</span> family<span class="o">=</span><span class="s">&#39;binomial&#39;</span><span class="p">))</span>
+
+gm1 <span class="o">&lt;-</span> glmer<span class="p">(</span>cop <span class="o">~</span> geodist_scl <span class="o">+</span>  sizediff_scl2 <span class="o">+</span> <span class="p">(</span><span class="m">1</span> <span class="o">|</span> Series<span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="m">1</span> <span class="o">|</span> Male<span class="p">)</span>  <span class="o">+</span> <span class="p">(</span><span class="m">1</span> <span class="o">|</span> Female<span class="p">)</span> <span class="p">,</span>
+             data<span class="o">=</span>d2<span class="p">,</span> family<span class="o">=</span><span class="s">&#39;binomial&#39;</span><span class="p">)</span>
+
+
+<span class="c1">## ----latimer-crit--------------------------------------------------------</span>
+
+anova<span class="p">(</span>gm1<span class="p">,</span> gm0<span class="p">)</span>
+
+plot<span class="p">(</span>gm0<span class="p">,</span> type<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;p&quot;</span><span class="p">)</span> <span class="p">)</span> <span class="c1">#non useful</span>
+plot<span class="p">(</span>gm0<span class="p">,</span> <span class="kp">factor</span><span class="p">(</span>Series<span class="p">)</span>  <span class="o">~</span> resid<span class="p">(</span><span class="m">.</span><span class="p">),</span>  abline<span class="o">=</span><span class="kt">c</span><span class="p">(</span>v<span class="o">=</span><span class="m">0</span><span class="p">),</span> lty<span class="o">=</span><span class="m">2</span><span class="p">)</span> <span class="c1"># better than default eh</span>
+plot<span class="p">(</span>gm0<span class="p">,</span> <span class="kp">sqrt</span><span class="p">(</span><span class="kp">abs</span><span class="p">(</span>resid<span class="p">(</span><span class="m">.</span><span class="p">)))</span> <span class="o">~</span> fitted<span class="p">(</span><span class="m">.</span><span class="p">)</span> <span class="o">|</span> Series <span class="p">)</span>
+
+<span class="kr">if</span><span class="p">(</span><span class="kn">require</span><span class="p">(</span>gridExtra<span class="p">))</span> <span class="p">{</span>
+    <span class="kp">do.call</span><span class="p">(</span>gridExtra<span class="o">::</span>grid.arrange<span class="p">,</span> <span class="kt">c</span><span class="p">(</span>lattice<span class="o">::</span>qqmath<span class="p">(</span>ranef<span class="p">(</span>gm0<span class="p">,</span> condVar<span class="o">=</span><span class="kc">TRUE</span><span class="p">)),</span> <span class="kt">list</span><span class="p">(</span>nrow<span class="o">=</span><span class="m">1</span><span class="p">)))</span>
+<span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+    lattice<span class="o">::</span>qqmath<span class="p">(</span>ranef<span class="p">(</span>gm0<span class="p">,</span> condVar<span class="o">=</span><span class="kc">TRUE</span><span class="p">))</span>
+    <span class="p">}</span>
+<span class="c1">## useful if you have a lot of RE to draw attention to strong ones</span>
+<span class="c1">## maybe latter == dot = sample size?</span>
+
+<span class="c1">## no reason to retain RE on Male, but also drop Female</span>
+<span class="c1">## no real justification, very slow profiling for many RE</span>
+<span class="c1">#gm0noindre &lt;- glmer(cop ~   sizediff_scl2   + (1 | Series), data=d2, family=&#39;binomial&#39;)</span>
+
+<span class="kp">system.time</span><span class="p">(</span>
+    gm0.prall <span class="o">&lt;-</span> profile<span class="p">(</span>gm0noindre<span class="p">,</span> devtol<span class="o">=</span><span class="m">1e-6</span><span class="p">)</span> <span class="c1"># see https://stat.ethz.ch/pipermail/r-sig-mixed-models/2014q3/022394.html</span>
+<span class="p">)</span>
+
+
+<span class="c1">## ----latimer-prof, eval=FALSE--------------------------------------------</span>
+<span class="c1">## </span>
+<span class="c1">## #system.time(</span>
+<span class="c1">## #    gm0_full.prall &lt;- profile(gm0, devtol=1e-6)</span>
+<span class="c1">## #)</span>
+<span class="c1">## #   user  system elapsed</span>
+<span class="c1">## #344.092   0.539 344.613</span>
+
+
+<span class="c1">## ----latimer-plotting, warning=FALSE-------------------------------------</span>
+
+lattice<span class="o">::</span>xyplot<span class="p">(</span>logProf<span class="p">(</span>gm0.prall<span class="p">))</span>
+lattice<span class="o">::</span>densityplot<span class="p">(</span>gm0.prall<span class="p">)</span>
+lattice<span class="o">::</span>splom<span class="p">(</span>gm0.prall<span class="p">)</span>
+
+<span class="c1">## add ci plots</span>
+
+<span class="kr">if</span><span class="p">(</span><span class="kn">require</span><span class="p">(</span>ggplot2<span class="p">))</span> <span class="p">{</span>
+  gm0_ci <span class="o">&lt;-</span> make_CI_df<span class="p">(</span>gm0.prall<span class="p">,</span> gm0<span class="p">)</span>
+  gm0_mean <span class="o">&lt;-</span> gm0_ci<span class="p">[[</span><span class="s">&#39;mean&#39;</span><span class="p">]]</span>
+  gm0_bnd <span class="o">&lt;-</span> gm0_ci<span class="p">[[</span><span class="s">&#39;bounds&#39;</span><span class="p">]]</span>
+  g <span class="o">&lt;-</span> ggplot<span class="p">(</span>gm0_bnd<span class="p">[</span>gm0_bnd<span class="o">$</span>parameter <span class="o">!=</span> <span class="s">&#39;(Intercept)&#39;</span><span class="p">,</span> <span class="p">])</span> <span class="o">+</span>
+          geom_linerange<span class="p">(</span>aes<span class="p">(</span>parameter<span class="p">,</span> ymax<span class="o">=</span><span class="sb">`97.5 %`</span><span class="p">,</span> ymin<span class="o">=</span><span class="sb">`2.5 %`</span><span class="p">,</span> color<span class="o">=</span>type<span class="p">),</span>
+                         position<span class="o">=</span>position_dodge<span class="p">(</span>w<span class="o">=</span><span class="m">.5</span><span class="p">),</span> size<span class="o">=</span><span class="m">1.5</span><span class="p">)</span> <span class="o">+</span>
+                           geom_hline<span class="p">(</span>yintercept<span class="o">=</span><span class="m">0</span><span class="p">,</span> linetype<span class="o">=</span><span class="m">2</span><span class="p">)</span> <span class="o">+</span>
+                               coord_flip<span class="p">()</span> <span class="o">+</span> theme_minimal<span class="p">()</span> <span class="o">+</span>
+                                   geom_point<span class="p">(</span>aes<span class="p">(</span>parameter<span class="p">,</span> value<span class="p">),</span>
+                                              size<span class="o">=</span><span class="m">3</span><span class="p">,</span> shape<span class="o">=</span><span class="m">3</span><span class="p">,</span>
+                                              data<span class="o">=</span>gm0_mean<span class="p">[</span>gm0_mean<span class="o">$</span>parameter <span class="o">!=</span> <span class="s">&#39;(Intercept)&#39;</span><span class="p">,</span> <span class="p">])</span>
+
+  g
+
+  <span class="p">}</span>
+
+
+<span class="c1">## ----low-magnitude-param, warning=FALSE----------------------------------</span>
+  g <span class="o">+</span> scale_y_log10<span class="p">()</span>
+
+
+
+
+<span class="c1">## ----prediction-visual---------------------------------------------------</span>
+<span class="c1">## predicted effect</span>
+d2<span class="o">$</span>pred_overall_gen <span class="o">&lt;-</span> predict<span class="p">(</span>gm0<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;response&#39;</span><span class="p">,</span> re.form<span class="o">=</span><span class="kc">NA</span><span class="p">)</span>
+d2<span class="o">$</span>pred_overall <span class="o">&lt;-</span> predict<span class="p">(</span>gm0<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;response&#39;</span><span class="p">)</span>
+d2<span class="o">$</span>pred_ind <span class="o">&lt;-</span> predict<span class="p">(</span>gm0<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;response&#39;</span><span class="p">,</span> re.form<span class="o">=~</span> <span class="p">(</span><span class="m">1</span><span class="o">|</span>Female<span class="p">))</span>
+d2<span class="o">$</span>pred_trial <span class="o">&lt;-</span> predict<span class="p">(</span>gm0<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;response&#39;</span><span class="p">,</span> re.form<span class="o">=~</span><span class="p">(</span><span class="m">1</span><span class="o">|</span>Series<span class="p">))</span>
+
+d2_plus_count <span class="o">&lt;-</span> <span class="kp">merge</span><span class="p">(</span>d2<span class="p">,</span> <span class="kp">as.data.frame</span><span class="p">(</span><span class="kp">table</span><span class="p">(</span>Series<span class="o">=</span>d2<span class="o">$</span>Series<span class="p">)))</span>
+
+<span class="kr">if</span><span class="p">(</span><span class="kn">require</span><span class="p">(</span>ggplot2<span class="p">))</span> <span class="p">{</span>
+g <span class="o">&lt;-</span>  ggplot<span class="p">(</span>d2_plus_count<span class="p">)</span> <span class="o">+</span> geom_point<span class="p">(</span>aes<span class="p">(</span>SizeDiff<span class="p">,</span> cop<span class="p">),</span>
+                                         position<span class="o">=</span>position_jitter<span class="p">(</span>h<span class="o">=</span><span class="m">0.05</span><span class="p">,</span> w<span class="o">=</span><span class="m">0</span><span class="p">))</span> <span class="o">+</span>
+    geom_line<span class="p">(</span>aes<span class="p">(</span>SizeDiff<span class="p">,</span> pred_trial<span class="p">,</span> color<span class="o">=</span>Series<span class="p">))</span> <span class="o">+</span>
+    geom_point<span class="p">(</span>aes<span class="p">(</span>SizeDiff<span class="p">,</span> pred_ind<span class="p">,</span> alpha<span class="o">=</span><span class="kp">as.numeric</span><span class="p">(</span>Female<span class="p">)))</span> <span class="o">+</span>
+    geom_line<span class="p">(</span>aes<span class="p">(</span>SizeDiff<span class="p">,</span> pred_overall_gen<span class="p">),</span> color<span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">,</span> size<span class="o">=</span><span class="m">1.5</span><span class="p">)</span> <span class="o">+</span>
+    theme_minimal<span class="p">()</span>
+g
+
+
+<span class="p">}</span>
+
+
+
+
+<span class="c1">## todo - figure out ls means quick vis for variety of predictor values</span>
+
+
+
+
+<span class="c1">## ----ugly-plot-----------------------------------------------------------</span>
+
+g <span class="o">+</span> geom_line<span class="p">(</span>aes<span class="p">(</span>SizeDiff<span class="p">,</span> pred_overall<span class="p">),</span> color<span class="o">=</span><span class="s">&#39;darkgray&#39;</span><span class="p">,</span> size<span class="o">=</span><span class="m">1</span><span class="p">)</span> 
+
+
+
+<span class="c1">## ----post-pred-----------------------------------------------------------</span>
+
+<span class="c1">## without RE</span>
+<span class="kp">set.seed</span><span class="p">(</span><span class="m">1141</span><span class="p">)</span>
+gm0.sim_wo <span class="o">&lt;-</span> simulate<span class="p">(</span>gm0<span class="p">,</span> nsim<span class="o">=</span><span class="m">1000</span><span class="p">,</span> re.form<span class="o">=</span><span class="kc">NA</span><span class="p">)</span>
+sims <span class="o">&lt;-</span> <span class="kp">sapply</span><span class="p">(</span>gm0.sim_wo<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span>  x<span class="p">)</span>
+ones <span class="o">&lt;-</span> <span class="kp">colSums</span><span class="p">(</span>sims<span class="p">)</span>
+zeros <span class="o">&lt;-</span> <span class="o">-</span><span class="kp">colSums</span><span class="p">(</span>sims<span class="m">-1</span><span class="p">)</span>
+perc <span class="o">&lt;-</span> ones<span class="o">/</span><span class="kp">nrow</span><span class="p">(</span>d2<span class="p">)</span>
+cvar <span class="o">&lt;-</span> <span class="kp">apply</span><span class="p">(</span>sims<span class="p">,</span> <span class="m">2</span><span class="p">,</span> var<span class="p">)</span>
+
+<span class="c1">## with RE</span>
+gm0.sim <span class="o">&lt;-</span> simulate<span class="p">(</span>gm0<span class="p">,</span> <span class="m">1000</span> <span class="p">)</span>
+sims <span class="o">&lt;-</span> <span class="kp">sapply</span><span class="p">(</span>gm0.sim<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span>  x<span class="p">)</span>
+re_ones <span class="o">&lt;-</span> <span class="kp">colSums</span><span class="p">(</span>sims<span class="p">)</span>
+re_zeros <span class="o">&lt;-</span> <span class="o">-</span><span class="kp">colSums</span><span class="p">(</span>sims<span class="m">-1</span><span class="p">)</span>
+re_perc <span class="o">&lt;-</span> re_ones<span class="o">/</span><span class="kp">nrow</span><span class="p">(</span>d2<span class="p">)</span>
+re_cvar <span class="o">&lt;-</span> <span class="kp">apply</span><span class="p">(</span>sims<span class="p">,</span> <span class="m">2</span><span class="p">,</span> var<span class="p">)</span>
+
+pp_comp <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>dist<span class="p">,</span> cmp_fn<span class="p">,</span> data<span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
+  hist<span class="p">(</span>dist<span class="p">,</span> col<span class="o">=</span><span class="s">&#39;orange&#39;</span><span class="p">,</span> xlab<span class="o">=</span><span class="s">&#39;value&#39;</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
+  abline<span class="p">(</span>v<span class="o">=</span>cmp_fn<span class="p">(</span>data<span class="p">),</span> lwd<span class="o">=</span><span class="m">4</span><span class="p">,</span> col<span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">,</span> lty<span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="p">}</span>
+
+op <span class="o">&lt;-</span> par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">4</span><span class="p">))</span>
+  pp_comp<span class="p">(</span>ones<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="kp">sum</span><span class="p">(</span>x<span class="o">$</span>cop<span class="p">),</span> d2<span class="p">,</span> main<span class="o">=</span><span class="s">&#39;ones - no RE&#39;</span><span class="p">,</span> xlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">45</span><span class="p">,</span> <span class="m">110</span><span class="p">))</span>
+  pp_comp<span class="p">(</span>zeros<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="o">-</span><span class="kp">sum</span><span class="p">(</span>x<span class="o">$</span>cop <span class="o">-</span> <span class="m">1</span><span class="p">),</span> d2<span class="p">,</span> main<span class="o">=</span><span class="s">&#39;zeros -no RE&#39;</span><span class="p">,</span> xlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">120</span><span class="p">,</span> <span class="m">185</span><span class="p">))</span>
+  pp_comp<span class="p">(</span>perc<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="kp">sum</span><span class="p">(</span>x<span class="o">$</span>cop<span class="p">)</span><span class="o">/</span><span class="kp">nrow</span><span class="p">(</span>d2<span class="p">),</span> d2<span class="p">,</span> main<span class="o">=</span><span class="s">&#39;% cop - no RE&#39;</span><span class="p">,</span> xlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">.8</span><span class="p">))</span>
+  pp_comp<span class="p">(</span>cvar<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> var<span class="p">(</span>x<span class="o">$</span>cop<span class="p">),</span> d2<span class="p">,</span> main<span class="o">=</span><span class="s">&#39;var - no RE&#39;</span><span class="p">,</span> xlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span> <span class="m">.3</span><span class="p">))</span>
+
+  pp_comp<span class="p">(</span>re_ones<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="kp">sum</span><span class="p">(</span>x<span class="o">$</span>cop<span class="p">),</span> d2<span class="p">,</span> main<span class="o">=</span><span class="s">&#39;ones - all RE&#39;</span><span class="p">,</span> xlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">45</span><span class="p">,</span> <span class="m">110</span><span class="p">))</span>
+  pp_comp<span class="p">(</span>re_zeros<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="o">-</span><span class="kp">sum</span><span class="p">(</span>x<span class="o">$</span>cop <span class="o">-</span> <span class="m">1</span><span class="p">),</span> d2<span class="p">,</span> main<span class="o">=</span><span class="s">&#39;zeros - all RE&#39;</span><span class="p">,</span> xlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">120</span><span class="p">,</span> <span class="m">185</span><span class="p">))</span>
+  pp_comp<span class="p">(</span>re_perc<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="kp">sum</span><span class="p">(</span>x<span class="o">$</span>cop<span class="p">)</span><span class="o">/</span><span class="kp">nrow</span><span class="p">(</span>d2<span class="p">),</span> d2<span class="p">,</span> main<span class="o">=</span><span class="s">&#39;% cop - RE&#39;</span><span class="p">,</span> xlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">.8</span><span class="p">))</span>
+  pp_comp<span class="p">(</span>re_cvar<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> var<span class="p">(</span>x<span class="o">$</span>cop<span class="p">),</span> d2<span class="p">,</span> main<span class="o">=</span><span class="s">&#39;var - all RE&#39;</span><span class="p">,</span> xlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span> <span class="m">.3</span><span class="p">))</span>
+par<span class="p">(</span>op<span class="p">)</span>
+
+
+
+<span class="c1">## ----glmmadmb-too, eval=FALSE--------------------------------------------</span>
+<span class="c1">## ## look at glmmadmb too -- not evaluated</span>
+<span class="c1">## gm1admb &lt;- glmmadmb(cop ~ geodist_scl +  sizediff_scl2, random= ~1 | Series + 1 | Female , data=d2, family=&#39;binomial&#39;)</span>
+<span class="c1">## </span>
+<span class="c1">## d2 &lt;- data.frame(d2, predict(gm1admb, interval=&#39;confidence&#39;, type=&#39;link&#39;))</span>
+<span class="c1">## </span>
+<span class="c1">## plot(cop ~ SizeDiff, d2, ylim = c(0, 1))</span>
+<span class="c1">## lines(plogis(fit) ~ SizeDiff, d2, lwd=2)</span>
+<span class="c1">## lines(plogis(lwr) ~ SizeDiff, d2, lty=2, lwd=2)</span>
+<span class="c1">## lines(plogis(upr) ~ SizeDiff, d2, lty=2, lwd=2)</span>
+<span class="c1">##       geom_line(aes(SizeDiff, plogis(lwr)), color=&#39;red&#39;, size=1, linetype=2) +</span>
+<span class="c1">##     geom_line(aes(SizeDiff, plogis(upr)), color=&#39;red&#39;, size=1, linetype=2) +</span>
+
+
+<span class="c1">## ----broom-fortify-------------------------------------------------------</span>
+
+
+<span class="kr">if</span><span class="p">(</span><span class="kn">require</span><span class="p">(</span>ggplot2<span class="p">))</span> <span class="p">{</span>
+    d_fort <span class="o">&lt;-</span> ggplot2<span class="o">::</span>fortify<span class="p">(</span>m1<span class="p">,</span> d<span class="p">)</span>
+    str<span class="p">(</span>d_fort<span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kr">if</span><span class="p">(</span><span class="kn">require</span><span class="p">(</span>broom<span class="p">))</span> <span class="p">{</span>
+    glance<span class="p">(</span>m1<span class="p">)</span>
+    str<span class="p">(</span>tidy<span class="p">(</span>m1<span class="p">))</span>
+    str<span class="p">(</span>augment<span class="p">(</span>m1<span class="p">,</span> d<span class="p">))</span>
+<span class="p">}</span>
+</pre></div>
+            </div>
+            <!-- /.entry-content -->
+<ul class="pager">
+  <li class="previous">
+    <a href="http://www.ashander.info/posts/2015/01/between-generation-bet-hedging/"><i class="fa fa-arrow-left"></i> Between-generation bet-hedging</a>
+  </li>
+</ul>        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-users fa-lg"></i><span class="icon-label">Find me</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="https://github.com/ashander"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+                <li class="list-group-item"><a href="https://twitter.com/jaimedash"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
+                <li class="list-group-item"><a href="http://figshare.com/authors/Jaime_Ashander/505494"><i class="fa fa-figshare-square fa-lg"></i> figshare</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="http://www.ashander.info/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="http://www.ashander.info/tag/musing/">
+                            musing
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="http://www.ashander.info/tag/floodplain/">
+                            Floodplain
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="http://www.ashander.info/tag/population-biology/">
+                            Population Biology
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="http://www.ashander.info/tag/science/">
+                            science
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="http://www.ashander.info/tag/salmon/">
+                            salmon
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://www.ashander.info/tag/ecological/">
+                            Ecological
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://www.ashander.info/tag/canada/">
+                            Canada
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://www.ashander.info/tag/evolution/">
+                            evolution
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://www.ashander.info/tag/spillback/">
+                            spillback
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://www.ashander.info/tag/inference/">
+                            inference
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://www.ashander.info/tag/peer-reviewed/">
+                            Peer reviewed
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://www.ashander.info/tag/stochasticity/">
+                            stochasticity
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://www.ashander.info/tag/synergies/">
+                            Synergies
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://www.ashander.info/tag/spillover/">
+                            spillover
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://www.ashander.info/tag/aquaculture/">
+                            aquaculture
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://www.ashander.info/tag/offs/">
+                            Offs
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://www.ashander.info/tag/management/">
+                            Management
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://www.ashander.info/tag/trade/">
+                            Trade
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://www.ashander.info/tag/msc/">
+                            M.Sc.
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://www.ashander.info/tag/historical/">
+                            Historical
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/phenology/">
+                            phenology
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/biogeochemical-data/">
+                            biogeochemical data
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/cascadia/">
+                            Cascadia
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/phenotypic-plasticity/">
+                            phenotypic plasticity
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/voting-abroad/">
+                            voting abroad
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/resistance-evolution/">
+                            resistance evolution
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/transient-dynamics/">
+                            transient dynamics
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/restoration/">
+                            restoration
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/modifying/">
+                            Modifying
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/pink-salmon/">
+                            pink salmon
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/geography/">
+                            geography
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/optimization/">
+                            optimization
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/applied-ecology/">
+                            applied ecology
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/mathematical-ecology/">
+                            mathematical ecology
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/local-adaptation/">
+                            local adaptation
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/climate/">
+                            climate
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/grand-canyon/">
+                            Grand Canyon
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/finance/">
+                            finance
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/economics/">
+                            economics
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/models/">
+                            models
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/floodplains/">
+                            floodplains
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/philosophy/">
+                            philosophy
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/esa2013/">
+                            ESA2013
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/stochastic-life-histories/">
+                            stochastic life histories
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/bayesian-methods/">
+                            Bayesian methods
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/ethics/">
+                            ethics
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/animal-movement/">
+                            animal movement
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/line-dominance/">
+                            line dominance
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/public/">
+                            public
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/california-history/">
+                            California history
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/phd/">
+                            Ph.D.
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/complex-population-dynamics/">
+                            complex population dynamics
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/sea-lice/">
+                            sea lice
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/economy/">
+                            economy
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/pnw/">
+                            PNW
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/time-series/">
+                            time series
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.ashander.info/tag/allee-effect/">
+                            Allee effect
+                        </a>
+                    </li>
+                </ul>
+            </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2009-2015 Jaime Ashander
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://www.ashander.info/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://www.ashander.info/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://www.ashander.info/theme/js/respond.min.js"></script>
+
+    <script src="http://www.ashander.info/theme/js/bodypadding.js"></script>
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-60354418-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <!-- End Google Analytics Code -->
+
+</body>
+</html>
