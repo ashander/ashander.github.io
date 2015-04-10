@@ -37,7 +37,7 @@ DEFAULT_PAGINATION = 10
 RELATIVE_URLS = True
 
 # static paths copied without parsing
-STATIC_PATHS = ['images', 'extra/custom.css', 'extra/CNAME', 
+STATIC_PATHS = ['images', 'extra/custom.css', 'extra/CNAME',
                 'extra/README' , 'extra/LICENSE' ]
 EXTRA_PATH_METADATA = {
     'extra/custom.css': {'path': 'static/custom.css'},
@@ -92,7 +92,7 @@ TEMPLATE_PAGES = { 'index.html': 'index.html'}
 #, 'projects/index.html': 'projects/index.html'}
 
 # fix for attempt to read index.html from http://www.voidynullness.net/blog/2014/11/30/upgrading-pelican-3-5/
-READERS = {'html': None} 
+READERS = {'html': None}
 ## direct
 
 EXTRA_TEMPLATES_PATHS = ['templates/']
