@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jaime Ashander</title><link href="http://www.ashander.info/" rel="alternate"></link><link href="http://www.ashander.info/feeds/results.atom.xml" rel="self"></link><id>http://www.ashander.info/</id><updated>2014-01-03T21:19:00-08:00</updated><entry><title>Understanding the joint effects of plastic and evolutionary change on demography from time series</title><link href="http://www.ashander.info/posts/2014/01/understanding-joint-effects-plastic-evolutionary-poster/" rel="alternate"></link><updated>2014-01-03T21:19:00-08:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2014-01-03:posts/2014/01/understanding-joint-effects-plastic-evolutionary-poster/</id><summary type="html">&lt;p&gt;Background/Question/Methods&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jaime Ashander</title><link href="http://www.ashander.info/" rel="alternate"></link><link href="http://www.ashander.info/feeds/results.atom.xml" rel="self"></link><id>http://www.ashander.info/</id><updated>2015-04-22T00:00:00-07:00</updated><entry><title>Overcoming the fear of failure to improve the conservation of extremely small populations</title><link href="http://www.ashander.info/posts/2015/04/fear-of-failure-in-conservation/" rel="alternate"></link><updated>2015-04-22T00:00:00-07:00</updated><author><name>Meek</name></author><id>tag:www.ashander.info,2015-04-22:posts/2015/04/fear-of-failure-in-conservation/</id><summary type="html">&lt;p&gt;The potential for extirpation of extremely small populations (ESPs) is
+high due to their vulnerability to demographic and environmental
+stochasticity and negative impacts of human activity. We argue that
+conservation actions that could aid ESPs are sometimes delayed because
+of a fear of failure. In human psychology, the fear of failure is
+composed of several distinct cognitive elements, including
+"uncertainty about the future" and "upsetting important others."
+Uncertainty about the future is often driven by infor- mation
+obstacles in conservation: information is either not easily shared
+among practitioners or informa- tion is lacking. Whereas, fear of
+upsetting important others can be due to apprehension about angering
+constituents, peers, funders, and other stakeholders. We present
+several ways to address these fears in hopes of improving the
+conservation process. We describe methods for increased information
+sharing and improved decision-making in the face of uncertainty, and
+recommend a shift in focus to cooperative actions and improving
+methods for evaluating success. Our hope is that by tackling stumbling
+blocks due to the apprehension of failure, conservation and management
+organizations can take steps to move from fear to action.&lt;/p&gt;</summary><category term="Peer reviewed"></category><category term="M.Sc."></category><category term="Allee effect"></category><category term="spillback"></category><category term="spillover"></category><category term="salmon"></category><category term="aquaculture"></category></entry><entry><title>Understanding the joint effects of plastic and evolutionary change on demography from time series</title><link href="http://www.ashander.info/posts/2014/01/understanding-joint-effects-plastic-evolutionary-poster/" rel="alternate"></link><updated>2014-01-03T21:19:00-08:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2014-01-03:posts/2014/01/understanding-joint-effects-plastic-evolutionary-poster/</id><summary type="html">&lt;p&gt;Background/Question/Methods&lt;/p&gt;
 
 &lt;p&gt;In nature, selection often fluctuates, but observed changes in traits may owe not only to selection but plasticity. Further, changes in traits due to selection and to plasticity do not have equal demographic effects: the cost of selection is paid through declines in population number or growth rate. Thus, observed trajectories of trait value and population number can depend on interactions between plasticity, evolution and environment. The extent to which these interactions affect observed trajectories depends on the demographic context. For example, it has long been known that natural selection interacts with density-dependence, which can dilute the effect of selection on population dynamics. Although recent methods decompose observed trait change into contributions due to evolution and plasticity, these methods have not yet fully accounted for the effect of selection on demography. In particular, including information about demographic change may sharpen inference of selection versus plasticity from time series.&lt;/p&gt;
 
