@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block canonical_rel %}<link rel="canonical" href="{{ SITEURL }}">{% endblock %}
+{% block banner %}
+        {% include 'includes/rotate_banner_image.html' %}
+        {% include 'includes/banner.html' %}
+{% endblock %}
 {% block content %}
 
 <div class="row">

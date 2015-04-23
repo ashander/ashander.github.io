@@ -1,16 +1,24 @@
 {% extends "article_list.html" %}
+{% block banner %}
+        {% include 'includes/rotate_banner_image.html' %}
+<div id="banner">
+        <div class="container{% if BOOTSTRAP_FLUID %}-fluid{% endif %}">
+                <div class="copy">
+                  {% include 'includes/feed_gethead.html' %}
+                </div>
+        </div>
+</div>
+{% endblock %}
+
 {% block content %}
 {% if articles %}
 <div class="row">
   <div class="col-sm-10">
-    {% include 'includes/feed_gethead.html' %}
-    <div class="bigspacer"></div>
        <div>
        {% for article in (articles_page.object_list[:5] if articles_page else articles[:8]) %}
          <div>
            <h2><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h2>
          </div>
-         
          {% include 'includes/note_info.html' %}
 
          <div class="spacer"></div>
@@ -32,5 +40,6 @@
 </div>
 
 {% endif %}
+{% include 'includes/pagination.html' %}
 {% include 'includes/etc-footer.html' %}
 {% endblock %}

@@ -1,0 +1,18 @@
+<script type="text/javascript">
+/*<![CDATA[*/
+var el="banner";
+var bgimg=new Array("/images/banner/bamfield.jpeg", "/images/banner/bedroom.jpeg", "/images/banner/\
+fir.jpeg", "/images/banner/parker.jpeg", "/images/banner/sunrise.jpeg");
+var random=Math.round((bgimg.length-1)*Math.random());
+var cssStr="#"+el+" { background-image: url("+bgimg[random]+") } ";
+var  style=document.createElement("style");
+
+style.setAttribute("type","text/css");
+if(style.styleSheet)
+{style.styleSheet.cssText=cssStr;}
+else
+{var cssText=document.createTextNode(cssStr);
+style.appendChild(cssText);}
+document.getElementsByTagName("head")[0].appendChild(style);
+/*]]>*/
+</script>

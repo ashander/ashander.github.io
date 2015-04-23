@@ -1,0 +1,32 @@
+---
+title: R markdown post using rmd_reader
+author: Jaime Ashander
+status: draft
+tags: help, tag me, i'm a tag
+output:
+     md_document:
+         variant: markdown_strict
+         dev: 'svg'
+         encoding: 'UTF-8'
+date: 2015-04-25
+---
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(cache = 1)
+```
+
+
+```{r, my-fig, fig.cap=c("My alt1", "alt2")}
+params <- rnorm(100)
+plot(params, rnorm(100))
+cat("\n\n")
+hist(params)
+```
+
+[intrasite link]({filename}example-yaml.md)
+
+
+```{r, self}
+print(knitr::knit_hooks$get('plot'))
+
+```

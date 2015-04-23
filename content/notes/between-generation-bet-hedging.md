@@ -1,7 +1,7 @@
 Title: Between-generation bet-hedging
 Author: Jaime
 Date: 2015-01-12
-Tags: stochastic life histories, evolution, stochasticity
+Tags: life history, evolution, stochasticity
 
 Version of notes for discussion I led in
 [Sebastain Schreiber's](http://www.eve.ucdavis.edu/sschreiber/) for

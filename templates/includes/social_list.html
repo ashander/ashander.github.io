@@ -1,0 +1,13 @@
+{% if SOCIAL %}
+   {% for name, link in SOCIAL %}
+     {% set name_sanitized = name|lower|replace('+','-plus')|replace('\&',' ')|replace(' ','-') %}
+     {% if name_sanitized in ['flickr', 'spotify', 'stack-overflow'] %}
+        {% set iconattributes = '"fa fa-' ~ name_sanitized ~ ' fa-lg"' %}
+     {% elif name_sanitized in ['figshare'] %}
+        {% set iconattributes = '"fa fa-spinner"' %}
+     {% else %}
+       {% set iconattributes = '"fa fa-' ~ name_sanitized ~ '-square fa-lg"' %}
+     {% endif %}
+    <li class="list-group-item"><a href="{{ link }}"><i class={{ iconattributes }}></i> {{ name }}</a></li>
+  {% endfor %}
+{% endif %}

@@ -1,0 +1,34 @@
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+        {% if DISPLAY_RECENT_POSTS_ON_SIDEBAR %}
+            {% if RECENT_POST_COUNT is not defined %}
+                {% set RECENT_POST_COUNT = 5 %}
+            {% endif %}
+            <li class="list-group-item"><h4><i class="fa fa-clock-o fa-lg"></i><span class="icon-label">Recent</span></h4>
+              <ul class="list-group" id="recentposts">
+                {% for cat, articles in categories %}
+                 {%if cat == category %}
+                    {%for article in articles[:RECENT_POST_COUNT] %}
+                    <li class="list-group-item">
+                        <a href="{{ SITEURL }}/{{ article.url }}">
+                            {{ article.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            </li>
+        {% endif %}
+        {% if SOCIAL %}
+          <li class="list-group-item">
+                  <h4> <i class="fa fa-paper-plane fa-lg"></i><span class="icon-label">Contact</span></h4>
+              <ul class="list-group" id="social">
+          {% include 'includes/social_list.html' %}
+                </ul>
+        {% endif %}
+        {% include 'includes/github.html' %}
+        {% include 'includes/twitter_timeline.html' %}
+        {% include 'includes/links.html' %}
+    </ul>
+</section>

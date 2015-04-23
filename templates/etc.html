@@ -1,7 +1,6 @@
 {% extends "page.html" %}
 {% block title %}{{ page.title }} - {{ SITENAME }}{% endblock %}
 {% if page.title == 'Contact' %}
-{% set blogpage = True %}
 {% endif %}
 {% block html_lang %}{{ page.lang }}{% endblock %}
 {% block meta %}
@@ -35,6 +34,17 @@
 {% block canonical_rel %}
 <link rel="canonical" href="{{ SITEURL }}/{{ page.url }}">
 {% endblock %}
+{% block banner %}
+        {% include 'includes/rotate_banner_image.html' %}
+<div id="banner">
+        <div class="container{% if BOOTSTRAP_FLUID %}-fluid{% endif %}">
+                <div class="copy">
+			<h1> {{ page.title }} </h1>
+                </div>
+        </div>
+</div>
+{% endblock %}
+
 
 {% block breadcrumbs %}
     {% if DISPLAY_BREADCRUMBS %}
@@ -49,7 +59,6 @@
 
 {% block content %}
     <section id="content" class="body">
-        <h1 class="entry-title">{{ page.title }}</h1>
         {% import 'includes/translations.html' as translations with context %}
         {{ translations.translations_for(page) }}
         {% if PDF_PROCESSOR %}

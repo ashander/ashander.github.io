@@ -5,11 +5,14 @@
     <ul class='list-inline'>
       {% for p in PAGES %}
       {% if 'etc' in p.url %} <!-- exclude etc pages -->
-      <li><a href="{{ SITEURL }}/{{ p.url }}">
+      <li class="list-group-item"><a href="{{ SITEURL }}/{{ p.url }}">
           <i class='fa fa-ellipsis-v'></i> {{ p.menulabel|default(p.title) }}
       </a></li>
       {% endif %}
       {% endfor %}
+    </ul>
+    <ul class='list-inline'>
+	    {% include 'includes/social_list.html' %}
     </ul>
   </div>
 </div>
