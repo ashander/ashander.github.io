@@ -38,7 +38,8 @@ RELATIVE_URLS = True
 
 # static paths copied without parsing
 STATIC_PATHS = ['images', 'extra/custom.css', 'extra/CNAME',
-                'extra/README' , 'extra/LICENSE' ]
+                'extra/README' , 'extra/LICENSE', 'presentations',
+		'code' ]
 EXTRA_PATH_METADATA = {
     'extra/custom.css': {'path': 'static/custom.css'},
     'extra/CNAME': {'path': 'CNAME'},
@@ -100,5 +101,5 @@ PAGE_PATHS = ['pages', 'etc']
 
 # Plugins
 PLUGIN_PATHS = [ "/Users/jaime/sites/pelican-plugins", ]
-PLUGINS =  ['latex', 'neighbors', 'summary', 'related_posts', 'render_math', 'optimize_images']
+PLUGINS =  ['latex', 'summary', 'related_posts', 'render_math', 'optimize_images']
 # https://github.com/getpelican/pelican-plugins/tree/master/render_math
