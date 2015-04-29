@@ -1,7 +1,7 @@
 ---
 title: Easy alternatives to bar charts in native R graphics
 author: Jaime Ashander
-date: 2015-04-26
+date: 2015-04-28
 tags: R, statistical graphics, visualization, ggplot2, lattice
 output:
     md_document:
