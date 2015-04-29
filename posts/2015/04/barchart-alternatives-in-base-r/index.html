@@ -162,7 +162,7 @@ know more.</p>
 source region.</p>
 <p>First, a bad ol' dynamite, er bar plot:</p>
 <p><img alt="bad bar
-plot" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/barplot-1.svg" /></p>
+plot" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/barplot-1.svg" /></p>
 <p>(I'm not including the code for this, because it's what I'm recommending
 against. Nor did I add error bars, so it's not really a dynamite plot.
 R's base graphics make both producing this plot and, especially, adding
@@ -183,7 +183,7 @@ stripchart<span class="p">(</span>uptake <span class="o">~</span> conc_f<span cl
 
 
 <p><img alt="stripchart: a scatter plot v
-factors" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/scatter-v-factors-1.svg" /></p>
+factors" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/scatter-v-factors-1.svg" /></p>
 <p>It's easy to jitter the points, as Weisgerber <em>et al</em> recommend, by
 passing the argument <code>method='jitter'</code>. But there are other options. For
 cases where there really isn't much data, <code>method='stack'</code> gives
@@ -196,14 +196,14 @@ This more clearly shows the values that were observed more than once:</p>
 
 
 <p><img alt="stripchart with
-stacking" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/stripchart-wilkinson-1.svg" /></p>
+stacking" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/stripchart-wilkinson-1.svg" /></p>
 <h2>Box (and whisker) plots</h2>
 <p>For box plots, R makes it very easy.</p>
 <div class="highlight"><pre>boxplot( uptake ~ conc_f , CO2, ylab=&#39;uptake&#39;, xlab=&#39;concentration&#39;, ylim=y_limits)
 </pre></div>
 
 
-<p><img alt="boxplot" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-1.svg" />
+<p><img alt="boxplot" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-1.svg" />
 In this case, with small data the boxplot is a bit misleading. This is
 clear from the scatter plots above, but you can also overplot onto the
 boxes using <code>stripchart</code> with <code>add = TRUE, vertical = TRUE</code>:</p>
@@ -212,7 +212,7 @@ boxes using <code>stripchart</code> with <code>add = TRUE, vertical = TRUE</code
 
 
 <p><img alt="boxplot with points
-overplotted" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-overplotted-1.svg" /></p>
+overplotted" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-overplotted-1.svg" /></p>
 <div class="highlight"><pre>stripchart(uptake ~ conc_f, CO2, method = &#39;jitter&#39;, add = TRUE, vertical = TRUE,
            pch = 19)
 </pre></div>
@@ -229,7 +229,7 @@ treatments in your raw data, and even overplot with <code>stripchart</code>!</p>
 
 
 <p><img alt="complex bar
-plot" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/complex-boxplot-1.svg" /></p>
+plot" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/complex-boxplot-1.svg" /></p>
 <div class="highlight"><pre>stripchart(uptake ~ conc_f : Treatment, CO2, method = &#39;jitter&#39;, add = TRUE, vertical = TRUE,
            pch = 19)
 </pre></div>
@@ -272,7 +272,7 @@ can use <code>split</code> and <code>lines</code>:</p>
 
 
 <p><img alt="paired points connected by lines and marked by
-points" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-points-1.svg" /></p>
+points" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-points-1.svg" /></p>
 <div class="highlight"><pre><span class="x">for(ID in split(sleep, sleep</span><span class="p">$</span><span class="nv">ID</span><span class="x">))</span>
 <span class="x">  lines(extra ~ group, ID)</span>
 </pre></div>
@@ -288,7 +288,7 @@ within the initial call to <code>stripchart</code>:</p>
 
 
 <p><img alt="paired locations connected by
-lines" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-lines-1.svg" /></p>
+lines" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-lines-1.svg" /></p>
 <div class="highlight"><pre><span class="x">for(ID in split(sleep, sleep</span><span class="p">$</span><span class="nv">ID</span><span class="x">))</span>
 <span class="x">  lines(extra ~ group, ID)</span>
 </pre></div>
@@ -310,7 +310,7 @@ uptake from the <code>CO2</code> data for grass plants receiving chilling or not
 
 
 <p><img alt="histogram of
-uptake" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/histo-1.svg" /></p>
+uptake" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/histo-1.svg" /></p>
 <div class="highlight"><pre>par(op)
 </pre></div>
 
