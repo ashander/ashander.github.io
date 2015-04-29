@@ -46,7 +46,7 @@ know more.&lt;/p&gt;
 source region.&lt;/p&gt;
 &lt;p&gt;First, a bad ol' dynamite, er bar plot:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="bad bar
-plot" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/barplot-1.svg" /&gt;&lt;/p&gt;
+plot" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/barplot-1.svg" /&gt;&lt;/p&gt;
 &lt;p&gt;(I'm not including the code for this, because it's what I'm recommending
 against. Nor did I add error bars, so it's not really a dynamite plot.
 R's base graphics make both producing this plot and, especially, adding
@@ -67,7 +67,7 @@ stripchart&lt;span class="p"&gt;(&lt;/span&gt;uptake &lt;span class="o"&gt;~&lt;
 
 
 &lt;p&gt;&lt;img alt="stripchart: a scatter plot v
-factors" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/scatter-v-factors-1.svg" /&gt;&lt;/p&gt;
+factors" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/scatter-v-factors-1.svg" /&gt;&lt;/p&gt;
 &lt;p&gt;It's easy to jitter the points, as Weisgerber &lt;em&gt;et al&lt;/em&gt; recommend, by
 passing the argument &lt;code&gt;method='jitter'&lt;/code&gt;. But there are other options. For
 cases where there really isn't much data, &lt;code&gt;method='stack'&lt;/code&gt; gives
@@ -80,14 +80,14 @@ This more clearly shows the values that were observed more than once:&lt;/p&gt;
 
 
 &lt;p&gt;&lt;img alt="stripchart with
-stacking" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/stripchart-wilkinson-1.svg" /&gt;&lt;/p&gt;
+stacking" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/stripchart-wilkinson-1.svg" /&gt;&lt;/p&gt;
 &lt;h2&gt;Box (and whisker) plots&lt;/h2&gt;
 &lt;p&gt;For box plots, R makes it very easy.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;boxplot( uptake ~ conc_f , CO2, ylab=&amp;#39;uptake&amp;#39;, xlab=&amp;#39;concentration&amp;#39;, ylim=y_limits)
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="boxplot" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-1.svg" /&gt;
+&lt;p&gt;&lt;img alt="boxplot" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-1.svg" /&gt;
 In this case, with small data the boxplot is a bit misleading. This is
 clear from the scatter plots above, but you can also overplot onto the
 boxes using &lt;code&gt;stripchart&lt;/code&gt; with &lt;code&gt;add = TRUE, vertical = TRUE&lt;/code&gt;:&lt;/p&gt;
@@ -96,14 +96,14 @@ boxes using &lt;code&gt;stripchart&lt;/code&gt; with &lt;code&gt;add = TRUE, ver
 
 
 &lt;p&gt;&lt;img alt="boxplot with points
-overplotted" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-overplotted-1.svg" /&gt;&lt;/p&gt;
+overplotted" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-overplotted-1.svg" /&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;stripchart(uptake ~ conc_f, CO2, method = &amp;#39;jitter&amp;#39;, add = TRUE, vertical = TRUE,
            pch = 19)
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;img alt="boxplot with points
-overplotted" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-overplotted-2.svg" /&gt;&lt;/p&gt;
+overplotted" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-overplotted-2.svg" /&gt;&lt;/p&gt;
 &lt;p&gt;Even with base graphics &lt;code&gt;boxplot&lt;/code&gt;, you can pass functions of multiple
 independent variables. This means you can visualize interactions between
 treatments in your raw data, and even overplot with &lt;code&gt;stripchart&lt;/code&gt;!&lt;/p&gt;
@@ -113,14 +113,14 @@ treatments in your raw data, and even overplot with &lt;code&gt;stripchart&lt;/c
 
 
 &lt;p&gt;&lt;img alt="complex bar
-plot" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/complex-boxplot-1.svg" /&gt;&lt;/p&gt;
+plot" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/complex-boxplot-1.svg" /&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;stripchart(uptake ~ conc_f : Treatment, CO2, method = &amp;#39;jitter&amp;#39;, add = TRUE, vertical = TRUE,
            pch = 19)
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;img alt="complex bar
-plot" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/complex-boxplot-2.svg" /&gt;&lt;/p&gt;
+plot" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/complex-boxplot-2.svg" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Note&lt;/em&gt; it would be easier to read the labels here if the plot were
 horizontal, for which there's an argument you can pass. The graphics
 settings on this post aren't playing well with long labels, so I don't
@@ -156,14 +156,14 @@ can use &lt;code&gt;split&lt;/code&gt; and &lt;code&gt;lines&lt;/code&gt;:&lt;/p
 
 
 &lt;p&gt;&lt;img alt="paired points connected by lines and marked by
-points" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-points-1.svg" /&gt;&lt;/p&gt;
+points" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-points-1.svg" /&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="x"&gt;for(ID in split(sleep, sleep&lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;ID&lt;/span&gt;&lt;span class="x"&gt;))&lt;/span&gt;
 &lt;span class="x"&gt;  lines(extra ~ group, ID)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;img alt="paired points connected by lines and marked by
-points" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-points-2.svg" /&gt;&lt;/p&gt;
+points" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-points-2.svg" /&gt;&lt;/p&gt;
 &lt;p&gt;If you'd rather only have the lines, just suppress plotting of points
 within the initial call to &lt;code&gt;stripchart&lt;/code&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;stripchart(extra ~ group, sleep, pch=&amp;quot;&amp;quot;, vertical=TRUE,
@@ -172,14 +172,14 @@ within the initial call to &lt;code&gt;stripchart&lt;/code&gt;:&lt;/p&gt;
 
 
 &lt;p&gt;&lt;img alt="paired locations connected by
-lines" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-lines-1.svg" /&gt;&lt;/p&gt;
+lines" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-lines-1.svg" /&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="x"&gt;for(ID in split(sleep, sleep&lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;ID&lt;/span&gt;&lt;span class="x"&gt;))&lt;/span&gt;
 &lt;span class="x"&gt;  lines(extra ~ group, ID)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;img alt="paired locations connected by
-lines" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-lines-2.svg" /&gt;&lt;/p&gt;
+lines" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-lines-2.svg" /&gt;&lt;/p&gt;
 &lt;h1&gt;Other plots&lt;/h1&gt;
 &lt;p&gt;R easily produces many other plots, in addition to those Weisgerber &lt;em&gt;et
 al&lt;/em&gt; for which provide templates.&lt;/p&gt;
@@ -194,7 +194,7 @@ uptake from the &lt;code&gt;CO2&lt;/code&gt; data for grass plants receiving chi
 
 
 &lt;p&gt;&lt;img alt="histogram of
-uptake" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/histo-1.svg" /&gt;&lt;/p&gt;
+uptake" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/histo-1.svg" /&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;par(op)
 &lt;/pre&gt;&lt;/div&gt;
 
