@@ -8,8 +8,8 @@ output:
         variant: markdown_strict
         dev: 'svg'
     encoding: 'UTF-8'
-status: draft
 ---
+
 ```{r knit-opts, echo=FALSE}
 ## important to let caching work between local render and building w/ pelican
 knitr::opts_chunk$set(cache = 1)
@@ -45,13 +45,13 @@ built-in graphics of [R](http://www.r-project.org/).
 
 # Independent groups
 
-For conveneince, I'm using the built in `CO2` dataset:
+For convenience, I'm using the built in `CO2` dataset:
 ```{r data}
 head(CO2)
 ```
 
 These data come from an experiment on cold tolerance in grasses from different
-regions, but the specifics here don't matter. The data were first publisehd in
+regions, but the specifics here don't matter. The data were first published in
 _Ecology_ in 1990. See `?CO2` in R if you'd like to know more.
 
 Mostly, I'll plot CO2 concentration versus uptake or Type, the plant's source
@@ -149,14 +149,14 @@ head(sleep)
 ```
 
 The easiest way to make plots that link paired data is to again use
-`stripchart` as a base.  Then, to add lines illustraiting the pairs, one can
+`stripchart` as a base.  Then, to add lines illustrating the pairs, one can
 use `split` and `lines`:
 
 ```{r paired-points, fig.cap = 'paired points connected by lines and marked by points'}
 
 invisible(stripchart(extra ~ group, sleep, pch=19, col=point_col,
 		     vertical=TRUE, ylab='extra sleep', xlab='drug received'))
-## note -- don't enclose this in invisble in your code -- some strangeness
+## note -- don't enclose this in invisible in your code -- some strangeness
 ##         with website production compels it here
 for(ID in split(sleep, sleep$ID))
   lines(extra ~ group, ID)
@@ -169,7 +169,7 @@ the initial call to `stripchart`:
 ```{r paired-lines, fig.cap = 'paired locations connected by lines'}
 invisible(stripchart(extra ~ group, sleep, pch="", vertical=TRUE,
            	     ylab='extra sleep', xlab='drug received'))
-## note -- don't enclose this in invisble in your code -- some strangeness
+## note -- don't enclose this in invisible in your code -- some strangeness
 ##         with website production compels it here
 for(ID in split(sleep, sleep$ID))
   lines(extra ~ group, ID)
@@ -224,6 +224,6 @@ I agree with Ben that this last feature, the implied reference to a baseline,
 means bar charts, can be very useful. But there's a corollary here: only use
 this strength when comparison to a baseline is the point. Further, then,
 if your graphics are to be honest, they must start at a meaningful
-zero. So, avoid bar charts for estimated quantites. Unless, your main
+zero. So, avoid bar charts for estimated quantities. Unless, your main
 comparison is between estimates with different, or with magnitudes very close
 to zero.

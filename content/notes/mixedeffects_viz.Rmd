@@ -16,13 +16,13 @@ output:
 ## important to let caching work between local render and building w/ pelican
 knitr::opts_chunk$set(cache = 1)
 ```
-In a live walkthrough on April 10 at the Davis R-Users Group, I gave a brief presentation
+In a live walk-through on April 10 at the Davis R-Users Group, I gave a brief presentation
 [motivating this topic]({filename}../presentations/mixedeffects_viz_motivation.html).
 
 **Updated 2015-04-28**
 
 The point of this post isn't the statistics of mixed models. For that, learning
-the experimentals design and statistics behind modern mixed models, I recommend
+the experimental design and statistics behind modern mixed models, I recommend
 some relatively recent papers below. In short, Schielzeth & Nakagawa (2013)
 and Stroup (2015) provide especially good introduction for those coming from an
 ANOVA background.
@@ -40,9 +40,9 @@ GLMM:
 [Ives 2015 "For testing the significance of regression coefficients, go ahead and log-transform count data" _Methods in Ecology and Evolution_](doi:10.1111/2041-210X.12386) [^ives]
 
 [^ives]: _I haven't read this simulation study carefully yet_ but a quick look
-implies the main problems occured when fitting a model that gets
+implies the main problems occurred when fitting a model that gets
 the hierarchy wrong (e.g., a GLM to data generated from a hierarchical
-process underperforms relative to a tranform + LMM)
+process under-performs relative to a transform + LMM)
 
 
 Second, "What _is_ my design (in the language of mixed models)?".  Baayen et al
@@ -50,7 +50,7 @@ focus on designs with crossed random effects (a strong suit of `lme4`), while
 Schielzeth & Nakagawa's "Nested by Design" paper is a more general
 introduction.  Finally, the Stroup paper provides a good entry point in
 ANOVA-speak [^stroup].  This could make or break the connection between an
-advisor that speaks only ANOVA, as is often the case for workers in crop and
+adviser that speaks only ANOVA, as is often the case for workers in crop and
 soil sciences, or experimental ecology and the GLMM that your unbalanced
 binomial regression demands.
 
@@ -70,7 +70,7 @@ Models_
   107(2):811-827](https://dl.sciencesocieties.org/publications/aj/abstracts/107/2/811)
 
 Third, "How do I specify and fit this model in `R`. The references below may
-also help with design and interpretation, but are primariliy hands-on.  The
+also help with design and interpretation, but are primarily hands-on.  The
 most thorough is Pinheiro & Bates (2000). These four references also serve as a
 bibliography of sorts for this post [^ack].
 
@@ -97,13 +97,13 @@ Given these preliminaries, here I **focus on three things**:
 
 * working with frequentist library `lme4` for (G)LMM in R
 * visualization for: criticism, inference, prediction
-* using the native plotting capabilites (to the extent possible)
+* using the native plotting capabilities (to the extent possible)
 
 **three facets** of visualization
 
 * quick diagnostic (plots *native* to fitting packages)
 * slower model criticism (also *native*)
-* inference & prediction (generally lightweight external libs / export capabilities)
+* inference & prediction (generally lightweight external libraries / export capabilities)
 
 Finally, I'll mention that example code and vignettes in documented packages are
 great resources for learning these things (as is google ;).
@@ -187,7 +187,7 @@ plot(m2,  sqrt(abs(resid(.))) ~ fitted(.) | block,     type=c("p", "smooth")) # 
 ## block 4 is not great well behaved :(
 lattice::qqmath(m2)
 
-## look at randeom effect
+## look at random effect
 lattice::dotplot(ranef(m2, condVar=TRUE))
 ##were we to have LOTS of RE, using lattice::qqmath for y axis spacing
 ##based on quantiles of standard normal -- is better to distinguish
@@ -229,7 +229,7 @@ lattice::xyplot(m1.prall)
 
 lattice::densityplot(m1.prall)
 # the 'profile density plot'
-# approximate probability density functinos of the parameters
+# approximate probability density functions of the parameters
 # -- distros underlying profile confidence intervals
 # linear zeta plot <==> gaussian densities
 ```
@@ -237,8 +237,8 @@ lattice::densityplot(m1.prall)
 ```{r, pairs-plot}
 lattice::splom(m1.prre)
 # the 'profile pairs plot'
-# bivariate confidence regions baed on profile
-# 'profile traces' -- cross hairs -- are conditinoal estimates  of one parmeter given the other
+# bivariate confidence regions based on profile
+# 'profile traces' -- cross hairs -- are conditional estimates  of one parameter given the other
 # above-diag: estimated scale
 # below-diag: 'zeta' scale, some sense, the best possible set of single-parameter transformations for assessing the contours"
 # we just look at RE here
@@ -251,13 +251,13 @@ The best tool is plotting, but quickly visualizing such models is
 not easy with flexible plotting libraries.
 
 Fortunately, `lsmeans`, although fairly inflexible in general, has
-plotting capabilites designed just for this purpose. Here's a demo
+plotting capabilities designed just for this purpose. Here's a demo
 with the full (4-way interacting) model
 
 ```{r use-lsmeans-mean-plots}
 ## look at consequences
 if(require(lsmeans)){
-    ## here for 4-way interaction model (m2) -- mostly to see how can quicky plot response
+    ## here for 4-way interaction model (m2) -- mostly to see how can quickly plot response
     ## at factor levels in complex models
     ## relatively easy to plot mean prediction on response scale account for complex interaction
     lsmip(m2, nutrient_hetero ~  water_add | water_hetero * nutrient_add  , type='response')
@@ -267,7 +267,7 @@ if(require(lsmeans)){
 ```
 
 ```{r ls-means-CI-plots
-    ## can also plot quickly mean estimates plus (wald) confidence intervals
+    ## can also plot quickly mean estimates plus (Wald) confidence intervals
     ## not that it's possible to do finite size correction in lsmeans (but only for linear models)
     ## steps take a min w/ lots of RE for some reason
     m2.lsm <- lsmeans(m2, ~ water_add * water_hetero   | nutrient_hetero  * nutrient_add)
@@ -295,7 +295,7 @@ if(require(lsmeans)){
 
 ```{r confint-lattice, fig.width = 10, fig.height = 9}
 ## OK -- back to the full model
-## if residuals looking ok -- fastest way to get a quick look at coeffiiencent uncertainty
+## if residuals looking OK -- fastest way to get a quick look at coefficient uncertainty
 ## I'll make it a function for later use
 
 quick_CI_df <- function(model, drop_intercept = TRUE,...) {
@@ -336,7 +336,7 @@ packages, e.g. `coefplot2`, `arm::coefplot`, here we just use builtin
 
 I make a dataframe with potentially several different types of confidence
 intervals: Wald (assume asymptotic multivariate normality of likelihood),
-profile, and boostrap. For the random effects, the output of bootstrap and
+profile, and bootstrap. For the random effects, the output of bootstrap and
 profile methods have different names -- as you can see in the plot below. The
 Wald method only estimates CIs for fixed effects.
 
@@ -380,16 +380,16 @@ if(require(ggplot2)) {
     lattice::dotplot(parameter ~ c(`2.5 %`, `97.5 %`) | type , m1_bnd, abline=c(v=0, lty=2))
     }
 
-##   strong effect ot nutrient homogenetity
+##   strong effect of nutrient homogeneity
 ##   effect of adding lots of water
-## nutreint has some effect
+## nutrient has some effect
 ```
 
 
 Pulling data out of models with `broom` or `ggplot2`
 -------
 
-Method `ggplot2::fortify` adds fitted and resid to data frame. Newish cran
+Method `ggplot2::fortify` adds fitted and resid to data frame. New-ish CRAN
 package `broom` generalizes this (and more), really aiming provide an interface
 for 'tidy' (i.e., easy to plot)representations of model objects from many R
 functions (including packages and base `R`).  The `broom` method `augment`
@@ -476,8 +476,8 @@ plot(gm0,  factor(Series) ~ resid(., type='pearson'),  abline=c(v=0), lty=2)
 ## plot(gm0, resid(., type='pearson') ~ fitted(.) | factor(Series), id = 0.05)
 
 ## main thing on pearson or deviance residuals is they're mostly less than 2
-## (as assed in first plot above -- second is the sqrt
-## we could later drop theese outlier and see if they cha
+## (as assessed in first plot above -- second is the sqrt
+## we could later drop these outlier and see if they change
 
 if(require(gridExtra)) {
     do.call(gridExtra::grid.arrange, c(lattice::qqmath(ranef(gm0, condVar=TRUE)), list(nrow=1)))
@@ -516,7 +516,7 @@ lattice::splom(gm0.prall)
 
 ```{r quick-ci, warning=FALSE}
 
-## if residuals looking ok -- fastest way to get a quick look at coeffiiencent uncertainty
+## if residuals looking OK -- fastest way to get a quick look at coefficient uncertainty
 ci_dat <- confint(gm0, method='Wald')
 ci_dat <- cbind(ci_dat, mean=rowMeans(ci_dat))
 ci_df <- data.frame(coef=row.names(ci_dat), ci_dat)
@@ -553,7 +553,7 @@ if(require(ggplot2)) {
       }
 ```
 
-Because the fixed effect paramter on size difference and the random effect
+Because the fixed effect parameter on size difference and the random effect
 variance are on such different scales, I make two plots
 
 ```{r low-magnitude-param, warning=FALSE}
@@ -571,7 +571,7 @@ Two things are different here:
 * for a quantitative predictor, the default will plot a single point
   at the mean of the predictor, to see prediction across the range, pass
   a list to the `at` argument
-* for more meaninful plots, we should label the plot y-axis with unscaled
+* for more meaningful plots, we should label the plot y-axis with unscaled
   size differences (but I didn't do this)
 * note that you can produce plots at various levels of interacting quantitative
   predictors using this technique
@@ -593,7 +593,7 @@ The quick plots using `lsmeans` are great, but they assume Wald confidence inter
 and don't account for random effects.
 To deal with the former, we need to bootstrap, which I won't cover here, but
 the problem of random effects is easily examined using the `re.form` argument
-of `predict.merMod` in `lme4`. Here I look at predictions accounting for alli,
+of `predict.merMod` in `lme4`. Here I look at predictions accounting for all,,
 none, or some of random effects fitted:
 
 ```{r prediction-visual, fig.width=10}
@@ -633,12 +633,12 @@ gridExtra::grid.arrange(g1, g2, ncol=2)
 The plot on the left above shows predictions for various series of experimental
 trials, and the raw data. The plot on the right shows the overall fit (orange line
 -- the grand mean with no random effects influencing the prediction),
-the predictions accoung just for random effects at the level of individual
+the predictions accounting just for random effects at the level of individual
 females (blue dots), and the raw data.
 
 
 ```{r ugly-plot, eval = FALSE}
-## could plot them all together -- code below gives some insight ## intot the
+## could plot them all together -- code below gives some insight ## into the
 ## ggplot2 fortify method
 if (require(ggplot2)) {
   g +  geom_point(aes(SizeDiff, plogis(.fitted)), color='darkgray', size=3,
