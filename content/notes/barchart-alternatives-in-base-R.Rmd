@@ -27,7 +27,7 @@ Although Ben Bolker has questioned
 in "When and here are dynamite plots appropriate" below.)
 
 Last week, Tracey Weisgerber and colleagues extend this tradition, making a
-[great set of concrete recommendations in a perspective for PLoS Biology](doi.org/10.1371/journal.pbio.1002128).
+[great set of concrete recommendations in a perspective for PLoS Biology](http://doi.org/10.1371/journal.pbio.1002128).
 Importantly, the authors also provided a
 [set of Excel templates on CTSpedia](https://www.ctspedia.org/do/view/CTSpedia/TemplateTesting)
 (a cool-looking site for sharing resources related to clinical trials) that
@@ -106,14 +106,17 @@ For box plots, R makes it very easy.
 
 boxplot( uptake ~ conc_f , CO2, ylab='uptake', xlab='concentration', ylim=y_limits)
 ```
+
 In this case, with small data the boxplot is a bit misleading. This is
 clear from the scatter plots above, but you can also overplot onto the
 boxes using `stripchart` with `add = TRUE, vertical = TRUE`:
 
 ```{r, boxplot-overplotted, fig.cap = 'boxplot with points overplotted'}
-boxplot( uptake ~ conc_f , CO2, ylab='uptake', xlab='concentration', ylim=y_limits)
-stripchart(uptake ~ conc_f, CO2, method = 'jitter', add = TRUE, vertical = TRUE,
-           pch = 19)
+{
+  boxplot( uptake ~ conc_f , CO2, ylab='uptake', xlab='concentration', ylim=y_limits)
+  stripchart(uptake ~ conc_f, CO2, method = 'jitter', add = TRUE, vertical = TRUE,
+             pch = 19)
+}
 ```
 
 Even with base graphics `boxplot`, you can pass functions of multiple
@@ -121,10 +124,12 @@ independent variables. This means you can visualize interactions between
 treatments in your raw data, and even overplot with `stripchart`!
 
 ```{r, complex-boxplot, fig.cap = 'complex bar plot'}
-boxplot( uptake ~ conc_f : Treatment, CO2, ylab='uptake', ylim=y_limits,
-        xlab = "concentration within chilling treatment")
-stripchart(uptake ~ conc_f : Treatment, CO2, method = 'jitter', add = TRUE, vertical = TRUE,
-           pch = 19)
+{
+  boxplot( uptake ~ conc_f : Treatment, CO2, ylab='uptake', ylim=y_limits,
+          xlab = "concentration within chilling treatment")
+  stripchart(uptake ~ conc_f : Treatment, CO2, method = 'jitter', add = TRUE, vertical = TRUE,
+             pch = 19)
+}
 ```
 
 _Note_ it would be easier to read the labels here if the plot were horizontal,
@@ -152,21 +157,24 @@ The easiest way to make plots that link paired data is to again use
 use `split` and `lines`:
 
 ```{r paired-points, fig.cap = 'paired points connected by lines and marked by points'}
-
-stripchart(extra ~ group, sleep, pch=19, col=point_col,
-           vertical=TRUE, ylab='extra sleep', xlab='drug received')
-for(ID in split(sleep, sleep$ID))
-  lines(extra ~ group, ID)
+{
+  stripchart(extra ~ group, sleep, pch=19, col=point_col,
+             vertical=TRUE, ylab='extra sleep', xlab='drug received')
+  for(ID in split(sleep, sleep$ID))
+    lines(extra ~ group, ID)
+}
 ```
 
 If you'd rather only have the lines, just suppress plotting of points within
 the initial call to `stripchart`:
 
 ```{r paired-lines, fig.cap = 'paired locations connected by lines'}
-stripchart(extra ~ group, sleep, pch="", vertical=TRUE,
-           ylab='extra sleep', xlab='drug received')
-for(ID in split(sleep, sleep$ID))
-  lines(extra ~ group, ID)
+{
+  stripchart(extra ~ group, sleep, pch="", vertical=TRUE,
+             ylab='extra sleep', xlab='drug received')
+  for(ID in split(sleep, sleep$ID))
+    lines(extra ~ group, ID)
+}
 ```
 
 
