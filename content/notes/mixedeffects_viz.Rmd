@@ -3,7 +3,7 @@ title: Visualizing fits, inference, implications of (G)LMMs
 author: Jaime Ashander
 slug: D-RUG-mixed-effects-viz
 date: 2015-04-10
-tags: visualization, lattice, model checking, statistical graphics, GLMM
+tags: visualization, lattice, model checking, statistical graphics, GLMM, R, ggplot2
 modified: 2015-04-26
 output:
     md_document:
