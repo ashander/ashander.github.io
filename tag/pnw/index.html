@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="http://www.ashander.info/theme/css/bootstrap.yeti.min.css" type="text/css"/>
     <link href="http://www.ashander.info/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="http://www.ashander.info/theme/css/pygments/native.css" rel="stylesheet">
+    <link href="http://www.ashander.info/theme/css/pygments/solarizedlight.css" rel="stylesheet">
     <link rel="stylesheet" href="http://www.ashander.info/theme/css/style.css" type="text/css"/>
         <link href="http://www.ashander.info/static/custom.css" rel="stylesheet">
 
@@ -75,7 +75,7 @@ var el="banner";
 var bgimg=new Array("/images/banner/bamfield.jpeg", "/images/banner/bedroom.jpeg", "/images/banner/\
 fir.jpeg", "/images/banner/parker.jpeg", "/images/banner/sunrise.jpeg");
 var random=Math.round((bgimg.length-1)*Math.random());
-var cssStr="#"+el+" { background: url("+bgimg[random]+") repeat-x top left } ";
+var cssStr="#"+el+" { background-image: url("+bgimg[random]+") } ";
 var  style=document.createElement("style");
 
 style.setAttribute("type","text/css");
@@ -86,30 +86,24 @@ else
 style.appendChild(cssText);}
 document.getElementsByTagName("head")[0].appendChild(style);
 /*]]>*/
-</script>
-
-
-<div id="banner">
+</script><div id="banner">
         <div class="container">
                 <div class="copy">
-                        <h1>Jaime Ashander</h1>
-                                <p class="intro">rapid evolution: theory, computation, inference</p>
+<h1><a  href="/tag/pnw">PNW</a></h1>
                 </div>
         </div>
-</div><!-- End Banner -->
+</div>
+<!-- End Banner -->
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
 
 <div class="row">
   <div class="col-sm-10">
-<h1><a  href="/tag/pnw">PNW</a></h1>
-    <div class="bigspacer"></div>
        <div>
          <div>
            <h2><a href="http://www.ashander.info/posts/2009/10/Salish-sea/">Salish Sea</a></h2>
          </div>
-         
 <div>
   <a href="http://www.ashander.info/posts/2009/10/Salish-sea/">
   </a>
@@ -153,331 +147,46 @@ of details about ...</p>
 
     <ul class='list-inline'>
  <!-- exclude etc pages -->
-      <li><a href="http://www.ashander.info/pages/etc-about.html">
+      <li class="list-group-item"><a href="http://www.ashander.info/pages/etc-about.html">
           <i class='fa fa-ellipsis-v'></i> This site
       </a></li>
  <!-- exclude etc pages -->
-      <li><a href="http://www.ashander.info/pages/etc-background.html">
+      <li class="list-group-item"><a href="http://www.ashander.info/pages/etc-background.html">
           <i class='fa fa-ellipsis-v'></i> Background
       </a></li>
  <!-- exclude etc pages -->
-      <li><a href="http://www.ashander.info/pages/etc-contact.html">
+      <li class="list-group-item"><a href="http://www.ashander.info/pages/etc-contact.html">
           <i class='fa fa-ellipsis-v'></i> Contact
       </a></li>
  <!-- exclude etc pages -->
-      <li><a href="http://www.ashander.info/pages/etc-funding.html">
+      <li class="list-group-item"><a href="http://www.ashander.info/pages/etc-funding.html">
           <i class='fa fa-ellipsis-v'></i> Funding
       </a></li>
+    </ul>
+    <ul class='list-inline'>
+    <li class="list-group-item"><a href="https://twitter.com/jaimedash"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
+    <li class="list-group-item"><a href="https://github.com/ashander"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+    <li class="list-group-item"><a href="http://figshare.com/authors/Jaime_Ashander/505494"><i class="fa fa-spinner"></i> figshare</a></li>
     </ul>
   </div>
 </div>        </div>
         <div class="col-sm-3" id="sidebar">
             <aside>
-
 <section class="well well-sm">
     <ul class="list-group list-group-flush">
-            <li class="list-group-item"><h4><i class="fa fa-users fa-lg"></i><span class="icon-label">Find me</span></h4>
-              <ul class="list-group" id="social">
-                <li class="list-group-item"><a href="https://github.com/ashander"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
-                <li class="list-group-item"><a href="https://twitter.com/jaimedash"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
-                <li class="list-group-item"><a href="http://figshare.com/authors/Jaime_Ashander/505494"><i class="fa fa-figshare-square fa-lg"></i> figshare</a></li>
-              </ul>
-            </li>
-
-
-
-            <li class="list-group-item"><a href="http://www.ashander.info/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
-                <ul class="list-group " id="tags">
-                    <li class="list-group-item tag-1">
-                        <a href="http://www.ashander.info/tag/musing/">
-                            musing
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://www.ashander.info/tag/spillback/">
-                            spillback
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://www.ashander.info/tag/spillover/">
-                            spillover
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://www.ashander.info/tag/science/">
-                            science
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://www.ashander.info/tag/floodplain/">
-                            Floodplain
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://www.ashander.info/tag/peer-reviewed/">
-                            Peer reviewed
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://www.ashander.info/tag/msc/">
-                            M.Sc.
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://www.ashander.info/tag/population-biology/">
-                            Population Biology
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://www.ashander.info/tag/aquaculture/">
-                            aquaculture
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://www.ashander.info/tag/salmon/">
-                            salmon
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://www.ashander.info/tag/historical/">
-                            Historical
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://www.ashander.info/tag/offs/">
-                            Offs
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://www.ashander.info/tag/ecological/">
-                            Ecological
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://www.ashander.info/tag/inference/">
-                            inference
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://www.ashander.info/tag/synergies/">
-                            Synergies
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://www.ashander.info/tag/trade/">
-                            Trade
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://www.ashander.info/tag/allee-effect/">
-                            Allee effect
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://www.ashander.info/tag/canada/">
-                            Canada
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://www.ashander.info/tag/evolution/">
-                            evolution
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://www.ashander.info/tag/stochasticity/">
-                            stochasticity
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://www.ashander.info/tag/management/">
-                            Management
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/floodplains/">
-                            floodplains
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/phenotypic-plasticity/">
-                            phenotypic plasticity
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/animal-movement/">
-                            animal movement
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/phenology/">
-                            phenology
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/climate/">
-                            climate
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/resistance-evolution/">
-                            resistance evolution
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/public/">
-                            public
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/grand-canyon/">
-                            Grand Canyon
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/models/">
-                            models
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/esa2013/">
-                            ESA2013
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/economics/">
-                            economics
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/mathematical-ecology/">
-                            mathematical ecology
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/complex-population-dynamics/">
-                            complex population dynamics
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/pnw/">
-                            PNW
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/restoration/">
-                            restoration
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/biogeochemical-data/">
-                            biogeochemical data
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/time-series/">
-                            time series
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/geography/">
-                            geography
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/finance/">
-                            finance
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/voting-abroad/">
-                            voting abroad
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/transient-dynamics/">
-                            transient dynamics
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/sea-lice/">
-                            sea lice
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/economy/">
-                            economy
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/ethics/">
-                            ethics
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/california-history/">
-                            California history
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/optimization/">
-                            optimization
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/local-adaptation/">
-                            local adaptation
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/modifying/">
-                            Modifying
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/pink-salmon/">
-                            pink salmon
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/cascadia/">
-                            Cascadia
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/line-dominance/">
-                            line dominance
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/stochastic-life-histories/">
-                            stochastic life histories
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/phd/">
-                            Ph.D.
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/bayesian-methods/">
-                            Bayesian methods
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/philosophy/">
-                            philosophy
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
-                        <a href="http://www.ashander.info/tag/applied-ecology/">
-                            applied ecology
-                        </a>
-                    </li>
+            <li class="list-group-item"><h4><i class="fa fa-clock-o fa-lg"></i><span class="icon-label">Recent</span></h4>
+              <ul class="list-group" id="recentposts">
                 </ul>
             </li>
+          <li class="list-group-item">
+                  <h4> <i class="fa fa-paper-plane fa-lg"></i><span class="icon-label">Contact</span></h4>
+              <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://twitter.com/jaimedash"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
+    <li class="list-group-item"><a href="https://github.com/ashander"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+    <li class="list-group-item"><a href="http://figshare.com/authors/Jaime_Ashander/505494"><i class="fa fa-spinner"></i> figshare</a></li>
+                </ul>
     </ul>
-</section>
-            </aside>
+</section>            </aside>
         </div>
     </div>
 </div>

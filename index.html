@@ -25,7 +25,7 @@
         <link rel="stylesheet" href="http://www.ashander.info/theme/css/bootstrap.yeti.min.css" type="text/css"/>
     <link href="http://www.ashander.info/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="http://www.ashander.info/theme/css/pygments/native.css" rel="stylesheet">
+    <link href="http://www.ashander.info/theme/css/pygments/solarizedlight.css" rel="stylesheet">
     <link rel="stylesheet" href="http://www.ashander.info/theme/css/style.css" type="text/css"/>
         <link href="http://www.ashander.info/static/custom.css" rel="stylesheet">
 
@@ -73,7 +73,7 @@ var el="banner";
 var bgimg=new Array("/images/banner/bamfield.jpeg", "/images/banner/bedroom.jpeg", "/images/banner/\
 fir.jpeg", "/images/banner/parker.jpeg", "/images/banner/sunrise.jpeg");
 var random=Math.round((bgimg.length-1)*Math.random());
-var cssStr="#"+el+" { background: url("+bgimg[random]+") repeat-x top left } ";
+var cssStr="#"+el+" { background-image: url("+bgimg[random]+") } ";
 var  style=document.createElement("style");
 
 style.setAttribute("type","text/css");
@@ -84,10 +84,7 @@ else
 style.appendChild(cssText);}
 document.getElementsByTagName("head")[0].appendChild(style);
 /*]]>*/
-</script>
-
-
-<div id="banner">
+</script><div id="banner">
         <div class="container">
                 <div class="copy">
                         <h1>Jaime Ashander</h1>
@@ -193,11 +190,20 @@ document.getElementsByTagName("head")[0].appendChild(style);
        <div>
          <div>
 <i class="fa fa-send-o fa-fw"></i>
-          <a  href="posts/2015/04/D-RUG-mixed-effects-viz/">Mixed effects viz for d-rug</a>
+          <a  href="posts/2015/04/D-RUG-mixed-effects-viz/">Visualizing fits, inference, implications of (G)LMMs</a>
          </div>
 
          <div >
-           in            on Fri 10 April 2015
+           in            <a href="http://www.ashander.info/tag/visualization/">visualization</a>
+           /
+           <a href="http://www.ashander.info/tag/lattice/">lattice</a>
+           /
+           <a href="http://www.ashander.info/tag/model-checking/">model checking</a>
+           /
+           <a href="http://www.ashander.info/tag/statistical-graphics/">statistical graphics</a>
+           /
+           <a href="http://www.ashander.info/tag/glmm/">GLMM</a>
+           on Fri 10 April 2015
          </div>
 
          <div class="spacer"></div>
@@ -207,7 +213,7 @@ document.getElementsByTagName("head")[0].appendChild(style);
          </div>
 
          <div >
-           in            <a href="http://www.ashander.info/tag/stochastic-life-histories/">stochastic life histories</a>
+           in            <a href="http://www.ashander.info/tag/life-history/">life history</a>
            /
            <a href="http://www.ashander.info/tag/evolution/">evolution</a>
            /
@@ -271,21 +277,26 @@ document.getElementsByTagName("head")[0].appendChild(style);
 
     <ul class='list-inline'>
  <!-- exclude etc pages -->
-      <li><a href="http://www.ashander.info/pages/etc-about.html">
+      <li class="list-group-item"><a href="http://www.ashander.info/pages/etc-about.html">
           <i class='fa fa-ellipsis-v'></i> This site
       </a></li>
  <!-- exclude etc pages -->
-      <li><a href="http://www.ashander.info/pages/etc-background.html">
+      <li class="list-group-item"><a href="http://www.ashander.info/pages/etc-background.html">
           <i class='fa fa-ellipsis-v'></i> Background
       </a></li>
  <!-- exclude etc pages -->
-      <li><a href="http://www.ashander.info/pages/etc-contact.html">
+      <li class="list-group-item"><a href="http://www.ashander.info/pages/etc-contact.html">
           <i class='fa fa-ellipsis-v'></i> Contact
       </a></li>
  <!-- exclude etc pages -->
-      <li><a href="http://www.ashander.info/pages/etc-funding.html">
+      <li class="list-group-item"><a href="http://www.ashander.info/pages/etc-funding.html">
           <i class='fa fa-ellipsis-v'></i> Funding
       </a></li>
+    </ul>
+    <ul class='list-inline'>
+    <li class="list-group-item"><a href="https://twitter.com/jaimedash"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
+    <li class="list-group-item"><a href="https://github.com/ashander"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+    <li class="list-group-item"><a href="http://figshare.com/authors/Jaime_Ashander/505494"><i class="fa fa-spinner"></i> figshare</a></li>
     </ul>
   </div>
 </div>        </div>

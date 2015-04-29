@@ -25,7 +25,7 @@
         <link rel="stylesheet" href="http://www.ashander.info/theme/css/bootstrap.yeti.min.css" type="text/css"/>
     <link href="http://www.ashander.info/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="http://www.ashander.info/theme/css/pygments/native.css" rel="stylesheet">
+    <link href="http://www.ashander.info/theme/css/pygments/solarizedlight.css" rel="stylesheet">
     <link rel="stylesheet" href="http://www.ashander.info/theme/css/style.css" type="text/css"/>
         <link href="http://www.ashander.info/static/custom.css" rel="stylesheet">
 
@@ -67,26 +67,6 @@
     </div>
 </div> <!-- /.navbar -->
 <!-- Banner -->
-<script type="text/javascript">
-/*<![CDATA[*/
-var el="banner";
-var bgimg=new Array("/images/banner/bamfield.jpeg", "/images/banner/bedroom.jpeg", "/images/banner/\
-fir.jpeg", "/images/banner/parker.jpeg", "/images/banner/sunrise.jpeg");
-var random=Math.round((bgimg.length-1)*Math.random());
-var cssStr="#"+el+" { background: url("+bgimg[random]+") repeat-x top left } ";
-var  style=document.createElement("style");
-
-style.setAttribute("type","text/css");
-if(style.styleSheet)
-{style.styleSheet.cssText=cssStr;}
-else
-{var cssText=document.createTextNode(cssStr);
-style.appendChild(cssText);}
-document.getElementsByTagName("head")[0].appendChild(style);
-/*]]>*/
-</script>
-
-
 <div id="banner">
         <div class="container">
                 <div class="copy">
@@ -226,17 +206,10 @@ not sure whether they intended to spring for the return journey.</p>
             </article>
             <hr/>
 
-        <ul class="pagination">
-                <li class="prev"><a href="http://www.ashander.info/index.html">&laquo;</a>
-                </li>
-                    <li class=""><a
-                            href="http://www.ashander.info/index.html">1</a></li>
-                    <li class="active"><a
-                            href="http://www.ashander.info/index2.html">2</a></li>
-                    <li class=""><a
-                            href="http://www.ashander.info/index3.html">3</a></li>
+        <ul class="pager">
+                <li class="previous"><a href="http://www.ashander.info/index.html">&larr; Newer</a></li>
                 <li class="next"><a
-                        href="http://www.ashander.info/index3.html">&raquo;</a></li>
+                        href="http://www.ashander.info/index3.html">Older &rarr;</a></li>
         </ul>
         </div>
     </div>

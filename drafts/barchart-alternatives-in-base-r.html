@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>Easy alternatives to bar charts in native R graphics - Jaime Ashander</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="http://www.ashander.info/drafts/barchart-alternatives-in-base-r.html">
+
+        <meta name="author" content="Jaime Ashander" />
+        <meta name="keywords" content="R,statistical graphics,visualization,ggplot2,lattice" />
+        <meta name="description" content="It&#39;s a long tradition in statistical graphics going from Tufte back to Tukey and Cleveland to advise against using bar charts. Many folks, including me, have pejoratively called the common (in ecology, at least) bar chart + SE a &#34;dynamite plot&#34;. Although Ben Bolker has questioned the universality of this ..." />
+
+        <meta property="og:site_name" content="Jaime Ashander" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Easy alternatives to bar charts in native R graphics"/>
+        <meta property="og:url" content="http://www.ashander.info/drafts/barchart-alternatives-in-base-r.html"/>
+        <meta property="og:description" content="It&#39;s a long tradition in statistical graphics going from Tufte back to Tukey and Cleveland to advise against using bar charts. Many folks, including me, have pejoratively called the common (in ecology, at least) bar chart + SE a &#34;dynamite plot&#34;. Although Ben Bolker has questioned the universality of this ..."/>
+        <meta property="article:published_time" content="2015-04-28" />
+            <meta property="article:section" content="notes" />
+            <meta property="article:tag" content="R" />
+            <meta property="article:tag" content="statistical graphics" />
+            <meta property="article:tag" content="visualization" />
+            <meta property="article:tag" content="ggplot2" />
+            <meta property="article:tag" content="lattice" />
+            <meta property="article:author" content="Jaime Ashander" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://www.ashander.info/theme/css/bootstrap.yeti.min.css" type="text/css"/>
+    <link href="http://www.ashander.info/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://www.ashander.info/theme/css/pygments/solarizedlight.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://www.ashander.info/theme/css/style.css" type="text/css"/>
+        <link href="http://www.ashander.info/static/custom.css" rel="stylesheet">
+
+        <link href="http://www.ashander.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Jaime Ashander ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://www.ashander.info/" class="navbar-brand">
+                <i class="fa fa-home fa-fw"></i>
+            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="http://www.ashander.info/category/themes">Themes</a>
+                        </li>
+                        <li >
+                            <a href="http://www.ashander.info/category/results">Results</a>
+                        </li>
+                        <li class="active">
+                            <a href="http://www.ashander.info/category/notes">Notes</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://www.ashander.info/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://www.ashander.info/drafts/barchart-alternatives-in-base-r.html"
+                       rel="bookmark"
+                       title="Permalink to Easy alternatives to bar charts in native R graphics">
+                        Easy alternatives to bar charts in native R graphics
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<div>
+  <a href="http://www.ashander.info/drafts/barchart-alternatives-in-base-r.html">
+<i class="fa fa-send-o fa-fw"></i>
+  </a>
+  in   <a href="http://www.ashander.info/tag/r/">R</a>
+  /
+  <a href="http://www.ashander.info/tag/statistical-graphics/">statistical graphics</a>
+  /
+  <a href="http://www.ashander.info/tag/visualization/">visualization</a>
+  /
+  <a href="http://www.ashander.info/tag/ggplot2/">ggplot2</a>
+  /
+  <a href="http://www.ashander.info/tag/lattice/">lattice</a>
+  on Tue 28 April 2015
+</div>
+
+                     </div>
+                </div>
+                <p>It's a long tradition in statistical graphics going from Tufte back to
+<a href="http://en.wikipedia.org/wiki/John_Tukey#Scientific_contributions">Tukey</a>
+and
+<a href="http://en.wikipedia.org/wiki/Dot_plot_%28statistics%29#Cleveland_dot_plots">Cleveland</a>
+to advise against using bar charts. Many folks, <a href="https://twitter.com/jaimedash/status/591289758191636480">including
+me</a>, have
+pejoratively called the common (in ecology, at least) bar chart + SE a
+"dynamite plot". Although Ben Bolker has questioned the universality of
+this received wisdom ("Dynamite Plots: unmitigated evil?", which I link
+below), I think in most cases they're worth avoiding. I'll expand on
+this below.</p>
+<p>Last week, Tracey Weisgerber and colleagues echoed this tradition,
+making a <a href="doi.org/10.1371/journal.pbio.1002128">great set of concrete recommendations in a perspective for
+PLoS Biology</a>. Importantly, the
+authors also provided a <a href="https://www.ctspedia.org/do/view/CTSpedia/TemplateTesting">set of Excel templates on
+CTSpedia</a> (a
+cool-looking site for sharing resources related to clinical trials) that
+implement their recommendations in Excel.</p>
+<p>This is great because in Excel, making good graphics like this is
+<em>really</em> hard. So people don't do it. Best practices have little appeal
+if they also involve lots of arcane work to implement! Fortunately in
+<a href="http://www.r-project.org/">R</a>, the recommended alternatives are built
+in, and even easier to use.</p>
+<p>Here, I'll provide some minimal code to make plots similar to those
+Weisgerber <em>et al</em> recommend, both for independent groups and paired
+data, using the built-in graphics of <a href="http://www.r-project.org/">R</a>.</p>
+<h1>Independent groups</h1>
+<p>For conveneince, I'm using the built in <code>CO2</code> dataset:</p>
+<div class="highlight"><pre>head(CO2)
+
+##   Plant   Type  Treatment conc uptake
+## 1   Qn1 Quebec nonchilled   95   16.0
+## 2   Qn1 Quebec nonchilled  175   30.4
+## 3   Qn1 Quebec nonchilled  250   34.8
+## 4   Qn1 Quebec nonchilled  350   37.2
+## 5   Qn1 Quebec nonchilled  500   35.3
+## 6   Qn1 Quebec nonchilled  675   39.2
+</pre></div>
+
+
+<p>These data come from an experiment on cold tolerance in grasses from
+different regions, but the specifics here don't matter. The data were
+first publisehd in <em>Ecology</em> in 1990. See <code>?CO2</code> in R if you'd like to
+know more.</p>
+<p>Mostly, I'll plot CO2 concentration versus uptake or Type, the plant's
+source region.</p>
+<p>First, a bad ol' dynamite, er bar plot:</p>
+<p><img alt="bad bar
+plot" src="http://www.ashander.info/drafts/barchart-alternatives-in-base-R_files/figure-markdown_strict/barplot-1.svg" /></p>
+<p>(I'm not including the code for this, because it's what I'm recommending
+against. Nor did I add error bars, so it's not really a dynamite plot.
+R's base graphics make both producing this plot and, especially, adding
+error bars to it, tedious compared to box plots or strip charts. Maybe
+this is a feature. External libraries like <code>ggplot</code> or <code>gplots</code> make
+such graphics a lot easier. See link at the end of this post.)</p>
+<h2>Scatter plots</h2>
+<p>The first type of plot is a univariate scatter plot. Most often, you'd
+want to plot a response against some observational or experimental
+factors. Another name for this type of plot is <code>stripchart</code>, which is
+what R calls it:</p>
+<div class="highlight"><pre>CO2 <span class="o">&lt;-</span> <span class="kp">within</span><span class="p">(</span>CO2<span class="p">,</span> conc_f <span class="o">&lt;-</span> <span class="kp">factor</span><span class="p">(</span>conc<span class="p">))</span>
+y_limits <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="kp">max</span><span class="p">(</span>CO2<span class="o">$</span>uptake<span class="p">)</span> <span class="o">*</span> <span class="m">1.15</span><span class="p">)</span>
+point_col <span class="o">&lt;-</span> gray<span class="p">(</span><span class="m">0.4</span><span class="p">)</span>
+stripchart<span class="p">(</span>uptake <span class="o">~</span> conc_f<span class="p">,</span> CO2<span class="p">,</span> method<span class="o">=</span><span class="s">&#39;jitter&#39;</span><span class="p">,</span> pch<span class="o">=</span><span class="m">19</span><span class="p">,</span> col<span class="o">=</span>point_col<span class="p">,</span>
+           xlab<span class="o">=</span><span class="s">&#39;concentration&#39;</span><span class="p">,</span> ylim<span class="o">=</span>y_limits<span class="p">,</span> vertical<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="stripchart: a scatter plot v
+factors" src="http://www.ashander.info/drafts/barchart-alternatives-in-base-R_files/figure-markdown_strict/scatter-v-factors-1.svg" /></p>
+<p>It's easy to jitter the points, as Weisgerber <em>et al</em> recommend, by
+passing the argument <code>method='jitter'</code>. But there are other options. For
+cases where there really isn't much data, <code>method='stack'</code> gives
+something closer to a <a href="http://en.wikipedia.org/wiki/Dot_plot_%28statistics%29#Wilkinson_dot_plots">Wilkinson dot
+plot</a>.
+This more clearly shows the values that were observed more than once:</p>
+<div class="highlight"><pre>stripchart(uptake ~ conc_f, CO2, method=&#39;stack&#39;, pch=19, col=point_col,
+           xlab=&#39;concentration&#39;,  ylim=y_limits, vertical=TRUE)
+</pre></div>
+
+
+<p><img alt="stripchart with
+stacking" src="http://www.ashander.info/drafts/barchart-alternatives-in-base-R_files/figure-markdown_strict/stripchart-wilkinson-1.svg" /></p>
+<h2>Box (and whisker) plots</h2>
+<p>For box plots, R makes it very easy.</p>
+<div class="highlight"><pre>boxplot( uptake ~ conc_f , CO2, ylab=&#39;uptake&#39;, xlab=&#39;concentration&#39;, ylim=y_limits)
+</pre></div>
+
+
+<p><img alt="boxplot" src="http://www.ashander.info/drafts/barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-1.svg" />
+In this case, with small data the boxplot is a bit misleading. This is
+clear from the scatter plots above, but with a little more work, you can
+overplot on the boxes:</p>
+<div class="highlight"><pre>jitter <span class="o">&lt;-</span> <span class="m">0.025</span>
+boxplot<span class="p">(</span> uptake <span class="o">~</span> conc_f <span class="p">,</span> CO2<span class="p">,</span> ylab<span class="o">=</span><span class="s">&#39;uptake&#39;</span><span class="p">,</span> xlab<span class="o">=</span><span class="s">&#39;concentration&#39;</span><span class="p">,</span> ylim<span class="o">=</span>y_limits<span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="boxplot with points
+overplotted" src="http://www.ashander.info/drafts/barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-overplotted-1.svg" /></p>
+<div class="highlight"><pre><span class="x">points(as.numeric(CO2</span><span class="p">$</span><span class="nv">conc_f</span><span class="x">) + rnorm(nrow(CO2), sd = jitter), CO2</span><span class="p">$</span><span class="nv">uptake</span><span class="x">,</span>
+<span class="x">       pch=19, col=point_col)</span>
+</pre></div>
+
+
+<p><img alt="boxplot with points
+overplotted" src="http://www.ashander.info/drafts/barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-overplotted-2.svg" /></p>
+<p>Even with base graphics <code>boxplot</code>, you can pass functions of multiple
+independent variables. This means you can visualize interactions between
+treatments in your raw data:</p>
+<div class="highlight"><pre>boxplot( uptake ~ conc_f : Treatment, CO2, ylab=&#39;uptake&#39;, ylim=y_limits,
+        xlab = &quot;concentration within chilling treatment&quot;)
+</pre></div>
+
+
+<p><img alt="complex bar
+plot" src="http://www.ashander.info/drafts/barchart-alternatives-in-base-R_files/figure-markdown_strict/complex-boxplot-1.svg" /></p>
+<p>I'm not sure how to easily overplot points on a complex boxplot like
+this one. (Without using an external library.) If you know -- drop me a
+note.</p>
+<p><em>Note</em> it would be easier to read the labels here if the plot were
+horizontal, for which there's an argument you can pass. The graphics
+settings on this post aren't playing well with long labels, so I don't
+evaluate this here:</p>
+<div class="highlight"><pre>op <span class="o">&lt;-</span> par<span class="p">(</span>las <span class="o">=</span> <span class="m">1</span><span class="p">,</span> mar <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span> <span class="m">8</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span> <span class="c1"># all axis labels horizontal</span>
+   boxplot<span class="p">(</span> uptake <span class="o">~</span> conc_f <span class="o">%in%</span> Treatment<span class="p">,</span> CO2<span class="p">,</span> xlab<span class="o">=</span><span class="s">&#39;uptake&#39;</span><span class="p">,</span> horizontal<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+par<span class="p">(</span>op<span class="p">)</span>
+</pre></div>
+
+
+<h2>Paired data</h2>
+<p>The CO2 data aren't paired. To look at paired scatter plots, I'll use
+the built in <code>sleep</code> data, which show extra sleep for subjects taking
+two sleep aids.</p>
+<div class="highlight"><pre>head(sleep)
+
+##   extra group ID
+## 1   0.7     1  1
+## 2  -1.6     1  2
+## 3  -0.2     1  3
+## 4  -1.2     1  4
+## 5  -0.1     1  5
+## 6   3.4     1  6
+</pre></div>
+
+
+<p>The easiest way to make plots that link paired data is to again use
+<code>stripchart</code> as a base. Then, to add lines illustraiting the pairs, one
+can use <code>split</code> and <code>lines</code>:</p>
+<div class="highlight"><pre>invisible(stripchart(extra ~ group, sleep, pch=19, col=point_col,
+             vertical=TRUE, ylab=&#39;extra sleep&#39;, xlab=&#39;drug received&#39;))
+</pre></div>
+
+
+<p><img alt="paired points connected by lines and marked by
+points" src="http://www.ashander.info/drafts/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-points-1.svg" /></p>
+<div class="highlight"><pre><span class="cp">##</span><span class="c"> note -- don&#39;t enclose this in invisble in your code -- some strangeness</span><span class="x"></span>
+<span class="cp">##</span><span class="c">         with website production compels it here</span><span class="x"></span>
+<span class="x">for(ID in split(sleep, sleep</span><span class="p">$</span><span class="nv">ID</span><span class="x">))</span>
+<span class="x">  lines(extra ~ group, ID)</span>
+</pre></div>
+
+
+<p><img alt="paired points connected by lines and marked by
+points" src="http://www.ashander.info/drafts/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-points-2.svg" /></p>
+<p>If you'd rather only have the lines, just suppress plotting of points
+within the initial call to <code>stripchart</code>:</p>
+<div class="highlight"><pre>invisible(stripchart(extra ~ group, sleep, pch=&quot;&quot;, vertical=TRUE,
+                 ylab=&#39;extra sleep&#39;, xlab=&#39;drug received&#39;))
+</pre></div>
+
+
+<p><img alt="paired locations connected by
+lines" src="http://www.ashander.info/drafts/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-lines-1.svg" /></p>
+<div class="highlight"><pre><span class="cp">##</span><span class="c"> note -- don&#39;t enclose this in invisble in your code -- some strangeness</span><span class="x"></span>
+<span class="cp">##</span><span class="c">         with website production compels it here</span><span class="x"></span>
+<span class="x">for(ID in split(sleep, sleep</span><span class="p">$</span><span class="nv">ID</span><span class="x">))</span>
+<span class="x">  lines(extra ~ group, ID)</span>
+</pre></div>
+
+
+<p><img alt="paired locations connected by
+lines" src="http://www.ashander.info/drafts/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-lines-2.svg" /></p>
+<h1>Other plots</h1>
+<p>R easily produces many other plots, in addition to those Weisgerber <em>et
+al</em> for which provide templates.</p>
+<p>For example, say you'd like a histograms across subsets. Here's one for
+uptake from the <code>CO2</code> data for grass plants receiving chilling or not:</p>
+<div class="highlight"><pre>op <span class="o">&lt;-</span> par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
+<span class="kr">for</span><span class="p">(</span>v <span class="kr">in</span> <span class="kp">levels</span><span class="p">(</span>CO2<span class="o">$</span>Treatment<span class="p">))</span> <span class="p">{</span>
+  subs <span class="o">&lt;-</span> <span class="kp">subset</span><span class="p">(</span>CO2<span class="p">,</span> Treatment <span class="o">==</span> v<span class="p">)</span>
+  hist<span class="p">(</span>subs<span class="o">$</span>uptake<span class="p">,</span> main <span class="o">=</span> v<span class="p">,</span> col <span class="o">=</span> point_col<span class="p">,</span> xlab <span class="o">=</span> <span class="s">&#39;uptake&#39;</span><span class="p">,</span> xlim <span class="o">=</span> y_limits<span class="p">)</span>
+  <span class="p">}</span>
+</pre></div>
+
+
+<p><img alt="histogram of
+uptake" src="http://www.ashander.info/drafts/barchart-alternatives-in-base-R_files/figure-markdown_strict/histo-1.svg" /></p>
+<div class="highlight"><pre>par(op)
+</pre></div>
+
+
+<h1>References: plotting libraries and examples</h1>
+<ul>
+<li><a href="http://www.statmethods.net/advgraphs/trellis.html">lattice</a> uses a
+    formula interface on top of grid graphics</li>
+<li><a href="http://ggplot2.org/">ggplot2</a> implements the grammar of graphics on
+    top of grid graphics</li>
+<li><em>note</em> if you're familiar with one of the above and not the other,
+    <a href="http://docs.ggplot2.org/0.9.3.1/translate_qplot_lattice.html">see this guide to translating between lattice and
+    qplot</a>
+    and <a href="https://learnr.wordpress.com/2009/08/26/ggplot2-version-of-figures-in-lattice-multivariate-data-visualization-with-r-final-part/">this post summarizing an extensive comparison of the two
+    libraries</a></li>
+<li>Ben Bolker's <a href="http://emdbolker.wikidot.com/blog:dynamite">post on dynamite
+    plots</a>, in which he
+    produces a variety of plots on the same data using both <code>ggplot2</code>
+    and an older library <code>gplots</code></li>
+</ul>
+<h1>When and where are dynamite plots appropriate?</h1>
+<p>In addition to Ben's post linked above, Solomon Messing has some nice
+reasons to choose dot plots for estimates +/- SE (<a href="https://solomonmessing.wordpress.com/2012/03/04/visualization-series-insight-from-cleveland-and-tufte-on-plotting-numeric-data-by-groups/">three paragraphs
+beginning with "Why do I use dot
+plots..."</a>).
+These boil down to:</p>
+<ul>
+<li>bar charts emphasize comparison to zero, which can make comparison
+    of small differences difficult</li>
+<li>bars are often used in histograms, which can confuse some audiences</li>
+<li>dot plots use more ink, and cognition, which causes the eye to
+    compare the estimate with the baseline</li>
+</ul>
+<p>I agree with Ben that this last feature, the implied reference to a
+baseline, means bar charts, can be very useful. But there's a corollary
+here: only use this strength when comparison to a baseline is the point.
+Further, then, if your graphics are to be honest, they must start at a
+meaningful zero. So, avoid bar charts for estimated quantites. Unless,
+your main comparison is between estimates with different, or with
+magnitudes very close to zero.</p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h2> Comments? </h2>
+
+    Mention me <a href="https://twitter.com/jaimedash">@jaimedash</a> on twitter or
+<a href="https://github.com/ashander/ashander.github.io">file an issue</a>.
+Contributions
+<a href="https://github.com/ashander/ashander.github.io/tree/content">(via pull request to the content branch)</a>
+are also welcome.
+</section>        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-clock-o fa-lg"></i><span class="icon-label">Recent</span></h4>
+              <ul class="list-group" id="recentposts">
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/">
+                            Visualizing fits, inference, implications of (G)LMMs
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2015/01/between-generation-bet-hedging/">
+                            Between-generation bet-hedging
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2011/07/Unhealth-plain/">
+                            The Central Valley long ago
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2010/01/Jobless-recovery/">
+                            Jobless recovery and growth-signalling autonomy
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2009/12/Science-is-uncertain/">
+                            Science education and uncertainty
+                        </a>
+                    </li>
+                </ul>
+            </li>
+          <li class="list-group-item">
+                  <h4> <i class="fa fa-paper-plane fa-lg"></i><span class="icon-label">Contact</span></h4>
+              <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://twitter.com/jaimedash"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
+    <li class="list-group-item"><a href="https://github.com/ashander"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+    <li class="list-group-item"><a href="http://figshare.com/authors/Jaime_Ashander/505494"><i class="fa fa-spinner"></i> figshare</a></li>
+                </ul>
+    </ul>
+</section>            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2009-2015 Jaime Ashander
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://www.ashander.info/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://www.ashander.info/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://www.ashander.info/theme/js/respond.min.js"></script>
+
+    <script src="http://www.ashander.info/theme/js/bodypadding.js"></script>
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-60354418-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <!-- End Google Analytics Code -->
+
+</body>
+</html>

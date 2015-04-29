@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>R markdown post using rmd_reader - Jaime Ashander</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="http://www.ashander.info/drafts/example-rmd.html">
+
+        <meta name="author" content="Jaime Ashander" />
+        <meta name="keywords" content="help,tag me,i'm a tag" />
+        <meta name="description" content="params &lt;- rnorm(100) plot(params, rnorm(100)) cat(&#34;\n\n&#34;) hist(params) intrasite link print(knitr::knit_hooks$get(&#39;plot&#39;)) ## function (x, options) ## { ## if (!is.null(options$pelican) &amp;&amp; options$pelican) ## x &lt;- paste0(&#34;{attach}&#34;, x) ## knitr::hook_plot_md(x ..." />
+
+        <meta property="og:site_name" content="Jaime Ashander" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="R markdown post using rmd_reader"/>
+        <meta property="og:url" content="http://www.ashander.info/drafts/example-rmd.html"/>
+        <meta property="og:description" content="params &lt;- rnorm(100) plot(params, rnorm(100)) cat(&#34;\n\n&#34;) hist(params) intrasite link print(knitr::knit_hooks$get(&#39;plot&#39;)) ## function (x, options) ## { ## if (!is.null(options$pelican) &amp;&amp; options$pelican) ## x &lt;- paste0(&#34;{attach}&#34;, x) ## knitr::hook_plot_md(x ..."/>
+        <meta property="article:published_time" content="2015-04-25" />
+            <meta property="article:section" content="notes" />
+            <meta property="article:tag" content="help" />
+            <meta property="article:tag" content="tag me" />
+            <meta property="article:tag" content="i'm a tag" />
+            <meta property="article:author" content="Jaime Ashander" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://www.ashander.info/theme/css/bootstrap.yeti.min.css" type="text/css"/>
+    <link href="http://www.ashander.info/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://www.ashander.info/theme/css/pygments/solarizedlight.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://www.ashander.info/theme/css/style.css" type="text/css"/>
+        <link href="http://www.ashander.info/static/custom.css" rel="stylesheet">
+
+        <link href="http://www.ashander.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Jaime Ashander ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://www.ashander.info/" class="navbar-brand">
+                <i class="fa fa-home fa-fw"></i>
+            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="http://www.ashander.info/category/themes">Themes</a>
+                        </li>
+                        <li >
+                            <a href="http://www.ashander.info/category/results">Results</a>
+                        </li>
+                        <li class="active">
+                            <a href="http://www.ashander.info/category/notes">Notes</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://www.ashander.info/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://www.ashander.info/drafts/example-rmd.html"
+                       rel="bookmark"
+                       title="Permalink to R markdown post using rmd_reader">
+                        R markdown post using rmd_reader
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<div>
+  <a href="http://www.ashander.info/drafts/example-rmd.html">
+<i class="fa fa-send-o fa-fw"></i>
+  </a>
+  in   <a href="http://www.ashander.info/tag/help/">help</a>
+  /
+  <a href="http://www.ashander.info/tag/tag-me/">tag me</a>
+  /
+  <a href="http://www.ashander.info/tag/im-a-tag/">i'm a tag</a>
+  on Sat 25 April 2015
+</div>
+
+                     </div>
+                </div>
+                <div class="highlight"><pre>params <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">)</span>
+plot<span class="p">(</span>params<span class="p">,</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">))</span>
+</pre></div>
+
+
+<p><img alt="My
+alt1" src="http://www.ashander.info/drafts/example-rmd_files/figure-markdown_strict/my-fig-1.svg" /></p>
+<div class="highlight"><pre>cat(&quot;\n\n&quot;)
+
+hist(params)
+</pre></div>
+
+
+<p><img alt="alt2" src="http://www.ashander.info/drafts/example-rmd_files/figure-markdown_strict/my-fig-2.svg" /></p>
+<p><a href="http://www.ashander.info/posts/2015/04/example-yaml/">intrasite link</a></p>
+<div class="highlight"><pre><span class="nx">print</span><span class="p">(</span><span class="nx">knitr</span><span class="o">::</span><span class="nx">knit_hooks$get</span><span class="p">(</span><span class="s1">&#39;plot&#39;</span><span class="p">))</span>
+
+<span class="err">##</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> 
+<span class="err">##</span> <span class="p">{</span>
+<span class="err">##</span>     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">is</span><span class="p">.</span><span class="kc">null</span><span class="p">(</span><span class="nx">options$pelican</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">options$pelican</span><span class="p">)</span> 
+<span class="err">##</span>         <span class="nx">x</span> <span class="o">&lt;-</span> <span class="nx">paste0</span><span class="p">(</span><span class="s2">&quot;{attach}&quot;</span><span class="p">,</span> <span class="nx">x</span><span class="p">)</span>
+<span class="err">##</span>     <span class="nx">knitr</span><span class="o">::</span><span class="nx">hook_plot_md</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span>
+<span class="err">##</span> <span class="p">}</span>
+<span class="err">##</span> <span class="o">&lt;</span><span class="nx">environment</span><span class="o">:</span> <span class="mh">0x104f27118</span><span class="o">&gt;</span>
+</pre></div>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h2> Comments? </h2>
+
+    Mention me <a href="https://twitter.com/jaimedash">@jaimedash</a> on twitter or
+<a href="https://github.com/ashander/ashander.github.io">file an issue</a>.
+Contributions
+<a href="https://github.com/ashander/ashander.github.io/tree/content">(via pull request to the content branch)</a>
+are also welcome.
+</section>        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-clock-o fa-lg"></i><span class="icon-label">Recent</span></h4>
+              <ul class="list-group" id="recentposts">
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/">
+                            Visualizing fits, inference, implications of (G)LMMs
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2015/01/between-generation-bet-hedging/">
+                            Between-generation bet-hedging
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2011/07/Unhealth-plain/">
+                            The Central Valley long ago
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2010/01/Jobless-recovery/">
+                            Jobless recovery and growth-signalling autonomy
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2009/12/Science-is-uncertain/">
+                            Science education and uncertainty
+                        </a>
+                    </li>
+                </ul>
+            </li>
+          <li class="list-group-item">
+                  <h4> <i class="fa fa-paper-plane fa-lg"></i><span class="icon-label">Contact</span></h4>
+              <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://twitter.com/jaimedash"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
+    <li class="list-group-item"><a href="https://github.com/ashander"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+    <li class="list-group-item"><a href="http://figshare.com/authors/Jaime_Ashander/505494"><i class="fa fa-spinner"></i> figshare</a></li>
+                </ul>
+    </ul>
+</section>            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2009-2015 Jaime Ashander
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://www.ashander.info/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://www.ashander.info/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://www.ashander.info/theme/js/respond.min.js"></script>
+
+    <script src="http://www.ashander.info/theme/js/bodypadding.js"></script>
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-60354418-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <!-- End Google Analytics Code -->
+
+</body>
+</html>

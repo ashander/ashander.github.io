@@ -5,3 +5,13 @@
 .bigspacer {
     margin-top: 20px;
 }
+
+#banner h1 {
+    text-transform: capitalize;
+}
+
+#sidebar {
+    padding-top: 0px;
+    -moz-hyphens: auto;
+    word-break: normal;
+}
