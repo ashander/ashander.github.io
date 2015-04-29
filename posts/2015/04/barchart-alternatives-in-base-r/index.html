@@ -14,13 +14,13 @@
 
         <meta name="author" content="Jaime Ashander" />
         <meta name="keywords" content="R,statistical graphics,visualization,ggplot2,lattice" />
-        <meta name="description" content="It&#39;s a long tradition in statistical graphics going from Tufte back to Tukey and Cleveland to advise against using bar charts. Many folks, including me, have pejoratively called the common (in ecology, at least) bar chart + SE a &#34;dynamite plot&#34;. Although Ben Bolker has questioned the universality of this ..." />
+        <meta name="description" content="It&#39;s a long tradition in statistical graphics going from Tufte back to Tukey and Cleveland to advise against using bar charts. Many folks, including me, have pejoratively called the common (in ecology, at least) bar chart + SE a &#34;dynamite plot&#34;. Although Ben Bolker has questioned the wisdom of this ..." />
 
         <meta property="og:site_name" content="Jaime Ashander" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Easy alternatives to bar charts in native R graphics"/>
         <meta property="og:url" content="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/"/>
-        <meta property="og:description" content="It&#39;s a long tradition in statistical graphics going from Tufte back to Tukey and Cleveland to advise against using bar charts. Many folks, including me, have pejoratively called the common (in ecology, at least) bar chart + SE a &#34;dynamite plot&#34;. Although Ben Bolker has questioned the universality of this ..."/>
+        <meta property="og:description" content="It&#39;s a long tradition in statistical graphics going from Tufte back to Tukey and Cleveland to advise against using bar charts. Many folks, including me, have pejoratively called the common (in ecology, at least) bar chart + SE a &#34;dynamite plot&#34;. Although Ben Bolker has questioned the wisdom of this ..."/>
         <meta property="article:published_time" content="2015-04-28" />
             <meta property="article:section" content="notes" />
             <meta property="article:tag" content="R" />
@@ -122,22 +122,21 @@ and
 to advise against using bar charts. Many folks, <a href="https://twitter.com/jaimedash/status/591289758191636480">including
 me</a>, have
 pejoratively called the common (in ecology, at least) bar chart + SE a
-"dynamite plot". Although Ben Bolker has questioned the universality of
-this received wisdom ("Dynamite Plots: unmitigated evil?", which I link
-below), I think in most cases they're worth avoiding. I'll expand on
-this below.</p>
-<p>Last week, Tracey Weisgerber and colleagues echoed this tradition,
+"dynamite plot". Although Ben Bolker has questioned <a href="http://emdbolker.wikidot.com/blog:dynamite">the wisdom of this
+sentiment</a> , I think in most
+cases they're worth avoiding. (I discuss this more in "When and here are
+dynamite plots appropriate" below.)</p>
+<p>Last week, Tracey Weisgerber and colleagues extend this tradition,
 making a <a href="doi.org/10.1371/journal.pbio.1002128">great set of concrete recommendations in a perspective for
 PLoS Biology</a>. Importantly, the
 authors also provided a <a href="https://www.ctspedia.org/do/view/CTSpedia/TemplateTesting">set of Excel templates on
 CTSpedia</a> (a
 cool-looking site for sharing resources related to clinical trials) that
 implement their recommendations in Excel.</p>
-<p>This is great because in Excel, making good graphics like this is
-<em>really</em> hard. So people don't do it. Best practices have little appeal
-if they also involve lots of arcane work to implement! Fortunately in
-<a href="http://www.r-project.org/">R</a>, the recommended alternatives are built
-in, and even easier to use.</p>
+<p>This is great because in Excel making good graphics is <em>really</em> hard. So
+people don't do it. Best practices have little appeal if they also
+involve lots of work! Fortunately in <a href="http://www.r-project.org/">R</a>, the
+recommended alternatives are built in, and even easier to use.</p>
 <p>Here, I'll provide some minimal code to make plots similar to those
 Weisgerber <em>et al</em> recommend, both for independent groups and paired
 data, using the built-in graphics of <a href="http://www.r-project.org/">R</a>.</p>
@@ -145,13 +144,13 @@ data, using the built-in graphics of <a href="http://www.r-project.org/">R</a>.<
 <p>For convenience, I'm using the built in <code>CO2</code> dataset:</p>
 <div class="highlight"><pre>head(CO2)
 
-##   Plant   Type  Treatment conc uptake
-## 1   Qn1 Quebec nonchilled   95   16.0
-## 2   Qn1 Quebec nonchilled  175   30.4
-## 3   Qn1 Quebec nonchilled  250   34.8
-## 4   Qn1 Quebec nonchilled  350   37.2
-## 5   Qn1 Quebec nonchilled  500   35.3
-## 6   Qn1 Quebec nonchilled  675   39.2
+##   Plant   Type  Treatment conc uptake conc_f
+## 1   Qn1 Quebec nonchilled   95   16.0     95
+## 2   Qn1 Quebec nonchilled  175   30.4    175
+## 3   Qn1 Quebec nonchilled  250   34.8    250
+## 4   Qn1 Quebec nonchilled  350   37.2    350
+## 5   Qn1 Quebec nonchilled  500   35.3    500
+## 6   Qn1 Quebec nonchilled  675   39.2    675
 </pre></div>
 
 
@@ -206,17 +205,16 @@ stacking" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-b
 
 <p><img alt="boxplot" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-1.svg" />
 In this case, with small data the boxplot is a bit misleading. This is
-clear from the scatter plots above, but with a little more work, you can
-overplot on the boxes:</p>
-<div class="highlight"><pre>jitter <span class="o">&lt;-</span> <span class="m">0.025</span>
-boxplot<span class="p">(</span> uptake <span class="o">~</span> conc_f <span class="p">,</span> CO2<span class="p">,</span> ylab<span class="o">=</span><span class="s">&#39;uptake&#39;</span><span class="p">,</span> xlab<span class="o">=</span><span class="s">&#39;concentration&#39;</span><span class="p">,</span> ylim<span class="o">=</span>y_limits<span class="p">)</span>
+clear from the scatter plots above, but you can also overplot onto the
+boxes using <code>stripchart</code> with <code>add = TRUE, vertical = TRUE</code>:</p>
+<div class="highlight"><pre>boxplot( uptake ~ conc_f , CO2, ylab=&#39;uptake&#39;, xlab=&#39;concentration&#39;, ylim=y_limits)
 </pre></div>
 
 
 <p><img alt="boxplot with points
 overplotted" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-overplotted-1.svg" /></p>
-<div class="highlight"><pre><span class="x">points(as.numeric(CO2</span><span class="p">$</span><span class="nv">conc_f</span><span class="x">) + rnorm(nrow(CO2), sd = jitter), CO2</span><span class="p">$</span><span class="nv">uptake</span><span class="x">,</span>
-<span class="x">       pch=19, col=point_col)</span>
+<div class="highlight"><pre>stripchart(uptake ~ conc_f, CO2, method = &#39;jitter&#39;, add = TRUE, vertical = TRUE,
+           pch = 19)
 </pre></div>
 
 
@@ -224,7 +222,7 @@ overplotted" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-i
 overplotted" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-overplotted-2.svg" /></p>
 <p>Even with base graphics <code>boxplot</code>, you can pass functions of multiple
 independent variables. This means you can visualize interactions between
-treatments in your raw data:</p>
+treatments in your raw data, and even overplot with <code>stripchart</code>!</p>
 <div class="highlight"><pre>boxplot( uptake ~ conc_f : Treatment, CO2, ylab=&#39;uptake&#39;, ylim=y_limits,
         xlab = &quot;concentration within chilling treatment&quot;)
 </pre></div>
@@ -232,9 +230,13 @@ treatments in your raw data:</p>
 
 <p><img alt="complex bar
 plot" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/complex-boxplot-1.svg" /></p>
-<p>I'm not sure how to easily overplot points on a complex boxplot like
-this one. (Without using an external library.) If you know -- drop me a
-note.</p>
+<div class="highlight"><pre>stripchart(uptake ~ conc_f : Treatment, CO2, method = &#39;jitter&#39;, add = TRUE, vertical = TRUE,
+           pch = 19)
+</pre></div>
+
+
+<p><img alt="complex bar
+plot" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/complex-boxplot-2.svg" /></p>
 <p><em>Note</em> it would be easier to read the labels here if the plot were
 horizontal, for which there's an argument you can pass. The graphics
 settings on this post aren't playing well with long labels, so I don't
@@ -264,16 +266,14 @@ two sleep aids.</p>
 <p>The easiest way to make plots that link paired data is to again use
 <code>stripchart</code> as a base. Then, to add lines illustrating the pairs, one
 can use <code>split</code> and <code>lines</code>:</p>
-<div class="highlight"><pre>invisible(stripchart(extra ~ group, sleep, pch=19, col=point_col,
-             vertical=TRUE, ylab=&#39;extra sleep&#39;, xlab=&#39;drug received&#39;))
+<div class="highlight"><pre>stripchart(extra ~ group, sleep, pch=19, col=point_col,
+           vertical=TRUE, ylab=&#39;extra sleep&#39;, xlab=&#39;drug received&#39;)
 </pre></div>
 
 
 <p><img alt="paired points connected by lines and marked by
 points" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-points-1.svg" /></p>
-<div class="highlight"><pre><span class="cp">##</span><span class="c"> note -- don&#39;t enclose this in invisible in your code -- some strangeness</span><span class="x"></span>
-<span class="cp">##</span><span class="c">         with website production compels it here</span><span class="x"></span>
-<span class="x">for(ID in split(sleep, sleep</span><span class="p">$</span><span class="nv">ID</span><span class="x">))</span>
+<div class="highlight"><pre><span class="x">for(ID in split(sleep, sleep</span><span class="p">$</span><span class="nv">ID</span><span class="x">))</span>
 <span class="x">  lines(extra ~ group, ID)</span>
 </pre></div>
 
@@ -282,16 +282,14 @@ points" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-bas
 points" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-points-2.svg" /></p>
 <p>If you'd rather only have the lines, just suppress plotting of points
 within the initial call to <code>stripchart</code>:</p>
-<div class="highlight"><pre>invisible(stripchart(extra ~ group, sleep, pch=&quot;&quot;, vertical=TRUE,
-                 ylab=&#39;extra sleep&#39;, xlab=&#39;drug received&#39;))
+<div class="highlight"><pre>stripchart(extra ~ group, sleep, pch=&quot;&quot;, vertical=TRUE,
+           ylab=&#39;extra sleep&#39;, xlab=&#39;drug received&#39;)
 </pre></div>
 
 
 <p><img alt="paired locations connected by
 lines" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-lines-1.svg" /></p>
-<div class="highlight"><pre><span class="cp">##</span><span class="c"> note -- don&#39;t enclose this in invisible in your code -- some strangeness</span><span class="x"></span>
-<span class="cp">##</span><span class="c">         with website production compels it here</span><span class="x"></span>
-<span class="x">for(ID in split(sleep, sleep</span><span class="p">$</span><span class="nv">ID</span><span class="x">))</span>
+<div class="highlight"><pre><span class="x">for(ID in split(sleep, sleep</span><span class="p">$</span><span class="nv">ID</span><span class="x">))</span>
 <span class="x">  lines(extra ~ group, ID)</span>
 </pre></div>
 
