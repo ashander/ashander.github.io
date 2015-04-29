@@ -14,13 +14,13 @@
 
         <meta name="author" content="Jaime Ashander" />
         <meta name="keywords" content="visualization,lattice,model checking,statistical graphics,GLMM" />
-        <meta name="description" content="In a live walkthrough on April 10 at the Davis R-Users Group, I gave a brief presentation motivating this topic. Updated 2015-04-28 The point of this post isn&#39;t the statistics of mixed models. For that, learning the experimentals design and statistics behind modern mixed models, I recommend some relatively ..." />
+        <meta name="description" content="In a live walk-through on April 10 at the Davis R-Users Group, I gave a brief presentation motivating this topic. Updated 2015-04-28 The point of this post isn&#39;t the statistics of mixed models. For that, learning the experimental design and statistics behind modern mixed models, I recommend some relatively ..." />
 
         <meta property="og:site_name" content="Jaime Ashander" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Visualizing fits, inference, implications of (G)LMMs"/>
         <meta property="og:url" content="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/"/>
-        <meta property="og:description" content="In a live walkthrough on April 10 at the Davis R-Users Group, I gave a brief presentation motivating this topic. Updated 2015-04-28 The point of this post isn&#39;t the statistics of mixed models. For that, learning the experimentals design and statistics behind modern mixed models, I recommend some relatively ..."/>
+        <meta property="og:description" content="In a live walk-through on April 10 at the Davis R-Users Group, I gave a brief presentation motivating this topic. Updated 2015-04-28 The point of this post isn&#39;t the statistics of mixed models. For that, learning the experimental design and statistics behind modern mixed models, I recommend some relatively ..."/>
         <meta property="article:published_time" content="2015-04-10" />
             <meta property="article:section" content="notes" />
             <meta property="article:tag" content="visualization" />
@@ -115,12 +115,12 @@
 
                      </div>
                 </div>
-                <p>In a live walkthrough on April 10 at the Davis R-Users Group, I gave a
+                <p>In a live walk-through on April 10 at the Davis R-Users Group, I gave a
 brief presentation <a href="http://www.ashander.info/presentations/mixedeffects_viz_motivation.html">motivating this
 topic</a>.</p>
 <p><strong>Updated 2015-04-28</strong></p>
 <p>The point of this post isn't the statistics of mixed models. For that,
-learning the experimentals design and statistics behind modern mixed
+learning the experimental design and statistics behind modern mixed
 models, I recommend some relatively recent papers below. In short,
 Schielzeth &amp; Nakagawa (2013) and Stroup (2015) provide especially good
 introduction for those coming from an ANOVA background.</p>
@@ -141,7 +141,7 @@ et al focus on designs with crossed random effects (a strong suit of
 <code>lme4</code>), while Schielzeth &amp; Nakagawa's "Nested by Design" paper is a
 more general introduction. Finally, the Stroup paper provides a good
 entry point in ANOVA-speak [2]. This could make or break the connection
-between an advisor that speaks only ANOVA, as is often the case for
+between an adviser that speaks only ANOVA, as is often the case for
 workers in crop and soil sciences, or experimental ecology and the GLMM
 that your unbalanced binomial regression demands.</p>
 <ul>
@@ -160,7 +160,7 @@ that your unbalanced binomial regression demands.</p>
     107(2):811-827</a></li>
 </ul>
 <p>Third, "How do I specify and fit this model in <code>R</code>. The references below
-may also help with design and interpretation, but are primariliy
+may also help with design and interpretation, but are primarily
 hands-on. The most thorough is Pinheiro &amp; Bates (2000). These four
 references also serve as a bibliography of sorts for this post [3].</p>
 <ul>
@@ -182,14 +182,14 @@ references also serve as a bibliography of sorts for this post [3].</p>
 <ul>
 <li>working with frequentist library <code>lme4</code> for (G)LMM in R</li>
 <li>visualization for: criticism, inference, prediction</li>
-<li>using the native plotting capabilites (to the extent possible)</li>
+<li>using the native plotting capabilities (to the extent possible)</li>
 </ul>
 <p><strong>three facets</strong> of visualization</p>
 <ul>
 <li>quick diagnostic (plots <em>native</em> to fitting packages)</li>
 <li>slower model criticism (also <em>native</em>)</li>
-<li>inference &amp; prediction (generally lightweight external libs / export
-    capabilities)</li>
+<li>inference &amp; prediction (generally lightweight external libraries /
+    export capabilities)</li>
 </ul>
 <p>Finally, I'll mention that example code and vignettes in documented
 packages are great resources for learning these things (as is google ;).
@@ -304,7 +304,7 @@ lattice::qqmath(m2)
 
 
 <p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/lme-models-5.svg" /></p>
-<div class="highlight"><pre><span class="cp">##</span><span class="c"> look at randeom effect</span><span class="x"></span>
+<div class="highlight"><pre><span class="cp">##</span><span class="c"> look at random effect</span><span class="x"></span>
 <span class="x">lattice::dotplot(ranef(m2, condVar=TRUE))</span>
 
 <span class="cp">##</span><span class="c"> $block</span><span class="x"></span>
@@ -341,12 +341,12 @@ m1 <span class="o">&lt;-</span> lmer<span class="p">(</span><span class="kp">log
 <span class="kp">system.time</span><span class="p">(</span>m1.prall <span class="o">&lt;-</span> profile<span class="p">(</span>m1<span class="p">))</span>
 
 <span class="c1">##    user  system elapsed </span>
-<span class="c1">##   5.183   0.013   5.196</span>
+<span class="c1">##   5.069   0.022   5.094</span>
 
 <span class="kp">system.time</span><span class="p">(</span>m1.prre <span class="o">&lt;-</span> profile<span class="p">(</span>m1<span class="p">,</span> which<span class="o">=</span><span class="s">&#39;theta_&#39;</span><span class="p">,</span> maxmult<span class="o">=</span><span class="m">5</span><span class="p">))</span> <span class="c1">## lower maxmult to avoid step error</span>
 
 <span class="c1">##    user  system elapsed </span>
-<span class="c1">##   1.137   0.004   1.142</span>
+<span class="c1">##   1.174   0.007   1.182</span>
 
 lattice<span class="o">::</span>xyplot<span class="p">(</span>m1.prall<span class="p">)</span>
 </pre></div>
@@ -364,19 +364,19 @@ lattice::densityplot(m1.prall)
 
 
 <p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/linear-profile-based-diagnostics-2.svg" /></p>
-<div class="highlight"><pre># the &#39;profile density plot&#39;
-# approximate probability density functinos of the parameters
-# -- distros underlying profile confidence intervals
-# linear zeta plot &lt;==&gt; gaussian densities
+<div class="highlight"><pre><span class="err">#</span> <span class="nx">the</span> <span class="s1">&#39;profile density plot&#39;</span>
+<span class="err">#</span> <span class="nx">approximate</span> <span class="nx">probability</span> <span class="nx">density</span> <span class="nx">functions</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">parameters</span>
+<span class="err">#</span> <span class="o">--</span> <span class="nx">distros</span> <span class="nx">underlying</span> <span class="nx">profile</span> <span class="nx">confidence</span> <span class="nx">intervals</span>
+<span class="err">#</span> <span class="nx">linear</span> <span class="nx">zeta</span> <span class="nx">plot</span> <span class="o">&lt;==&gt;</span> <span class="nx">gaussian</span> <span class="nx">densities</span>
 
-lattice::splom(m1.prre)
+<span class="nx">lattice</span><span class="o">::</span><span class="nx">splom</span><span class="p">(</span><span class="nx">m1</span><span class="p">.</span><span class="nx">prre</span><span class="p">)</span>
 </pre></div>
 
 
 <p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/pairs-plot-1.svg" /></p>
 <div class="highlight"><pre># the &#39;profile pairs plot&#39;
-# bivariate confidence regions baed on profile
-# &#39;profile traces&#39; -- cross hairs -- are conditinoal estimates  of one parmeter given the other
+# bivariate confidence regions based on profile
+# &#39;profile traces&#39; -- cross hairs -- are conditional estimates  of one parameter given the other
 # above-diag: estimated scale
 # below-diag: &#39;zeta&#39; scale, some sense, the best possible set of single-parameter transformations for assessing the contours&quot;
 # we just look at RE here
@@ -388,11 +388,11 @@ lattice::splom(m1.prre)
 best tool is plotting, but quickly visualizing such models is not easy
 with flexible plotting libraries.</p>
 <p>Fortunately, <code>lsmeans</code>, although fairly inflexible in general, has
-plotting capabilites designed just for this purpose. Here's a demo with
+plotting capabilities designed just for this purpose. Here's a demo with
 the full (4-way interacting) model</p>
 <div class="highlight"><pre><span class="err">##</span> <span class="nx">look</span> <span class="nx">at</span> <span class="nx">consequences</span>
 <span class="k">if</span><span class="p">(</span><span class="nx">require</span><span class="p">(</span><span class="nx">lsmeans</span><span class="p">)){</span>
-    <span class="err">##</span> <span class="nx">here</span> <span class="k">for</span> <span class="mi">4</span><span class="o">-</span><span class="nx">way</span> <span class="nx">interaction</span> <span class="nx">model</span> <span class="p">(</span><span class="nx">m2</span><span class="p">)</span> <span class="o">--</span> <span class="nx">mostly</span> <span class="nx">to</span> <span class="nx">see</span> <span class="nx">how</span> <span class="nx">can</span> <span class="nx">quicky</span> <span class="nx">plot</span> <span class="nx">response</span>
+    <span class="err">##</span> <span class="nx">here</span> <span class="k">for</span> <span class="mi">4</span><span class="o">-</span><span class="nx">way</span> <span class="nx">interaction</span> <span class="nx">model</span> <span class="p">(</span><span class="nx">m2</span><span class="p">)</span> <span class="o">--</span> <span class="nx">mostly</span> <span class="nx">to</span> <span class="nx">see</span> <span class="nx">how</span> <span class="nx">can</span> <span class="nx">quickly</span> <span class="nx">plot</span> <span class="nx">response</span>
     <span class="err">##</span> <span class="nx">at</span> <span class="nx">factor</span> <span class="nx">levels</span> <span class="k">in</span> <span class="nx">complex</span> <span class="nx">models</span>
     <span class="err">##</span> <span class="nx">relatively</span> <span class="nx">easy</span> <span class="nx">to</span> <span class="nx">plot</span> <span class="nx">mean</span> <span class="nx">prediction</span> <span class="nx">on</span> <span class="nx">response</span> <span class="nx">scale</span> <span class="nx">account</span> <span class="k">for</span> <span class="nx">complex</span> <span class="nx">interaction</span>
     <span class="nx">lsmip</span><span class="p">(</span><span class="nx">m2</span><span class="p">,</span> <span class="nx">nutrient_hetero</span> <span class="o">~</span>  <span class="nx">water_add</span> <span class="o">|</span> <span class="nx">water_hetero</span> <span class="o">*</span> <span class="nx">nutrient_add</span>  <span class="p">,</span> <span class="nx">type</span><span class="o">=</span><span class="s1">&#39;response&#39;</span><span class="p">)</span>
@@ -400,6 +400,7 @@ the full (4-way interacting) model</p>
     <span class="nx">lsmip</span><span class="p">(</span><span class="nx">m2</span><span class="p">,</span> <span class="nx">water_add</span> <span class="o">~</span> <span class="nx">water_hetero</span>  <span class="o">|</span> <span class="nx">nutrient_add</span> <span class="o">*</span> <span class="nx">nutrient_hetero</span><span class="p">,</span> <span class="nx">type</span><span class="o">=</span><span class="s1">&#39;response&#39;</span><span class="p">)</span>
 <span class="p">}</span>
 
+<span class="err">##</span> <span class="nx">Loading</span> <span class="nx">required</span> <span class="nx">namespace</span><span class="o">:</span> <span class="nx">pbkrtest</span>
 <span class="err">##</span> <span class="nx">Note</span><span class="o">:</span> <span class="nx">method</span> <span class="kd">with</span> <span class="nx">signature</span> <span class="s1">&#39;sparseMatrix#ANY&#39;</span> <span class="nx">chosen</span> <span class="k">for</span> <span class="kd">function</span> <span class="s1">&#39;kronecker&#39;</span><span class="p">,</span>
 <span class="err">##</span>  <span class="nx">target</span> <span class="nx">signature</span> <span class="s1">&#39;dgCMatrix#ngCMatrix&#39;</span><span class="p">.</span>
 <span class="err">##</span>  <span class="s2">&quot;ANY#sparseMatrix&quot;</span> <span class="nx">would</span> <span class="nx">also</span> <span class="nx">be</span> <span class="nx">valid</span>
@@ -409,7 +410,7 @@ the full (4-way interacting) model</p>
 <p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-1.svg" />
 <img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-2.svg" />
 <img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-3.svg" /></p>
-<p><code>{r ls-means-CI-plots     ## can also plot quickly mean estimates plus (wald) confidence intervals     ## not that it's possible to do finite size correction in lsmeans (but only for linear models)     ## steps take a min w/ lots of RE for some reason     m2.lsm &lt;- lsmeans(m2, ~ water_add * water_hetero   | nutrient_hetero  * nutrient_add)     plot(m2.lsm, layout =c(2, 3), horizontal=TRUE)     }</code></p>
+<p><code>{r ls-means-CI-plots     ## can also plot quickly mean estimates plus (Wald) confidence intervals     ## not that it's possible to do finite size correction in lsmeans (but only for linear models)     ## steps take a min w/ lots of RE for some reason     m2.lsm &lt;- lsmeans(m2, ~ water_add * water_hetero   | nutrient_hetero  * nutrient_add)     plot(m2.lsm, layout =c(2, 3), horizontal=TRUE)     }</code></p>
 <div class="highlight"><pre>    <span class="c1">## for the simpler</span>
     lsmip<span class="p">(</span>m1<span class="p">,</span> nutrient_hetero <span class="o">~</span>  water_add <span class="o">|</span> water_hetero <span class="o">*</span> nutrient_add  <span class="p">,</span> type<span class="o">=</span><span class="s">&#39;response&#39;</span><span class="p">)</span>
     lsmip<span class="p">(</span>m1<span class="p">,</span> water_add <span class="o">~</span> nutrient_add  <span class="o">|</span> water_hetero <span class="o">*</span> nutrient_hetero<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;response&#39;</span><span class="p">)</span>
@@ -424,7 +425,7 @@ the full (4-way interacting) model</p>
 <h1>Confidence intervals</h1>
 <h2>quick &amp; dirty</h2>
 <div class="highlight"><pre><span class="err">##</span> <span class="nx">OK</span> <span class="o">--</span> <span class="nx">back</span> <span class="nx">to</span> <span class="nx">the</span> <span class="nx">full</span> <span class="nx">model</span>
-<span class="err">##</span> <span class="k">if</span> <span class="nx">residuals</span> <span class="nx">looking</span> <span class="nx">ok</span> <span class="o">--</span> <span class="nx">fastest</span> <span class="nx">way</span> <span class="nx">to</span> <span class="nx">get</span> <span class="nx">a</span> <span class="nx">quick</span> <span class="nx">look</span> <span class="nx">at</span> <span class="nx">coeffiiencent</span> <span class="nx">uncertainty</span>
+<span class="err">##</span> <span class="k">if</span> <span class="nx">residuals</span> <span class="nx">looking</span> <span class="nx">OK</span> <span class="o">--</span> <span class="nx">fastest</span> <span class="nx">way</span> <span class="nx">to</span> <span class="nx">get</span> <span class="nx">a</span> <span class="nx">quick</span> <span class="nx">look</span> <span class="nx">at</span> <span class="nx">coefficient</span> <span class="nx">uncertainty</span>
 <span class="err">##</span> <span class="nx">I</span><span class="s1">&#39;ll make it a function for later use</span>
 
 <span class="s1">quick_CI_df &lt;- function(model, drop_intercept = TRUE,...) {</span>
@@ -464,7 +465,7 @@ variety of packages, e.g. <code>coefplot2</code>, <code>arm::coefplot</code>, he
 builtin <code>lme4::confint</code> to build a dataframe.</p>
 <p>I make a dataframe with potentially several different types of
 confidence intervals: Wald (assume asymptotic multivariate normality of
-likelihood), profile, and boostrap. For the random effects, the output
+likelihood), profile, and bootstrap. For the random effects, the output
 of bootstrap and profile methods have different names -- as you can see
 in the plot below. The Wald method only estimates CIs for fixed effects.</p>
 <div class="highlight"><pre><span class="nx">compare_CI_df</span> <span class="o">&lt;-</span> <span class="kd">function</span><span class="p">(</span><span class="nx">modprof</span><span class="p">,</span> <span class="nx">model</span><span class="p">,</span> <span class="nx">BOOT</span><span class="o">=</span><span class="nx">FALSE</span><span class="p">,</span> <span class="p">...)</span> <span class="p">{</span>
@@ -510,15 +511,15 @@ in the plot below. The Wald method only estimates CIs for fixed effects.</p>
 
 
 <p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/ryo-1.svg" /></p>
-<div class="highlight"><pre>##   strong effect ot nutrient homogenetity
+<div class="highlight"><pre>##   strong effect of nutrient homogeneity
 ##   effect of adding lots of water
-## nutreint has some effect
+## nutrient has some effect
 </pre></div>
 
 
 <h2>Pulling data out of models with <code>broom</code> or <code>ggplot2</code></h2>
-<p>Method <code>ggplot2::fortify</code> adds fitted and resid to data frame. Newish
-cran package <code>broom</code> generalizes this (and more), really aiming provide
+<p>Method <code>ggplot2::fortify</code> adds fitted and resid to data frame. New-ish
+CRAN package <code>broom</code> generalizes this (and more), really aiming provide
 an interface for 'tidy' (i.e., easy to plot)representations of model
 objects from many R functions (including packages and base <code>R</code>). The
 <code>broom</code> method <code>augment</code> really generalized version of <code>fortify</code> and is
@@ -625,8 +626,8 @@ plot(gm0,  factor(Trial) ~ resid(., type=&#39;pearson&#39;),  abline=c(v=0), lty
 ## plot(gm0, resid(., type=&#39;pearson&#39;) ~ fitted(.) | factor(Series), id = 0.05)
 
 ## main thing on pearson or deviance residuals is they&#39;re mostly less than 2
-## (as assed in first plot above -- second is the sqrt
-## we could later drop theese outlier and see if they cha
+## (as assessed in first plot above -- second is the sqrt
+## we could later drop these outlier and see if they change
 
 if(require(gridExtra)) {
     do.call(gridExtra::grid.arrange, c(lattice::qqmath(ranef(gm0, condVar=TRUE)), list(nrow=1)))
@@ -649,7 +650,7 @@ gm0noindre <span class="o">&lt;-</span> glmer<span class="p">(</span>cop <span c
 <span class="p">)</span>
 
 <span class="c1">##    user  system elapsed </span>
-<span class="c1">##  34.186   0.089  34.300</span>
+<span class="c1">##  30.527   0.045  30.575</span>
 
 <span class="c1">#system.time(</span>
 <span class="c1">#    gm0_full.prall &lt;- profile(gm0, devtol=1e-6)</span>
@@ -673,7 +674,7 @@ lattice<span class="o">::</span>xyplot<span class="p">(</span>logProf<span class
 
 <p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/lizard-plotting-3.svg" /></p>
 <h1>Confidence intervals</h1>
-<div class="highlight"><pre><span class="err">##</span> <span class="k">if</span> <span class="nx">residuals</span> <span class="nx">looking</span> <span class="nx">ok</span> <span class="o">--</span> <span class="nx">fastest</span> <span class="nx">way</span> <span class="nx">to</span> <span class="nx">get</span> <span class="nx">a</span> <span class="nx">quick</span> <span class="nx">look</span> <span class="nx">at</span> <span class="nx">coeffiiencent</span> <span class="nx">uncertainty</span>
+<div class="highlight"><pre><span class="err">##</span> <span class="k">if</span> <span class="nx">residuals</span> <span class="nx">looking</span> <span class="nx">OK</span> <span class="o">--</span> <span class="nx">fastest</span> <span class="nx">way</span> <span class="nx">to</span> <span class="nx">get</span> <span class="nx">a</span> <span class="nx">quick</span> <span class="nx">look</span> <span class="nx">at</span> <span class="nx">coefficient</span> <span class="nx">uncertainty</span>
 <span class="nx">ci_dat</span> <span class="o">&lt;-</span> <span class="nx">confint</span><span class="p">(</span><span class="nx">gm0</span><span class="p">,</span> <span class="nx">method</span><span class="o">=</span><span class="s1">&#39;Wald&#39;</span><span class="p">)</span>
 <span class="nx">ci_dat</span> <span class="o">&lt;-</span> <span class="nx">cbind</span><span class="p">(</span><span class="nx">ci_dat</span><span class="p">,</span> <span class="nx">mean</span><span class="o">=</span><span class="nx">rowMeans</span><span class="p">(</span><span class="nx">ci_dat</span><span class="p">))</span>
 <span class="nx">ci_df</span> <span class="o">&lt;-</span> <span class="nx">data</span><span class="p">.</span><span class="nx">frame</span><span class="p">(</span><span class="nx">coef</span><span class="o">=</span><span class="nx">row</span><span class="p">.</span><span class="nx">names</span><span class="p">(</span><span class="nx">ci_dat</span><span class="p">),</span> <span class="nx">ci_dat</span><span class="p">)</span>
@@ -711,7 +712,7 @@ lattice<span class="o">::</span>xyplot<span class="p">(</span>logProf<span class
 
 
 <p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/ryo-lizard-ci-1.svg" /></p>
-<p>Because the fixed effect paramter on size difference and the random
+<p>Because the fixed effect parameter on size difference and the random
 effect variance are on such different scales, I make two plots</p>
 <div class="highlight"><pre>if(require(ggplot2))
     g + scale_y_log10()
@@ -728,7 +729,7 @@ things are different here:</p>
 <li>for a quantitative predictor, the default will plot a single point
     at the mean of the predictor, to see prediction across the range,
     pass a list to the <code>at</code> argument</li>
-<li>for more meaninful plots, we should label the plot y-axis with
+<li>for more meaningful plots, we should label the plot y-axis with
     unscaled size differences (but I didn't do this)</li>
 <li>note that you can produce plots at various levels of interacting
     quantitative predictors using this technique</li>
@@ -752,7 +753,7 @@ confidence intervals and don't account for random effects. To deal with
 the former, we need to bootstrap, which I won't cover here, but the
 problem of random effects is easily examined using the <code>re.form</code>
 argument of <code>predict.merMod</code> in <code>lme4</code>. Here I look at predictions
-accounting for alli, none, or some of random effects fitted:</p>
+accounting for all,, none, or some of random effects fitted:</p>
 <div class="highlight"><pre><span class="c1">## predicted effect</span>
 d2<span class="o">$</span>pred_overall_gen <span class="o">&lt;-</span> predict<span class="p">(</span>gm0<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;response&#39;</span><span class="p">,</span> re.form<span class="o">=</span><span class="kc">NA</span><span class="p">)</span>
 d2<span class="o">$</span>pred_overall <span class="o">&lt;-</span> predict<span class="p">(</span>gm0<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;response&#39;</span><span class="p">)</span>
@@ -791,10 +792,10 @@ gridExtra<span class="o">::</span>grid.arrange<span class="p">(</span>g1<span cl
 <p>The plot on the left above shows predictions for various series of
 experimental trials, and the raw data. The plot on the right shows the
 overall fit (orange line -- the grand mean with no random effects
-influencing the prediction), the predictions accoung just for random
+influencing the prediction), the predictions accounting just for random
 effects at the level of individual females (blue dots), and the raw
 data.</p>
-<div class="highlight"><pre>## could plot them all together -- code below gives some insight ## intot the
+<div class="highlight"><pre>## could plot them all together -- code below gives some insight ## into the
 ## ggplot2 fortify method
 if (require(ggplot2)) {
   g +  geom_point(aes(SizeDiff, plogis(.fitted)), color=&#39;darkgray&#39;, size=3,
@@ -903,9 +904,9 @@ lines<span class="p">(</span>plogis<span class="p">(</span>upr<span class="p">)<
 
 
 <p>[1] <em>I haven't read this simulation study carefully yet</em> but a quick
-look implies the main problems occured when fitting a model that gets
+look implies the main problems occurred when fitting a model that gets
 the hierarchy wrong (e.g., a GLM to data generated from a hierarchical
-process underperforms relative to a tranform + LMM)</p>
+process under-performs relative to a transform + LMM)</p>
 <p>[2] Stroup also authored the CRC Press book <em>Generalized Linear Mixed
 Models</em></p>
 <p>[3] Discussions with and classes from colleagues, including Scott
@@ -921,7 +922,13 @@ greatly improved my understanding of plotting and fitting mixed models.</p>
 Contributions
 <a href="https://github.com/ashander/ashander.github.io/tree/content">(via pull request to the content branch)</a>
 are also welcome.
-</section>        </article>
+</section><section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/">Easy alternatives to bar charts in native R graphics</a></li>
+    </ul>
+</section>
+        </article>
     </section>
 
         </div>
@@ -931,6 +938,11 @@ are also welcome.
     <ul class="list-group list-group-flush">
             <li class="list-group-item"><h4><i class="fa fa-clock-o fa-lg"></i><span class="icon-label">Recent</span></h4>
               <ul class="list-group" id="recentposts">
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/">
+                            Easy alternatives to bar charts in native R graphics
+                        </a>
+                    </li>
                     <li class="list-group-item">
                         <a href="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/">
                             Visualizing fits, inference, implications of (G)LMMs
@@ -949,11 +961,6 @@ are also welcome.
                     <li class="list-group-item">
                         <a href="http://www.ashander.info/posts/2010/01/Jobless-recovery/">
                             Jobless recovery and growth-signalling autonomy
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="http://www.ashander.info/posts/2009/12/Science-is-uncertain/">
-                            Science education and uncertainty
                         </a>
                     </li>
                 </ul>
