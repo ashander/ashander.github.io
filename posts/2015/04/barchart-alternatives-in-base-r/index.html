@@ -260,36 +260,30 @@ two sleep aids.</p>
 <p>The easiest way to make plots that link paired data is to again use
 <code>stripchart</code> as a base. Then, to add lines illustrating the pairs, one
 can use <code>split</code> and <code>lines</code>:</p>
-<div class="highlight"><pre>stripchart(extra ~ group, sleep, pch=19, col=point_col,
-           vertical=TRUE, ylab=&#39;extra sleep&#39;, xlab=&#39;drug received&#39;)
+<div class="highlight"><pre><span class="err">{</span><span class="x"></span>
+<span class="x">  stripchart(extra ~ group, sleep, pch=19, col=point_col,</span>
+<span class="x">             vertical=TRUE, ylab=&#39;extra sleep&#39;, xlab=&#39;drug received&#39;)</span>
+<span class="x">  for(ID in split(sleep, sleep</span><span class="p">$</span><span class="nv">ID</span><span class="x">))</span>
+<span class="x">    lines(extra ~ group, ID)</span>
+<span class="x">}</span>
 </pre></div>
 
 
 <p><img alt="paired points connected by lines and marked by
 points" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-points-1.svg" /></p>
-<div class="highlight"><pre><span class="x">for(ID in split(sleep, sleep</span><span class="p">$</span><span class="nv">ID</span><span class="x">))</span>
-<span class="x">  lines(extra ~ group, ID)</span>
-</pre></div>
-
-
-<p><img alt="paired points connected by lines and marked by
-points" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-points-2.svg" /></p>
 <p>If you'd rather only have the lines, just suppress plotting of points
 within the initial call to <code>stripchart</code>:</p>
-<div class="highlight"><pre>stripchart(extra ~ group, sleep, pch=&quot;&quot;, vertical=TRUE,
-           ylab=&#39;extra sleep&#39;, xlab=&#39;drug received&#39;)
+<div class="highlight"><pre><span class="err">{</span><span class="x"></span>
+<span class="x">  stripchart(extra ~ group, sleep, pch=&quot;&quot;, vertical=TRUE,</span>
+<span class="x">             ylab=&#39;extra sleep&#39;, xlab=&#39;drug received&#39;)</span>
+<span class="x">  for(ID in split(sleep, sleep</span><span class="p">$</span><span class="nv">ID</span><span class="x">))</span>
+<span class="x">    lines(extra ~ group, ID)</span>
+<span class="x">}</span>
 </pre></div>
 
 
 <p><img alt="paired locations connected by
 lines" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-lines-1.svg" /></p>
-<div class="highlight"><pre><span class="x">for(ID in split(sleep, sleep</span><span class="p">$</span><span class="nv">ID</span><span class="x">))</span>
-<span class="x">  lines(extra ~ group, ID)</span>
-</pre></div>
-
-
-<p><img alt="paired locations connected by
-lines" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-lines-2.svg" /></p>
 <h1>Other plots</h1>
 <p>R easily produces many other plots, in addition to those Weisgerber <em>et
 al</em> for which provide templates.</p>

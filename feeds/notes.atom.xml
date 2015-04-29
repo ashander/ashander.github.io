@@ -144,36 +144,30 @@ two sleep aids.&lt;/p&gt;
 &lt;p&gt;The easiest way to make plots that link paired data is to again use
 &lt;code&gt;stripchart&lt;/code&gt; as a base. Then, to add lines illustrating the pairs, one
 can use &lt;code&gt;split&lt;/code&gt; and &lt;code&gt;lines&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;stripchart(extra ~ group, sleep, pch=19, col=point_col,
-           vertical=TRUE, ylab=&amp;#39;extra sleep&amp;#39;, xlab=&amp;#39;drug received&amp;#39;)
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;span class="x"&gt;  stripchart(extra ~ group, sleep, pch=19, col=point_col,&lt;/span&gt;
+&lt;span class="x"&gt;             vertical=TRUE, ylab=&amp;#39;extra sleep&amp;#39;, xlab=&amp;#39;drug received&amp;#39;)&lt;/span&gt;
+&lt;span class="x"&gt;  for(ID in split(sleep, sleep&lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;ID&lt;/span&gt;&lt;span class="x"&gt;))&lt;/span&gt;
+&lt;span class="x"&gt;    lines(extra ~ group, ID)&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;img alt="paired points connected by lines and marked by
 points" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-points-1.svg" /&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="x"&gt;for(ID in split(sleep, sleep&lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;ID&lt;/span&gt;&lt;span class="x"&gt;))&lt;/span&gt;
-&lt;span class="x"&gt;  lines(extra ~ group, ID)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img alt="paired points connected by lines and marked by
-points" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-points-2.svg" /&gt;&lt;/p&gt;
 &lt;p&gt;If you'd rather only have the lines, just suppress plotting of points
 within the initial call to &lt;code&gt;stripchart&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;stripchart(extra ~ group, sleep, pch=&amp;quot;&amp;quot;, vertical=TRUE,
-           ylab=&amp;#39;extra sleep&amp;#39;, xlab=&amp;#39;drug received&amp;#39;)
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;span class="x"&gt;  stripchart(extra ~ group, sleep, pch=&amp;quot;&amp;quot;, vertical=TRUE,&lt;/span&gt;
+&lt;span class="x"&gt;             ylab=&amp;#39;extra sleep&amp;#39;, xlab=&amp;#39;drug received&amp;#39;)&lt;/span&gt;
+&lt;span class="x"&gt;  for(ID in split(sleep, sleep&lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;ID&lt;/span&gt;&lt;span class="x"&gt;))&lt;/span&gt;
+&lt;span class="x"&gt;    lines(extra ~ group, ID)&lt;/span&gt;
+&lt;span class="x"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;img alt="paired locations connected by
 lines" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-lines-1.svg" /&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="x"&gt;for(ID in split(sleep, sleep&lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;ID&lt;/span&gt;&lt;span class="x"&gt;))&lt;/span&gt;
-&lt;span class="x"&gt;  lines(extra ~ group, ID)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img alt="paired locations connected by
-lines" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-lines-2.svg" /&gt;&lt;/p&gt;
 &lt;h1&gt;Other plots&lt;/h1&gt;
 &lt;p&gt;R easily produces many other plots, in addition to those Weisgerber &lt;em&gt;et
 al&lt;/em&gt; for which provide templates.&lt;/p&gt;
