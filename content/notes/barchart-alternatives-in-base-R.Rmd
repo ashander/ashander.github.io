@@ -21,22 +21,23 @@ It's a long tradition in statistical graphics going from Tufte back to
 to advise against using bar charts.  Many folks, [including
 me](https://twitter.com/jaimedash/status/591289758191636480), have pejoratively
 called the common (in ecology, at least) bar chart + SE a "dynamite plot".
-Although Ben Bolker has questioned the universality of this received wisdom
-("Dynamite Plots: unmitigated evil?", which I link below), I think in most
-cases they're worth avoiding. I'll expand on this below.
+Although Ben Bolker has questioned
+[the wisdom of this sentiment](http://emdbolker.wikidot.com/blog:dynamite)
+, I think in most cases they're worth avoiding. (I discuss this more
+in "When and here are dynamite plots appropriate" below.)
 
-Last week, Tracey Weisgerber and colleagues echoed this tradition, making a
+Last week, Tracey Weisgerber and colleagues extend this tradition, making a
 [great set of concrete recommendations in a perspective for PLoS Biology](doi.org/10.1371/journal.pbio.1002128).
 Importantly, the authors also provided a
 [set of Excel templates on CTSpedia](https://www.ctspedia.org/do/view/CTSpedia/TemplateTesting)
 (a cool-looking site for sharing resources related to clinical trials) that
 implement their recommendations in Excel.
 
-This is great because in Excel, making good graphics like this is _really_
-hard.  So people don't do it. Best practices have little appeal if they also
-involve lots of arcane work to implement!  Fortunately in
-[R](http://www.r-project.org/), the recommended alternatives are built in, and
-even easier to use.
+This is great because in Excel making good graphics is _really_
+hard.  So people don't do it. Best practices have little appeal if
+they also involve lots of work!  Fortunately in
+[R](http://www.r-project.org/), the recommended alternatives are built
+in, and even easier to use.
 
 Here, I'll provide some minimal code to make plots similar to those Weisgerber
 _et al_ recommend, both for independent groups and paired data, using the
@@ -105,28 +106,26 @@ For box plots, R makes it very easy.
 
 boxplot( uptake ~ conc_f , CO2, ylab='uptake', xlab='concentration', ylim=y_limits)
 ```
-In this case, with small data the boxplot is a bit misleading. This is clear from the
-scatter plots above, but with a little more work, you can overplot on the
-boxes:
+In this case, with small data the boxplot is a bit misleading. This is
+clear from the scatter plots above, but you can also overplot onto the
+boxes using `stripchart` with `add = TRUE, vertical = TRUE`:
 
 ```{r, boxplot-overplotted, fig.cap = 'boxplot with points overplotted'}
-jitter <- 0.025
 boxplot( uptake ~ conc_f , CO2, ylab='uptake', xlab='concentration', ylim=y_limits)
-points(as.numeric(CO2$conc_f) + rnorm(nrow(CO2), sd = jitter), CO2$uptake,
-       pch=19, col=point_col)
+stripchart(uptake ~ conc_f, CO2, method = 'jitter', add = TRUE, vertical = TRUE,
+           pch = 19)
 ```
 
 Even with base graphics `boxplot`, you can pass functions of multiple
 independent variables. This means you can visualize interactions between
-treatments in your raw data:
+treatments in your raw data, and even overplot with `stripchart`!
 
 ```{r, complex-boxplot, fig.cap = 'complex bar plot'}
 boxplot( uptake ~ conc_f : Treatment, CO2, ylab='uptake', ylim=y_limits,
         xlab = "concentration within chilling treatment")
+stripchart(uptake ~ conc_f : Treatment, CO2, method = 'jitter', add = TRUE, vertical = TRUE,
+           pch = 19)
 ```
-
-I'm not sure how to easily overplot points on a complex boxplot like this one.
-(Without using an external library.) If you know -- drop me a note.
 
 _Note_ it would be easier to read the labels here if the plot were horizontal,
 for which there's an argument you can pass. The graphics settings on this post
@@ -154,23 +153,18 @@ use `split` and `lines`:
 
 ```{r paired-points, fig.cap = 'paired points connected by lines and marked by points'}
 
-invisible(stripchart(extra ~ group, sleep, pch=19, col=point_col,
-		     vertical=TRUE, ylab='extra sleep', xlab='drug received'))
-## note -- don't enclose this in invisible in your code -- some strangeness
-##         with website production compels it here
+stripchart(extra ~ group, sleep, pch=19, col=point_col,
+           vertical=TRUE, ylab='extra sleep', xlab='drug received')
 for(ID in split(sleep, sleep$ID))
   lines(extra ~ group, ID)
-
 ```
 
 If you'd rather only have the lines, just suppress plotting of points within
 the initial call to `stripchart`:
 
 ```{r paired-lines, fig.cap = 'paired locations connected by lines'}
-invisible(stripchart(extra ~ group, sleep, pch="", vertical=TRUE,
-           	     ylab='extra sleep', xlab='drug received'))
-## note -- don't enclose this in invisible in your code -- some strangeness
-##         with website production compels it here
+stripchart(extra ~ group, sleep, pch="", vertical=TRUE,
+           ylab='extra sleep', xlab='drug received')
 for(ID in split(sleep, sleep$ID))
   lines(extra ~ group, ID)
 ```
