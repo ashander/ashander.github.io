@@ -126,7 +126,7 @@ pejoratively called the common (in ecology, at least) bar chart + SE a
 sentiment</a> , I think in most
 cases they're worth avoiding. (I discuss this more in "When and here are
 dynamite plots appropriate" below.)</p>
-<p>Last week, Tracey Weisgerber and colleagues extend this tradition,
+<p>Last week, Tracey Weissgerber and colleagues extend this tradition,
 making a <a href="http://doi.org/10.1371/journal.pbio.1002128">great set of concrete recommendations in a perspective for
 PLoS Biology</a>. Importantly,
 the authors also provided a <a href="https://www.ctspedia.org/do/view/CTSpedia/TemplateTesting">set of Excel templates on
@@ -138,7 +138,7 @@ people don't do it. Best practices have little appeal if they also
 involve lots of work! Fortunately in <a href="http://www.r-project.org/">R</a>, the
 recommended alternatives are built in, and even easier to use.</p>
 <p>Here, I'll provide some minimal code to make plots similar to those
-Weisgerber <em>et al</em> recommend, both for independent groups and paired
+Weissgerber <em>et al</em> recommend, both for independent groups and paired
 data, using the built-in graphics of <a href="http://www.r-project.org/">R</a>.</p>
 <h1>Independent groups</h1>
 <p>For convenience, I'm using the built in <code>CO2</code> dataset:</p>
@@ -184,7 +184,7 @@ stripchart<span class="p">(</span>uptake <span class="o">~</span> conc_f<span cl
 
 <p><img alt="stripchart: a scatter plot v
 factors" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/scatter-v-factors-1.svg" /></p>
-<p>It's easy to jitter the points, as Weisgerber <em>et al</em> recommend, by
+<p>It's easy to jitter the points, as Weissgerber <em>et al</em> recommend, by
 passing the argument <code>method='jitter'</code>. But there are other options. For
 cases where there really isn't much data, <code>method='stack'</code> gives
 something closer to a <a href="http://en.wikipedia.org/wiki/Dot_plot_%28statistics%29#Wilkinson_dot_plots">Wilkinson dot
@@ -285,7 +285,7 @@ within the initial call to <code>stripchart</code>:</p>
 <p><img alt="paired locations connected by
 lines" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-lines-1.svg" /></p>
 <h1>Other plots</h1>
-<p>R easily produces many other plots, in addition to those Weisgerber <em>et
+<p>R easily produces many other plots, in addition to those Weissgerber <em>et
 al</em> for which provide templates.</p>
 <p>For example, say you'd like a histograms across subsets. Here's one for
 uptake from the <code>CO2</code> data for grass plants receiving chilling or not:</p>
