@@ -127,9 +127,9 @@ sentiment</a> , I think in most
 cases they're worth avoiding. (I discuss this more in "When and here are
 dynamite plots appropriate" below.)</p>
 <p>Last week, Tracey Weisgerber and colleagues extend this tradition,
-making a <a href="doi.org/10.1371/journal.pbio.1002128">great set of concrete recommendations in a perspective for
-PLoS Biology</a>. Importantly, the
-authors also provided a <a href="https://www.ctspedia.org/do/view/CTSpedia/TemplateTesting">set of Excel templates on
+making a <a href="http://doi.org/10.1371/journal.pbio.1002128">great set of concrete recommendations in a perspective for
+PLoS Biology</a>. Importantly,
+the authors also provided a <a href="https://www.ctspedia.org/do/view/CTSpedia/TemplateTesting">set of Excel templates on
 CTSpedia</a> (a
 cool-looking site for sharing resources related to clinical trials) that
 implement their recommendations in Excel.</p>
@@ -144,13 +144,13 @@ data, using the built-in graphics of <a href="http://www.r-project.org/">R</a>.<
 <p>For convenience, I'm using the built in <code>CO2</code> dataset:</p>
 <div class="highlight"><pre>head(CO2)
 
-##   Plant   Type  Treatment conc uptake conc_f
-## 1   Qn1 Quebec nonchilled   95   16.0     95
-## 2   Qn1 Quebec nonchilled  175   30.4    175
-## 3   Qn1 Quebec nonchilled  250   34.8    250
-## 4   Qn1 Quebec nonchilled  350   37.2    350
-## 5   Qn1 Quebec nonchilled  500   35.3    500
-## 6   Qn1 Quebec nonchilled  675   39.2    675
+##   Plant   Type  Treatment conc uptake
+## 1   Qn1 Quebec nonchilled   95   16.0
+## 2   Qn1 Quebec nonchilled  175   30.4
+## 3   Qn1 Quebec nonchilled  250   34.8
+## 4   Qn1 Quebec nonchilled  350   37.2
+## 5   Qn1 Quebec nonchilled  500   35.3
+## 6   Qn1 Quebec nonchilled  675   39.2
 </pre></div>
 
 
@@ -203,40 +203,34 @@ stacking" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-b
 </pre></div>
 
 
-<p><img alt="boxplot" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-1.svg" />
-In this case, with small data the boxplot is a bit misleading. This is
+<p><img alt="boxplot" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-1.svg" /></p>
+<p>In this case, with small data the boxplot is a bit misleading. This is
 clear from the scatter plots above, but you can also overplot onto the
 boxes using <code>stripchart</code> with <code>add = TRUE, vertical = TRUE</code>:</p>
-<div class="highlight"><pre>boxplot( uptake ~ conc_f , CO2, ylab=&#39;uptake&#39;, xlab=&#39;concentration&#39;, ylim=y_limits)
+<div class="highlight"><pre>{
+  boxplot( uptake ~ conc_f , CO2, ylab=&#39;uptake&#39;, xlab=&#39;concentration&#39;, ylim=y_limits)
+  stripchart(uptake ~ conc_f, CO2, method = &#39;jitter&#39;, add = TRUE, vertical = TRUE,
+             pch = 19)
+}
 </pre></div>
 
 
 <p><img alt="boxplot with points
 overplotted" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-overplotted-1.svg" /></p>
-<div class="highlight"><pre>stripchart(uptake ~ conc_f, CO2, method = &#39;jitter&#39;, add = TRUE, vertical = TRUE,
-           pch = 19)
-</pre></div>
-
-
-<p><img alt="boxplot with points
-overplotted" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-overplotted-2.svg" /></p>
 <p>Even with base graphics <code>boxplot</code>, you can pass functions of multiple
 independent variables. This means you can visualize interactions between
 treatments in your raw data, and even overplot with <code>stripchart</code>!</p>
-<div class="highlight"><pre>boxplot( uptake ~ conc_f : Treatment, CO2, ylab=&#39;uptake&#39;, ylim=y_limits,
-        xlab = &quot;concentration within chilling treatment&quot;)
+<div class="highlight"><pre>{
+  boxplot( uptake ~ conc_f : Treatment, CO2, ylab=&#39;uptake&#39;, ylim=y_limits,
+          xlab = &quot;concentration within chilling treatment&quot;)
+  stripchart(uptake ~ conc_f : Treatment, CO2, method = &#39;jitter&#39;, add = TRUE, vertical = TRUE,
+             pch = 19)
+}
 </pre></div>
 
 
 <p><img alt="complex bar
 plot" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/complex-boxplot-1.svg" /></p>
-<div class="highlight"><pre>stripchart(uptake ~ conc_f : Treatment, CO2, method = &#39;jitter&#39;, add = TRUE, vertical = TRUE,
-           pch = 19)
-</pre></div>
-
-
-<p><img alt="complex bar
-plot" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/complex-boxplot-2.svg" /></p>
 <p><em>Note</em> it would be easier to read the labels here if the plot were
 horizontal, for which there's an argument you can pass. The graphics
 settings on this post aren't playing well with long labels, so I don't
@@ -279,7 +273,7 @@ points" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-bas
 
 
 <p><img alt="paired points connected by lines and marked by
-points" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-points-2.svg" /></p>
+points" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-points-2.svg" /></p>
 <p>If you'd rather only have the lines, just suppress plotting of points
 within the initial call to <code>stripchart</code>:</p>
 <div class="highlight"><pre>stripchart(extra ~ group, sleep, pch=&quot;&quot;, vertical=TRUE,
@@ -295,7 +289,7 @@ lines" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base
 
 
 <p><img alt="paired locations connected by
-lines" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-lines-2.svg" /></p>
+lines" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-lines-2.svg" /></p>
 <h1>Other plots</h1>
 <p>R easily produces many other plots, in addition to those Weisgerber <em>et
 al</em> for which provide templates.</p>

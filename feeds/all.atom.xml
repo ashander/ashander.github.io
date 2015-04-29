@@ -11,9 +11,9 @@ sentiment&lt;/a&gt; , I think in most
 cases they're worth avoiding. (I discuss this more in "When and here are
 dynamite plots appropriate" below.)&lt;/p&gt;
 &lt;p&gt;Last week, Tracey Weisgerber and colleagues extend this tradition,
-making a &lt;a href="doi.org/10.1371/journal.pbio.1002128"&gt;great set of concrete recommendations in a perspective for
-PLoS Biology&lt;/a&gt;. Importantly, the
-authors also provided a &lt;a href="https://www.ctspedia.org/do/view/CTSpedia/TemplateTesting"&gt;set of Excel templates on
+making a &lt;a href="http://doi.org/10.1371/journal.pbio.1002128"&gt;great set of concrete recommendations in a perspective for
+PLoS Biology&lt;/a&gt;. Importantly,
+the authors also provided a &lt;a href="https://www.ctspedia.org/do/view/CTSpedia/TemplateTesting"&gt;set of Excel templates on
 CTSpedia&lt;/a&gt; (a
 cool-looking site for sharing resources related to clinical trials) that
 implement their recommendations in Excel.&lt;/p&gt;
@@ -28,13 +28,13 @@ data, using the built-in graphics of &lt;a href="http://www.r-project.org/"&gt;R
 &lt;p&gt;For convenience, I'm using the built in &lt;code&gt;CO2&lt;/code&gt; dataset:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;head(CO2)
 
-##   Plant   Type  Treatment conc uptake conc_f
-## 1   Qn1 Quebec nonchilled   95   16.0     95
-## 2   Qn1 Quebec nonchilled  175   30.4    175
-## 3   Qn1 Quebec nonchilled  250   34.8    250
-## 4   Qn1 Quebec nonchilled  350   37.2    350
-## 5   Qn1 Quebec nonchilled  500   35.3    500
-## 6   Qn1 Quebec nonchilled  675   39.2    675
+##   Plant   Type  Treatment conc uptake
+## 1   Qn1 Quebec nonchilled   95   16.0
+## 2   Qn1 Quebec nonchilled  175   30.4
+## 3   Qn1 Quebec nonchilled  250   34.8
+## 4   Qn1 Quebec nonchilled  350   37.2
+## 5   Qn1 Quebec nonchilled  500   35.3
+## 6   Qn1 Quebec nonchilled  675   39.2
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -87,40 +87,34 @@ stacking" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-b
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="boxplot" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-1.svg" /&gt;
-In this case, with small data the boxplot is a bit misleading. This is
+&lt;p&gt;&lt;img alt="boxplot" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-1.svg" /&gt;&lt;/p&gt;
+&lt;p&gt;In this case, with small data the boxplot is a bit misleading. This is
 clear from the scatter plots above, but you can also overplot onto the
 boxes using &lt;code&gt;stripchart&lt;/code&gt; with &lt;code&gt;add = TRUE, vertical = TRUE&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;boxplot( uptake ~ conc_f , CO2, ylab=&amp;#39;uptake&amp;#39;, xlab=&amp;#39;concentration&amp;#39;, ylim=y_limits)
+&lt;div class="highlight"&gt;&lt;pre&gt;{
+  boxplot( uptake ~ conc_f , CO2, ylab=&amp;#39;uptake&amp;#39;, xlab=&amp;#39;concentration&amp;#39;, ylim=y_limits)
+  stripchart(uptake ~ conc_f, CO2, method = &amp;#39;jitter&amp;#39;, add = TRUE, vertical = TRUE,
+             pch = 19)
+}
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;img alt="boxplot with points
 overplotted" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-overplotted-1.svg" /&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;stripchart(uptake ~ conc_f, CO2, method = &amp;#39;jitter&amp;#39;, add = TRUE, vertical = TRUE,
-           pch = 19)
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img alt="boxplot with points
-overplotted" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-overplotted-2.svg" /&gt;&lt;/p&gt;
 &lt;p&gt;Even with base graphics &lt;code&gt;boxplot&lt;/code&gt;, you can pass functions of multiple
 independent variables. This means you can visualize interactions between
 treatments in your raw data, and even overplot with &lt;code&gt;stripchart&lt;/code&gt;!&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;boxplot( uptake ~ conc_f : Treatment, CO2, ylab=&amp;#39;uptake&amp;#39;, ylim=y_limits,
-        xlab = &amp;quot;concentration within chilling treatment&amp;quot;)
+&lt;div class="highlight"&gt;&lt;pre&gt;{
+  boxplot( uptake ~ conc_f : Treatment, CO2, ylab=&amp;#39;uptake&amp;#39;, ylim=y_limits,
+          xlab = &amp;quot;concentration within chilling treatment&amp;quot;)
+  stripchart(uptake ~ conc_f : Treatment, CO2, method = &amp;#39;jitter&amp;#39;, add = TRUE, vertical = TRUE,
+             pch = 19)
+}
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;img alt="complex bar
 plot" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/complex-boxplot-1.svg" /&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;stripchart(uptake ~ conc_f : Treatment, CO2, method = &amp;#39;jitter&amp;#39;, add = TRUE, vertical = TRUE,
-           pch = 19)
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img alt="complex bar
-plot" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/complex-boxplot-2.svg" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Note&lt;/em&gt; it would be easier to read the labels here if the plot were
 horizontal, for which there's an argument you can pass. The graphics
 settings on this post aren't playing well with long labels, so I don't
@@ -163,7 +157,7 @@ points" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-bas
 
 
 &lt;p&gt;&lt;img alt="paired points connected by lines and marked by
-points" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-points-2.svg" /&gt;&lt;/p&gt;
+points" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-points-2.svg" /&gt;&lt;/p&gt;
 &lt;p&gt;If you'd rather only have the lines, just suppress plotting of points
 within the initial call to &lt;code&gt;stripchart&lt;/code&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;stripchart(extra ~ group, sleep, pch=&amp;quot;&amp;quot;, vertical=TRUE,
@@ -179,7 +173,7 @@ lines" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base
 
 
 &lt;p&gt;&lt;img alt="paired locations connected by
-lines" src="{attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-lines-2.svg" /&gt;&lt;/p&gt;
+lines" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-lines-2.svg" /&gt;&lt;/p&gt;
 &lt;h1&gt;Other plots&lt;/h1&gt;
 &lt;p&gt;R easily produces many other plots, in addition to those Weisgerber &lt;em&gt;et
 al&lt;/em&gt; for which provide templates.&lt;/p&gt;
