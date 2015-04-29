@@ -26,7 +26,7 @@ Although Ben Bolker has questioned
 , I think in most cases they're worth avoiding. (I discuss this more
 in "When and here are dynamite plots appropriate" below.)
 
-Last week, Tracey Weisgerber and colleagues extend this tradition, making a
+Last week, Tracey Weissgerber and colleagues extend this tradition, making a
 [great set of concrete recommendations in a perspective for PLoS Biology](http://doi.org/10.1371/journal.pbio.1002128).
 Importantly, the authors also provided a
 [set of Excel templates on CTSpedia](https://www.ctspedia.org/do/view/CTSpedia/TemplateTesting)
@@ -39,7 +39,7 @@ they also involve lots of work!  Fortunately in
 [R](http://www.r-project.org/), the recommended alternatives are built
 in, and even easier to use.
 
-Here, I'll provide some minimal code to make plots similar to those Weisgerber
+Here, I'll provide some minimal code to make plots similar to those Weissgerber
 _et al_ recommend, both for independent groups and paired data, using the
 built-in graphics of [R](http://www.r-project.org/).
 
@@ -86,7 +86,7 @@ stripchart(uptake ~ conc_f, CO2, method='jitter', pch=19, col=point_col,
            xlab='concentration', ylim=y_limits, vertical=TRUE)
 ```
 
-It's easy to jitter the points, as Weisgerber _et al_ recommend, by passing the
+It's easy to jitter the points, as Weissgerber _et al_ recommend, by passing the
 argument `method='jitter'`. But there are other options.  For cases where there
 really isn't much data, `method='stack'` gives something closer to a
 [Wilkinson dot plot](http://en.wikipedia.org/wiki/Dot_plot_%28statistics%29#Wilkinson_dot_plots).
@@ -180,7 +180,7 @@ the initial call to `stripchart`:
 
 # Other plots
 
-R easily produces many other plots, in addition to those Weisgerber _et al_ for
+R easily produces many other plots, in addition to those Weissgerber _et al_ for
 which provide templates.
 
 For example, say you'd like a histograms across subsets.  Here's one for uptake
