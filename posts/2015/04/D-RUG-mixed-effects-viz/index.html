@@ -14,13 +14,13 @@
 
         <meta name="author" content="Jaime Ashander" />
         <meta name="keywords" content="visualization,lattice,model checking,statistical graphics,GLMM,R,ggplot2" />
-        <meta name="description" content="In a live walk-through on April 10 at the Davis R-Users Group, I gave a brief presentation motivating this topic. Updated 2015-04-28 The point of this post isn&#39;t the statistics of mixed models. For that, learning the experimental design and statistics behind modern mixed models, I recommend some relatively ..." />
+        <meta name="description" content="In a live walk-through on April 10 at the Davis R-Users Group, I gave a brief presentation motivating this topic. This post expands and cleans up the code from that talk. If you just want the code: download the .R file. Updated 2015-04-28 The point of this post isn&#39;t ..." />
 
         <meta property="og:site_name" content="Jaime Ashander" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Visualizing fits, inference, implications of (G)LMMs"/>
         <meta property="og:url" content="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/"/>
-        <meta property="og:description" content="In a live walk-through on April 10 at the Davis R-Users Group, I gave a brief presentation motivating this topic. Updated 2015-04-28 The point of this post isn&#39;t the statistics of mixed models. For that, learning the experimental design and statistics behind modern mixed models, I recommend some relatively ..."/>
+        <meta property="og:description" content="In a live walk-through on April 10 at the Davis R-Users Group, I gave a brief presentation motivating this topic. This post expands and cleans up the code from that talk. If you just want the code: download the .R file. Updated 2015-04-28 The point of this post isn&#39;t ..."/>
         <meta property="article:published_time" content="2015-04-10" />
             <meta property="article:section" content="notes" />
             <meta property="article:tag" content="visualization" />
@@ -123,8 +123,9 @@
                 </div>
                 <p>In a live walk-through on April 10 at the Davis R-Users Group, I gave a
 brief presentation <a href="http://www.ashander.info/presentations/mixedeffects_viz_motivation.html">motivating this
-topic</a>. This post expands and cleans up the code from that talk. If you just want the code <a href="https://raw.githubusercontent.com/ashander/ashander.github.io/content/content/notes/mixedeffects_viz.Rmd">it's here in Rmd format</a>. 
-(You can use purl from the knitr package to turn it into a simple R script.)</p>
+topic</a>.
+This post expands and cleans up the code from that talk. If you just
+want the code: <a href="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz.R">download the .R file</a>.</p>
 <p><strong>Updated 2015-04-28</strong></p>
 <p>The point of this post isn't the statistics of mixed models. For that,
 learning the experimental design and statistics behind modern mixed
@@ -417,7 +418,22 @@ the full (4-way interacting) model</p>
 <p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-1.svg" />
 <img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-2.svg" />
 <img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-3.svg" /></p>
-<p><code>{r ls-means-CI-plots     ## can also plot quickly mean estimates plus (Wald) confidence intervals     ## not that it's possible to do finite size correction in lsmeans (but only for linear models)     ## steps take a min w/ lots of RE for some reason     m2.lsm &lt;- lsmeans(m2, ~ water_add * water_hetero   | nutrient_hetero  * nutrient_add)     plot(m2.lsm, layout =c(2, 3), horizontal=TRUE)     }</code></p>
+<div class="highlight"><pre><span class="k">if</span><span class="p">(</span><span class="nx">require</span><span class="p">(</span><span class="nx">lsmeans</span><span class="p">)){</span>
+    <span class="err">##</span> <span class="nx">can</span> <span class="nx">also</span> <span class="nx">plot</span> <span class="nx">quickly</span> <span class="nx">mean</span> <span class="nx">estimates</span> <span class="nx">plus</span> <span class="p">(</span><span class="nx">Wald</span><span class="p">)</span> <span class="nx">confidence</span> <span class="nx">intervals</span>
+    <span class="err">##</span> <span class="nx">not</span> <span class="nx">that</span> <span class="nx">it</span><span class="s1">&#39;s possible to do finite size correction in lsmeans (but only for linear models)</span>
+<span class="s1">    ## steps take a min w/ lots of RE for some reason</span>
+<span class="s1">    m2.lsm &lt;- lsmeans(m2, ~ water_add * water_hetero   | nutrient_hetero  * nutrient_add)</span>
+<span class="s1">    plot(m2.lsm, layout =c(2, 3), horizontal=TRUE)</span>
+<span class="s1">}</span>
+
+<span class="s1">## Loading required namespace: pbkrtest</span>
+<span class="s1">## Note: method with signature &#39;</span><span class="nx">sparseMatrix</span><span class="err">#</span><span class="nx">ANY</span><span class="s1">&#39; chosen for function &#39;</span><span class="nx">kronecker</span><span class="s1">&#39;,</span>
+<span class="s1">##  target signature &#39;</span><span class="nx">dgCMatrix</span><span class="err">#</span><span class="nx">ngCMatrix</span><span class="err">&#39;</span><span class="p">.</span>
+<span class="err">##</span>  <span class="s2">&quot;ANY#sparseMatrix&quot;</span> <span class="nx">would</span> <span class="nx">also</span> <span class="nx">be</span> <span class="nx">valid</span>
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/ls-means-CI-plots-1.svg" /></p>
 <div class="highlight"><pre>    <span class="c1">## for the simpler</span>
     lsmip<span class="p">(</span>m1<span class="p">,</span> nutrient_hetero <span class="o">~</span>  water_add <span class="o">|</span> water_hetero <span class="o">*</span> nutrient_add  <span class="p">,</span> type<span class="o">=</span><span class="s">&#39;response&#39;</span><span class="p">)</span>
     lsmip<span class="p">(</span>m1<span class="p">,</span> water_add <span class="o">~</span> nutrient_add  <span class="o">|</span> water_hetero <span class="o">*</span> nutrient_hetero<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;response&#39;</span><span class="p">)</span>

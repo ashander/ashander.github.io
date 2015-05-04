@@ -1,0 +1,472 @@
+## ----knit-opts, echo=FALSE-----------------------------------------------
+## important to let caching work between local render and building w/ pelican
+knitr::opts_chunk$set(cache = 1)
+
+## ----help, results='hide', eval=FALSE------------------------------------
+## ??lme4
+## help(package='lme4')
+## methods(class='merMod')
+## vignette(package='lme4')
+
+## ----packages, results='hide'--------------------------------------------
+library(lme4)
+library(lattice) ## already loaded via namespace by lme4 -- may as well attach
+#library(ggplot2) # recommend
+#library(lsmeans) #recommend
+#library(gridExtra) #recommend
+
+## ----load----------------------------------------------------------------
+d <- read.delim("http://datadryad.org/bitstream/handle/10255/dryad.41984/Maestre_Ecol88.txt?sequence=1")
+recode <- car::recode
+d <- within(d, {
+    nutrient_hetero <- recode(factor(nh), "1='homogeneous'; 2='heterogeneous'")
+    nutrient_add <- recode(factor(na), "1='40 mg N'; 2='80 mg N'; 3='120 mg N'")
+    water_hetero <- recode(factor(wh), "1='homogeneous'; 2='pulse'")
+    water_add <- recode(factor(wa), "1='125 mL'; 2='250 mL';3='375 mL'")
+    block <- factor(block)
+  })
+d$nutrient_add <- factor(d$nutrient_add, levels(d$nutrient_add)[c(2, 3, 1)])
+
+## centered?
+ctr <- function(v, ...)
+    (v - mean(v, ...) ) #/ sd(v, ...)
+
+d <- within(d, {
+    nhc <- ctr(nh)
+    nac <- ctr(na)
+    wac <- ctr(wa)
+    whc <- ctr(wh)
+})
+
+
+## ----lme-models, warning=FALSE-------------------------------------------
+
+## bt - total biomass
+
+## we'd like to use model that includes varying sopes
+## watering seems the most likely to have block-level differences ?
+m2 <- lmer(log(bt) ~ nutrient_add * nutrient_hetero  *  water_add * water_hetero +
+               (water_hetero * water_add | block), data=d)
+
+## first diagnostic -- very high correlation is bad -- can't really justify complex RE
+## structures you might like, if cause these type of fits!
+## could see bad performance in resid plots too if you wanted
+VarCorr(m2)
+
+plot(m2, type = c("p", "smooth") , id = 0.05) # id outliers
+plot(m2, sqrt(abs(resid(.))) ~ fitted(.), type=c('p', 'smooth'))
+## slight increase in resid w/ fitted
+
+plot(m2, resid(.) ~ fitted(.) | block, abline=c(h = 0),  lty = 1,  type = c("p", "smooth")) # per block
+plot(m2,  sqrt(abs(resid(.))) ~ fitted(.) | block,     type=c("p", "smooth")) # 2 blocks behave  badly
+## block 4 is not great well behaved :(
+lattice::qqmath(m2)
+
+## look at random effect
+lattice::dotplot(ranef(m2, condVar=TRUE))
+##were we to have LOTS of RE, using lattice::qqmath for y axis spacing
+##based on quantiles of standard normal -- is better to distinguish
+##important few from "trivial many"
+
+
+## want to look @ 4-way but profile diagnostics not working
+
+## for illustrating these, I fit a model with fewer interactions
+## use quick plot assess which fixef we can drop (in addition to the RE, unf)
+## run drop1(m2) and drop 4-way and water_hetero:nutrient_add
+m1 <- lmer(log(bt) ~ nutrient_add * water_add * nutrient_hetero +
+           nutrient_hetero *  water_add  * water_hetero  +
+           (1 | block),
+           data=d)
+
+## Note: if you look at diagnostics for these, issues pointed out
+## above seem even worse. there is a greater increase in resid w/ fitted
+## several of the blocks are poorly behaved
+## plot(m1, type=c("p", "smooth") , id=0.05) # id outliers
+## plot(m1, sqrt(abs(resid(.))) ~ fitted(.), type=c('p', 'smooth'))
+## plot(m1, resid(.) ~ fitted(.) | block, abline=c(h=0), lty=1,  type=c("p", "smooth")) # per block
+## plot(m1,  sqrt(abs(resid(.))) ~ fitted(.) | block,     type=c("p", "smooth")) # 2 blocks behave  badly
+## lattice::qqmath(m1)
+## lattice::dotplot(ranef(m1, condVar=TRUE))
+
+## ----linear-profile-based-diagnostics, warning = FALSE, fig.width = 10, fig.height = 10----
+## to get more informative diagnostics -- need to profile
+system.time(m1.prall <- profile(m1))
+system.time(m1.prre <- profile(m1, which='theta_', maxmult=5)) ## lower maxmult to avoid step error
+
+lattice::xyplot(m1.prall)
+# lattice::xyplot(m1.prre) # for only re
+# the 'profile zeta plot' linear indicates a quadratic
+# likelihood profile, and so Wald approximations for CI will work well
+# random effects parameters on a standard deviation (or correlation)
+# scale
+
+lattice::densityplot(m1.prall)
+# the 'profile density plot'
+# approximate probability density functions of the parameters
+# -- distros underlying profile confidence intervals
+# linear zeta plot <==> gaussian densities
+
+## ---- pairs-plot---------------------------------------------------------
+lattice::splom(m1.prre)
+# the 'profile pairs plot'
+# bivariate confidence regions based on profile
+# 'profile traces' -- cross hairs -- are conditional estimates  of one parameter given the other
+# above-diag: estimated scale
+# below-diag: 'zeta' scale, some sense, the best possible set of single-parameter transformations for assessing the contours"
+# we just look at RE here
+
+## ----use-lsmeans-mean-plots----------------------------------------------
+## look at consequences
+if(require(lsmeans)){
+    ## here for 4-way interaction model (m2) -- mostly to see how can quickly plot response
+    ## at factor levels in complex models
+    ## relatively easy to plot mean prediction on response scale account for complex interaction
+    lsmip(m2, nutrient_hetero ~  water_add | water_hetero * nutrient_add  , type='response')
+    lsmip(m2, water_add ~ nutrient_add  | water_hetero * nutrient_hetero, type='response')
+    lsmip(m2, water_add ~ water_hetero  | nutrient_add * nutrient_hetero, type='response')
+}
+
+## ----ls-means-CI-plots---------------------------------------------------
+if(require(lsmeans)){
+    ## can also plot quickly mean estimates plus (Wald) confidence intervals
+    ## not that it's possible to do finite size correction in lsmeans (but only for linear models)
+    ## steps take a min w/ lots of RE for some reason
+    m2.lsm <- lsmeans(m2, ~ water_add * water_hetero   | nutrient_hetero  * nutrient_add)
+    plot(m2.lsm, layout =c(2, 3), horizontal=TRUE)
+}
+
+## ----lsmeans-simple, eval=FALSE------------------------------------------
+##     ## for the simpler
+##     lsmip(m1, nutrient_hetero ~  water_add | water_hetero * nutrient_add  , type='response')
+##     lsmip(m1, water_add ~ nutrient_add  | water_hetero * nutrient_hetero, type='response')
+##     lsmip(m1, water_add ~ water_hetero  | nutrient_add * nutrient_hetero, type='response')
+## 
+##     ## overall pattern doesn't differ too much from m1
+##     m1.lsm <- lsmeans(m1, ~ water_add * water_hetero   | nutrient_hetero  * nutrient_add)
+##     plot(m1.lsm, layout =c(2, 3), horizontal=TRUE)
+
+## ----confint-lattice, fig.width = 10, fig.height = 9---------------------
+## OK -- back to the full model
+## if residuals looking OK -- fastest way to get a quick look at coefficient uncertainty
+## I'll make it a function for later use
+
+quick_CI_df <- function(model, drop_intercept = TRUE,...) {
+  ## coef table using WALD CIs for a merMod
+  ci_dat <- confint(model, method='Wald', ...)
+  ci_dat <- cbind(ci_dat, mean=rowMeans(ci_dat))
+  ci_df <- data.frame(coef=row.names(ci_dat), ci_dat)
+  names(ci_df)[2:3] <- c('lwr', 'upr')
+  coef_colon <-   gregexpr("\\:", ci_df$coef)
+  coef_order <- sapply(coef_colon, function(x) {
+    if(x[1] == -1)
+      return(0)
+    else
+      return(length(x))
+  })
+  ci_df$coef <- reorder(ci_df$coef, coef_order)
+  if (drop_intercept)
+    return(subset(ci_df, coef != '(Intercept)'))
+  ci_df
+}
+
+m1_wald_ci <- quick_CI_df(m2)
+
+lattice::dotplot(coef ~ mean, m1_wald_ci,
+                 panel = function(x, y) {
+                   panel.xyplot(x, y, pch=19)
+                   panel.segments(m1_wald_ci$lwr, y, m1_wald_ci$upr, y)
+                   panel.abline(v=0, lty=2)
+                 })
+
+
+## ----ryo, fig.width=10---------------------------------------------------
+
+compare_CI_df <- function(modprof, model, BOOT=FALSE, ...) {
+  ci <- confint(model, method='Wald')
+  cip <- confint(modprof)
+  if(BOOT) {
+      cib <- confint(model, method="boot", ...)
+      cib_dat <- data.frame(cib, parameter=row.names(cib), type='Boot')
+      names(cib_dat)[1:2] <- colnames(cib)
+  }
+  ci_dat <- data.frame(ci, parameter=row.names(ci), type='Wald')
+  names(ci_dat)[1:2] <- colnames(ci)
+  cip_dat <- data.frame(cip, parameter=row.names(cip), type='Prof')
+  names(cip_dat)[1:2] <- colnames(cip)
+  if (!BOOT) {
+      ci_all_dat <- rbind(ci_dat, cip_dat)
+  } else {
+      ci_all_dat <- rbind(ci_dat, cip_dat, cib_dat)
+  }
+  fe_dat <- data.frame(parameter=names(fixef(model)), value=fixef(model))
+  list(mean=fe_dat, bounds=ci_all_dat)
+}
+
+if(require(ggplot2)) {
+    m1_ci <- compare_CI_df(m1.prall, m1, BOOT=TRUE, nsim=100)
+    m1_mean <- m1_ci[['mean']]
+    m1_bnd <- m1_ci[['bounds']]
+
+    ggplot(m1_bnd[m1_bnd$parameter != '(Intercept)', ]) +
+    geom_linerange(aes(parameter, ymax=`97.5 %`, ymin=`2.5 %`, color=type),
+                   position=position_dodge(w=.5), size=1.5) +
+    geom_hline(yintercept=0, linetype=2) +
+    coord_flip() + theme_minimal() +
+    geom_point(aes(parameter, value), size=3, shape=3,
+               data=m1_mean[m1_mean$parameter != '(Intercept)', ])
+
+} else {
+    lattice::dotplot(parameter ~ c(`2.5 %`, `97.5 %`) | type , m1_bnd, abline=c(v=0, lty=2))
+    }
+
+##   strong effect of nutrient homogeneity
+##   effect of adding lots of water
+## nutrient has some effect
+
+## ----broom-fortify-------------------------------------------------------
+if(require(ggplot2)) {
+    d_fort <- ggplot2::fortify(m1, d)
+    ## adds .fortify, scresid, .resid
+    ##head(d_fort)
+}
+
+if(require(broom)) {
+    glm1 <- glance(m1) # model summary
+    tdm1 <- tidy(m1, effects='fixed') #model coefficient summary
+    augm1 <- augment(m1, d, se.fit=TRUE, type.predict='response') # model data with fits
+    ## head(glm1)
+    ## head(tdm1)
+    ## head(augm1)
+}
+
+
+## ----lizard-fits---------------------------------------------------------
+
+d2 <- read.delim("http://datadryad.org/bitstream/handle/10255/dryad.33579/Richmond%20et%20al%202011%20Datafile.txt?sequence=1")
+names(d2) <- gsub('\\.', '', names(d2))
+
+# rescale geo dist, sizediff
+d2 <- within(d2, {
+    geodist_scl <- (GeoDist - mean(GeoDist)) / var(GeoDist)
+    gendist_scl <- (GenDist - mean(GenDist))
+    sizediff_scl2 <- ((SizeDiff - mean(SizeDiff)) / var(SizeDiff))^2
+    Series <- factor(Series)
+    Female <- factor(Female)
+    Male <- factor(Male)
+  })
+
+## cop - copulation
+system.time(gm0 <- glmer(cop ~   sizediff_scl2   + (1 | Series) + (1 | Male)  + (1 | Female) ,
+               data=d2, family='binomial'))
+
+system.time(gm1 <- glmer(cop ~ gendist_scl + geodist_scl +  sizediff_scl2 + (1 | Series) +
+                         (1 | Male)  + (1 | Female) , data=d2, family='binomial'))
+
+
+## ----lizard-crit---------------------------------------------------------
+
+anova(gm1, gm0) # no need for non-size predictors
+
+plot(gm0, type=c("p"), id = 0.05 )
+## non useful visually but with id = 0.05 gives sense of outlier
+## see ?plot.merMod for explanation of test run
+
+## it's more useful to plot residuals in GLM logistic combined across grouping factors
+## or binned fitted values
+plot(gm0,  factor(Trial) ~ resid(., type='pearson'),  abline=c(v=0), lty=2)
+plot(gm0,  factor(Series) ~ resid(., type='pearson'),  abline=c(v=0), lty=2)
+## better than default eh
+
+## second plot suggests some issue with series, indicating we may want to
+## fit a model accounting for differences between trial series
+## (in fact, Richmond et al did fit such a model)
+## you can see the outliers here too with
+## plot(gm0, resid(., type='pearson') ~ fitted(.) | factor(Series), id = 0.05)
+
+## main thing on pearson or deviance residuals is they're mostly less than 2
+## (as assessed in first plot above -- second is the sqrt
+## we could later drop these outlier and see if they change
+
+if(require(gridExtra)) {
+    do.call(gridExtra::grid.arrange, c(lattice::qqmath(ranef(gm0, condVar=TRUE)), list(nrow=1)))
+} else {
+    lattice::qqmath(ranef(gm0, condVar=TRUE))
+  }
+## useful if you have a lot of RE to draw attention to strong ones
+## maybe latter == dot = sample size?
+
+## no reason to retain RE on Male, but also drop Female
+## no real justification, just very slow profiling for many RE
+gm0noindre <- glmer(cop ~   sizediff_scl2   + (1 | Series), data=d2, family='binomial')
+
+system.time(#
+    gm0.prall <- profile(gm0noindre, devtol=1e-6) # see https://stat.ethz.ch/pipermail/r-sig-mixed-models/2014q3/022394.html
+)
+
+## ----lizard-prof, eval=FALSE---------------------------------------------
+## 
+## #system.time(
+## #    gm0_full.prall <- profile(gm0, devtol=1e-6)
+## #)
+## #   user  system elapsed
+## #344.092   0.539 344.613
+
+## ----lizard-plotting, warning=FALSE--------------------------------------
+
+lattice::xyplot(logProf(gm0.prall))
+lattice::densityplot(gm0.prall)
+lattice::splom(gm0.prall)
+
+## ----quick-ci, warning=FALSE---------------------------------------------
+
+## if residuals looking OK -- fastest way to get a quick look at coefficient uncertainty
+ci_dat <- confint(gm0, method='Wald')
+ci_dat <- cbind(ci_dat, mean=rowMeans(ci_dat))
+ci_df <- data.frame(coef=row.names(ci_dat), ci_dat)
+names(ci_df)[2:3] <- c('lwr', 'upr')
+
+
+lattice::dotplot(coef ~ mean, ci_df,
+        panel = function(x, y) {
+            panel.xyplot(x, y, pch=19)
+            panel.segments(ci_df$lwr, y, ci_df$upr, y)
+            panel.abline(v=0, lty=2)
+        })
+
+
+## ----ryo-lizard-ci, warning = FALSE--------------------------------------
+if(require(ggplot2)) {
+  gm0_ci <- compare_CI_df(gm0.prall, gm0)
+  gm0_mean <- gm0_ci[['mean']]
+  gm0_bnd <- gm0_ci[['bounds']]
+  g <- ggplot(gm0_bnd[gm0_bnd$parameter != '(Intercept)', ]) +
+    geom_linerange(aes(parameter, ymax=`97.5 %`, ymin=`2.5 %`, color=type),
+                   position=position_dodge(w=.5), size=1.5) +
+    geom_hline(yintercept=0, linetype=2) +
+    coord_flip() + theme_minimal() +
+    geom_point(aes(parameter, value),
+               size=3, shape=3,
+               data=gm0_mean[gm0_mean$parameter != '(Intercept)', ])
+  g
+  } else {
+    lattice::dotplot(parameter ~ c(`2.5 %`, `97.5 %`) | type , gm0_bnd)
+      }
+
+## ----low-magnitude-param, warning=FALSE----------------------------------
+if(require(ggplot2))
+    g + scale_y_log10()
+
+## ----quick-vis-glmm------------------------------------------------------
+if(require(lsmeans))
+
+gm0_lsm <-    lsmeans(gm0, ~ sizediff_scl2,
+                  at = list(sizediff_scl2 = seq(from=0,
+                              to = 1.5 * median(d2$sizediff_scl2), length.out = 10)))
+
+plot(gm0_lsm, type = 'response', ylab = 'scaled size diff', xlab = 'probability of copulation')
+
+
+## ----prediction-visual, fig.width=10-------------------------------------
+## predicted effect
+d2$pred_overall_gen <- predict(gm0, type='response', re.form=NA)
+d2$pred_overall <- predict(gm0, type='response')
+d2$pred_ind <- predict(gm0, type='response', re.form=~ (1|Female))
+d2$pred_trial <- predict(gm0, type='response', re.form=~(1|Series))
+
+## NB this changes row order from the fit!!!
+d2_pred <- merge(d2, as.data.frame(table(Series=d2$Series)))
+
+if(require(ggplot2)) {
+
+g <- ggplot(d2_pred) +
+     geom_point(aes(SizeDiff, cop),
+                position=position_jitter(h=0.025, w=0)) +
+     theme_minimal() +
+     ylab("Probability copulation")
+
+
+g1 <- g + geom_line(aes(SizeDiff, pred_trial, color=Series))
+
+g2 <- g + geom_line(aes(SizeDiff, pred_overall_gen), color='orange', size = 1.5) +
+    geom_point(aes(SizeDiff, pred_ind, alpha=as.numeric(Female)), color = 'blue') +
+    theme(legend.position = "none")
+
+gridExtra::grid.arrange(g1, g2, ncol=2)
+
+} else {
+    plot(cop ~ SizeDiff, d2_pred, ylab="Probability copulation")
+    points(pred_ind ~ SizeDiff, d2_pred, pch=19, cex=.5, col='darkgray')
+    points(pred_overall_gen ~ SizeDiff, d2_pred, pch=19, cex=.5)
+    }
+
+## ----ugly-plot, eval = FALSE---------------------------------------------
+## ## could plot them all together -- code below gives some insight ## into the
+## ## ggplot2 fortify method
+## if (require(ggplot2)) {
+##   g +  geom_point(aes(SizeDiff, plogis(.fitted)), color='darkgray', size=3,
+##                   data=fortify(gm0, d2))
+## 
+## ## nb -- same as predict with all RE!
+##   with(fortify(gm0, d2),
+##        unique(pred_overall - plogis(.fitted)))
+## }
+
+## ----post-pred-----------------------------------------------------------
+
+## without RE
+set.seed(1141)
+gm0.sim_wo <- simulate(gm0, nsim=1000, re.form=NA)
+sims <- sapply(gm0.sim_wo, function(x)  x)
+ones <- colSums(sims)
+zeros <- -colSums(sims-1)
+perc <- ones/nrow(d2)
+cvar <- apply(sims, 2, var)
+
+## with RE
+gm0.sim <- simulate(gm0, 1000 )
+sims <- sapply(gm0.sim, function(x)  x)
+re_ones <- colSums(sims)
+re_zeros <- -colSums(sims-1)
+re_perc <- re_ones/nrow(d2)
+re_cvar <- apply(sims, 2, var)
+
+pp_comp <- function(dist, cmp_fn, data, ...) {
+  hist(dist, col='orange', xlab='value', ...)
+  abline(v=cmp_fn(data), lwd=4, col='blue', lty=2)
+  abline(v=mean(dist), lwd=4)
+}
+
+op <- par(mfrow=c(2,4))
+  pp_comp(ones, function(x) sum(x$cop),
+          d2, main='ones - no RE', xlim=c(45, 110))
+  pp_comp(zeros, function(x) -sum(x$cop - 1),
+          d2, main='zeros -no RE', xlim=c(120, 185))
+  pp_comp(perc, function(x) sum(x$cop)/nrow(d2),
+          d2, main='% cop - no RE', xlim=c(0, .8))
+  pp_comp(cvar, function(x) var(x$cop),
+          d2, main='var - no RE')
+
+pp_comp(re_ones, function(x) sum(x$cop),
+          d2, main='ones - all RE', xlim=c(45, 110))
+  pp_comp(re_zeros, function(x) -sum(x$cop - 1),
+          d2, main='zeros - all RE', xlim=c(120, 185))
+  pp_comp(re_perc, function(x) sum(x$cop)/nrow(d2),
+          d2, main='% cop - RE', xlim=c(0, .8))
+  pp_comp(re_cvar, function(x) var(x$cop),
+          d2, main='var - all RE')
+par(op)
+
+## ----glmmadmb-too, eval=FALSE--------------------------------------------
+## ## look at glmmadmb too -- not evaluated
+## gm1admb <- glmmadmb(cop ~ geodist_scl +  sizediff_scl2, random= ~1 | Series + 1 | Female , data=d2, family='binomial')
+## 
+## d2 <- data.frame(d2, predict(gm1admb, interval='confidence', type='link'))
+## 
+## plot(cop ~ SizeDiff, d2, ylim = c(0, 1))
+## lines(plogis(fit) ~ SizeDiff, d2, lwd=2)
+## lines(plogis(lwr) ~ SizeDiff, d2, lty=2, lwd=2)
+## lines(plogis(upr) ~ SizeDiff, d2, lty=2, lwd=2)
+##       geom_line(aes(SizeDiff, plogis(lwr)), color='orange', size=1, linetype=2) +
+##     geom_line(aes(SizeDiff, plogis(upr)), color='orange', size=1, linetype=2) +
+

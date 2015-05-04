@@ -224,7 +224,9 @@ meaningful zero. So, avoid bar charts for estimated quantities. Unless,
 your main comparison is between estimates with different, or with
 magnitudes very close to zero.&lt;/p&gt;</summary><category term="R"></category><category term="statistical graphics"></category><category term="visualization"></category><category term="ggplot2"></category><category term="lattice"></category></entry><entry><title>Visualizing fits, inference, implications of (G)LMMs</title><link href="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/" rel="alternate"></link><updated>2015-04-26T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2015-04-10:posts/2015/04/D-RUG-mixed-effects-viz/</id><summary type="html">&lt;p&gt;In a live walk-through on April 10 at the Davis R-Users Group, I gave a
 brief presentation &lt;a href="http://www.ashander.info/presentations/mixedeffects_viz_motivation.html"&gt;motivating this
-topic&lt;/a&gt;.&lt;/p&gt;
+topic&lt;/a&gt;.
+This post expands and cleans up the code from that talk. If you just
+want the code: &lt;a href="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz.R"&gt;download the .R file&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Updated 2015-04-28&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;The point of this post isn't the statistics of mixed models. For that,
 learning the experimental design and statistics behind modern mixed
@@ -517,7 +519,22 @@ the full (4-way interacting) model&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-1.svg" /&gt;
 &lt;img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-2.svg" /&gt;
 &lt;img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-3.svg" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;{r ls-means-CI-plots     ## can also plot quickly mean estimates plus (Wald) confidence intervals     ## not that it's possible to do finite size correction in lsmeans (but only for linear models)     ## steps take a min w/ lots of RE for some reason     m2.lsm &amp;lt;- lsmeans(m2, ~ water_add * water_hetero   | nutrient_hetero  * nutrient_add)     plot(m2.lsm, layout =c(2, 3), horizontal=TRUE)     }&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;lsmeans&lt;/span&gt;&lt;span class="p"&gt;)){&lt;/span&gt;
+    &lt;span class="err"&gt;##&lt;/span&gt; &lt;span class="nx"&gt;can&lt;/span&gt; &lt;span class="nx"&gt;also&lt;/span&gt; &lt;span class="nx"&gt;plot&lt;/span&gt; &lt;span class="nx"&gt;quickly&lt;/span&gt; &lt;span class="nx"&gt;mean&lt;/span&gt; &lt;span class="nx"&gt;estimates&lt;/span&gt; &lt;span class="nx"&gt;plus&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;Wald&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nx"&gt;confidence&lt;/span&gt; &lt;span class="nx"&gt;intervals&lt;/span&gt;
+    &lt;span class="err"&gt;##&lt;/span&gt; &lt;span class="nx"&gt;not&lt;/span&gt; &lt;span class="nx"&gt;that&lt;/span&gt; &lt;span class="nx"&gt;it&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s possible to do finite size correction in lsmeans (but only for linear models)&lt;/span&gt;
+&lt;span class="s1"&gt;    ## steps take a min w/ lots of RE for some reason&lt;/span&gt;
+&lt;span class="s1"&gt;    m2.lsm &amp;lt;- lsmeans(m2, ~ water_add * water_hetero   | nutrient_hetero  * nutrient_add)&lt;/span&gt;
+&lt;span class="s1"&gt;    plot(m2.lsm, layout =c(2, 3), horizontal=TRUE)&lt;/span&gt;
+&lt;span class="s1"&gt;}&lt;/span&gt;
+
+&lt;span class="s1"&gt;## Loading required namespace: pbkrtest&lt;/span&gt;
+&lt;span class="s1"&gt;## Note: method with signature &amp;#39;&lt;/span&gt;&lt;span class="nx"&gt;sparseMatrix&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="nx"&gt;ANY&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; chosen for function &amp;#39;&lt;/span&gt;&lt;span class="nx"&gt;kronecker&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;,&lt;/span&gt;
+&lt;span class="s1"&gt;##  target signature &amp;#39;&lt;/span&gt;&lt;span class="nx"&gt;dgCMatrix&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="nx"&gt;ngCMatrix&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="err"&gt;##&lt;/span&gt;  &lt;span class="s2"&gt;&amp;quot;ANY#sparseMatrix&amp;quot;&lt;/span&gt; &lt;span class="nx"&gt;would&lt;/span&gt; &lt;span class="nx"&gt;also&lt;/span&gt; &lt;span class="nx"&gt;be&lt;/span&gt; &lt;span class="nx"&gt;valid&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/ls-means-CI-plots-1.svg" /&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="c1"&gt;## for the simpler&lt;/span&gt;
     lsmip&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; nutrient_hetero &lt;span class="o"&gt;~&lt;/span&gt;  water_add &lt;span class="o"&gt;|&lt;/span&gt; water_hetero &lt;span class="o"&gt;*&lt;/span&gt; nutrient_add  &lt;span class="p"&gt;,&lt;/span&gt; type&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;response&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     lsmip&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; water_add &lt;span class="o"&gt;~&lt;/span&gt; nutrient_add  &lt;span class="o"&gt;|&lt;/span&gt; water_hetero &lt;span class="o"&gt;*&lt;/span&gt; nutrient_hetero&lt;span class="p"&gt;,&lt;/span&gt; type&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;response&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
