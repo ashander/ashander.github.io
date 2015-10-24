@@ -76,9 +76,9 @@ endif
 
 devserver:
 ifdef PORT
-	$(BASEDIR)/develop_server.sh restart $(PORT)
+	$(BASEDIR)/develop_server.sh restart $(PORT) 2> devdebug.log 1> dev.log
 else
-	$(BASEDIR)/develop_server.sh restart
+	$(BASEDIR)/develop_server.sh restart 2> devdebug.log 1> dev.log
 endif
 
 stopserver:
