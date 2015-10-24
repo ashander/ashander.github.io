@@ -7,7 +7,7 @@ Originally built during my masters and hosted at `http://www.math.ualberta.ca/~a
 ```sh
 
 virtualenv site
-pip install pelican Markdown PyYAML RPy2
+pip install pelican Markdown PyYAML RPy2 ghp-import
 mkdir plugins
 git clone  https://github.com/getpelican/pelican-plugins.git plugins/pelican-plugins
 # install my rmarkdown plugin
