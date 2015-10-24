@@ -2,14 +2,14 @@ Title: Effects of parasite exchange among farm and wild salmon
 Date: 2010-08-29
 Tags: sea lice, salmon, resistance evolution, complex population dynamics, population biology, mathematical ecology
 Author: Jaime Ashander
-Template: theme 
+Template: theme
 Image: /images/msc.png
 Results: M.Sc.
 
 My master's research focused on the evolutionary ecology of sea lice,
    farmed and wild salmon. I'm particularly interested in the ways in
    which the combination of wild salmon migrations and salmon farm
-   management can influence chemical resistance evoultion on farms.
+   management can influence chemical resistance evolution on farms.
   
 Sea lice tend to proliferate on sea-cage farmed salmon, resulting in
 economic costs to the farmers. These outbreaks can also affect wild
