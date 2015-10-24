@@ -1,146 +1,21 @@
----
-title: Visualizing fits, inference, implications of (G)LMMs
-author: Jaime Ashander
-slug: D-RUG-mixed-effects-viz
-date: 2015-04-10
-tags: visualization, lattice, model checking, statistical graphics, GLMM, R, ggplot2
-modified: 2015-04-26
-output:
-    md_document:
-        variant: markdown_strict
-        dev: 'svg'
-    encoding: 'UTF-8'
----
-
-```{r knit-opts, echo=FALSE}
+## ----knit-opts, echo=FALSE-----------------------------------------------
 ## important to let caching work between local render and building w/ pelican
 knitr::opts_chunk$set(cache = 1)
-```
-In a live walk-through on April 10 at the Davis R-Users Group, I gave a brief presentation
-[motivating this topic]({filename}../presentations/mixedeffects_viz_motivation.html).
-This post expands and cleans up the code from that talk.  If you just
-want the code: [download the .R file]({attach}mixedeffects_viz.R).
 
-**Updated 2015-04-28**
+## ----help, results='hide', eval=FALSE------------------------------------
+## ??lme4
+## help(package='lme4')
+## methods(class='merMod')
+## vignette(package='lme4')
 
-The point of this post isn't the statistics of mixed models. For that, learning
-the experimental design and statistics behind modern mixed models, I recommend
-some relatively recent papers below. In short, Schielzeth & Nakagawa (2013)
-and Stroup (2015) provide especially good introduction for those coming from an
-ANOVA background.
-
-When working with generalized, hierarchical designs, ask yourself three
-questions:
-
-First (and maybe most important), "Do I _really_ need these models?" Think
-carefully, and consult these references:
-
-* Is nesting doing anything for your analysis? Example 1: Murtaugh 2007
-  _Ecology_ 88(1):56-62)
-* For significance testing, transform + LMM might work as well as
-GLMM:
-[Ives 2015 "For testing the significance of regression coefficients, go ahead and log-transform count data" _Methods in Ecology and Evolution_](doi:10.1111/2041-210X.12386) [^ives]
-
-[^ives]: _I haven't read this simulation study carefully yet_ but a quick look
-implies the main problems occurred when fitting a model that gets
-the hierarchy wrong (e.g., a GLM to data generated from a hierarchical
-process under-performs relative to a transform + LMM)
-
-
-Second, "What _is_ my design (in the language of mixed models)?".  Baayen et al
-focus on designs with crossed random effects (a strong suit of `lme4`), while
-Schielzeth & Nakagawa's "Nested by Design" paper is a more general
-introduction.  Finally, the Stroup paper provides a good entry point in
-ANOVA-speak [^stroup].  This could make or break the connection between an
-adviser that speaks only ANOVA, as is often the case for workers in crop and
-soil sciences, or experimental ecology and the GLMM that your unbalanced
-binomial regression demands.
-
-[^stroup]: Stroup also authored the CRC Press book _Generalized Linear Mixed
-Models_
-
-*  [Schielzeth & Nakagawa 2013 Nested by design: model fitting and
-  interpretation in a mixed model era. _Methods in Ecology and Evolution_
-  4:14-24](http://onlinelibrary.wiley.com/doi/10.1111/j.2041-210x.2012.00251.x/full)
-* [Baayen, Davidson, & Bates 2008 Mixed-effects modeling with crossed random
-  effects for subjects and items. _Journal of Memory and Language_
-  59:390-412](http://www.sfs.uni-tuebingen.de/~hbaayen/publications/baayenDavidsonBates.pdf)
-  Note that Baayen et al present `lme4` code, but some (e.g., `mcmcsamp`will
-  not work with current versions of the package).
-* [Stroup 2015 Rethinking the Analysis of Non-Normal Data in Plant and Soil
-  Science. _Agronomy Journal_
-  107(2):811-827](https://dl.sciencesocieties.org/publications/aj/abstracts/107/2/811)
-
-Third, "How do I specify and fit this model in `R`. The references below may
-also help with design and interpretation, but are primarily hands-on.  The
-most thorough is Pinheiro & Bates (2000). These four references also serve as a
-bibliography of sorts for this post [^ack].
-
-[^ack]: Discussions with and classes from colleagues, including Scott Burgess,
-Andrew Latimer, Richard McElreath, and Will Wetzel, have also greatly improved
-my understanding of plotting and fitting mixed models.
-
-* Pinheiro & Bates 2000 _Mixed-effects models in S and S-PLUS_ Springer, New
-  York
-* [Bates' `lme4` book draft](http://lme4.r-forge.r-project.org/book/)
-* [the lme4 paper](http://arxiv.org/abs/1406.5823):
-* Ben Bolker's forthcoming chapter on "Worked examples" [available on
-  Rpubs](https://rpubs.com/bbolker/glmmchapter)
-
-### Focus of this post
-
-Given these preliminaries, here I **focus on three things**:
-
-* criticizing the model and fit
-* (graphically) assessing parameter inference
-* illustrate predictions
-
-**emphasizing**
-
-* working with frequentist library `lme4` for (G)LMM in R
-* visualization for: criticism, inference, prediction
-* using the native plotting capabilities (to the extent possible)
-
-**three facets** of visualization
-
-* quick diagnostic (plots *native* to fitting packages)
-* slower model criticism (also *native*)
-* inference & prediction (generally lightweight external libraries / export capabilities)
-
-Finally, I'll mention that example code and vignettes in documented packages are
-great resources for learning these things (as is google ;).
-Try these commands:
-
-```{r help, results='hide', eval=FALSE}
-??lme4
-help(package='lme4')
-methods(class='merMod')
-vignette(package='lme4')
-```
-
-Packages:
-```{r packages, results='hide'}
+## ----packages, results='hide'--------------------------------------------
 library(lme4)
 library(lattice) ## already loaded via namespace by lme4 -- may as well attach
 #library(ggplot2) # recommend
 #library(lsmeans) #recommend
 #library(gridExtra) #recommend
-```
 
-Below, much of the commentary is included in `# comments` to the code blocks.
-
-# LMM: greenhouse full factorial (RCBD)
-
-* "Simple" greenhouse, linear mixed model
-* Pattern and amount -- cool question!
-* balanced so perfect for traditional ANOVA
-* 4 (!) treatments -- full factorial blocked so 4-way interaction potential and hard to visualize
-(making a good test case here)
-
-![Maestre title image]({attach}figures/maestre.png)
-
-
-```{r load}
+## ----load----------------------------------------------------------------
 d <- read.delim("http://datadryad.org/bitstream/handle/10255/dryad.41984/Maestre_Ecol88.txt?sequence=1")
 recode <- car::recode
 d <- within(d, {
@@ -163,10 +38,8 @@ d <- within(d, {
     whc <- ctr(wh)
 })
 
-```
 
-
-```{r lme-models, warning=FALSE}
+## ----lme-models, warning=FALSE-------------------------------------------
 
 ## bt - total biomass
 
@@ -215,9 +88,8 @@ m1 <- lmer(log(bt) ~ nutrient_add * water_add * nutrient_hetero +
 ## plot(m1,  sqrt(abs(resid(.))) ~ fitted(.) | block,     type=c("p", "smooth")) # 2 blocks behave  badly
 ## lattice::qqmath(m1)
 ## lattice::dotplot(ranef(m1, condVar=TRUE))
-```
 
-```{r linear-profile-based-diagnostics, warning = FALSE, fig.width = 10, fig.height = 10}
+## ----linear-profile-based-diagnostics, warning = FALSE, fig.width = 10, fig.height = 10----
 ## to get more informative diagnostics -- need to profile
 system.time(m1.prall <- profile(m1))
 system.time(m1.prre <- profile(m1, which='theta_', maxmult=5)) ## lower maxmult to avoid step error
@@ -234,9 +106,8 @@ lattice::densityplot(m1.prall)
 # approximate probability density functions of the parameters
 # -- distros underlying profile confidence intervals
 # linear zeta plot <==> gaussian densities
-```
 
-```{r, pairs-plot}
+## ---- pairs-plot---------------------------------------------------------
 lattice::splom(m1.prre)
 # the 'profile pairs plot'
 # bivariate confidence regions based on profile
@@ -244,19 +115,8 @@ lattice::splom(m1.prre)
 # above-diag: estimated scale
 # below-diag: 'zeta' scale, some sense, the best possible set of single-parameter transformations for assessing the contours"
 # we just look at RE here
-```
 
-## Implications -- lsmeans
-
-Understanding a complex model with high-order interactions is tough.
-The best tool is plotting, but quickly visualizing such models is
-not easy with flexible plotting libraries.
-
-Fortunately, `lsmeans`, although fairly inflexible in general, has
-plotting capabilities designed just for this purpose. Here's a demo
-with the full (4-way interacting) model
-
-```{r use-lsmeans-mean-plots}
+## ----use-lsmeans-mean-plots----------------------------------------------
 ## look at consequences
 if(require(lsmeans)){
     ## here for 4-way interaction model (m2) -- mostly to see how can quickly plot response
@@ -266,9 +126,8 @@ if(require(lsmeans)){
     lsmip(m2, water_add ~ nutrient_add  | water_hetero * nutrient_hetero, type='response')
     lsmip(m2, water_add ~ water_hetero  | nutrient_add * nutrient_hetero, type='response')
 }
-```
 
-```{r ls-means-CI-plots}
+## ----ls-means-CI-plots---------------------------------------------------
 if(require(lsmeans)){
     ## can also plot quickly mean estimates plus (Wald) confidence intervals
     ## not that it's possible to do finite size correction in lsmeans (but only for linear models)
@@ -276,27 +135,18 @@ if(require(lsmeans)){
     m2.lsm <- lsmeans(m2, ~ water_add * water_hetero   | nutrient_hetero  * nutrient_add)
     plot(m2.lsm, layout =c(2, 3), horizontal=TRUE)
 }
-```
 
-```{r lsmeans-simple, eval=FALSE}
-    ## for the simpler
-    lsmip(m1, nutrient_hetero ~  water_add | water_hetero * nutrient_add  , type='response')
-    lsmip(m1, water_add ~ nutrient_add  | water_hetero * nutrient_hetero, type='response')
-    lsmip(m1, water_add ~ water_hetero  | nutrient_add * nutrient_hetero, type='response')
+## ----lsmeans-simple, eval=FALSE------------------------------------------
+##     ## for the simpler
+##     lsmip(m1, nutrient_hetero ~  water_add | water_hetero * nutrient_add  , type='response')
+##     lsmip(m1, water_add ~ nutrient_add  | water_hetero * nutrient_hetero, type='response')
+##     lsmip(m1, water_add ~ water_hetero  | nutrient_add * nutrient_hetero, type='response')
+## 
+##     ## overall pattern doesn't differ too much from m1
+##     m1.lsm <- lsmeans(m1, ~ water_add * water_hetero   | nutrient_hetero  * nutrient_add)
+##     plot(m1.lsm, layout =c(2, 3), horizontal=TRUE)
 
-    ## overall pattern doesn't differ too much from m1
-    m1.lsm <- lsmeans(m1, ~ water_add * water_hetero   | nutrient_hetero  * nutrient_add)
-    plot(m1.lsm, layout =c(2, 3), horizontal=TRUE)
-```
-
-
-# Confidence intervals
-
-
-
-## quick & dirty
-
-```{r confint-lattice, fig.width = 10, fig.height = 9}
+## ----confint-lattice, fig.width = 10, fig.height = 9---------------------
 ## OK -- back to the full model
 ## if residuals looking OK -- fastest way to get a quick look at coefficient uncertainty
 ## I'll make it a function for later use
@@ -329,21 +179,8 @@ lattice::dotplot(coef ~ mean, m1_wald_ci,
                    panel.abline(v=0, lty=2)
                  })
 
-```
 
-## Confidence Intervals -- rolling your own
-
-For more control than the simple plot above, you could use any of a variety of
-packages, e.g. `coefplot2`, `arm::coefplot`, here we just use builtin
-`lme4::confint` to build a dataframe.
-
-I make a dataframe with potentially several different types of confidence
-intervals: Wald (assume asymptotic multivariate normality of likelihood),
-profile, and bootstrap. For the random effects, the output of bootstrap and
-profile methods have different names -- as you can see in the plot below. The
-Wald method only estimates CIs for fixed effects.
-
-```{r ryo, fig.width=10}
+## ----ryo, fig.width=10---------------------------------------------------
 
 compare_CI_df <- function(modprof, model, BOOT=FALSE, ...) {
   ci <- confint(model, method='Wald')
@@ -386,19 +223,8 @@ if(require(ggplot2)) {
 ##   strong effect of nutrient homogeneity
 ##   effect of adding lots of water
 ## nutrient has some effect
-```
 
-
-Pulling data out of models with `broom` or `ggplot2`
--------
-
-Method `ggplot2::fortify` adds fitted and resid to data frame. New-ish CRAN
-package `broom` generalizes this (and more), really aiming provide an interface
-for 'tidy' (i.e., easy to plot)representations of model objects from many R
-functions (including packages and base `R`).  The `broom` method `augment`
-really  generalized version of `fortify` and is recommended instead
-
-```{r broom-fortify}
+## ----broom-fortify-------------------------------------------------------
 if(require(ggplot2)) {
     d_fort <- ggplot2::fortify(m1, d)
     ## adds .fortify, scresid, .resid
@@ -414,27 +240,8 @@ if(require(broom)) {
     ## head(augm1)
 }
 
-```
 
-Unfortunately, the predict and confint methods for `merMod` aren't yet
-integrated to `broom` or `ggplot` (or my code above for confidence intervals
-could be much cleaner at the slight cost of an additional package dependency).
-
-
-## GLMM: Lizard mate choice
-
-
-Mechanisms of speciation -- cool question!
-
-* mate compatibility trails
-* western North American skinks (_Plestiodon skiltonianus_ spp)
-* Richmond, J. Q., E. L. Jockusch, and A. M. Latimer 2010. Mechanical
-reproductive isolation facilitates parallel speciation in western
-North American scincid lizards. _American Naturalist_
-
-**Repeated measure of ind crossed with multiple trials, binary outcome**
-
-```{r lizard-fits}
+## ----lizard-fits---------------------------------------------------------
 
 d2 <- read.delim("http://datadryad.org/bitstream/handle/10255/dryad.33579/Richmond%20et%20al%202011%20Datafile.txt?sequence=1")
 names(d2) <- gsub('\\.', '', names(d2))
@@ -456,9 +263,8 @@ system.time(gm0 <- glmer(cop ~   sizediff_scl2   + (1 | Series) + (1 | Male)  + 
 system.time(gm1 <- glmer(cop ~ gendist_scl + geodist_scl +  sizediff_scl2 + (1 | Series) +
                          (1 | Male)  + (1 | Female) , data=d2, family='binomial'))
 
-```
 
-```{r lizard-crit}
+## ----lizard-crit---------------------------------------------------------
 
 anova(gm1, gm0) # no need for non-size predictors
 
@@ -497,27 +303,22 @@ gm0noindre <- glmer(cop ~   sizediff_scl2   + (1 | Series), data=d2, family='bin
 system.time(#
     gm0.prall <- profile(gm0noindre, devtol=1e-6) # see https://stat.ethz.ch/pipermail/r-sig-mixed-models/2014q3/022394.html
 )
-```
 
-```{r lizard-prof, eval=FALSE}
+## ----lizard-prof, eval=FALSE---------------------------------------------
+## 
+## #system.time(
+## #    gm0_full.prall <- profile(gm0, devtol=1e-6)
+## #)
+## #   user  system elapsed
+## #344.092   0.539 344.613
 
-#system.time(
-#    gm0_full.prall <- profile(gm0, devtol=1e-6)
-#)
-#   user  system elapsed
-#344.092   0.539 344.613
-```
-
-```{r lizard-plotting, warning=FALSE}
+## ----lizard-plotting, warning=FALSE--------------------------------------
 
 lattice::xyplot(logProf(gm0.prall))
 lattice::densityplot(gm0.prall)
 lattice::splom(gm0.prall)
-```
 
-# Confidence intervals
-
-```{r quick-ci, warning=FALSE}
+## ----quick-ci, warning=FALSE---------------------------------------------
 
 ## if residuals looking OK -- fastest way to get a quick look at coefficient uncertainty
 ci_dat <- confint(gm0, method='Wald')
@@ -533,11 +334,8 @@ lattice::dotplot(coef ~ mean, ci_df,
             panel.abline(v=0, lty=2)
         })
 
-```
 
-Rolling your own again
-
-```{r ryo-lizard-ci, warning = FALSE}
+## ----ryo-lizard-ci, warning = FALSE--------------------------------------
 if(require(ggplot2)) {
   gm0_ci <- compare_CI_df(gm0.prall, gm0)
   gm0_mean <- gm0_ci[['mean']]
@@ -554,33 +352,12 @@ if(require(ggplot2)) {
   } else {
     lattice::dotplot(parameter ~ c(`2.5 %`, `97.5 %`) | type , gm0_bnd)
       }
-```
 
-Because the fixed effect parameter on size difference and the random effect
-variance are on such different scales, I make two plots
-
-```{r low-magnitude-param, warning=FALSE}
+## ----low-magnitude-param, warning=FALSE----------------------------------
 if(require(ggplot2))
     g + scale_y_log10()
-```
 
-## quick predictions
-
-Again, the quickest way to visualize predictions is with `lsmeans`.
-Two things are different here:
-
-* to plot GLM predictions on a meaningful scale, you need to pass
-  `type = 'response'` to the `plot` function.
-* for a quantitative predictor, the default will plot a single point
-  at the mean of the predictor, to see prediction across the range, pass
-  a list to the `at` argument
-* for more meaningful plots, we should label the plot y-axis with unscaled
-  size differences (but I didn't do this)
-* note that you can produce plots at various levels of interacting quantitative
-  predictors using this technique
-
-
-```{r quick-vis-glmm}
+## ----quick-vis-glmm------------------------------------------------------
 if(require(lsmeans))
 
 gm0_lsm <-    lsmeans(gm0, ~ sizediff_scl2,
@@ -589,17 +366,8 @@ gm0_lsm <-    lsmeans(gm0, ~ sizediff_scl2,
 
 plot(gm0_lsm, type = 'response', ylab = 'scaled size diff', xlab = 'probability of copulation')
 
-```
-## customized predictions
 
-The quick plots using `lsmeans` are great, but they assume Wald confidence intervals
-and don't account for random effects.
-To deal with the former, we need to bootstrap, which I won't cover here, but
-the problem of random effects is easily examined using the `re.form` argument
-of `predict.merMod` in `lme4`. Here I look at predictions accounting for all,,
-none, or some of random effects fitted:
-
-```{r prediction-visual, fig.width=10}
+## ----prediction-visual, fig.width=10-------------------------------------
 ## predicted effect
 d2$pred_overall_gen <- predict(gm0, type='response', re.form=NA)
 d2$pred_overall <- predict(gm0, type='response')
@@ -631,50 +399,20 @@ gridExtra::grid.arrange(g1, g2, ncol=2)
     points(pred_ind ~ SizeDiff, d2_pred, pch=19, cex=.5, col='darkgray')
     points(pred_overall_gen ~ SizeDiff, d2_pred, pch=19, cex=.5)
     }
-```
 
-The plot on the left above shows predictions for various series of experimental
-trials, and the raw data. The plot on the right shows the overall fit (orange line
--- the grand mean with no random effects influencing the prediction),
-the predictions accounting just for random effects at the level of individual
-females (blue dots), and the raw data.
+## ----ugly-plot, eval = FALSE---------------------------------------------
+## ## could plot them all together -- code below gives some insight ## into the
+## ## ggplot2 fortify method
+## if (require(ggplot2)) {
+##   g +  geom_point(aes(SizeDiff, plogis(.fitted)), color='darkgray', size=3,
+##                   data=fortify(gm0, d2))
+## 
+## ## nb -- same as predict with all RE!
+##   with(fortify(gm0, d2),
+##        unique(pred_overall - plogis(.fitted)))
+## }
 
-
-```{r ugly-plot, eval = FALSE}
-## could plot them all together -- code below gives some insight ## into the
-## ggplot2 fortify method
-if (require(ggplot2)) {
-  g +  geom_point(aes(SizeDiff, plogis(.fitted)), color='darkgray', size=3,
-                  data=fortify(gm0, d2))
-
-## nb -- same as predict with all RE!
-  with(fortify(gm0, d2),
-       unique(pred_overall - plogis(.fitted)))
-}
-```
-## Checking model adequacy
-
-With ``lme4`, you can also easily produce something akin to posterior-predictive
-checks, [a Bayesian
-tool](http://andrewgelman.com/2014/08/11/discussion-sander-greenland-posterior-predictive-checks/)
-for model criticism.
-
-Using `simulate` on an `lme4` produces a set of response data implied by the
-model.  By examining summary statistics of this dataset, and comparing them to
-the actual data, you can examine how well, or poorly, the model fits. Note that
-these checks are less rigorous than something like cross-validation.  See
-`?simulate.merMod` for additional information.
-
-The upshot: these are relatively quick, and can provide a warning that your
-model isn't capturing some aspect of the data. But, be aware there is
-controversy about their use for anything other than seeing how the model is
-capturing the data. Often, we're interested in making more formal, frequentist
-inference. Though these checks are valuable, the p-like-values implied by them
-[do not satisfy assumptions necessary for this kind of
-inference](http://andrewgelman.com/2009/02/07/confusions_abou/) (i.e., don't
-use them for model comparison or parameter inference).
-
-```{r post-pred}
+## ----post-pred-----------------------------------------------------------
 
 ## without RE
 set.seed(1141)
@@ -718,34 +456,17 @@ pp_comp(re_ones, function(x) sum(x$cop),
   pp_comp(re_cvar, function(x) var(x$cop),
           d2, main='var - all RE')
 par(op)
-```
-In this case I've plotted the simulated distributions of the number of ones,
-zeros, the proportion of copulations, and the variance in observed copulations
--- all with and without accounting for all the random effects.  For each of
-these, I show the distribution of the statistic, its mean (black line), and the
-mean of the same statistic in the observed data.
 
-All test quantities have broader distributions when we account for the random
-effects.
+## ----glmmadmb-too, eval=FALSE--------------------------------------------
+## ## look at glmmadmb too -- not evaluated
+## gm1admb <- glmmadmb(cop ~ geodist_scl +  sizediff_scl2, random= ~1 | Series + 1 | Female , data=d2, family='binomial')
+## 
+## d2 <- data.frame(d2, predict(gm1admb, interval='confidence', type='link'))
+## 
+## plot(cop ~ SizeDiff, d2, ylim = c(0, 1))
+## lines(plogis(fit) ~ SizeDiff, d2, lwd=2)
+## lines(plogis(lwr) ~ SizeDiff, d2, lty=2, lwd=2)
+## lines(plogis(upr) ~ SizeDiff, d2, lty=2, lwd=2)
+##       geom_line(aes(SizeDiff, plogis(lwr)), color='orange', size=1, linetype=2) +
+##     geom_line(aes(SizeDiff, plogis(upr)), color='orange', size=1, linetype=2) +
 
-
-
-`glmmADMB` version (not run)
----
-
-You can run many of the same graphical procedures (including the quick plots
-from `lsmeans`!) on output from other frequentist fitting packages. Try it!
-
-```{r glmmadmb-too, eval=FALSE}
-## look at glmmadmb too -- not evaluated
-gm1admb <- glmmadmb(cop ~ geodist_scl +  sizediff_scl2, random= ~1 | Series + 1 | Female , data=d2, family='binomial')
-
-d2 <- data.frame(d2, predict(gm1admb, interval='confidence', type='link'))
-
-plot(cop ~ SizeDiff, d2, ylim = c(0, 1))
-lines(plogis(fit) ~ SizeDiff, d2, lwd=2)
-lines(plogis(lwr) ~ SizeDiff, d2, lty=2, lwd=2)
-lines(plogis(upr) ~ SizeDiff, d2, lty=2, lwd=2)
-      geom_line(aes(SizeDiff, plogis(lwr)), color='orange', size=1, linetype=2) +
-    geom_line(aes(SizeDiff, plogis(upr)), color='orange', size=1, linetype=2) +
-```
