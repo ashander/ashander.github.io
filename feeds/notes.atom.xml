@@ -534,7 +534,7 @@ the full (4-way interacting) model&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/ls-means-CI-plots-1.svg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="{attach}mixedeffects_viz_files/figure-markdown_strict/ls-means-CI-plots-1.svg" /&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="c1"&gt;## for the simpler&lt;/span&gt;
     lsmip&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; nutrient_hetero &lt;span class="o"&gt;~&lt;/span&gt;  water_add &lt;span class="o"&gt;|&lt;/span&gt; water_hetero &lt;span class="o"&gt;*&lt;/span&gt; nutrient_add  &lt;span class="p"&gt;,&lt;/span&gt; type&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;response&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     lsmip&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; water_add &lt;span class="o"&gt;~&lt;/span&gt; nutrient_add  &lt;span class="o"&gt;|&lt;/span&gt; water_hetero &lt;span class="o"&gt;*&lt;/span&gt; nutrient_hetero&lt;span class="p"&gt;,&lt;/span&gt; type&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;response&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
