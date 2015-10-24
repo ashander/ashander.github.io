@@ -15,7 +15,7 @@
 <div class="row">
   <div class="col-sm-10">
        <div>
-       {% for article in (articles_page.object_list[:5] if articles_page else articles[:8]) %}
+       {% for article in (articles_page.object_list if articles_page else articles) %}
          <div>
            <h2><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h2>
          </div>
@@ -42,4 +42,4 @@
 {% endif %}
 {% include 'includes/pagination.html' %}
 {% include 'includes/etc-footer.html' %}
-{% endblock %}
+{% endblock content %}

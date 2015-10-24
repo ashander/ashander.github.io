@@ -33,7 +33,7 @@ SOCIAL = (('Twitter', 'https://twitter.com/jaimedash'),
 HIDE_SIDEBAR = False
 DISPLAY_RECENT_POSTS_ON_SIDEBAR = True
 
-DEFAULT_PAGINATION = 10
+DEFAULT_PAGINATION = 5
 USE_PAGER = True
 
 # Uncomment following line if you want document-relative URLs when developing
@@ -111,7 +111,7 @@ EXTRA_TEMPLATES_PATHS = ['templates/']
 PAGE_PATHS = ['pages', 'etc']
 
 # Plugins
-PLUGIN_PATHS = ['/Users/jaime/sites/plugins/pelican-plugins',
+PLUGIN_PATHS = ['plugins/pelican-plugins',
                 'plugins']
 PLUGINS = ['latex', 'summary', 'related_posts', 'render_math',
            'rmarkdown']  # last is my own -- permits
