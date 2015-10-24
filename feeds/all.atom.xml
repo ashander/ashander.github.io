@@ -1203,7 +1203,33 @@ arithmetic mean fitness (if they have lower variance).&lt;/p&gt;
         "}";
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</summary><category term="life history"></category><category term="evolution"></category><category term="stochasticity"></category></entry><entry><title>Understanding the joint effects of plastic and evolutionary change on demography from time series</title><link href="http://www.ashander.info/posts/2014/01/understanding-joint-effects-plastic-evolutionary-poster/" rel="alternate"></link><updated>2014-01-03T21:19:00-08:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2014-01-03:posts/2014/01/understanding-joint-effects-plastic-evolutionary-poster/</id><summary type="html">&lt;p&gt;Background/Question/Methods&lt;/p&gt;
+&lt;/script&gt;</summary><category term="life history"></category><category term="evolution"></category><category term="stochasticity"></category></entry><entry><title>Response of fish biota to dams in the Lower Colorado River Basin: empirical findings and utility for predicting responses to climate and water use change</title><link href="http://www.ashander.info/posts/2014/05/response-fish-biota-lower-colorado-river/" rel="alternate"></link><updated>2014-05-24T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2014-05-24:posts/2014/05/response-fish-biota-lower-colorado-river/</id><summary type="html">&lt;p&gt;&lt;em&gt;The biologists have done their jobs. We know the life cycles and habitat requirements of endangered western fishes. . . [A] successful management program could be devised and implemented for the Grand Canyon region. Current politics stand in the way, just as surely as politics of the 1960s aided and abetted our efforts to learn enough to save this fauna.&lt;/em&gt; -- W. L. Minckley (1991)&lt;/p&gt;
+&lt;p&gt;Over the past century, development of the Colorado River Basin for water
+resources changed a dynamic river into a managed system. Seasonality in flow,
+temperature, and turbidity is reduced, and formerly riverine habitats are now
+reservoirs. These changes have played out in the fish fauna. Native species
+have declined and non-natives have increased. The key alteration, relative to
+the past, is increased competition and predation, especially at juvenile
+stages, which is likely mediated by more stable flow and resource regimes.
+A dataset (SONFISHES) assembled by W. L. Minckley and covering 150 years of
+fish occurrence in the Lower Colorado River (below Glen Canyon Dam) has
+provided insight into patterns in extirpation among native fishes and range
+expansion among non-native fishes. Several studies have combined these data
+with measures of extinction risk to explain how range fragmentation and
+species’ traits correlate with observed extinctions or threats in native
+species. Another study analyzed range shifts within a strategy space of
+potential fish life histories (originally introduced by K. O. Winemiller and K.
+A. Rose) to understand how human activity has created and removed ecological
+niches. Together, these studies support a causal link between environmental and
+faunal change. This strongly suggests that continuing the status quo will
+result in further extirpation and extinction of native fishes. I argue,
+however, that current knowledge is not yet sufficient to quantitatively
+forecast the magnitude and timescale of the response in fish biodiversity to
+any projected future environment. Such forecasting requires a model that
+quantitatively relates the environment to persistence in the strategy-space of
+fish life histories. Unfortunately, we do not need such a model to make the
+qualitative prediction: threatened "big-river" fishes will eventually go
+extinct without intervention.&lt;/p&gt;</summary><category term="Colorado River"></category><category term="life history theory"></category><category term="conservation biology"></category><category term="invasive species"></category><category term="population biology"></category><category term="Floodplain"></category></entry><entry><title>Understanding the joint effects of plastic and evolutionary change on demography from time series</title><link href="http://www.ashander.info/posts/2014/01/understanding-joint-effects-plastic-evolutionary-poster/" rel="alternate"></link><updated>2014-01-03T21:19:00-08:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2014-01-03:posts/2014/01/understanding-joint-effects-plastic-evolutionary-poster/</id><summary type="html">&lt;p&gt;Background/Question/Methods&lt;/p&gt;
 
 &lt;p&gt;In nature, selection often fluctuates, but observed changes in traits may owe not only to selection but plasticity. Further, changes in traits due to selection and to plasticity do not have equal demographic effects: the cost of selection is paid through declines in population number or growth rate. Thus, observed trajectories of trait value and population number can depend on interactions between plasticity, evolution and environment. The extent to which these interactions affect observed trajectories depends on the demographic context. For example, it has long been known that natural selection interacts with density-dependence, which can dilute the effect of selection on population dynamics. Although recent methods decompose observed trait change into contributions due to evolution and plasticity, these methods have not yet fully accounted for the effect of selection on demography. In particular, including information about demographic change may sharpen inference of selection versus plasticity from time series.&lt;/p&gt;
 
@@ -1265,10 +1291,10 @@ if wild-origin parasites on aquaculture hosts are proportionally
 controlled to their abundance then line dominance decreases.&lt;/p&gt;</summary><category term="peer reviewed"></category><category term="M.Sc."></category><category term="line dominance"></category><category term="pink salmon"></category><category term="spillback"></category><category term="spillover"></category><category term="aquaculture"></category></entry><entry><title>Population biology in regulated rivers: application to regulation and restoration</title><link href="http://www.ashander.info/posts/2010/09/population-biology-in-regulated-rivers/" rel="alternate"></link><updated>2010-09-29T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2010-09-29:posts/2010/09/population-biology-in-regulated-rivers/</id><summary type="html">&lt;p&gt;Several projects apply concepts and methods from population biology to applied issues in river management and conservation:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;IGERT collaborative project on &lt;a href="http://reach.ucdavis.edu/programs/floodplains.html"&gt;Floodplain management: opportunities, challenges, and successes&lt;/a&gt; with collaborators &lt;a href="http://www.noamross.net/"&gt;Noam Ross&lt;/a&gt;, Kelly Graveur, Megan Kelso, and Mary Mendoza.&lt;/p&gt;
+&lt;p&gt;IGERT collaborative project on &lt;a href="http://reach.ucdavis.edu/programs/floodplains.html"&gt;Floodplain management: opportunities, challenges, and successes&lt;/a&gt; with collaborators Kelly Graveur, Megan Kelso, Mary Mendoza, and &lt;a href="http://www.noamross.net/"&gt;Noam Ross&lt;/a&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;CO River Class and Grand Canyon trip: details to come&lt;/p&gt;
+&lt;p&gt;Colorado River Class and Grand Canyon trip: "The Changing Colorado River". Check out &lt;a href="https://watershed.ucdavis.edu/education/classes/ecogeomorphology-grand-canyon-2014/photos/lower-canyon-part-1"&gt;some&lt;/a&gt; &lt;a href="https://watershed.ucdavis.edu/education/classes/ecogeomorphology-grand-canyon-2014/photos/lower-canyon-part-2"&gt;photos&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</summary><category term="floodplains"></category><category term="salmon"></category><category term="restoration"></category><category term="applied ecology"></category><category term="population biology"></category><category term="Grand Canyon"></category><category term="optimization"></category><category term="economics"></category></entry><entry><title>Effects of parasite exchange among farm and wild salmon</title><link href="http://www.ashander.info/posts/2010/08/parasite-exchange/" rel="alternate"></link><updated>2010-08-29T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2010-08-29:posts/2010/08/parasite-exchange/</id><summary type="html">&lt;p&gt;My master's research focused on the evolutionary ecology of sea lice,
    farmed and wild salmon. I'm particularly interested in the ways in
