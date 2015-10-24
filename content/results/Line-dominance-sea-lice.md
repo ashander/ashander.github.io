@@ -1,6 +1,6 @@
 Title: Aquaculture-induced changes to dynamics of a migratory host and specialist parasite: a case study of pink salmon and sea lice
-Date: 2011-03-17 
-Tags: Peer reviewed,M.Sc., line dominance, pink salmon, spillback, spillover, aquaculture
+Date: 2011-03-17
+Tags: peer reviewed,M.Sc., line dominance, pink salmon, spillback, spillover, aquaculture
 Authors: Jaime Ashander, Martin Krkosek, Mark A Lewis
 Journal: Theoretical Ecology
 DOI: 10.1007/s12080-011-0122-4

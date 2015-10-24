@@ -1,6 +1,6 @@
 Title:  Overcoming the fear of failure to improve the conservation of extremely small populations
 Date: 2015-04-22
-Tags: Peer reviewed, Ph.D., conservation, small populations, extinction, stochastic
+Tags: peer reviewed, Ph.D., conservation, small populations, extinction, stochastic
 Authors: Meek, M., C. Wells, K. Tomalty, J. Ashander, E. Cole, D. Gille, B. Putman, J. Rose, M. Savoca, L. Yamane, J. Hull, D. Rogers, E.B. Rosenblum, J.F. Shogren, R. Swaisgood, B. May.
 Journal: Biological Conservation
 DOI: 10.1016/j.biocon.2015.01.025

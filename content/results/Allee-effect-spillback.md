@@ -1,6 +1,6 @@
 Title: Allee effect from parasite spill-back
 Date: 2013-09-05
-Tags: Peer reviewed, M.Sc., Allee effect, spillback, spillover, salmon, aquaculture
+Tags: peer reviewed, M.Sc., Allee effect, spillback, spillover, salmon, aquaculture
 Authors: Martin Krkosek, Jaime Ashander, L Neil Frazer, Mark A Lewis
 Journal: The American Naturalist
 DOI: 10.1086/673238
