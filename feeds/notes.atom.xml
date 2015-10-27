@@ -1,5 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jaime Ashander</title><link href="http://www.ashander.info/" rel="alternate"></link><link href="http://www.ashander.info/feeds/notes.atom.xml" rel="self"></link><id>http://www.ashander.info/</id><updated>2015-04-28T00:00:00-07:00</updated><entry><title>Easy alternatives to bar charts in native R graphics</title><link href="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/" rel="alternate"></link><updated>2015-04-28T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2015-04-28:posts/2015/04/barchart-alternatives-in-base-r/</id><summary type="html">&lt;p&gt;It's a long tradition in statistical graphics going from Tufte back to
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jaime Ashander</title><link href="http://www.ashander.info/" rel="alternate"></link><link href="http://www.ashander.info/feeds/notes.atom.xml" rel="self"></link><id>http://www.ashander.info/</id><updated>2015-10-26T00:00:00-07:00</updated><entry><title>So, you did some GLMs &amp; compared with AIC. Congrats!</title><link href="http://www.ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/" rel="alternate"></link><updated>2015-10-26T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2015-10-26:posts/2015/10/model-selection-glms-aic-what-to-report/</id><summary type="html">&lt;p&gt;Here's what you need to report in a paper about the model comparison:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;residual deviance&lt;/li&gt;
+&lt;li&gt;residual df&lt;/li&gt;
+&lt;li&gt;delta AIC&lt;/li&gt;
+&lt;li&gt;AIC weight&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You should also report the null deviance and degrees of freedom, maybe
+in a table caption.&lt;/p&gt;
+&lt;p&gt;Thanks to &lt;a href="http://brunalab.org/"&gt;Emilio Bruna&lt;/a&gt; for prompting this post
+and suggesting its title. Below I'll do a worked example, explain why
+you should include at least these numbers, and mention some situations
+where it's better to use something other than AIC.&lt;/p&gt;
+&lt;h3&gt;Example: UC Berkeley admissions and gender&lt;/h3&gt;
+&lt;p&gt;Let's look at the built-in &lt;code&gt;UCBAdmissions&lt;/code&gt; data. As R will tell you,
+these data are often used to illustrate Simpson's paradox (see
+&lt;code&gt;?UCBAdmissions&lt;/code&gt; and Bickel &lt;em&gt;et al.&lt;/em&gt; 1975 or my PPS below).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;d &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;as.data.frame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;UCBAdmissions&lt;span class="p"&gt;)&lt;/span&gt;
+d &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; tidyr&lt;span class="o"&gt;::&lt;/span&gt;spread&lt;span class="p"&gt;(&lt;/span&gt;d&lt;span class="p"&gt;,&lt;/span&gt; Admit&lt;span class="p"&gt;,&lt;/span&gt; Freq&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# use Hadley&amp;#39;s excellent tidyr to reshape&lt;/span&gt;
+d&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="kp"&gt;order&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;d&lt;span class="o"&gt;$&lt;/span&gt;Dept&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="c1"&gt;##    Gender Dept Admitted Rejected&lt;/span&gt;
+&lt;span class="c1"&gt;## 1    Male    A      512      313&lt;/span&gt;
+&lt;span class="c1"&gt;## 7  Female    A       89       19&lt;/span&gt;
+&lt;span class="c1"&gt;## 2    Male    B      353      207&lt;/span&gt;
+&lt;span class="c1"&gt;## 8  Female    B       17        8&lt;/span&gt;
+&lt;span class="c1"&gt;## 3    Male    C      120      205&lt;/span&gt;
+&lt;span class="c1"&gt;## 9  Female    C      202      391&lt;/span&gt;
+&lt;span class="c1"&gt;## 4    Male    D      138      279&lt;/span&gt;
+&lt;span class="c1"&gt;## 10 Female    D      131      244&lt;/span&gt;
+&lt;span class="c1"&gt;## 5    Male    E       53      138&lt;/span&gt;
+&lt;span class="c1"&gt;## 11 Female    E       94      299&lt;/span&gt;
+&lt;span class="c1"&gt;## 6    Male    F       22      351&lt;/span&gt;
+&lt;span class="c1"&gt;## 12 Female    F       24      317&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Using logistic regression, encode several models for the effect of
+applicant gender, department identity, or both on admission.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;m1 &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; glm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;cbind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;Admitted&lt;span class="p"&gt;,&lt;/span&gt; Rejected&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt; Gender&lt;span class="p"&gt;,&lt;/span&gt; d&lt;span class="p"&gt;,&lt;/span&gt; family&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;binomial&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+m2 &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; glm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;cbind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;Admitted&lt;span class="p"&gt;,&lt;/span&gt; Rejected&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt; Dept&lt;span class="p"&gt;,&lt;/span&gt; d&lt;span class="p"&gt;,&lt;/span&gt; family &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;binomial&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+m3 &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; glm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;cbind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;Admitted&lt;span class="p"&gt;,&lt;/span&gt; Rejected&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt; Dept &lt;span class="o"&gt;+&lt;/span&gt; Gender&lt;span class="p"&gt;,&lt;/span&gt; d&lt;span class="p"&gt;,&lt;/span&gt; family &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;binomial&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;(Note: although we might like to allow for an interaction between gender
+and department, the data here are insufficient to fit such a model.)&lt;/p&gt;
+&lt;p&gt;Running &lt;code&gt;summary&lt;/code&gt; on any one of the fits yields a bunch of stats: AIC,
+Residual and null deviance, as well as coefficients, their standard
+errors, and significance.&lt;/p&gt;
+&lt;h3&gt;What to report&lt;/h3&gt;
+&lt;p&gt;We could type by hand the AIC and other stats. Instead, we'll use &lt;a href="http://varianceexplained.org/"&gt;David
+Robinson&lt;/a&gt;'s &lt;code&gt;broom&lt;/code&gt; which gives tidy
+summaries of model objects.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;summary.table &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;do.call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;rbind&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;lapply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; m2&lt;span class="p"&gt;,&lt;/span&gt; m3&lt;span class="p"&gt;),&lt;/span&gt; broom&lt;span class="o"&gt;::&lt;/span&gt;glance&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="kp"&gt;summary.table&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;model&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If we take a look at &lt;code&gt;summary.table&lt;/code&gt;, we'll see it has all the
+ingredients we might like to report from model selection, whether via
+AIC, BIC, or just the deviance. These are, in order, null.deviance,
+df.null, logLik, AIC, BIC, deviance, df.residual, model.&lt;/p&gt;
+&lt;p&gt;Creating a table with our own desired columns in an appropriate order is
+easy.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;table.cols &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;model&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;df.residual&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;deviance&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;AIC&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+reported.table &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;summary.table&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;table.cols&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="kp"&gt;names&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;reported.table&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Model&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Resid. Df&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Resid. Dev&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;AIC&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;For model selection, a model's AIC is only meaningful relative to that
+of other models, so Akaike and others recommend reporting differences in
+AIC from the best model, &lt;em&gt;Δ&lt;/em&gt;&lt;em&gt;AIC&lt;/em&gt;, and AIC weights &lt;em&gt;wAIC&lt;/em&gt;. The latter
+can be viewed as an estimate of the probability a model gives the best
+predictions on new data (conditional on the models considered; Burnham
+and Anderson 2002, McElreath 2015).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;reported.table&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;dAIC&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt;  &lt;span class="kp"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;reported.table&lt;span class="p"&gt;,&lt;/span&gt; AIC &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="kp"&gt;min&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;AIC&lt;span class="p"&gt;))&lt;/span&gt;
+reported.table&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;wAIC&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;reported.table&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="m"&gt;0.5&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; dAIC&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="kp"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="m"&gt;0.5&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; dAIC&lt;span class="p"&gt;)))&lt;/span&gt;
+reported.table&lt;span class="o"&gt;$&lt;/span&gt;AIC &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kc"&gt;NULL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;With this advice in mind, here's &lt;em&gt;a minimal table for reporting model
+selection on GLMs&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;Caption: Model selection for the effect gender (model 1), department
+(model 2), and both gender and department (model 3) on admission
+probability with 11 null degrees of freedom and 877.06 null deviance.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;reported.table
+
+##   Model Resid. Df Resid. Dev   dAIC     wAIC
+## 1     1        10        784 753.87 1.1e-164
+## 2     2         6         22   0.00  5.6e-01
+## 3     3         5         20   0.47  4.4e-01
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Even if using an information criterion, include the residual deviance
+and degrees of freedom for each model. These provide a (rough) goodness
+of fit measure for each model.&lt;/p&gt;
+&lt;p&gt;Of course, model selection is just the beginning of reporting your
+results. See the PPS below for some thoughts on reporting results of the
+best model(s).&lt;/p&gt;
+&lt;h3&gt;Is AIC the right criterion?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;For small data, you should use AICc -- the small sample correction
+    which provides greater penalty for each parameter but approaches AIC
+    as &lt;em&gt;n&lt;/em&gt; becomes large. If it makes a difference, you should use it.
+    (I probably should have used it above.)&lt;/li&gt;
+&lt;li&gt;For large data, consider BIC, which is asymptotically consistent
+    while AIC is not (see Hastie &lt;em&gt;et al.&lt;/em&gt; 2009, which is
+    available online). AIC typically favors overly-complex models with
+    large &lt;em&gt;n&lt;/em&gt; relative to BIC.&lt;/li&gt;
+&lt;li&gt;For Bayesian models, consider &lt;a href="http://andrewgelman.com/2015/07/16/new-papers-on-loowaic-and-stan/"&gt;WAIC or
+    LOO&lt;/a&gt;
+    (instead of DIC, which has issues with non-Gaussian posteriors
+    McElreath 2015).&lt;/li&gt;
+&lt;li&gt;Don't use information criteria for model selection between GLMs with
+    different link functions&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Further Reading &amp;amp; References&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://ms.mcmaster.ca/~bolker/misc/GLMM_results_report.pdf"&gt;Ben Bolker on reporting results in the
+    text&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Burnham, Kenneth P., and David R. Anderson. 2002. Model selection
+    and multimodel inference: a practical
+    information-theoretic approach. Springer, New York, NY, USA.&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://statweb.stanford.edu/~tibs/ElemStatLearn/"&gt;Hastie, Tibshirani, and Friedman.
+    2009&lt;/a&gt; Elements of
+    Statistical Learning, Second Edition. Springer, New York, NY, USA.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.crcpress.com/Statistical-Rethinking-A-Bayesian-Course-with-Examples-in-R-and-Stan/McElreath/9781482253443"&gt;McElreath. 2015.&lt;/a&gt;
+    Statistical Rethinking. CRC Press.&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://brianomeara.info/tutorials/aic/"&gt;Brian O'Meara's AIC
+    tutorial&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;PS: Nested models&lt;/h3&gt;
+&lt;p&gt;Reporting the residual deviance and degrees of freedom as above is
+relatively similar to R's output for conducting an ANOVA on a GLM (where
+you can optionally add a statistical test). For nested models, you may
+as well just do this and report the table:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;m3.anova &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; anova&lt;span class="p"&gt;(&lt;/span&gt;m3&lt;span class="p"&gt;,&lt;/span&gt; test&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Chisq&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="kp"&gt;round&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;m3.anova&lt;span class="p"&gt;,&lt;/span&gt; digits &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;## Analysis of Deviance Table&lt;/span&gt;
+&lt;span class="c1"&gt;## &lt;/span&gt;
+&lt;span class="c1"&gt;## Model: binomial, link: logit&lt;/span&gt;
+&lt;span class="c1"&gt;## &lt;/span&gt;
+&lt;span class="c1"&gt;## Response: cbind(Admitted, Rejected)&lt;/span&gt;
+&lt;span class="c1"&gt;## &lt;/span&gt;
+&lt;span class="c1"&gt;## Terms added sequentially (first to last)&lt;/span&gt;
+&lt;span class="c1"&gt;## &lt;/span&gt;
+&lt;span class="c1"&gt;## &lt;/span&gt;
+&lt;span class="c1"&gt;##        Df Deviance Resid. Df Resid. Dev Pr(&amp;gt;Chi)    &lt;/span&gt;
+&lt;span class="c1"&gt;## NULL                      11     877.06             &lt;/span&gt;
+&lt;span class="c1"&gt;## Dept    5   855.32         6      21.74   &amp;lt;2e-16 ***&lt;/span&gt;
+&lt;span class="c1"&gt;## Gender  1     1.53         5      20.20   0.2159    &lt;/span&gt;
+&lt;span class="c1"&gt;## ---&lt;/span&gt;
+&lt;span class="c1"&gt;## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;PPS: Evaluating the best model&lt;/h3&gt;
+&lt;p&gt;For the best model(s), you should then go on to report model results in
+the text, as &lt;a href="http://ms.mcmaster.ca/~bolker/misc/GLMM_results_report.pdf"&gt;Ben Bolker
+demonstrates&lt;/a&gt;,
+and visualize the fit relative to the data.&lt;/p&gt;
+&lt;p&gt;To visualize the admissions data and mean fits from models 2 and 3
+(which have approximately equal AIC weight), we can use &lt;code&gt;ggplot2&lt;/code&gt; and
+&lt;code&gt;augment&lt;/code&gt; from broom (which adds model predictions and statistics to the
+data):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;m3.pred &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; broom&lt;span class="o"&gt;::&lt;/span&gt;augment&lt;span class="p"&gt;(&lt;/span&gt;m3&lt;span class="p"&gt;)&lt;/span&gt;
+m2.pred &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; broom&lt;span class="o"&gt;::&lt;/span&gt;augment&lt;span class="p"&gt;(&lt;/span&gt;m2&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="kn"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;ggplot2&lt;span class="p"&gt;)&lt;/span&gt;
+ggplot&lt;span class="p"&gt;(&lt;/span&gt;d&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+    geom_point&lt;span class="p"&gt;(&lt;/span&gt;aes&lt;span class="p"&gt;(&lt;/span&gt;Dept&lt;span class="p"&gt;,&lt;/span&gt; Admitted &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;Admitted &lt;span class="o"&gt;+&lt;/span&gt; Rejected&lt;span class="p"&gt;),&lt;/span&gt; color&lt;span class="o"&gt;=&lt;/span&gt;Gender&lt;span class="p"&gt;,&lt;/span&gt; size&lt;span class="o"&gt;=&lt;/span&gt;Admitted &lt;span class="o"&gt;+&lt;/span&gt; Rejected&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+    geom_point&lt;span class="p"&gt;(&lt;/span&gt;aes&lt;span class="p"&gt;(&lt;/span&gt;Dept&lt;span class="p"&gt;,&lt;/span&gt; plogis&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;.&lt;/span&gt;fitted&lt;span class="p"&gt;)),&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt;m2.pred&lt;span class="p"&gt;,&lt;/span&gt; shape &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; alpha&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0.4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; geom_point&lt;span class="p"&gt;(&lt;/span&gt;aes&lt;span class="p"&gt;(&lt;/span&gt;Dept&lt;span class="p"&gt;,&lt;/span&gt; plogis&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;.&lt;/span&gt;fitted&lt;span class="p"&gt;),&lt;/span&gt; shape&lt;span class="o"&gt;=&lt;/span&gt;Gender&lt;span class="p"&gt;),&lt;/span&gt; alpha &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0.4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; m3.pred&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+    theme_minimal&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; scale_color_manual&lt;span class="p"&gt;(&lt;/span&gt;values&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;orange&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; guides&lt;span class="p"&gt;(&lt;/span&gt;shape&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;FALSE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img alt="Admissions (open circles, size indicates total applicants) versus
+deparatment and predictions from model 2 (department only, diamonds) and
+model 3 (department and gender, dots and
+triangles)" src="http://www.ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/model-selection-GLMs-AIC-what-to-report_files/figure-markdown_strict/model-viz-1.svg" /&gt;&lt;/p&gt;
+&lt;p&gt;Admissions (colored dots, size indicates total applicants) versus
+department and predictions from model 2 (department only, diamonds) and
+model 3 (department and gender, dots and triangles)&lt;/p&gt;
+&lt;h4&gt;Simpson's paradox&lt;/h4&gt;
+&lt;p&gt;Comparing model 3 with model 1 illustrates Simpson's paradox. Without
+accounting for department, the apparent effect of female gender on
+admission is negative (female odds relative to male 0.54, &lt;em&gt;p&lt;/em&gt; ≈ 0),
+whereas after accounting for department, the effect is positive (but
+weak: female odds relative to male 1.11, &lt;em&gt;p&lt;/em&gt; ≈  0.22).&lt;/p&gt;</summary><category term="R"></category><category term="statistics"></category><category term="model selection"></category><category term="GLM"></category><category term="AIC"></category><category term="deviance"></category></entry><entry><title>Easy alternatives to bar charts in native R graphics</title><link href="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/" rel="alternate"></link><updated>2015-04-28T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2015-04-28:posts/2015/04/barchart-alternatives-in-base-r/</id><summary type="html">&lt;p&gt;It's a long tradition in statistical graphics going from Tufte back to
 &lt;a href="http://en.wikipedia.org/wiki/John_Tukey#Scientific_contributions"&gt;Tukey&lt;/a&gt;
 and
 &lt;a href="http://en.wikipedia.org/wiki/Dot_plot_%28statistics%29#Cleveland_dot_plots"&gt;Cleveland&lt;/a&gt;
@@ -312,10 +504,6 @@ vignette(package=&amp;#39;lme4&amp;#39;)
 
 &lt;p&gt;Packages:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;library(lme4)
-
-## Loading required package: Matrix
-## Loading required package: Rcpp
-
 library(lattice) ## already loaded via namespace by lme4 -- may as well attach
 #library(ggplot2) # recommend
 #library(lsmeans) #recommend
@@ -369,11 +557,11 @@ blocks.&lt;/p&gt;
 &lt;span class="nx"&gt;VarCorr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;m2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="err"&gt;##&lt;/span&gt;  &lt;span class="nx"&gt;Groups&lt;/span&gt;   &lt;span class="nx"&gt;Name&lt;/span&gt;                              &lt;span class="nx"&gt;Std&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Dev&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="nx"&gt;Corr&lt;/span&gt;                
-&lt;span class="err"&gt;##&lt;/span&gt;  &lt;span class="nx"&gt;block&lt;/span&gt;    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;Intercept&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;                       &lt;span class="mf"&gt;0.031806&lt;/span&gt;                     
-&lt;span class="err"&gt;##&lt;/span&gt;           &lt;span class="nx"&gt;water_heteropulse&lt;/span&gt;                 &lt;span class="mf"&gt;0.041752&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.739&lt;/span&gt;              
+&lt;span class="err"&gt;##&lt;/span&gt;  &lt;span class="nx"&gt;block&lt;/span&gt;    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;Intercept&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;                       &lt;span class="mf"&gt;0.031807&lt;/span&gt;                     
+&lt;span class="err"&gt;##&lt;/span&gt;           &lt;span class="nx"&gt;water_heteropulse&lt;/span&gt;                 &lt;span class="mf"&gt;0.041753&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.739&lt;/span&gt;              
 &lt;span class="err"&gt;##&lt;/span&gt;           &lt;span class="nx"&gt;water_add250&lt;/span&gt; &lt;span class="nx"&gt;mL&lt;/span&gt;                   &lt;span class="mf"&gt;0.061256&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.938&lt;/span&gt;  &lt;span class="mf"&gt;0.643&lt;/span&gt;       
 &lt;span class="err"&gt;##&lt;/span&gt;           &lt;span class="nx"&gt;water_add375&lt;/span&gt; &lt;span class="nx"&gt;mL&lt;/span&gt;                   &lt;span class="mf"&gt;0.060199&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.622&lt;/span&gt;  &lt;span class="mf"&gt;0.235&lt;/span&gt;  &lt;span class="mf"&gt;0.848&lt;/span&gt;
-&lt;span class="err"&gt;##&lt;/span&gt;           &lt;span class="nx"&gt;water_heteropulse&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="nx"&gt;water_add250&lt;/span&gt; &lt;span class="nx"&gt;mL&lt;/span&gt; &lt;span class="mf"&gt;0.074705&lt;/span&gt;  &lt;span class="mf"&gt;0.935&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.930&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.853&lt;/span&gt;
+&lt;span class="err"&gt;##&lt;/span&gt;           &lt;span class="nx"&gt;water_heteropulse&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="nx"&gt;water_add250&lt;/span&gt; &lt;span class="nx"&gt;mL&lt;/span&gt; &lt;span class="mf"&gt;0.074706&lt;/span&gt;  &lt;span class="mf"&gt;0.935&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.930&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.853&lt;/span&gt;
 &lt;span class="err"&gt;##&lt;/span&gt;           &lt;span class="nx"&gt;water_heteropulse&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="nx"&gt;water_add375&lt;/span&gt; &lt;span class="nx"&gt;mL&lt;/span&gt; &lt;span class="mf"&gt;0.073710&lt;/span&gt;  &lt;span class="mf"&gt;0.427&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.119&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.713&lt;/span&gt;
 &lt;span class="err"&gt;##&lt;/span&gt;  &lt;span class="nx"&gt;Residual&lt;/span&gt;                                   &lt;span class="mf"&gt;0.070193&lt;/span&gt;                     
 &lt;span class="err"&gt;##&lt;/span&gt;               
@@ -450,12 +638,12 @@ m1 &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; lmer&lt;span class="p"&gt;(&lt;/
 &lt;span class="kp"&gt;system.time&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;m1.prall &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; profile&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;))&lt;/span&gt;
 
 &lt;span class="c1"&gt;##    user  system elapsed &lt;/span&gt;
-&lt;span class="c1"&gt;##   5.069   0.022   5.094&lt;/span&gt;
+&lt;span class="c1"&gt;##   3.294   0.039   3.401&lt;/span&gt;
 
 &lt;span class="kp"&gt;system.time&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;m1.prre &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; profile&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; which&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;theta_&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; maxmult&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="c1"&gt;## lower maxmult to avoid step error&lt;/span&gt;
 
 &lt;span class="c1"&gt;##    user  system elapsed &lt;/span&gt;
-&lt;span class="c1"&gt;##   1.174   0.007   1.182&lt;/span&gt;
+&lt;span class="c1"&gt;##   0.575   0.001   0.576&lt;/span&gt;
 
 lattice&lt;span class="o"&gt;::&lt;/span&gt;xyplot&lt;span class="p"&gt;(&lt;/span&gt;m1.prall&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -509,7 +697,6 @@ the full (4-way interacting) model&lt;/p&gt;
     &lt;span class="nx"&gt;lsmip&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;m2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;water_add&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt; &lt;span class="nx"&gt;water_hetero&lt;/span&gt;  &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nx"&gt;nutrient_add&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nx"&gt;nutrient_hetero&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;response&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 
-&lt;span class="err"&gt;##&lt;/span&gt; &lt;span class="nx"&gt;Loading&lt;/span&gt; &lt;span class="nx"&gt;required&lt;/span&gt; &lt;span class="nx"&gt;namespace&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;pbkrtest&lt;/span&gt;
 &lt;span class="err"&gt;##&lt;/span&gt; &lt;span class="nx"&gt;Note&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;method&lt;/span&gt; &lt;span class="kd"&gt;with&lt;/span&gt; &lt;span class="nx"&gt;signature&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;sparseMatrix#ANY&amp;#39;&lt;/span&gt; &lt;span class="nx"&gt;chosen&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;kronecker&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
 &lt;span class="err"&gt;##&lt;/span&gt;  &lt;span class="nx"&gt;target&lt;/span&gt; &lt;span class="nx"&gt;signature&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;dgCMatrix#ngCMatrix&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
 &lt;span class="err"&gt;##&lt;/span&gt;  &lt;span class="s2"&gt;&amp;quot;ANY#sparseMatrix&amp;quot;&lt;/span&gt; &lt;span class="nx"&gt;would&lt;/span&gt; &lt;span class="nx"&gt;also&lt;/span&gt; &lt;span class="nx"&gt;be&lt;/span&gt; &lt;span class="nx"&gt;valid&lt;/span&gt;
@@ -519,22 +706,17 @@ the full (4-way interacting) model&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-1.svg" /&gt;
 &lt;img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-2.svg" /&gt;
 &lt;img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-3.svg" /&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;lsmeans&lt;/span&gt;&lt;span class="p"&gt;)){&lt;/span&gt;
-    &lt;span class="err"&gt;##&lt;/span&gt; &lt;span class="nx"&gt;can&lt;/span&gt; &lt;span class="nx"&gt;also&lt;/span&gt; &lt;span class="nx"&gt;plot&lt;/span&gt; &lt;span class="nx"&gt;quickly&lt;/span&gt; &lt;span class="nx"&gt;mean&lt;/span&gt; &lt;span class="nx"&gt;estimates&lt;/span&gt; &lt;span class="nx"&gt;plus&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;Wald&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nx"&gt;confidence&lt;/span&gt; &lt;span class="nx"&gt;intervals&lt;/span&gt;
-    &lt;span class="err"&gt;##&lt;/span&gt; &lt;span class="nx"&gt;not&lt;/span&gt; &lt;span class="nx"&gt;that&lt;/span&gt; &lt;span class="nx"&gt;it&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s possible to do finite size correction in lsmeans (but only for linear models)&lt;/span&gt;
-&lt;span class="s1"&gt;    ## steps take a min w/ lots of RE for some reason&lt;/span&gt;
-&lt;span class="s1"&gt;    m2.lsm &amp;lt;- lsmeans(m2, ~ water_add * water_hetero   | nutrient_hetero  * nutrient_add)&lt;/span&gt;
-&lt;span class="s1"&gt;    plot(m2.lsm, layout =c(2, 3), horizontal=TRUE)&lt;/span&gt;
-&lt;span class="s1"&gt;}&lt;/span&gt;
-
-&lt;span class="s1"&gt;## Loading required namespace: pbkrtest&lt;/span&gt;
-&lt;span class="s1"&gt;## Note: method with signature &amp;#39;&lt;/span&gt;&lt;span class="nx"&gt;sparseMatrix&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="nx"&gt;ANY&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; chosen for function &amp;#39;&lt;/span&gt;&lt;span class="nx"&gt;kronecker&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;,&lt;/span&gt;
-&lt;span class="s1"&gt;##  target signature &amp;#39;&lt;/span&gt;&lt;span class="nx"&gt;dgCMatrix&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="nx"&gt;ngCMatrix&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-&lt;span class="err"&gt;##&lt;/span&gt;  &lt;span class="s2"&gt;&amp;quot;ANY#sparseMatrix&amp;quot;&lt;/span&gt; &lt;span class="nx"&gt;would&lt;/span&gt; &lt;span class="nx"&gt;also&lt;/span&gt; &lt;span class="nx"&gt;be&lt;/span&gt; &lt;span class="nx"&gt;valid&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kr"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kn"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;lsmeans&lt;span class="p"&gt;)){&lt;/span&gt;
+    &lt;span class="c1"&gt;## can also plot quickly mean estimates plus (Wald) confidence intervals&lt;/span&gt;
+    &lt;span class="c1"&gt;## not that it&amp;#39;s possible to do finite size correction in lsmeans (but only for linear models)&lt;/span&gt;
+    &lt;span class="c1"&gt;## steps take a min w/ lots of RE for some reason&lt;/span&gt;
+    m2.lsm &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; lsmeans&lt;span class="p"&gt;(&lt;/span&gt;m2&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt; water_add &lt;span class="o"&gt;*&lt;/span&gt; water_hetero   &lt;span class="o"&gt;|&lt;/span&gt; nutrient_hetero  &lt;span class="o"&gt;*&lt;/span&gt; nutrient_add&lt;span class="p"&gt;)&lt;/span&gt;
+    plot&lt;span class="p"&gt;(&lt;/span&gt;m2.lsm&lt;span class="p"&gt;,&lt;/span&gt; layout &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; horizontal&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="" src="{attach}mixedeffects_viz_files/figure-markdown_strict/ls-means-CI-plots-1.svg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/ls-means-CI-plots-1.svg" /&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="c1"&gt;## for the simpler&lt;/span&gt;
     lsmip&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; nutrient_hetero &lt;span class="o"&gt;~&lt;/span&gt;  water_add &lt;span class="o"&gt;|&lt;/span&gt; water_hetero &lt;span class="o"&gt;*&lt;/span&gt; nutrient_add  &lt;span class="p"&gt;,&lt;/span&gt; type&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;response&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     lsmip&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; water_add &lt;span class="o"&gt;~&lt;/span&gt; nutrient_add  &lt;span class="o"&gt;|&lt;/span&gt; water_hetero &lt;span class="o"&gt;*&lt;/span&gt; nutrient_hetero&lt;span class="p"&gt;,&lt;/span&gt; type&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;response&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -631,6 +813,10 @@ in the plot below. The Wald method only estimates CIs for fixed effects.&lt;/p&g
     &lt;span class="p"&gt;}&lt;/span&gt;
 
 &lt;span class="err"&gt;##&lt;/span&gt; &lt;span class="nx"&gt;Computing&lt;/span&gt; &lt;span class="nx"&gt;bootstrap&lt;/span&gt; &lt;span class="nx"&gt;confidence&lt;/span&gt; &lt;span class="nx"&gt;intervals&lt;/span&gt; &lt;span class="p"&gt;...&lt;/span&gt;
+
+&lt;span class="err"&gt;##&lt;/span&gt; &lt;span class="nx"&gt;Warning&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;Removed&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="nx"&gt;rows&lt;/span&gt; &lt;span class="nx"&gt;containing&lt;/span&gt; &lt;span class="nx"&gt;missing&lt;/span&gt; &lt;span class="nx"&gt;values&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;geom_segment&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;
+
+&lt;span class="err"&gt;##&lt;/span&gt; &lt;span class="nx"&gt;Warning&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;Removed&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="nx"&gt;rows&lt;/span&gt; &lt;span class="nx"&gt;containing&lt;/span&gt; &lt;span class="nx"&gt;missing&lt;/span&gt; &lt;span class="nx"&gt;values&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;geom_segment&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -662,8 +848,6 @@ recommended instead&lt;/p&gt;
     &lt;span class="c1"&gt;## head(tdm1)&lt;/span&gt;
     &lt;span class="c1"&gt;## head(augm1)&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="c1"&gt;## Loading required package: broom&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -699,13 +883,20 @@ d2 &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;within&lt
                data&lt;span class="o"&gt;=&lt;/span&gt;d2&lt;span class="p"&gt;,&lt;/span&gt; family&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;binomial&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
 &lt;span class="c1"&gt;##    user  system elapsed &lt;/span&gt;
-&lt;span class="c1"&gt;##   1.019   0.002   1.022&lt;/span&gt;
+&lt;span class="c1"&gt;##   0.602   0.004   0.685&lt;/span&gt;
 
 &lt;span class="kp"&gt;system.time&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;gm1 &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; glmer&lt;span class="p"&gt;(&lt;/span&gt;cop &lt;span class="o"&gt;~&lt;/span&gt; gendist_scl &lt;span class="o"&gt;+&lt;/span&gt; geodist_scl &lt;span class="o"&gt;+&lt;/span&gt;  sizediff_scl2 &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; Series&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
                          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; Male&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; Female&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt; data&lt;span class="o"&gt;=&lt;/span&gt;d2&lt;span class="p"&gt;,&lt;/span&gt; family&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;binomial&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
+&lt;span class="c1"&gt;## Warning in checkConv(attr(opt, &amp;quot;derivs&amp;quot;), opt$par, ctrl = control&lt;/span&gt;
+&lt;span class="c1"&gt;## $checkConv, : unable to evaluate scaled gradient&lt;/span&gt;
+
+&lt;span class="c1"&gt;## Warning in checkConv(attr(opt, &amp;quot;derivs&amp;quot;), opt$par, ctrl = control&lt;/span&gt;
+&lt;span class="c1"&gt;## $checkConv, : Hessian is numerically singular: parameters are not uniquely&lt;/span&gt;
+&lt;span class="c1"&gt;## determined&lt;/span&gt;
+
 &lt;span class="c1"&gt;##    user  system elapsed &lt;/span&gt;
-&lt;span class="c1"&gt;##   2.815   0.007   2.826&lt;/span&gt;
+&lt;span class="c1"&gt;##   1.489   0.007   1.498&lt;/span&gt;
 
 anova&lt;span class="p"&gt;(&lt;/span&gt;gm1&lt;span class="p"&gt;,&lt;/span&gt; gm0&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# no need for non-size predictors&lt;/span&gt;
 
@@ -720,8 +911,8 @@ anova&lt;span class="p"&gt;(&lt;/span&gt;gm1&lt;span class="p"&gt;,&lt;/span&gt;
 
 plot&lt;span class="p"&gt;(&lt;/span&gt;gm0&lt;span class="p"&gt;,&lt;/span&gt; type&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;p&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; id &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0.05&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;span class="c1"&gt;## Warning in if (grps == &amp;quot;.obs&amp;quot;) return(seq(fitted(object))): the condition&lt;/span&gt;
-&lt;span class="c1"&gt;## has length &amp;gt; 1 and only the first element will be used&lt;/span&gt;
+&lt;span class="c1"&gt;## Warning in if (as.character(grps) == &amp;quot;.obs&amp;quot;) return(seq(fitted(object))):&lt;/span&gt;
+&lt;span class="c1"&gt;## the condition has length &amp;gt; 1 and only the first element will be used&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -774,7 +965,7 @@ gm0noindre &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; glmer&lt;span class="p"&
 &lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="c1"&gt;##    user  system elapsed &lt;/span&gt;
-&lt;span class="c1"&gt;##  30.527   0.045  30.575&lt;/span&gt;
+&lt;span class="c1"&gt;##  10.312   0.046  10.406&lt;/span&gt;
 
 &lt;span class="c1"&gt;#system.time(&lt;/span&gt;
 &lt;span class="c1"&gt;#    gm0_full.prall &amp;lt;- profile(gm0, devtol=1e-6)&lt;/span&gt;

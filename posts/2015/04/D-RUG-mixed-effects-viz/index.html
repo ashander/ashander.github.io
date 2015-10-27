@@ -211,10 +211,6 @@ vignette(package=&#39;lme4&#39;)
 
 <p>Packages:</p>
 <div class="highlight"><pre>library(lme4)
-
-## Loading required package: Matrix
-## Loading required package: Rcpp
-
 library(lattice) ## already loaded via namespace by lme4 -- may as well attach
 #library(ggplot2) # recommend
 #library(lsmeans) #recommend
@@ -268,11 +264,11 @@ blocks.</p>
 <span class="nx">VarCorr</span><span class="p">(</span><span class="nx">m2</span><span class="p">)</span>
 
 <span class="err">##</span>  <span class="nx">Groups</span>   <span class="nx">Name</span>                              <span class="nx">Std</span><span class="p">.</span><span class="nx">Dev</span><span class="p">.</span> <span class="nx">Corr</span>                
-<span class="err">##</span>  <span class="nx">block</span>    <span class="p">(</span><span class="nx">Intercept</span><span class="p">)</span>                       <span class="mf">0.031806</span>                     
-<span class="err">##</span>           <span class="nx">water_heteropulse</span>                 <span class="mf">0.041752</span> <span class="o">-</span><span class="mf">0.739</span>              
+<span class="err">##</span>  <span class="nx">block</span>    <span class="p">(</span><span class="nx">Intercept</span><span class="p">)</span>                       <span class="mf">0.031807</span>                     
+<span class="err">##</span>           <span class="nx">water_heteropulse</span>                 <span class="mf">0.041753</span> <span class="o">-</span><span class="mf">0.739</span>              
 <span class="err">##</span>           <span class="nx">water_add250</span> <span class="nx">mL</span>                   <span class="mf">0.061256</span> <span class="o">-</span><span class="mf">0.938</span>  <span class="mf">0.643</span>       
 <span class="err">##</span>           <span class="nx">water_add375</span> <span class="nx">mL</span>                   <span class="mf">0.060199</span> <span class="o">-</span><span class="mf">0.622</span>  <span class="mf">0.235</span>  <span class="mf">0.848</span>
-<span class="err">##</span>           <span class="nx">water_heteropulse</span><span class="o">:</span><span class="nx">water_add250</span> <span class="nx">mL</span> <span class="mf">0.074705</span>  <span class="mf">0.935</span> <span class="o">-</span><span class="mf">0.930</span> <span class="o">-</span><span class="mf">0.853</span>
+<span class="err">##</span>           <span class="nx">water_heteropulse</span><span class="o">:</span><span class="nx">water_add250</span> <span class="nx">mL</span> <span class="mf">0.074706</span>  <span class="mf">0.935</span> <span class="o">-</span><span class="mf">0.930</span> <span class="o">-</span><span class="mf">0.853</span>
 <span class="err">##</span>           <span class="nx">water_heteropulse</span><span class="o">:</span><span class="nx">water_add375</span> <span class="nx">mL</span> <span class="mf">0.073710</span>  <span class="mf">0.427</span> <span class="o">-</span><span class="mf">0.119</span> <span class="o">-</span><span class="mf">0.713</span>
 <span class="err">##</span>  <span class="nx">Residual</span>                                   <span class="mf">0.070193</span>                     
 <span class="err">##</span>               
@@ -349,12 +345,12 @@ m1 <span class="o">&lt;-</span> lmer<span class="p">(</span><span class="kp">log
 <span class="kp">system.time</span><span class="p">(</span>m1.prall <span class="o">&lt;-</span> profile<span class="p">(</span>m1<span class="p">))</span>
 
 <span class="c1">##    user  system elapsed </span>
-<span class="c1">##   5.069   0.022   5.094</span>
+<span class="c1">##   3.294   0.039   3.401</span>
 
 <span class="kp">system.time</span><span class="p">(</span>m1.prre <span class="o">&lt;-</span> profile<span class="p">(</span>m1<span class="p">,</span> which<span class="o">=</span><span class="s">&#39;theta_&#39;</span><span class="p">,</span> maxmult<span class="o">=</span><span class="m">5</span><span class="p">))</span> <span class="c1">## lower maxmult to avoid step error</span>
 
 <span class="c1">##    user  system elapsed </span>
-<span class="c1">##   1.174   0.007   1.182</span>
+<span class="c1">##   0.575   0.001   0.576</span>
 
 lattice<span class="o">::</span>xyplot<span class="p">(</span>m1.prall<span class="p">)</span>
 </pre></div>
@@ -408,7 +404,6 @@ the full (4-way interacting) model</p>
     <span class="nx">lsmip</span><span class="p">(</span><span class="nx">m2</span><span class="p">,</span> <span class="nx">water_add</span> <span class="o">~</span> <span class="nx">water_hetero</span>  <span class="o">|</span> <span class="nx">nutrient_add</span> <span class="o">*</span> <span class="nx">nutrient_hetero</span><span class="p">,</span> <span class="nx">type</span><span class="o">=</span><span class="s1">&#39;response&#39;</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="err">##</span> <span class="nx">Loading</span> <span class="nx">required</span> <span class="nx">namespace</span><span class="o">:</span> <span class="nx">pbkrtest</span>
 <span class="err">##</span> <span class="nx">Note</span><span class="o">:</span> <span class="nx">method</span> <span class="kd">with</span> <span class="nx">signature</span> <span class="s1">&#39;sparseMatrix#ANY&#39;</span> <span class="nx">chosen</span> <span class="k">for</span> <span class="kd">function</span> <span class="s1">&#39;kronecker&#39;</span><span class="p">,</span>
 <span class="err">##</span>  <span class="nx">target</span> <span class="nx">signature</span> <span class="s1">&#39;dgCMatrix#ngCMatrix&#39;</span><span class="p">.</span>
 <span class="err">##</span>  <span class="s2">&quot;ANY#sparseMatrix&quot;</span> <span class="nx">would</span> <span class="nx">also</span> <span class="nx">be</span> <span class="nx">valid</span>
@@ -418,22 +413,17 @@ the full (4-way interacting) model</p>
 <p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-1.svg" />
 <img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-2.svg" />
 <img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-3.svg" /></p>
-<div class="highlight"><pre><span class="k">if</span><span class="p">(</span><span class="nx">require</span><span class="p">(</span><span class="nx">lsmeans</span><span class="p">)){</span>
-    <span class="err">##</span> <span class="nx">can</span> <span class="nx">also</span> <span class="nx">plot</span> <span class="nx">quickly</span> <span class="nx">mean</span> <span class="nx">estimates</span> <span class="nx">plus</span> <span class="p">(</span><span class="nx">Wald</span><span class="p">)</span> <span class="nx">confidence</span> <span class="nx">intervals</span>
-    <span class="err">##</span> <span class="nx">not</span> <span class="nx">that</span> <span class="nx">it</span><span class="s1">&#39;s possible to do finite size correction in lsmeans (but only for linear models)</span>
-<span class="s1">    ## steps take a min w/ lots of RE for some reason</span>
-<span class="s1">    m2.lsm &lt;- lsmeans(m2, ~ water_add * water_hetero   | nutrient_hetero  * nutrient_add)</span>
-<span class="s1">    plot(m2.lsm, layout =c(2, 3), horizontal=TRUE)</span>
-<span class="s1">}</span>
-
-<span class="s1">## Loading required namespace: pbkrtest</span>
-<span class="s1">## Note: method with signature &#39;</span><span class="nx">sparseMatrix</span><span class="err">#</span><span class="nx">ANY</span><span class="s1">&#39; chosen for function &#39;</span><span class="nx">kronecker</span><span class="s1">&#39;,</span>
-<span class="s1">##  target signature &#39;</span><span class="nx">dgCMatrix</span><span class="err">#</span><span class="nx">ngCMatrix</span><span class="err">&#39;</span><span class="p">.</span>
-<span class="err">##</span>  <span class="s2">&quot;ANY#sparseMatrix&quot;</span> <span class="nx">would</span> <span class="nx">also</span> <span class="nx">be</span> <span class="nx">valid</span>
+<div class="highlight"><pre><span class="kr">if</span><span class="p">(</span><span class="kn">require</span><span class="p">(</span>lsmeans<span class="p">)){</span>
+    <span class="c1">## can also plot quickly mean estimates plus (Wald) confidence intervals</span>
+    <span class="c1">## not that it&#39;s possible to do finite size correction in lsmeans (but only for linear models)</span>
+    <span class="c1">## steps take a min w/ lots of RE for some reason</span>
+    m2.lsm <span class="o">&lt;-</span> lsmeans<span class="p">(</span>m2<span class="p">,</span> <span class="o">~</span> water_add <span class="o">*</span> water_hetero   <span class="o">|</span> nutrient_hetero  <span class="o">*</span> nutrient_add<span class="p">)</span>
+    plot<span class="p">(</span>m2.lsm<span class="p">,</span> layout <span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">),</span> horizontal<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="p">}</span>
 </pre></div>
 
 
-<p><img alt="" src="{attach}mixedeffects_viz_files/figure-markdown_strict/ls-means-CI-plots-1.svg" /></p>
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/ls-means-CI-plots-1.svg" /></p>
 <div class="highlight"><pre>    <span class="c1">## for the simpler</span>
     lsmip<span class="p">(</span>m1<span class="p">,</span> nutrient_hetero <span class="o">~</span>  water_add <span class="o">|</span> water_hetero <span class="o">*</span> nutrient_add  <span class="p">,</span> type<span class="o">=</span><span class="s">&#39;response&#39;</span><span class="p">)</span>
     lsmip<span class="p">(</span>m1<span class="p">,</span> water_add <span class="o">~</span> nutrient_add  <span class="o">|</span> water_hetero <span class="o">*</span> nutrient_hetero<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;response&#39;</span><span class="p">)</span>
@@ -530,6 +520,10 @@ in the plot below. The Wald method only estimates CIs for fixed effects.</p>
     <span class="p">}</span>
 
 <span class="err">##</span> <span class="nx">Computing</span> <span class="nx">bootstrap</span> <span class="nx">confidence</span> <span class="nx">intervals</span> <span class="p">...</span>
+
+<span class="err">##</span> <span class="nx">Warning</span><span class="o">:</span> <span class="nx">Removed</span> <span class="mi">1</span> <span class="nx">rows</span> <span class="nx">containing</span> <span class="nx">missing</span> <span class="nx">values</span> <span class="p">(</span><span class="nx">geom_segment</span><span class="p">).</span>
+
+<span class="err">##</span> <span class="nx">Warning</span><span class="o">:</span> <span class="nx">Removed</span> <span class="mi">1</span> <span class="nx">rows</span> <span class="nx">containing</span> <span class="nx">missing</span> <span class="nx">values</span> <span class="p">(</span><span class="nx">geom_segment</span><span class="p">).</span>
 </pre></div>
 
 
@@ -561,8 +555,6 @@ recommended instead</p>
     <span class="c1">## head(tdm1)</span>
     <span class="c1">## head(augm1)</span>
 <span class="p">}</span>
-
-<span class="c1">## Loading required package: broom</span>
 </pre></div>
 
 
@@ -598,13 +590,20 @@ d2 <span class="o">&lt;-</span> <span class="kp">within</span><span class="p">(<
                data<span class="o">=</span>d2<span class="p">,</span> family<span class="o">=</span><span class="s">&#39;binomial&#39;</span><span class="p">))</span>
 
 <span class="c1">##    user  system elapsed </span>
-<span class="c1">##   1.019   0.002   1.022</span>
+<span class="c1">##   0.602   0.004   0.685</span>
 
 <span class="kp">system.time</span><span class="p">(</span>gm1 <span class="o">&lt;-</span> glmer<span class="p">(</span>cop <span class="o">~</span> gendist_scl <span class="o">+</span> geodist_scl <span class="o">+</span>  sizediff_scl2 <span class="o">+</span> <span class="p">(</span><span class="m">1</span> <span class="o">|</span> Series<span class="p">)</span> <span class="o">+</span>
                          <span class="p">(</span><span class="m">1</span> <span class="o">|</span> Male<span class="p">)</span>  <span class="o">+</span> <span class="p">(</span><span class="m">1</span> <span class="o">|</span> Female<span class="p">)</span> <span class="p">,</span> data<span class="o">=</span>d2<span class="p">,</span> family<span class="o">=</span><span class="s">&#39;binomial&#39;</span><span class="p">))</span>
 
+<span class="c1">## Warning in checkConv(attr(opt, &quot;derivs&quot;), opt$par, ctrl = control</span>
+<span class="c1">## $checkConv, : unable to evaluate scaled gradient</span>
+
+<span class="c1">## Warning in checkConv(attr(opt, &quot;derivs&quot;), opt$par, ctrl = control</span>
+<span class="c1">## $checkConv, : Hessian is numerically singular: parameters are not uniquely</span>
+<span class="c1">## determined</span>
+
 <span class="c1">##    user  system elapsed </span>
-<span class="c1">##   2.815   0.007   2.826</span>
+<span class="c1">##   1.489   0.007   1.498</span>
 
 anova<span class="p">(</span>gm1<span class="p">,</span> gm0<span class="p">)</span> <span class="c1"># no need for non-size predictors</span>
 
@@ -619,8 +618,8 @@ anova<span class="p">(</span>gm1<span class="p">,</span> gm0<span class="p">)</s
 
 plot<span class="p">(</span>gm0<span class="p">,</span> type<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;p&quot;</span><span class="p">),</span> id <span class="o">=</span> <span class="m">0.05</span> <span class="p">)</span>
 
-<span class="c1">## Warning in if (grps == &quot;.obs&quot;) return(seq(fitted(object))): the condition</span>
-<span class="c1">## has length &gt; 1 and only the first element will be used</span>
+<span class="c1">## Warning in if (as.character(grps) == &quot;.obs&quot;) return(seq(fitted(object))):</span>
+<span class="c1">## the condition has length &gt; 1 and only the first element will be used</span>
 </pre></div>
 
 
@@ -673,7 +672,7 @@ gm0noindre <span class="o">&lt;-</span> glmer<span class="p">(</span>cop <span c
 <span class="p">)</span>
 
 <span class="c1">##    user  system elapsed </span>
-<span class="c1">##  30.527   0.045  30.575</span>
+<span class="c1">##  10.312   0.046  10.406</span>
 
 <span class="c1">#system.time(</span>
 <span class="c1">#    gm0_full.prall &lt;- profile(gm0, devtol=1e-6)</span>
@@ -949,6 +948,7 @@ are also welcome.
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/">Easy alternatives to bar charts in native R graphics</a></li>
+        <li><a href="http://www.ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/">So, you did some GLMs & compared with AIC. Congrats!</a></li>
     </ul>
 </section>
         </article>
@@ -961,6 +961,11 @@ are also welcome.
     <ul class="list-group list-group-flush">
             <li class="list-group-item"><h4><i class="fa fa-clock-o fa-lg"></i><span class="icon-label">Recent</span></h4>
               <ul class="list-group" id="recentposts">
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/">
+                            So, you did some GLMs & compared with AIC. Congrats!
+                        </a>
+                    </li>
                     <li class="list-group-item">
                         <a href="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/">
                             Easy alternatives to bar charts in native R graphics
@@ -979,11 +984,6 @@ are also welcome.
                     <li class="list-group-item">
                         <a href="http://www.ashander.info/posts/2011/07/Unhealth-plain/">
                             The Central Valley long ago
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="http://www.ashander.info/posts/2010/01/Jobless-recovery/">
-                            Jobless recovery and growth-signalling autonomy
                         </a>
                     </li>
                 </ul>
