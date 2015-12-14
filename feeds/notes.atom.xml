@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jaime Ashander</title><link href="http://www.ashander.info/" rel="alternate"></link><link href="http://www.ashander.info/feeds/notes.atom.xml" rel="self"></link><id>http://www.ashander.info/</id><updated>2015-10-26T00:00:00-07:00</updated><entry><title>So, you did some GLMs &amp; compared with AIC. Congrats!</title><link href="http://www.ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/" rel="alternate"></link><updated>2015-10-26T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2015-10-26:posts/2015/10/model-selection-glms-aic-what-to-report/</id><summary type="html">&lt;p&gt;Here's what you need to report in a paper about the model comparison:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jaime Ashander</title><link href="http://www.ashander.info/" rel="alternate"></link><link href="http://www.ashander.info/feeds/notes.atom.xml" rel="self"></link><id>http://www.ashander.info/</id><updated>2015-12-14T00:00:00-08:00</updated><entry><title>So, you did some GLMs &amp; compared with AIC. Congrats!</title><link href="http://www.ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/" rel="alternate"></link><updated>2015-12-14T00:00:00-08:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2015-10-26:posts/2015/10/model-selection-glms-aic-what-to-report/</id><summary type="html">&lt;p&gt;Here's what you need to report in a paper about the model comparison:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;residual deviance&lt;/li&gt;
 &lt;li&gt;residual df&lt;/li&gt;
@@ -9,9 +9,24 @@
 &lt;p&gt;You should also report the null deviance and degrees of freedom, maybe
 in a table caption.&lt;/p&gt;
 &lt;p&gt;Thanks to &lt;a href="http://brunalab.org/"&gt;Emilio Bruna&lt;/a&gt; for prompting this post
-and suggesting its title. Below I'll do a worked example, explain why
-you should include at least these numbers, and mention some situations
-where it's better to use something other than AIC.&lt;/p&gt;
+and suggesting its title. (&lt;strong&gt;Update 2015-12-14&lt;/strong&gt;: thanks also to Ben
+Bolker for &lt;a href="https://github.com/ashander/ashander.github.io/commit/b25af179befbfdcdf013f7b484092296a0324bf6"&gt;pointing out some issues in the first version of this
+post&lt;/a&gt;.)
+Below I'll explain why you should include at least these numbers, do a
+worked example, and mention some situations where it's better to use
+something other than AIC.&lt;/p&gt;
+&lt;h3&gt;What to report&lt;/h3&gt;
+&lt;p&gt;For model selection, a model's AIC is only meaningful relative to that
+of other models, so Akaike and others recommend reporting differences in
+AIC from the best model, &lt;em&gt;Δ&lt;/em&gt;&lt;em&gt;AIC&lt;/em&gt;, and AIC &lt;em&gt;weight&lt;/em&gt;. The latter can be
+viewed as an estimate of the probability a model gives the best
+predictions on new data (conditional on the models considered; Burnham
+and Anderson 2004, McElreath 2015). Also, neither differences in AIC
+less than 0.1 nor differences in AIC weights below 0.01 are really
+meaningful, so round the reported numbers appropriately.&lt;/p&gt;
+&lt;p&gt;Finally, even if using an information criterion include the residual
+deviance and degrees of freedom for each model. These provide a (rough)
+goodness of fit.&lt;/p&gt;
 &lt;h3&gt;Example: UC Berkeley admissions and gender&lt;/h3&gt;
 &lt;p&gt;Let's look at the built-in &lt;code&gt;UCBAdmissions&lt;/code&gt; data. As R will tell you,
 these data are often used to illustrate Simpson's paradox (see
@@ -41,6 +56,7 @@ applicant gender, department identity, or both on admission.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;m1 &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; glm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;cbind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;Admitted&lt;span class="p"&gt;,&lt;/span&gt; Rejected&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt; Gender&lt;span class="p"&gt;,&lt;/span&gt; d&lt;span class="p"&gt;,&lt;/span&gt; family&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;binomial&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 m2 &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; glm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;cbind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;Admitted&lt;span class="p"&gt;,&lt;/span&gt; Rejected&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt; Dept&lt;span class="p"&gt;,&lt;/span&gt; d&lt;span class="p"&gt;,&lt;/span&gt; family &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;binomial&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 m3 &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; glm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;cbind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;Admitted&lt;span class="p"&gt;,&lt;/span&gt; Rejected&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt; Dept &lt;span class="o"&gt;+&lt;/span&gt; Gender&lt;span class="p"&gt;,&lt;/span&gt; d&lt;span class="p"&gt;,&lt;/span&gt; family &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;binomial&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+model.names &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;1 Gender&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;2 Dept&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;3 Gender + Dept&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -49,69 +65,90 @@ and department, the data here are insufficient to fit such a model.)&lt;/p&gt;
 &lt;p&gt;Running &lt;code&gt;summary&lt;/code&gt; on any one of the fits yields a bunch of stats: AIC,
 Residual and null deviance, as well as coefficients, their standard
 errors, and significance.&lt;/p&gt;
-&lt;h3&gt;What to report&lt;/h3&gt;
-&lt;p&gt;We could type by hand the AIC and other stats. Instead, we'll use &lt;a href="http://varianceexplained.org/"&gt;David
-Robinson&lt;/a&gt;'s &lt;code&gt;broom&lt;/code&gt; which gives tidy
-summaries of model objects.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;summary.table &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;do.call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;rbind&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;lapply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; m2&lt;span class="p"&gt;,&lt;/span&gt; m3&lt;span class="p"&gt;),&lt;/span&gt; broom&lt;span class="o"&gt;::&lt;/span&gt;glance&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="kp"&gt;summary.table&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;model&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;
+&lt;h3&gt;How to do it in &lt;code&gt;R&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;We could type by hand the AIC and other stats. No fun!&lt;/p&gt;
+&lt;p&gt;There are two other options.&lt;/p&gt;
+&lt;p&gt;First is to use &lt;a href="http://varianceexplained.org/"&gt;David Robinson&lt;/a&gt;'s
+&lt;code&gt;broom&lt;/code&gt; which gives tidy summaries of model objects. The second is to
+use &lt;a href="http://ms.mcmaster.ca/~bolker/"&gt;Ben Bolker&lt;/a&gt;'s &lt;code&gt;bbmle&lt;/code&gt; which
+provides methods for generating pretty tables of xIC values.&lt;/p&gt;
+&lt;h4&gt;Using broom&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;summ.table &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;do.call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;rbind&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;lapply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; m2&lt;span class="p"&gt;,&lt;/span&gt; m3&lt;span class="p"&gt;),&lt;/span&gt; broom&lt;span class="o"&gt;::&lt;/span&gt;glance&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;If we take a look at &lt;code&gt;summary.table&lt;/code&gt;, we'll see it has all the
-ingredients we might like to report from model selection, whether via
-AIC, BIC, or just the deviance. These are, in order, null.deviance,
-df.null, logLik, AIC, BIC, deviance, df.residual, model.&lt;/p&gt;
+&lt;p&gt;If we take a look at &lt;code&gt;summ.table&lt;/code&gt;, we'll see it has all the ingredients
+we might like to report from model selection, whether via AIC, BIC, or
+just the deviance. These are, in order, null.deviance, df.null, logLik,
+AIC, BIC, deviance, df.residual.&lt;/p&gt;
 &lt;p&gt;Creating a table with our own desired columns in an appropriate order is
 easy.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;table.cols &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;model&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;df.residual&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;deviance&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;AIC&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-reported.table &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;summary.table&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;table.cols&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="kp"&gt;names&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;reported.table&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Model&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Resid. Df&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Resid. Dev&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;AIC&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;table.cols &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;df.residual&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;deviance&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;AIC&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+reported.table &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; summ.table&lt;span class="p"&gt;[&lt;/span&gt;table.cols&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="kp"&gt;names&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;reported.table&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Resid. Df&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Resid. Dev&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;AIC&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-
-&lt;p&gt;For model selection, a model's AIC is only meaningful relative to that
-of other models, so Akaike and others recommend reporting differences in
-AIC from the best model, &lt;em&gt;Δ&lt;/em&gt;&lt;em&gt;AIC&lt;/em&gt;, and AIC weights &lt;em&gt;wAIC&lt;/em&gt;. The latter
-can be viewed as an estimate of the probability a model gives the best
-predictions on new data (conditional on the models considered; Burnham
-and Anderson 2002, McElreath 2015).&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;reported.table&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;dAIC&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt;  &lt;span class="kp"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;reported.table&lt;span class="p"&gt;,&lt;/span&gt; AIC &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="kp"&gt;min&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;AIC&lt;span class="p"&gt;))&lt;/span&gt;
-reported.table&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;wAIC&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;reported.table&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="m"&gt;0.5&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; dAIC&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="kp"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="m"&gt;0.5&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; dAIC&lt;span class="p"&gt;)))&lt;/span&gt;
+reported.table&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;dAIC&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt;  &lt;span class="kp"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;reported.table&lt;span class="p"&gt;,&lt;/span&gt; AIC &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="kp"&gt;min&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;AIC&lt;span class="p"&gt;))&lt;/span&gt;
+reported.table&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;weight&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;reported.table&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="m"&gt;0.5&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; dAIC&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="kp"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="m"&gt;0.5&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; dAIC&lt;span class="p"&gt;)))&lt;/span&gt;
 reported.table&lt;span class="o"&gt;$&lt;/span&gt;AIC &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kc"&gt;NULL&lt;/span&gt;
+reported.table&lt;span class="o"&gt;$&lt;/span&gt;weight &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;round&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;reported.table&lt;span class="o"&gt;$&lt;/span&gt;weight&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+reported.table&lt;span class="o"&gt;$&lt;/span&gt;dAIC &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;round&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;reported.table&lt;span class="o"&gt;$&lt;/span&gt;dAIC&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="kp"&gt;row.names&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;reported.table&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; model.names
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;With this advice in mind, here's &lt;em&gt;a minimal table for reporting model
-selection on GLMs&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;With my advice above in mind, here's &lt;em&gt;a minimal table for reporting
+model selection on GLMs&lt;/em&gt; using fitting results extracted with
+&lt;code&gt;broom::glance&lt;/code&gt;:&lt;/p&gt;
 &lt;p&gt;Caption: Model selection for the effect gender (model 1), department
 (model 2), and both gender and department (model 3) on admission
-probability with 11 null degrees of freedom and 877.06 null deviance.&lt;/p&gt;
+probability fit to 12 observations (i.e., total degrees of freedom) with
+877.056 null deviance.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;reported.table
 
-##   Model Resid. Df Resid. Dev   dAIC     wAIC
-## 1     1        10        784 753.87 1.1e-164
-## 2     2         6         22   0.00  5.6e-01
-## 3     3         5         20   0.47  4.4e-01
+##                 Resid. Df Resid. Dev  dAIC weight
+## 1 Gender               10      783.6 753.9   0.00
+## 2 Dept                  6       21.7   0.0   0.56
+## 3 Gender + Dept         5       20.2   0.5   0.44
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Even if using an information criterion, include the residual deviance
-and degrees of freedom for each model. These provide a (rough) goodness
-of fit measure for each model.&lt;/p&gt;
+&lt;h4&gt;Using &lt;code&gt;bbmle&lt;/code&gt;&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;reported.table2 &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; bbmle&lt;span class="o"&gt;::&lt;/span&gt;AICtab&lt;span class="p"&gt;(&lt;/span&gt;m1&lt;span class="p"&gt;,&lt;/span&gt; m2&lt;span class="p"&gt;,&lt;/span&gt; m3&lt;span class="p"&gt;,&lt;/span&gt; weights &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; sort &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;FALSE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; mnames &lt;span class="o"&gt;=&lt;/span&gt; model.names&lt;span class="p"&gt;)&lt;/span&gt;
+reported.table2&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Resid. Dev&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;  &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; summ.table&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;deviance&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt; &lt;span class="c1"&gt;# get the deviance from broom&amp;#39;d table&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Caption: Model selection for the effect gender (model 1), department
+(model 2), and both gender and department (model 3) on admission
+probability fit to 12 observations (i.e., total degrees of freedom) with
+877.056 null deviance.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;reported.table2
+
+##                 dAIC  df weight Resid. Dev
+## 1 Gender        753.9 2  &amp;lt;0.001 783.6     
+## 2 Dept            0.0 6  0.56    21.7     
+## 3 Gender + Dept   0.5 7  0.44    20.2
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;Of course, model selection is just the beginning of reporting your
 results. See the PPS below for some thoughts on reporting results of the
 best model(s).&lt;/p&gt;
+&lt;p&gt;And, before you even did model selection, you should have asked
+yourself...&lt;/p&gt;
 &lt;h3&gt;Is AIC the right criterion?&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;For small data, you should use AICc -- the small sample correction
-    which provides greater penalty for each parameter but approaches AIC
-    as &lt;em&gt;n&lt;/em&gt; becomes large. If it makes a difference, you should use it.
-    (I probably should have used it above.)&lt;/li&gt;
-&lt;li&gt;For large data, consider BIC, which is asymptotically consistent
-    while AIC is not (see Hastie &lt;em&gt;et al.&lt;/em&gt; 2009, which is
-    available online). AIC typically favors overly-complex models with
-    large &lt;em&gt;n&lt;/em&gt; relative to BIC.&lt;/li&gt;
+&lt;li&gt;For small data and frequentist inference, you should use AICc -- the
+    small sample correction which provides greater penalty for each
+    parameter but approaches AIC as &lt;em&gt;n&lt;/em&gt; becomes large. If it makes a
+    difference, you should use it. (I probably should have used
+    it above.)&lt;/li&gt;
+&lt;li&gt;For large data and frequentist inference , consider BIC, which is
+    asymptotically consistent while AIC is not (see Hastie &lt;em&gt;et al.&lt;/em&gt;
+    2009, which is available online). AIC typically favors
+    overly-complex models with large &lt;em&gt;n&lt;/em&gt; relative to BIC. Note, however,
+    that this is not an issue for prediction, only inference of a &lt;em&gt;true&lt;/em&gt;
+    model (if one exists; Sec. 6.4 McElreath 2015).&lt;/li&gt;
 &lt;li&gt;For Bayesian models, consider &lt;a href="http://andrewgelman.com/2015/07/16/new-papers-on-loowaic-and-stan/"&gt;WAIC or
     LOO&lt;/a&gt;
     (instead of DIC, which has issues with non-Gaussian posteriors
@@ -121,13 +158,21 @@ best model(s).&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h3&gt;Further Reading &amp;amp; References&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="http://ms.mcmaster.ca/~bolker/misc/GLMM_results_report.pdf"&gt;Ben Bolker on reporting results in the
-    text&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Burnham, Kenneth P., and David R. Anderson. 2002. Model selection
-    and multimodel inference: a practical
-    information-theoretic approach. Springer, New York, NY, USA.&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://ms.mcmaster.ca/~bolker/misc/GLMM_results_report.pdf"&gt;Ben Bolker on reporting results in the text for
+    GLMMs&lt;/a&gt;
+    this is a piece of a larger chapter &lt;a href="http://ms.mcmaster.ca/~bolker/R/misc/foxchapter/bolker_chap.html"&gt;GLMMs: worked
+    examples&lt;/a&gt;
+    that approaches inference as model checking and improvement (as
+    opposed to multi-model inference &lt;em&gt;sensu&lt;/em&gt; Burnham and Anderson 2004)&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://dx.doi.org/10.1177/0049124104268644"&gt;Burnham, and Anderson.
+    2004.&lt;/a&gt; Multimodel
+    Inference: Understanding AIC and BIC in Model Selection.
+    &lt;em&gt;Sociological Methods &amp;amp; Research&lt;/em&gt; 33(2):261-304&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://dx.doi.org/10.1641/B570708"&gt;Elliot and Brook 2007&lt;/a&gt; for a
+    short piece on the philosophical background of multiple working
+    hypotheses&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://statweb.stanford.edu/~tibs/ElemStatLearn/"&gt;Hastie, Tibshirani, and Friedman.
-    2009&lt;/a&gt; Elements of
+    2009.&lt;/a&gt; Elements of
     Statistical Learning, Second Edition. Springer, New York, NY, USA.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.crcpress.com/Statistical-Rethinking-A-Bayesian-Course-with-Examples-in-R-and-Stan/McElreath/9781482253443"&gt;McElreath. 2015.&lt;/a&gt;
     Statistical Rethinking. CRC Press.&lt;/li&gt;
@@ -160,22 +205,34 @@ as well just do this and report the table:&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h3&gt;PPS: Evaluating the best model&lt;/h3&gt;
-&lt;p&gt;For the best model(s), you should then go on to report model results in
-the text, as &lt;a href="http://ms.mcmaster.ca/~bolker/misc/GLMM_results_report.pdf"&gt;Ben Bolker
-demonstrates&lt;/a&gt;,
-and visualize the fit relative to the data.&lt;/p&gt;
+&lt;h3&gt;PPS: Evaluating the best model(s)&lt;/h3&gt;
+&lt;p&gt;For the best model(s), you should then go on to visualize the fit
+relative to the data (and report model results in the text).&lt;/p&gt;
 &lt;p&gt;To visualize the admissions data and mean fits from models 2 and 3
 (which have approximately equal AIC weight), we can use &lt;code&gt;ggplot2&lt;/code&gt; and
 &lt;code&gt;augment&lt;/code&gt; from broom (which adds model predictions and statistics to the
-data):&lt;/p&gt;
+data).&lt;/p&gt;
+&lt;p&gt;To provide model-averaged predictions is a bit more work:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;m3.pred &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; broom&lt;span class="o"&gt;::&lt;/span&gt;augment&lt;span class="p"&gt;(&lt;/span&gt;m3&lt;span class="p"&gt;)&lt;/span&gt;
 m2.pred &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; broom&lt;span class="o"&gt;::&lt;/span&gt;augment&lt;span class="p"&gt;(&lt;/span&gt;m2&lt;span class="p"&gt;)&lt;/span&gt;
+m2.weight &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; reported.table&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;weight&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+m3.weight &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; reported.table&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;weight&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+mavg.pred &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; m2.weight &lt;span class="o"&gt;*&lt;/span&gt; m2.pred&lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; m3.weight &lt;span class="o"&gt;*&lt;/span&gt; m3.pred&lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+mavg.pred &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;cbind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;m3.pred&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; mavg.pred&lt;span class="p"&gt;)&lt;/span&gt;
+
 &lt;span class="kn"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;ggplot2&lt;span class="p"&gt;)&lt;/span&gt;
 ggplot&lt;span class="p"&gt;(&lt;/span&gt;d&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
-    geom_point&lt;span class="p"&gt;(&lt;/span&gt;aes&lt;span class="p"&gt;(&lt;/span&gt;Dept&lt;span class="p"&gt;,&lt;/span&gt; Admitted &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;Admitted &lt;span class="o"&gt;+&lt;/span&gt; Rejected&lt;span class="p"&gt;),&lt;/span&gt; color&lt;span class="o"&gt;=&lt;/span&gt;Gender&lt;span class="p"&gt;,&lt;/span&gt; size&lt;span class="o"&gt;=&lt;/span&gt;Admitted &lt;span class="o"&gt;+&lt;/span&gt; Rejected&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
-    geom_point&lt;span class="p"&gt;(&lt;/span&gt;aes&lt;span class="p"&gt;(&lt;/span&gt;Dept&lt;span class="p"&gt;,&lt;/span&gt; plogis&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;.&lt;/span&gt;fitted&lt;span class="p"&gt;)),&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt;m2.pred&lt;span class="p"&gt;,&lt;/span&gt; shape &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; alpha&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0.4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; geom_point&lt;span class="p"&gt;(&lt;/span&gt;aes&lt;span class="p"&gt;(&lt;/span&gt;Dept&lt;span class="p"&gt;,&lt;/span&gt; plogis&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;.&lt;/span&gt;fitted&lt;span class="p"&gt;),&lt;/span&gt; shape&lt;span class="o"&gt;=&lt;/span&gt;Gender&lt;span class="p"&gt;),&lt;/span&gt; alpha &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0.4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; m3.pred&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
-    theme_minimal&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; scale_color_manual&lt;span class="p"&gt;(&lt;/span&gt;values&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;orange&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; guides&lt;span class="p"&gt;(&lt;/span&gt;shape&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;FALSE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    geom_point&lt;span class="p"&gt;(&lt;/span&gt;aes&lt;span class="p"&gt;(&lt;/span&gt;Dept&lt;span class="p"&gt;,&lt;/span&gt; Admitted &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;Admitted &lt;span class="o"&gt;+&lt;/span&gt; Rejected&lt;span class="p"&gt;),&lt;/span&gt; color&lt;span class="o"&gt;=&lt;/span&gt;Gender&lt;span class="p"&gt;,&lt;/span&gt;
+           size&lt;span class="o"&gt;=&lt;/span&gt;Admitted &lt;span class="o"&gt;+&lt;/span&gt; Rejected&lt;span class="p"&gt;),&lt;/span&gt;
+           position &lt;span class="o"&gt;=&lt;/span&gt; position_dodge&lt;span class="p"&gt;(&lt;/span&gt;width &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+    geom_pointrange&lt;span class="p"&gt;(&lt;/span&gt;aes&lt;span class="p"&gt;(&lt;/span&gt;Dept&lt;span class="p"&gt;,&lt;/span&gt; plogis&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;.&lt;/span&gt;fitted&lt;span class="p"&gt;),&lt;/span&gt;
+            ymin &lt;span class="o"&gt;=&lt;/span&gt; plogis&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;.&lt;/span&gt;fitted &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="m"&gt;.&lt;/span&gt;se.fit&lt;span class="p"&gt;),&lt;/span&gt;
+            ymax &lt;span class="o"&gt;=&lt;/span&gt; plogis&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;.&lt;/span&gt;fitted &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="m"&gt;.&lt;/span&gt;se.fit&lt;span class="p"&gt;),&lt;/span&gt;
+            shape&lt;span class="o"&gt;=&lt;/span&gt;Gender&lt;span class="p"&gt;),&lt;/span&gt;
+            position&lt;span class="o"&gt;=&lt;/span&gt;position_dodge&lt;span class="p"&gt;(&lt;/span&gt;width &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt;mavg.pred&lt;span class="p"&gt;,&lt;/span&gt; alpha&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0.4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+    theme_minimal&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; scale_color_manual&lt;span class="p"&gt;(&lt;/span&gt;values&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;orange&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="c1"&gt;## ymax not defined: adjusting position using y instead&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -184,14 +241,15 @@ deparatment and predictions from model 2 (department only, diamonds) and
 model 3 (department and gender, dots and
 triangles)" src="http://www.ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/model-selection-GLMs-AIC-what-to-report_files/figure-markdown_strict/model-viz-1.svg" /&gt;&lt;/p&gt;
 &lt;p&gt;Admissions (colored dots, size indicates total applicants) versus
-department and predictions from model 2 (department only, diamonds) and
-model 3 (department and gender, dots and triangles)&lt;/p&gt;
+department from UCB Admissions data (included in &lt;code&gt;R&lt;/code&gt;), and averaged
+predictions (means  ±  2 SE) from model 2 (department only) and model 3
+(department and gender), with averaging by AIC weight.&lt;/p&gt;
 &lt;h4&gt;Simpson's paradox&lt;/h4&gt;
 &lt;p&gt;Comparing model 3 with model 1 illustrates Simpson's paradox. Without
 accounting for department, the apparent effect of female gender on
-admission is negative (female odds relative to male 0.54, &lt;em&gt;p&lt;/em&gt; ≈ 0),
-whereas after accounting for department, the effect is positive (but
-weak: female odds relative to male 1.11, &lt;em&gt;p&lt;/em&gt; ≈  0.22).&lt;/p&gt;</summary><category term="R"></category><category term="statistics"></category><category term="model selection"></category><category term="GLM"></category><category term="AIC"></category><category term="deviance"></category></entry><entry><title>Easy alternatives to bar charts in native R graphics</title><link href="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/" rel="alternate"></link><updated>2015-04-28T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2015-04-28:posts/2015/04/barchart-alternatives-in-base-r/</id><summary type="html">&lt;p&gt;It's a long tradition in statistical graphics going from Tufte back to
+admission is negative (female odds relative to male 0.543, &lt;em&gt;p&lt;/em&gt; ≈ 0),
+whereas after accounting for department, the (within-department) effect
+is positive (but weak: female odds relative to male 1.105, &lt;em&gt;p&lt;/em&gt; ≈  0.22).&lt;/p&gt;</summary><category term="R"></category><category term="statistics"></category><category term="model selection"></category><category term="GLM"></category><category term="AIC"></category><category term="deviance"></category></entry><entry><title>Easy alternatives to bar charts in native R graphics</title><link href="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/" rel="alternate"></link><updated>2015-04-28T00:00:00-07:00</updated><author><name>Jaime Ashander</name></author><id>tag:www.ashander.info,2015-04-28:posts/2015/04/barchart-alternatives-in-base-r/</id><summary type="html">&lt;p&gt;It's a long tradition in statistical graphics going from Tufte back to
 &lt;a href="http://en.wikipedia.org/wiki/John_Tukey#Scientific_contributions"&gt;Tukey&lt;/a&gt;
 and
 &lt;a href="http://en.wikipedia.org/wiki/Dot_plot_%28statistics%29#Cleveland_dot_plots"&gt;Cleveland&lt;/a&gt;
