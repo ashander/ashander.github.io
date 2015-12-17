@@ -39,9 +39,10 @@ than AIC.
 For model selection, a model's AIC is only meaningful relative to that of other
 models, so Akaike and others recommend reporting differences in AIC from the
 best model, $\Delta$_AIC_, and AIC _weight_. The latter can be viewed as
-an estimate of the probability a model gives the best predictions on new data
-(conditional on the models considered; Burnham and Anderson 2004, McElreath
-2015).
+an estimate of the proportion of the time a model will give the best predictions on new data
+(conditional on the models considered and assuming the same process generates
+the data; this heuristic view appears justified by simulations, e.g.,  Burnham
+and Anderson 2002 pp. 348).
 Also, neither differences in AIC less than 0.1 nor differences in AIC weights
 below 0.01 are really meaningful, so round the reported numbers appropriately.
 
@@ -169,6 +170,8 @@ And, before you even did model selection, you should have asked yourself...
 * [Burnham, and Anderson. 2004.](https://dx.doi.org/10.1177/0049124104268644)
   Multimodel Inference: Understanding AIC and BIC in Model Selection.
   _Sociological Methods & Research_ 33(2):261-304
+* Burnham, and Anderson. 2002. _Model Selection and Multimodel Inference: A
+  Practical Information-Theoretic Approach._  Second Edition. Springer.
 - [Elliot and Brook 2007](https://dx.doi.org/10.1641/B570708) for a short piece
   on the philosophical background of multiple working hypotheses
 * [Hastie, Tibshirani, and Friedman. 2009.](http://statweb.stanford.edu/~tibs/ElemStatLearn/)
