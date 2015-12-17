@@ -19,11 +19,13 @@ something other than AIC.&lt;/p&gt;
 &lt;p&gt;For model selection, a model's AIC is only meaningful relative to that
 of other models, so Akaike and others recommend reporting differences in
 AIC from the best model, &lt;em&gt;Δ&lt;/em&gt;&lt;em&gt;AIC&lt;/em&gt;, and AIC &lt;em&gt;weight&lt;/em&gt;. The latter can be
-viewed as an estimate of the probability a model gives the best
-predictions on new data (conditional on the models considered; Burnham
-and Anderson 2004, McElreath 2015). Also, neither differences in AIC
-less than 0.1 nor differences in AIC weights below 0.01 are really
-meaningful, so round the reported numbers appropriately.&lt;/p&gt;
+viewed as an estimate of the proportion of the time a model will give
+the best predictions on new data (conditional on the models considered
+and assuming the same process generates the data; this heuristic view
+appears justified by simulations, e.g., Burnham and Anderson 2002 pp.
+348). Also, neither differences in AIC less than 0.1 nor differences in
+AIC weights below 0.01 are really meaningful, so round the reported
+numbers appropriately.&lt;/p&gt;
 &lt;p&gt;Finally, even if using an information criterion include the residual
 deviance and degrees of freedom for each model. These provide a (rough)
 goodness of fit.&lt;/p&gt;
@@ -168,6 +170,9 @@ yourself...&lt;/p&gt;
     2004.&lt;/a&gt; Multimodel
     Inference: Understanding AIC and BIC in Model Selection.
     &lt;em&gt;Sociological Methods &amp;amp; Research&lt;/em&gt; 33(2):261-304&lt;/li&gt;
+&lt;li&gt;Burnham, and Anderson. 2002. &lt;em&gt;Model Selection and Multimodel
+    Inference: A Practical Information-Theoretic Approach.&lt;/em&gt;
+    Second Edition. Springer.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://dx.doi.org/10.1641/B570708"&gt;Elliot and Brook 2007&lt;/a&gt; for a
     short piece on the philosophical background of multiple working
     hypotheses&lt;/li&gt;

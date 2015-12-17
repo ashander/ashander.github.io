@@ -138,11 +138,13 @@ something other than AIC.</p>
 <p>For model selection, a model's AIC is only meaningful relative to that
 of other models, so Akaike and others recommend reporting differences in
 AIC from the best model, <em>Δ</em><em>AIC</em>, and AIC <em>weight</em>. The latter can be
-viewed as an estimate of the probability a model gives the best
-predictions on new data (conditional on the models considered; Burnham
-and Anderson 2004, McElreath 2015). Also, neither differences in AIC
-less than 0.1 nor differences in AIC weights below 0.01 are really
-meaningful, so round the reported numbers appropriately.</p>
+viewed as an estimate of the proportion of the time a model will give
+the best predictions on new data (conditional on the models considered
+and assuming the same process generates the data; this heuristic view
+appears justified by simulations, e.g., Burnham and Anderson 2002 pp.
+348). Also, neither differences in AIC less than 0.1 nor differences in
+AIC weights below 0.01 are really meaningful, so round the reported
+numbers appropriately.</p>
 <p>Finally, even if using an information criterion include the residual
 deviance and degrees of freedom for each model. These provide a (rough)
 goodness of fit.</p>
@@ -287,6 +289,9 @@ yourself...</p>
     2004.</a> Multimodel
     Inference: Understanding AIC and BIC in Model Selection.
     <em>Sociological Methods &amp; Research</em> 33(2):261-304</li>
+<li>Burnham, and Anderson. 2002. <em>Model Selection and Multimodel
+    Inference: A Practical Information-Theoretic Approach.</em>
+    Second Edition. Springer.</li>
 <li><a href="https://dx.doi.org/10.1641/B570708">Elliot and Brook 2007</a> for a
     short piece on the philosophical background of multiple working
     hypotheses</li>
@@ -382,8 +387,8 @@ are also welcome.
 </section><section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/">Easy alternatives to bar charts in native R graphics</a></li>
         <li><a href="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/">Visualizing fits, inference, implications of (G)LMMs</a></li>
+        <li><a href="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/">Easy alternatives to bar charts in native R graphics</a></li>
     </ul>
 </section>
         </article>
