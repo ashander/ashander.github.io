@@ -161,8 +161,10 @@ know more.</p>
 <p>Mostly, I'll plot CO2 concentration versus uptake or Type, the plant's
 source region.</p>
 <p>First, a bad ol' dynamite, er bar plot:</p>
-<p><img alt="bad bar
-plot" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/barplot-1.svg" /></p>
+<p><img src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/barplot-1.svg" alt="bad bar plot"  />
+<p class="caption">
+bad bar plot
+</p></p>
 <p>(I'm not including the code for this, because it's what I'm recommending
 against. Nor did I add error bars, so it's not really a dynamite plot.
 R's base graphics make both producing this plot and, especially, adding
@@ -182,8 +184,10 @@ stripchart<span class="p">(</span>uptake <span class="o">~</span> conc_f<span cl
 </pre></div>
 
 
-<p><img alt="stripchart: a scatter plot v
-factors" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/scatter-v-factors-1.svg" /></p>
+<p><img src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/scatter-v-factors-1.svg" alt="stripchart: a scatter plot v factors"  />
+<p class="caption">
+stripchart: a scatter plot v factors
+</p></p>
 <p>It's easy to jitter the points, as Weissgerber <em>et al</em> recommend, by
 passing the argument <code>method='jitter'</code>. But there are other options. For
 cases where there really isn't much data, <code>method='stack'</code> gives
@@ -195,15 +199,20 @@ This more clearly shows the values that were observed more than once:</p>
 </pre></div>
 
 
-<p><img alt="stripchart with
-stacking" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/stripchart-wilkinson-1.svg" /></p>
+<p><img src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/stripchart-wilkinson-1.svg" alt="stripchart with stacking"  />
+<p class="caption">
+stripchart with stacking
+</p></p>
 <h2>Box (and whisker) plots</h2>
 <p>For box plots, R makes it very easy.</p>
 <div class="highlight"><pre>boxplot( uptake ~ conc_f , CO2, ylab=&#39;uptake&#39;, xlab=&#39;concentration&#39;, ylim=y_limits)
 </pre></div>
 
 
-<p><img alt="boxplot" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-1.svg" /></p>
+<p><img src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-1.svg" alt="boxplot"  />
+<p class="caption">
+boxplot
+</p></p>
 <p>In this case, with small data the boxplot is a bit misleading. This is
 clear from the scatter plots above, but you can also overplot onto the
 boxes using <code>stripchart</code> with <code>add = TRUE, vertical = TRUE</code>:</p>
@@ -215,8 +224,10 @@ boxes using <code>stripchart</code> with <code>add = TRUE, vertical = TRUE</code
 </pre></div>
 
 
-<p><img alt="boxplot with points
-overplotted" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-overplotted-1.svg" /></p>
+<p><img src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-overplotted-1.svg" alt="boxplot with points overplotted"  />
+<p class="caption">
+boxplot with points overplotted
+</p></p>
 <p>Even with base graphics <code>boxplot</code>, you can pass functions of multiple
 independent variables. This means you can visualize interactions between
 treatments in your raw data, and even overplot with <code>stripchart</code>!</p>
@@ -229,8 +240,10 @@ treatments in your raw data, and even overplot with <code>stripchart</code>!</p>
 </pre></div>
 
 
-<p><img alt="complex bar
-plot" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/complex-boxplot-1.svg" /></p>
+<p><img src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/complex-boxplot-1.svg" alt="complex bar plot"  />
+<p class="caption">
+complex bar plot
+</p></p>
 <p><em>Note</em> it would be easier to read the labels here if the plot were
 horizontal, for which there's an argument you can pass. The graphics
 settings on this post aren't playing well with long labels, so I don't
@@ -269,8 +282,10 @@ can use <code>split</code> and <code>lines</code>:</p>
 </pre></div>
 
 
-<p><img alt="paired points connected by lines and marked by
-points" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-points-1.svg" /></p>
+<p><img src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-points-1.svg" alt="paired points connected by lines and marked by points"  />
+<p class="caption">
+paired points connected by lines and marked by points
+</p></p>
 <p>If you'd rather only have the lines, just suppress plotting of points
 within the initial call to <code>stripchart</code>:</p>
 <div class="highlight"><pre><span class="err">{</span><span class="x"></span>
@@ -282,8 +297,10 @@ within the initial call to <code>stripchart</code>:</p>
 </pre></div>
 
 
-<p><img alt="paired locations connected by
-lines" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-lines-1.svg" /></p>
+<p><img src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-lines-1.svg" alt="paired locations connected by lines"  />
+<p class="caption">
+paired locations connected by lines
+</p></p>
 <h1>Other plots</h1>
 <p>R easily produces many other plots, in addition to those Weissgerber <em>et
 al</em> for which provide templates.</p>
@@ -297,8 +314,10 @@ uptake from the <code>CO2</code> data for grass plants receiving chilling or not
 </pre></div>
 
 
-<p><img alt="histogram of
-uptake" src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/histo-1.svg" /></p>
+<p><img src="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/barchart-alternatives-in-base-R_files/figure-markdown_strict/histo-1.svg" alt="histogram of uptake"  />
+<p class="caption">
+histogram of uptake
+</p></p>
 <div class="highlight"><pre>par(op)
 </pre></div>
 
@@ -349,14 +368,7 @@ magnitudes very close to zero.</p>
 Contributions
 <a href="https://github.com/ashander/ashander.github.io/tree/content">(via pull request to the content branch)</a>
 are also welcome.
-</section><section class="well" id="related-posts">
-    <h4>Related Posts:</h4>
-    <ul>
-        <li><a href="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/">Visualizing fits, inference, implications of (G)LMMs</a></li>
-        <li><a href="http://www.ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/">So, you did some GLMs & compared with AIC. Congrats!</a></li>
-    </ul>
-</section>
-        </article>
+</section>        </article>
     </section>
 
         </div>
@@ -367,18 +379,8 @@ are also welcome.
             <li class="list-group-item"><h4><i class="fa fa-clock-o fa-lg"></i><span class="icon-label">Recent</span></h4>
               <ul class="list-group" id="recentposts">
                     <li class="list-group-item">
-                        <a href="http://www.ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/">
-                            So, you did some GLMs & compared with AIC. Congrats!
-                        </a>
-                    </li>
-                    <li class="list-group-item">
                         <a href="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/">
                             Easy alternatives to bar charts in native R graphics
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/">
-                            Visualizing fits, inference, implications of (G)LMMs
                         </a>
                     </li>
                     <li class="list-group-item">
@@ -389,6 +391,16 @@ are also welcome.
                     <li class="list-group-item">
                         <a href="http://www.ashander.info/posts/2011/07/Unhealth-plain/">
                             The Central Valley long ago
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2010/01/Jobless-recovery/">
+                            Jobless recovery and growth-signalling autonomy
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2009/12/Science-is-uncertain/">
+                            Science education and uncertainty
                         </a>
                     </li>
                 </ul>
