@@ -107,7 +107,7 @@ TEMPLATE_PAGES = {'index.html': 'index.html'}
 READERS = {'html': None}
 # direct
 
-EXTRA_TEMPLATES_PATHS = ['templates/']
+EXTRA_TEMPLATES_PATHS = ['/Users/ashander/sites/ashander.github.io/templates/']
 PAGE_PATHS = ['pages', 'etc']
 
 # Plugins
