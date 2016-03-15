@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>Visualizing fits, inference, implications of (G)LMMs - Jaime Ashander</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/">
+
+        <meta name="author" content="Jaime Ashander" />
+        <meta name="keywords" content="visualization,lattice,model checking,statistical graphics,GLMM,R,ggplot2" />
+        <meta name="description" content="In a live walk-through on April 10 at the Davis R-Users Group, I gave a brief presentation motivating this topic. This post expands and cleans up the code from that talk. If you just want the code: download the .R file. Updated 2015-04-28 The point of this post isn&#39;t ..." />
+
+        <meta property="og:site_name" content="Jaime Ashander" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Visualizing fits, inference, implications of (G)LMMs"/>
+        <meta property="og:url" content="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/"/>
+        <meta property="og:description" content="In a live walk-through on April 10 at the Davis R-Users Group, I gave a brief presentation motivating this topic. This post expands and cleans up the code from that talk. If you just want the code: download the .R file. Updated 2015-04-28 The point of this post isn&#39;t ..."/>
+        <meta property="article:published_time" content="2015-04-10" />
+            <meta property="article:section" content="notes" />
+            <meta property="article:tag" content="visualization" />
+            <meta property="article:tag" content="lattice" />
+            <meta property="article:tag" content="model checking" />
+            <meta property="article:tag" content="statistical graphics" />
+            <meta property="article:tag" content="GLMM" />
+            <meta property="article:tag" content="R" />
+            <meta property="article:tag" content="ggplot2" />
+            <meta property="article:author" content="Jaime Ashander" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://www.ashander.info/theme/css/bootstrap.yeti.min.css" type="text/css"/>
+    <link href="http://www.ashander.info/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://www.ashander.info/theme/css/pygments/solarizedlight.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://www.ashander.info/theme/css/style.css" type="text/css"/>
+        <link href="http://www.ashander.info/static/custom.css" rel="stylesheet">
+
+        <link href="http://www.ashander.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Jaime Ashander ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://www.ashander.info/" class="navbar-brand">
+                <i class="fa fa-home fa-fw"></i>
+            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="http://www.ashander.info/category/themes">Themes</a>
+                        </li>
+                        <li >
+                            <a href="http://www.ashander.info/category/results">Results</a>
+                        </li>
+                        <li class="active">
+                            <a href="http://www.ashander.info/category/notes">Notes</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://www.ashander.info/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/"
+                       rel="bookmark"
+                       title="Permalink to Visualizing fits, inference, implications of (G)LMMs">
+                        Visualizing fits, inference, implications of (G)LMMs
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<div>
+  <a href="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/">
+<i class="fa fa-send-o fa-fw"></i>
+  </a>
+  in   <a href="http://www.ashander.info/tag/visualization/">visualization</a>
+  /
+  <a href="http://www.ashander.info/tag/lattice/">lattice</a>
+  /
+  <a href="http://www.ashander.info/tag/model-checking/">model checking</a>
+  /
+  <a href="http://www.ashander.info/tag/statistical-graphics/">statistical graphics</a>
+  /
+  <a href="http://www.ashander.info/tag/glmm/">GLMM</a>
+  /
+  <a href="http://www.ashander.info/tag/r/">R</a>
+  /
+  <a href="http://www.ashander.info/tag/ggplot2/">ggplot2</a>
+  on Fri 10 April 2015
+</div>
+
+                     </div>
+                </div>
+                <p>In a live walk-through on April 10 at the Davis R-Users Group, I gave a
+brief presentation <a href="http://www.ashander.info/presentations/mixedeffects_viz_motivation.html">motivating this
+topic</a>.
+This post expands and cleans up the code from that talk. If you just
+want the code: <a href="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz.R">download the .R file</a>.</p>
+<p><strong>Updated 2015-04-28</strong></p>
+<p>The point of this post isn't the statistics of mixed models. For that,
+learning the experimental design and statistics behind modern mixed
+models, I recommend some relatively recent papers below. In short,
+Schielzeth &amp; Nakagawa (2013) and Stroup (2015) provide especially good
+introduction for those coming from an ANOVA background.</p>
+<p>When working with generalized, hierarchical designs, ask yourself three
+questions:</p>
+<p>First (and maybe most important), "Do I <em>really</em> need these models?"
+Think carefully, and consult these references:</p>
+<ul>
+<li>Is nesting doing anything for your analysis? Example 1: Murtaugh
+    2007 <em>Ecology</em> 88(1):56-62)</li>
+<li>For significance testing, transform + LMM might work as well as
+    GLMM: <a href="doi:10.1111/2041-210X.12386">Ives 2015 "For testing the significance of regression
+    coefficients, go ahead and log-transform count data" <em>Methods in
+    Ecology and Evolution</em></a> [1]</li>
+</ul>
+<p>Second, "What <em>is</em> my design (in the language of mixed models)?". Baayen
+et al focus on designs with crossed random effects (a strong suit of
+<code>lme4</code>), while Schielzeth &amp; Nakagawa's "Nested by Design" paper is a
+more general introduction. Finally, the Stroup paper provides a good
+entry point in ANOVA-speak [2]. This could make or break the connection
+between an adviser that speaks only ANOVA, as is often the case for
+workers in crop and soil sciences, or experimental ecology and the GLMM
+that your unbalanced binomial regression demands.</p>
+<ul>
+<li><a href="http://onlinelibrary.wiley.com/doi/10.1111/j.2041-210x.2012.00251.x/full">Schielzeth &amp; Nakagawa 2013 Nested by design: model fitting and
+    interpretation in a mixed model era. <em>Methods in Ecology and
+    Evolution</em>
+    4:14-24</a></li>
+<li><a href="http://www.sfs.uni-tuebingen.de/~hbaayen/publications/baayenDavidsonBates.pdf">Baayen, Davidson, &amp; Bates 2008 Mixed-effects modeling with crossed
+    random effects for subjects and items. <em>Journal of Memory and
+    Language</em>
+    59:390-412</a>
+    Note that Baayen et al present <code>lme4</code> code, but some (e.g.,
+    <code>mcmcsamp</code>will not work with current versions of the package).</li>
+<li><a href="https://dl.sciencesocieties.org/publications/aj/abstracts/107/2/811">Stroup 2015 Rethinking the Analysis of Non-Normal Data in Plant and
+    Soil Science. <em>Agronomy Journal</em>
+    107(2):811-827</a></li>
+</ul>
+<p>Third, "How do I specify and fit this model in <code>R</code>. The references below
+may also help with design and interpretation, but are primarily
+hands-on. The most thorough is Pinheiro &amp; Bates (2000). These four
+references also serve as a bibliography of sorts for this post [3].</p>
+<ul>
+<li>Pinheiro &amp; Bates 2000 <em>Mixed-effects models in S and S-PLUS</em>
+    Springer, New York</li>
+<li><a href="http://lme4.r-forge.r-project.org/book/">Bates' <code>lme4</code> book draft</a></li>
+<li><a href="http://arxiv.org/abs/1406.5823">the lme4 paper</a>:</li>
+<li>Ben Bolker's forthcoming chapter on "Worked examples" <a href="https://rpubs.com/bbolker/glmmchapter">available on
+    Rpubs</a></li>
+</ul>
+<h3>Focus of this post</h3>
+<p>Given these preliminaries, here I <strong>focus on three things</strong>:</p>
+<ul>
+<li>criticizing the model and fit</li>
+<li>(graphically) assessing parameter inference</li>
+<li>illustrate predictions</li>
+</ul>
+<p><strong>emphasizing</strong></p>
+<ul>
+<li>working with frequentist library <code>lme4</code> for (G)LMM in R</li>
+<li>visualization for: criticism, inference, prediction</li>
+<li>using the native plotting capabilities (to the extent possible)</li>
+</ul>
+<p><strong>three facets</strong> of visualization</p>
+<ul>
+<li>quick diagnostic (plots <em>native</em> to fitting packages)</li>
+<li>slower model criticism (also <em>native</em>)</li>
+<li>inference &amp; prediction (generally lightweight external libraries /
+    export capabilities)</li>
+</ul>
+<p>Finally, I'll mention that example code and vignettes in documented
+packages are great resources for learning these things (as is google ;).
+Try these commands:</p>
+<div class="highlight"><pre>??lme4
+help(package=&#39;lme4&#39;)
+methods(class=&#39;merMod&#39;)
+vignette(package=&#39;lme4&#39;)
+</pre></div>
+
+
+<p>Packages:</p>
+<div class="highlight"><pre>library(lme4)
+library(lattice) ## already loaded via namespace by lme4 -- may as well attach
+#library(ggplot2) # recommend
+#library(lsmeans) #recommend
+#library(gridExtra) #recommend
+</pre></div>
+
+
+<p>Below, much of the commentary is included in <code># comments</code> to the code
+blocks.</p>
+<h1>LMM: greenhouse full factorial (RCBD)</h1>
+<ul>
+<li>"Simple" greenhouse, linear mixed model</li>
+<li>Pattern and amount -- cool question!</li>
+<li>balanced so perfect for traditional ANOVA</li>
+<li>4 (!) treatments -- full factorial blocked so 4-way interaction
+    potential and hard to visualize (making a good test case here)</li>
+</ul>
+<p><img alt="Maestre title image" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/figures/maestre.png" /></p>
+<div class="highlight"><pre><span class="nx">d</span> <span class="o">&lt;-</span> <span class="nx">read</span><span class="p">.</span><span class="nx">delim</span><span class="p">(</span><span class="s2">&quot;http://datadryad.org/bitstream/handle/10255/dryad.41984/Maestre_Ecol88.txt?sequence=1&quot;</span><span class="p">)</span>
+<span class="nx">recode</span> <span class="o">&lt;-</span> <span class="nx">car</span><span class="o">::</span><span class="nx">recode</span>
+<span class="nx">d</span> <span class="o">&lt;-</span> <span class="nx">within</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">nutrient_hetero</span> <span class="o">&lt;-</span> <span class="nx">recode</span><span class="p">(</span><span class="nx">factor</span><span class="p">(</span><span class="nx">nh</span><span class="p">),</span> <span class="s2">&quot;1=&#39;homogeneous&#39;; 2=&#39;heterogeneous&#39;&quot;</span><span class="p">)</span>
+    <span class="nx">nutrient_add</span> <span class="o">&lt;-</span> <span class="nx">recode</span><span class="p">(</span><span class="nx">factor</span><span class="p">(</span><span class="nx">na</span><span class="p">),</span> <span class="s2">&quot;1=&#39;40 mg N&#39;; 2=&#39;80 mg N&#39;; 3=&#39;120 mg N&#39;&quot;</span><span class="p">)</span>
+    <span class="nx">water_hetero</span> <span class="o">&lt;-</span> <span class="nx">recode</span><span class="p">(</span><span class="nx">factor</span><span class="p">(</span><span class="nx">wh</span><span class="p">),</span> <span class="s2">&quot;1=&#39;homogeneous&#39;; 2=&#39;pulse&#39;&quot;</span><span class="p">)</span>
+    <span class="nx">water_add</span> <span class="o">&lt;-</span> <span class="nx">recode</span><span class="p">(</span><span class="nx">factor</span><span class="p">(</span><span class="nx">wa</span><span class="p">),</span> <span class="s2">&quot;1=&#39;125 mL&#39;; 2=&#39;250 mL&#39;;3=&#39;375 mL&#39;&quot;</span><span class="p">)</span>
+    <span class="nx">block</span> <span class="o">&lt;-</span> <span class="nx">factor</span><span class="p">(</span><span class="nx">block</span><span class="p">)</span>
+  <span class="p">})</span>
+<span class="nx">d$nutrient_add</span> <span class="o">&lt;-</span> <span class="nx">factor</span><span class="p">(</span><span class="nx">d$nutrient_add</span><span class="p">,</span> <span class="nx">levels</span><span class="p">(</span><span class="nx">d$nutrient_add</span><span class="p">)</span><span class="cp">[</span><span class="nx">c</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="cp">]</span><span class="p">)</span>
+
+<span class="err">##</span> <span class="nx">centered</span><span class="o">?</span>
+<span class="nx">ctr</span> <span class="o">&lt;-</span> <span class="kd">function</span><span class="p">(</span><span class="nx">v</span><span class="p">,</span> <span class="p">...)</span>
+    <span class="p">(</span><span class="nx">v</span> <span class="o">-</span> <span class="nx">mean</span><span class="p">(</span><span class="nx">v</span><span class="p">,</span> <span class="p">...)</span> <span class="p">)</span> <span class="err">#</span><span class="o">/</span> <span class="nx">sd</span><span class="p">(</span><span class="nx">v</span><span class="p">,</span> <span class="p">...)</span>
+
+<span class="nx">d</span> <span class="o">&lt;-</span> <span class="nx">within</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">nhc</span> <span class="o">&lt;-</span> <span class="nx">ctr</span><span class="p">(</span><span class="nx">nh</span><span class="p">)</span>
+    <span class="nx">nac</span> <span class="o">&lt;-</span> <span class="nx">ctr</span><span class="p">(</span><span class="nx">na</span><span class="p">)</span>
+    <span class="nx">wac</span> <span class="o">&lt;-</span> <span class="nx">ctr</span><span class="p">(</span><span class="nx">wa</span><span class="p">)</span>
+    <span class="nx">whc</span> <span class="o">&lt;-</span> <span class="nx">ctr</span><span class="p">(</span><span class="nx">wh</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="err">##</span> <span class="nx">bt</span> <span class="o">-</span> <span class="nx">total</span> <span class="nx">biomass</span>
+
+<span class="err">##</span> <span class="nx">we</span><span class="s1">&#39;d like to use model that includes varying sopes</span>
+<span class="s1">## watering seems the most likely to have block-level differences ?</span>
+<span class="s1">m2 &lt;- lmer(log(bt) ~ nutrient_add * nutrient_hetero  *  water_add * water_hetero +</span>
+<span class="s1">               (water_hetero * water_add | block), data=d)</span>
+
+<span class="s1">## first diagnostic -- very high correlation is bad -- can&#39;</span><span class="nx">t</span> <span class="nx">really</span> <span class="nx">justify</span> <span class="nx">complex</span> <span class="nx">RE</span>
+<span class="err">##</span> <span class="nx">structures</span> <span class="nx">you</span> <span class="nx">might</span> <span class="nx">like</span><span class="p">,</span> <span class="k">if</span> <span class="nx">cause</span> <span class="nx">these</span> <span class="nx">type</span> <span class="nx">of</span> <span class="nx">fits</span><span class="o">!</span>
+<span class="err">##</span> <span class="nx">could</span> <span class="nx">see</span> <span class="nx">bad</span> <span class="nx">performance</span> <span class="k">in</span> <span class="nx">resid</span> <span class="nx">plots</span> <span class="nx">too</span> <span class="k">if</span> <span class="nx">you</span> <span class="nx">wanted</span>
+<span class="nx">VarCorr</span><span class="p">(</span><span class="nx">m2</span><span class="p">)</span>
+
+<span class="err">##</span>  <span class="nx">Groups</span>   <span class="nx">Name</span>                              <span class="nx">Std</span><span class="p">.</span><span class="nx">Dev</span><span class="p">.</span> <span class="nx">Corr</span>                
+<span class="err">##</span>  <span class="nx">block</span>    <span class="p">(</span><span class="nx">Intercept</span><span class="p">)</span>                       <span class="mf">0.031807</span>                     
+<span class="err">##</span>           <span class="nx">water_heteropulse</span>                 <span class="mf">0.041753</span> <span class="o">-</span><span class="mf">0.739</span>              
+<span class="err">##</span>           <span class="nx">water_add250</span> <span class="nx">mL</span>                   <span class="mf">0.061256</span> <span class="o">-</span><span class="mf">0.938</span>  <span class="mf">0.643</span>       
+<span class="err">##</span>           <span class="nx">water_add375</span> <span class="nx">mL</span>                   <span class="mf">0.060199</span> <span class="o">-</span><span class="mf">0.622</span>  <span class="mf">0.235</span>  <span class="mf">0.848</span>
+<span class="err">##</span>           <span class="nx">water_heteropulse</span><span class="o">:</span><span class="nx">water_add250</span> <span class="nx">mL</span> <span class="mf">0.074706</span>  <span class="mf">0.935</span> <span class="o">-</span><span class="mf">0.930</span> <span class="o">-</span><span class="mf">0.853</span>
+<span class="err">##</span>           <span class="nx">water_heteropulse</span><span class="o">:</span><span class="nx">water_add375</span> <span class="nx">mL</span> <span class="mf">0.073710</span>  <span class="mf">0.427</span> <span class="o">-</span><span class="mf">0.119</span> <span class="o">-</span><span class="mf">0.713</span>
+<span class="err">##</span>  <span class="nx">Residual</span>                                   <span class="mf">0.070193</span>                     
+<span class="err">##</span>               
+<span class="err">##</span>               
+<span class="err">##</span>               
+<span class="err">##</span>               
+<span class="err">##</span>               
+<span class="err">##</span>  <span class="o">-</span><span class="mf">0.468</span>       
+<span class="err">##</span>  <span class="o">-</span><span class="mf">0.969</span>  <span class="mf">0.301</span>
+<span class="err">##</span>
+
+<span class="nx">plot</span><span class="p">(</span><span class="nx">m2</span><span class="p">,</span> <span class="nx">type</span> <span class="o">=</span> <span class="nx">c</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="s2">&quot;smooth&quot;</span><span class="p">)</span> <span class="p">,</span> <span class="nx">id</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span> <span class="err">#</span> <span class="nx">id</span> <span class="nx">outliers</span>
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/lme-models-1.svg" /><!-- --></p>
+<div class="highlight"><pre>plot(m2, sqrt(abs(resid(.))) ~ fitted(.), type=c(&#39;p&#39;, &#39;smooth&#39;))
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/lme-models-2.svg" /><!-- --></p>
+<div class="highlight"><pre>## slight increase in resid w/ fitted
+
+plot(m2, resid(.) ~ fitted(.) | block, abline=c(h = 0),  lty = 1,  type = c(&quot;p&quot;, &quot;smooth&quot;)) # per block
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/lme-models-3.svg" /><!-- --></p>
+<div class="highlight"><pre>plot(m2,  sqrt(abs(resid(.))) ~ fitted(.) | block,     type=c(&quot;p&quot;, &quot;smooth&quot;)) # 2 blocks behave  badly
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/lme-models-4.svg" /><!-- --></p>
+<div class="highlight"><pre>## block 4 is not great well behaved :(
+lattice::qqmath(m2)
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/lme-models-5.svg" /><!-- --></p>
+<div class="highlight"><pre><span class="cp">##</span><span class="c"> look at random effect</span><span class="x"></span>
+<span class="x">lattice::dotplot(ranef(m2, condVar=TRUE))</span>
+
+<span class="cp">##</span><span class="c"> $block</span><span class="x"></span>
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/lme-models-6.svg" /><!-- --></p>
+<div class="highlight"><pre><span class="c1">##were we to have LOTS of RE, using lattice::qqmath for y axis spacing</span>
+<span class="c1">##based on quantiles of standard normal -- is better to distinguish</span>
+<span class="c1">##important few from &quot;trivial many&quot;</span>
+
+
+<span class="c1">## want to look @ 4-way but profile diagnostics not working</span>
+
+<span class="c1">## for illustrating these, I fit a model with fewer interactions</span>
+<span class="c1">## use quick plot assess which fixef we can drop (in addition to the RE, unf)</span>
+<span class="c1">## run drop1(m2) and drop 4-way and water_hetero:nutrient_add</span>
+m1 <span class="o">&lt;-</span> lmer<span class="p">(</span><span class="kp">log</span><span class="p">(</span>bt<span class="p">)</span> <span class="o">~</span> nutrient_add <span class="o">*</span> water_add <span class="o">*</span> nutrient_hetero <span class="o">+</span>
+           nutrient_hetero <span class="o">*</span>  water_add  <span class="o">*</span> water_hetero  <span class="o">+</span>
+           <span class="p">(</span><span class="m">1</span> <span class="o">|</span> block<span class="p">),</span>
+           data<span class="o">=</span>d<span class="p">)</span>
+
+<span class="c1">## Note: if you look at diagnostics for these, issues pointed out</span>
+<span class="c1">## above seem even worse. there is a greater increase in resid w/ fitted</span>
+<span class="c1">## several of the blocks are poorly behaved</span>
+<span class="c1">## plot(m1, type=c(&quot;p&quot;, &quot;smooth&quot;) , id=0.05) # id outliers</span>
+<span class="c1">## plot(m1, sqrt(abs(resid(.))) ~ fitted(.), type=c(&#39;p&#39;, &#39;smooth&#39;))</span>
+<span class="c1">## plot(m1, resid(.) ~ fitted(.) | block, abline=c(h=0), lty=1,  type=c(&quot;p&quot;, &quot;smooth&quot;)) # per block</span>
+<span class="c1">## plot(m1,  sqrt(abs(resid(.))) ~ fitted(.) | block,     type=c(&quot;p&quot;, &quot;smooth&quot;)) # 2 blocks behave  badly</span>
+<span class="c1">## lattice::qqmath(m1)</span>
+<span class="c1">## lattice::dotplot(ranef(m1, condVar=TRUE))</span>
+
+<span class="c1">## to get more informative diagnostics -- need to profile</span>
+<span class="kp">system.time</span><span class="p">(</span>m1.prall <span class="o">&lt;-</span> profile<span class="p">(</span>m1<span class="p">))</span>
+
+<span class="c1">##    user  system elapsed </span>
+<span class="c1">##   3.396   0.030   3.437</span>
+
+<span class="kp">system.time</span><span class="p">(</span>m1.prre <span class="o">&lt;-</span> profile<span class="p">(</span>m1<span class="p">,</span> which<span class="o">=</span><span class="s">&#39;theta_&#39;</span><span class="p">,</span> maxmult<span class="o">=</span><span class="m">5</span><span class="p">))</span> <span class="c1">## lower maxmult to avoid step error</span>
+
+<span class="c1">##    user  system elapsed </span>
+<span class="c1">##   0.655   0.005   0.663</span>
+
+lattice<span class="o">::</span>xyplot<span class="p">(</span>m1.prall<span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/linear-profile-based-diagnostics-1.svg" /><!-- --></p>
+<div class="highlight"><pre># lattice::xyplot(m1.prre) # for only re
+# the &#39;profile zeta plot&#39; linear indicates a quadratic
+# likelihood profile, and so Wald approximations for CI will work well
+# random effects parameters on a standard deviation (or correlation)
+# scale
+
+lattice::densityplot(m1.prall)
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/linear-profile-based-diagnostics-2.svg" /><!-- --></p>
+<div class="highlight"><pre><span class="err">#</span> <span class="nx">the</span> <span class="s1">&#39;profile density plot&#39;</span>
+<span class="err">#</span> <span class="nx">approximate</span> <span class="nx">probability</span> <span class="nx">density</span> <span class="nx">functions</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">parameters</span>
+<span class="err">#</span> <span class="o">--</span> <span class="nx">distros</span> <span class="nx">underlying</span> <span class="nx">profile</span> <span class="nx">confidence</span> <span class="nx">intervals</span>
+<span class="err">#</span> <span class="nx">linear</span> <span class="nx">zeta</span> <span class="nx">plot</span> <span class="o">&lt;==&gt;</span> <span class="nx">gaussian</span> <span class="nx">densities</span>
+
+<span class="nx">lattice</span><span class="o">::</span><span class="nx">splom</span><span class="p">(</span><span class="nx">m1</span><span class="p">.</span><span class="nx">prre</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/pairs-plot-1.svg" /><!-- --></p>
+<div class="highlight"><pre># the &#39;profile pairs plot&#39;
+# bivariate confidence regions based on profile
+# &#39;profile traces&#39; -- cross hairs -- are conditional estimates  of one parameter given the other
+# above-diag: estimated scale
+# below-diag: &#39;zeta&#39; scale, some sense, the best possible set of single-parameter transformations for assessing the contours&quot;
+# we just look at RE here
+</pre></div>
+
+
+<h2>Implications -- lsmeans</h2>
+<p>Understanding a complex model with high-order interactions is tough. The
+best tool is plotting, but quickly visualizing such models is not easy
+with flexible plotting libraries.</p>
+<p>Fortunately, <code>lsmeans</code>, although fairly inflexible in general, has
+plotting capabilities designed just for this purpose. Here's a demo with
+the full (4-way interacting) model</p>
+<div class="highlight"><pre><span class="err">##</span> <span class="nx">look</span> <span class="nx">at</span> <span class="nx">consequences</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">require</span><span class="p">(</span><span class="nx">lsmeans</span><span class="p">)){</span>
+    <span class="err">##</span> <span class="nx">here</span> <span class="k">for</span> <span class="mi">4</span><span class="o">-</span><span class="nx">way</span> <span class="nx">interaction</span> <span class="nx">model</span> <span class="p">(</span><span class="nx">m2</span><span class="p">)</span> <span class="o">--</span> <span class="nx">mostly</span> <span class="nx">to</span> <span class="nx">see</span> <span class="nx">how</span> <span class="nx">can</span> <span class="nx">quickly</span> <span class="nx">plot</span> <span class="nx">response</span>
+    <span class="err">##</span> <span class="nx">at</span> <span class="nx">factor</span> <span class="nx">levels</span> <span class="k">in</span> <span class="nx">complex</span> <span class="nx">models</span>
+    <span class="err">##</span> <span class="nx">relatively</span> <span class="nx">easy</span> <span class="nx">to</span> <span class="nx">plot</span> <span class="nx">mean</span> <span class="nx">prediction</span> <span class="nx">on</span> <span class="nx">response</span> <span class="nx">scale</span> <span class="nx">account</span> <span class="k">for</span> <span class="nx">complex</span> <span class="nx">interaction</span>
+    <span class="nx">lsmip</span><span class="p">(</span><span class="nx">m2</span><span class="p">,</span> <span class="nx">nutrient_hetero</span> <span class="o">~</span>  <span class="nx">water_add</span> <span class="o">|</span> <span class="nx">water_hetero</span> <span class="o">*</span> <span class="nx">nutrient_add</span>  <span class="p">,</span> <span class="nx">type</span><span class="o">=</span><span class="s1">&#39;response&#39;</span><span class="p">)</span>
+    <span class="nx">lsmip</span><span class="p">(</span><span class="nx">m2</span><span class="p">,</span> <span class="nx">water_add</span> <span class="o">~</span> <span class="nx">nutrient_add</span>  <span class="o">|</span> <span class="nx">water_hetero</span> <span class="o">*</span> <span class="nx">nutrient_hetero</span><span class="p">,</span> <span class="nx">type</span><span class="o">=</span><span class="s1">&#39;response&#39;</span><span class="p">)</span>
+    <span class="nx">lsmip</span><span class="p">(</span><span class="nx">m2</span><span class="p">,</span> <span class="nx">water_add</span> <span class="o">~</span> <span class="nx">water_hetero</span>  <span class="o">|</span> <span class="nx">nutrient_add</span> <span class="o">*</span> <span class="nx">nutrient_hetero</span><span class="p">,</span> <span class="nx">type</span><span class="o">=</span><span class="s1">&#39;response&#39;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="err">##</span> <span class="nx">Loading</span> <span class="nx">required</span> <span class="nx">namespace</span><span class="o">:</span> <span class="nx">pbkrtest</span>
+
+<span class="err">##</span> <span class="nx">Note</span><span class="o">:</span> <span class="nx">method</span> <span class="kd">with</span> <span class="nx">signature</span> <span class="s1">&#39;sparseMatrix#ANY&#39;</span> <span class="nx">chosen</span> <span class="k">for</span> <span class="kd">function</span> <span class="s1">&#39;kronecker&#39;</span><span class="p">,</span>
+<span class="err">##</span>  <span class="nx">target</span> <span class="nx">signature</span> <span class="s1">&#39;dgCMatrix#ngCMatrix&#39;</span><span class="p">.</span>
+<span class="err">##</span>  <span class="s2">&quot;ANY#sparseMatrix&quot;</span> <span class="nx">would</span> <span class="nx">also</span> <span class="nx">be</span> <span class="nx">valid</span>
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-1.svg" /><!-- --><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-2.svg" /><!-- --><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-3.svg" /><!-- --></p>
+<div class="highlight"><pre><span class="kr">if</span><span class="p">(</span><span class="kn">require</span><span class="p">(</span>lsmeans<span class="p">)){</span>
+    <span class="c1">## can also plot quickly mean estimates plus (Wald) confidence intervals</span>
+    <span class="c1">## not that it&#39;s possible to do finite size correction in lsmeans (but only for linear models)</span>
+    <span class="c1">## steps take a min w/ lots of RE for some reason</span>
+    m2.lsm <span class="o">&lt;-</span> lsmeans<span class="p">(</span>m2<span class="p">,</span> <span class="o">~</span> water_add <span class="o">*</span> water_hetero   <span class="o">|</span> nutrient_hetero  <span class="o">*</span> nutrient_add<span class="p">)</span>
+    plot<span class="p">(</span>m2.lsm<span class="p">,</span> layout <span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">),</span> horizontal<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/ls-means-CI-plots-1.svg" /><!-- --></p>
+<div class="highlight"><pre>    <span class="c1">## for the simpler</span>
+    lsmip<span class="p">(</span>m1<span class="p">,</span> nutrient_hetero <span class="o">~</span>  water_add <span class="o">|</span> water_hetero <span class="o">*</span> nutrient_add  <span class="p">,</span> type<span class="o">=</span><span class="s">&#39;response&#39;</span><span class="p">)</span>
+    lsmip<span class="p">(</span>m1<span class="p">,</span> water_add <span class="o">~</span> nutrient_add  <span class="o">|</span> water_hetero <span class="o">*</span> nutrient_hetero<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;response&#39;</span><span class="p">)</span>
+    lsmip<span class="p">(</span>m1<span class="p">,</span> water_add <span class="o">~</span> water_hetero  <span class="o">|</span> nutrient_add <span class="o">*</span> nutrient_hetero<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;response&#39;</span><span class="p">)</span>
+
+    <span class="c1">## overall pattern doesn&#39;t differ too much from m1</span>
+    m1.lsm <span class="o">&lt;-</span> lsmeans<span class="p">(</span>m1<span class="p">,</span> <span class="o">~</span> water_add <span class="o">*</span> water_hetero   <span class="o">|</span> nutrient_hetero  <span class="o">*</span> nutrient_add<span class="p">)</span>
+    plot<span class="p">(</span>m1.lsm<span class="p">,</span> layout <span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">),</span> horizontal<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+
+
+<h1>Confidence intervals</h1>
+<h2>quick &amp; dirty</h2>
+<div class="highlight"><pre><span class="err">##</span> <span class="nx">OK</span> <span class="o">--</span> <span class="nx">back</span> <span class="nx">to</span> <span class="nx">the</span> <span class="nx">full</span> <span class="nx">model</span>
+<span class="err">##</span> <span class="k">if</span> <span class="nx">residuals</span> <span class="nx">looking</span> <span class="nx">OK</span> <span class="o">--</span> <span class="nx">fastest</span> <span class="nx">way</span> <span class="nx">to</span> <span class="nx">get</span> <span class="nx">a</span> <span class="nx">quick</span> <span class="nx">look</span> <span class="nx">at</span> <span class="nx">coefficient</span> <span class="nx">uncertainty</span>
+<span class="err">##</span> <span class="nx">I</span><span class="s1">&#39;ll make it a function for later use</span>
+
+<span class="s1">quick_CI_df &lt;- function(model, drop_intercept = TRUE,...) {</span>
+<span class="s1">  ## coef table using WALD CIs for a merMod</span>
+<span class="s1">  ci_dat &lt;- confint(model, method=&#39;</span><span class="nx">Wald</span><span class="s1">&#39;, ...)</span>
+<span class="s1">  ci_dat &lt;- cbind(ci_dat, mean=rowMeans(ci_dat))</span>
+<span class="s1">  ci_df &lt;- data.frame(coef=row.names(ci_dat), ci_dat)</span>
+<span class="s1">  names(ci_df)</span><span class="cp">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="cp">]</span><span class="s1"> &lt;- c(&#39;</span><span class="nx">lwr</span><span class="s1">&#39;, &#39;</span><span class="nx">upr</span><span class="s1">&#39;)</span>
+<span class="s1">  coef_colon &lt;-   gregexpr(&quot;\\:&quot;, ci_df$coef)</span>
+<span class="s1">  coef_order &lt;- sapply(coef_colon, function(x) {</span>
+<span class="s1">    if(x</span><span class="cp">[</span><span class="mi">1</span><span class="cp">]</span><span class="s1"> == -1)</span>
+<span class="s1">      return(0)</span>
+<span class="s1">    else</span>
+<span class="s1">      return(length(x))</span>
+<span class="s1">  })</span>
+<span class="s1">  ci_df$coef &lt;- reorder(ci_df$coef, coef_order)</span>
+<span class="s1">  if (drop_intercept)</span>
+<span class="s1">    return(subset(ci_df, coef != &#39;</span><span class="p">(</span><span class="nx">Intercept</span><span class="p">)</span><span class="err">&#39;</span><span class="p">))</span>
+  <span class="nx">ci_df</span>
+<span class="p">}</span>
+
+<span class="nx">m1_wald_ci</span> <span class="o">&lt;-</span> <span class="nx">quick_CI_df</span><span class="p">(</span><span class="nx">m2</span><span class="p">)</span>
+
+<span class="nx">lattice</span><span class="o">::</span><span class="nx">dotplot</span><span class="p">(</span><span class="nx">coef</span> <span class="o">~</span> <span class="nx">mean</span><span class="p">,</span> <span class="nx">m1_wald_ci</span><span class="p">,</span>
+                 <span class="nx">panel</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+                   <span class="nx">panel</span><span class="p">.</span><span class="nx">xyplot</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">pch</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+                   <span class="nx">panel</span><span class="p">.</span><span class="nx">segments</span><span class="p">(</span><span class="nx">m1_wald_ci$lwr</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">m1_wald_ci$upr</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span>
+                   <span class="nx">panel</span><span class="p">.</span><span class="nx">abline</span><span class="p">(</span><span class="nx">v</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nx">lty</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+                 <span class="p">})</span>
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/confint-lattice-1.svg" /><!-- --></p>
+<h2>Confidence Intervals -- rolling your own</h2>
+<p>For more control than the simple plot above, you could use any of a
+variety of packages, e.g. <code>coefplot2</code>, <code>arm::coefplot</code>, here we just use
+builtin <code>lme4::confint</code> to build a dataframe.</p>
+<p>I make a dataframe with potentially several different types of
+confidence intervals: Wald (assume asymptotic multivariate normality of
+likelihood), profile, and bootstrap. For the random effects, the output
+of bootstrap and profile methods have different names -- as you can see
+in the plot below. The Wald method only estimates CIs for fixed effects.</p>
+<div class="highlight"><pre><span class="nx">compare_CI_df</span> <span class="o">&lt;-</span> <span class="kd">function</span><span class="p">(</span><span class="nx">modprof</span><span class="p">,</span> <span class="nx">model</span><span class="p">,</span> <span class="nx">BOOT</span><span class="o">=</span><span class="nx">FALSE</span><span class="p">,</span> <span class="p">...)</span> <span class="p">{</span>
+  <span class="nx">ci</span> <span class="o">&lt;-</span> <span class="nx">confint</span><span class="p">(</span><span class="nx">model</span><span class="p">,</span> <span class="nx">method</span><span class="o">=</span><span class="s1">&#39;Wald&#39;</span><span class="p">)</span>
+  <span class="nx">cip</span> <span class="o">&lt;-</span> <span class="nx">confint</span><span class="p">(</span><span class="nx">modprof</span><span class="p">)</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">BOOT</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">cib</span> <span class="o">&lt;-</span> <span class="nx">confint</span><span class="p">(</span><span class="nx">model</span><span class="p">,</span> <span class="nx">method</span><span class="o">=</span><span class="s2">&quot;boot&quot;</span><span class="p">,</span> <span class="p">...)</span>
+      <span class="nx">cib_dat</span> <span class="o">&lt;-</span> <span class="nx">data</span><span class="p">.</span><span class="nx">frame</span><span class="p">(</span><span class="nx">cib</span><span class="p">,</span> <span class="nx">parameter</span><span class="o">=</span><span class="nx">row</span><span class="p">.</span><span class="nx">names</span><span class="p">(</span><span class="nx">cib</span><span class="p">),</span> <span class="nx">type</span><span class="o">=</span><span class="s1">&#39;Boot&#39;</span><span class="p">)</span>
+      <span class="nx">names</span><span class="p">(</span><span class="nx">cib_dat</span><span class="p">)</span><span class="cp">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="cp">]</span> <span class="o">&lt;-</span> <span class="nx">colnames</span><span class="p">(</span><span class="nx">cib</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="nx">ci_dat</span> <span class="o">&lt;-</span> <span class="nx">data</span><span class="p">.</span><span class="nx">frame</span><span class="p">(</span><span class="nx">ci</span><span class="p">,</span> <span class="nx">parameter</span><span class="o">=</span><span class="nx">row</span><span class="p">.</span><span class="nx">names</span><span class="p">(</span><span class="nx">ci</span><span class="p">),</span> <span class="nx">type</span><span class="o">=</span><span class="s1">&#39;Wald&#39;</span><span class="p">)</span>
+  <span class="nx">names</span><span class="p">(</span><span class="nx">ci_dat</span><span class="p">)</span><span class="cp">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="cp">]</span> <span class="o">&lt;-</span> <span class="nx">colnames</span><span class="p">(</span><span class="nx">ci</span><span class="p">)</span>
+  <span class="nx">cip_dat</span> <span class="o">&lt;-</span> <span class="nx">data</span><span class="p">.</span><span class="nx">frame</span><span class="p">(</span><span class="nx">cip</span><span class="p">,</span> <span class="nx">parameter</span><span class="o">=</span><span class="nx">row</span><span class="p">.</span><span class="nx">names</span><span class="p">(</span><span class="nx">cip</span><span class="p">),</span> <span class="nx">type</span><span class="o">=</span><span class="s1">&#39;Prof&#39;</span><span class="p">)</span>
+  <span class="nx">names</span><span class="p">(</span><span class="nx">cip_dat</span><span class="p">)</span><span class="cp">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="cp">]</span> <span class="o">&lt;-</span> <span class="nx">colnames</span><span class="p">(</span><span class="nx">cip</span><span class="p">)</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">BOOT</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">ci_all_dat</span> <span class="o">&lt;-</span> <span class="nx">rbind</span><span class="p">(</span><span class="nx">ci_dat</span><span class="p">,</span> <span class="nx">cip_dat</span><span class="p">)</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">ci_all_dat</span> <span class="o">&lt;-</span> <span class="nx">rbind</span><span class="p">(</span><span class="nx">ci_dat</span><span class="p">,</span> <span class="nx">cip_dat</span><span class="p">,</span> <span class="nx">cib_dat</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="nx">fe_dat</span> <span class="o">&lt;-</span> <span class="nx">data</span><span class="p">.</span><span class="nx">frame</span><span class="p">(</span><span class="nx">parameter</span><span class="o">=</span><span class="nx">names</span><span class="p">(</span><span class="nx">fixef</span><span class="p">(</span><span class="nx">model</span><span class="p">)),</span> <span class="nx">value</span><span class="o">=</span><span class="nx">fixef</span><span class="p">(</span><span class="nx">model</span><span class="p">))</span>
+  <span class="nx">list</span><span class="p">(</span><span class="nx">mean</span><span class="o">=</span><span class="nx">fe_dat</span><span class="p">,</span> <span class="nx">bounds</span><span class="o">=</span><span class="nx">ci_all_dat</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="p">(</span><span class="nx">require</span><span class="p">(</span><span class="nx">ggplot2</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">m1_ci</span> <span class="o">&lt;-</span> <span class="nx">compare_CI_df</span><span class="p">(</span><span class="nx">m1</span><span class="p">.</span><span class="nx">prall</span><span class="p">,</span> <span class="nx">m1</span><span class="p">,</span> <span class="nx">BOOT</span><span class="o">=</span><span class="nx">TRUE</span><span class="p">,</span> <span class="nx">nsim</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="nx">m1_mean</span> <span class="o">&lt;-</span> <span class="nx">m1_ci</span><span class="cp">[</span><span class="err">[</span><span class="s1">&#39;mean&#39;</span><span class="cp">]</span><span class="p">]</span>
+    <span class="nx">m1_bnd</span> <span class="o">&lt;-</span> <span class="nx">m1_ci</span><span class="cp">[</span><span class="err">[</span><span class="s1">&#39;bounds&#39;</span><span class="cp">]</span><span class="p">]</span>
+
+    <span class="nx">ggplot</span><span class="p">(</span><span class="nx">m1_bnd</span><span class="cp">[</span><span class="nx">m1_bnd</span><span class="nv">$parameter</span> <span class="o">!=</span> <span class="s1">&#39;(Intercept)&#39;</span><span class="p">,</span> <span class="cp">]</span><span class="p">)</span> <span class="o">+</span>
+    <span class="nx">geom_linerange</span><span class="p">(</span><span class="nx">aes</span><span class="p">(</span><span class="nx">parameter</span><span class="p">,</span> <span class="nx">ymax</span><span class="o">=</span><span class="err">`</span><span class="mf">97.5</span> <span class="o">%</span><span class="err">`</span><span class="p">,</span> <span class="nx">ymin</span><span class="o">=</span><span class="err">`</span><span class="mf">2.5</span> <span class="o">%</span><span class="err">`</span><span class="p">,</span> <span class="nx">color</span><span class="o">=</span><span class="nx">type</span><span class="p">),</span>
+                   <span class="nx">position</span><span class="o">=</span><span class="nx">position_dodge</span><span class="p">(</span><span class="nx">w</span><span class="o">=</span><span class="p">.</span><span class="mi">5</span><span class="p">),</span> <span class="nx">size</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span> <span class="o">+</span>
+    <span class="nx">geom_hline</span><span class="p">(</span><span class="nx">yintercept</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nx">linetype</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span>
+    <span class="nx">coord_flip</span><span class="p">()</span> <span class="o">+</span> <span class="nx">theme_minimal</span><span class="p">()</span> <span class="o">+</span>
+    <span class="nx">geom_point</span><span class="p">(</span><span class="nx">aes</span><span class="p">(</span><span class="nx">parameter</span><span class="p">,</span> <span class="nx">value</span><span class="p">),</span> <span class="nx">size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="nx">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+               <span class="nx">data</span><span class="o">=</span><span class="nx">m1_mean</span><span class="cp">[</span><span class="nx">m1_mean</span><span class="nv">$parameter</span> <span class="o">!=</span> <span class="s1">&#39;(Intercept)&#39;</span><span class="p">,</span> <span class="cp">]</span><span class="p">)</span>
+
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">lattice</span><span class="o">::</span><span class="nx">dotplot</span><span class="p">(</span><span class="nx">parameter</span> <span class="o">~</span> <span class="nx">c</span><span class="p">(</span><span class="err">`</span><span class="mf">2.5</span> <span class="o">%</span><span class="err">`</span><span class="p">,</span> <span class="err">`</span><span class="mf">97.5</span> <span class="o">%</span><span class="err">`</span><span class="p">)</span> <span class="o">|</span> <span class="nx">type</span> <span class="p">,</span> <span class="nx">m1_bnd</span><span class="p">,</span> <span class="nx">abline</span><span class="o">=</span><span class="nx">c</span><span class="p">(</span><span class="nx">v</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nx">lty</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+    <span class="p">}</span>
+
+<span class="err">##</span> <span class="nx">Computing</span> <span class="nx">bootstrap</span> <span class="nx">confidence</span> <span class="nx">intervals</span> <span class="p">...</span>
+
+<span class="err">##</span> <span class="nx">Warning</span><span class="o">:</span> <span class="nx">Removed</span> <span class="mi">1</span> <span class="nx">rows</span> <span class="nx">containing</span> <span class="nx">missing</span> <span class="nx">values</span> <span class="p">(</span><span class="nx">geom_segment</span><span class="p">).</span>
+
+<span class="err">##</span> <span class="nx">Warning</span><span class="o">:</span> <span class="nx">Removed</span> <span class="mi">1</span> <span class="nx">rows</span> <span class="nx">containing</span> <span class="nx">missing</span> <span class="nx">values</span> <span class="p">(</span><span class="nx">geom_segment</span><span class="p">).</span>
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/ryo-1.svg" /><!-- --></p>
+<div class="highlight"><pre>##   strong effect of nutrient homogeneity
+##   effect of adding lots of water
+## nutrient has some effect
+</pre></div>
+
+
+<h2>Pulling data out of models with <code>broom</code> or <code>ggplot2</code></h2>
+<p>Method <code>ggplot2::fortify</code> adds fitted and resid to data frame. New-ish
+CRAN package <code>broom</code> generalizes this (and more), really aiming provide
+an interface for 'tidy' (i.e., easy to plot)representations of model
+objects from many R functions (including packages and base <code>R</code>). The
+<code>broom</code> method <code>augment</code> really generalized version of <code>fortify</code> and is
+recommended instead</p>
+<div class="highlight"><pre><span class="kr">if</span><span class="p">(</span><span class="kn">require</span><span class="p">(</span>ggplot2<span class="p">))</span> <span class="p">{</span>
+    d_fort <span class="o">&lt;-</span> ggplot2<span class="o">::</span>fortify<span class="p">(</span>m1<span class="p">,</span> d<span class="p">)</span>
+    <span class="c1">## adds .fortify, scresid, .resid</span>
+    <span class="c1">##head(d_fort)</span>
+<span class="p">}</span>
+
+<span class="kr">if</span><span class="p">(</span><span class="kn">require</span><span class="p">(</span>broom<span class="p">))</span> <span class="p">{</span>
+    glm1 <span class="o">&lt;-</span> glance<span class="p">(</span>m1<span class="p">)</span> <span class="c1"># model summary</span>
+    tdm1 <span class="o">&lt;-</span> tidy<span class="p">(</span>m1<span class="p">,</span> effects<span class="o">=</span><span class="s">&#39;fixed&#39;</span><span class="p">)</span> <span class="c1">#model coefficient summary</span>
+    augm1 <span class="o">&lt;-</span> augment<span class="p">(</span>m1<span class="p">,</span> d<span class="p">,</span> se.fit<span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> type.predict<span class="o">=</span><span class="s">&#39;response&#39;</span><span class="p">)</span> <span class="c1"># model data with fits</span>
+    <span class="c1">## head(glm1)</span>
+    <span class="c1">## head(tdm1)</span>
+    <span class="c1">## head(augm1)</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Unfortunately, the predict and confint methods for <code>merMod</code> aren't yet
+integrated to <code>broom</code> or <code>ggplot</code> (or my code above for confidence
+intervals could be much cleaner at the slight cost of an additional
+package dependency).</p>
+<h2>GLMM: Lizard mate choice</h2>
+<p>Mechanisms of speciation -- cool question!</p>
+<ul>
+<li>mate compatibility trails</li>
+<li>western North American skinks (<em>Plestiodon skiltonianus</em> spp)</li>
+<li>Richmond, J. Q., E. L. Jockusch, and A. M. Latimer 2010. Mechanical
+    reproductive isolation facilitates parallel speciation in western
+    North American scincid lizards. <em>American Naturalist</em></li>
+</ul>
+<p><strong>Repeated measure of ind crossed with multiple trials, binary outcome</strong></p>
+<div class="highlight"><pre>d2 <span class="o">&lt;-</span> read.delim<span class="p">(</span><span class="s">&quot;http://datadryad.org/bitstream/handle/10255/dryad.33579/Richmond%20et%20al%202011%20Datafile.txt?sequence=1&quot;</span><span class="p">)</span>
+<span class="kp">names</span><span class="p">(</span>d2<span class="p">)</span> <span class="o">&lt;-</span> <span class="kp">gsub</span><span class="p">(</span><span class="s">&#39;\\.&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="kp">names</span><span class="p">(</span>d2<span class="p">))</span>
+
+<span class="c1"># rescale geo dist, sizediff</span>
+d2 <span class="o">&lt;-</span> <span class="kp">within</span><span class="p">(</span>d2<span class="p">,</span> <span class="p">{</span>
+    geodist_scl <span class="o">&lt;-</span> <span class="p">(</span>GeoDist <span class="o">-</span> <span class="kp">mean</span><span class="p">(</span>GeoDist<span class="p">))</span> <span class="o">/</span> var<span class="p">(</span>GeoDist<span class="p">)</span>
+    gendist_scl <span class="o">&lt;-</span> <span class="p">(</span>GenDist <span class="o">-</span> <span class="kp">mean</span><span class="p">(</span>GenDist<span class="p">))</span>
+    sizediff_scl2 <span class="o">&lt;-</span> <span class="p">((</span>SizeDiff <span class="o">-</span> <span class="kp">mean</span><span class="p">(</span>SizeDiff<span class="p">))</span> <span class="o">/</span> var<span class="p">(</span>SizeDiff<span class="p">))</span><span class="o">^</span><span class="m">2</span>
+    Series <span class="o">&lt;-</span> <span class="kp">factor</span><span class="p">(</span>Series<span class="p">)</span>
+    Female <span class="o">&lt;-</span> <span class="kp">factor</span><span class="p">(</span>Female<span class="p">)</span>
+    Male <span class="o">&lt;-</span> <span class="kp">factor</span><span class="p">(</span>Male<span class="p">)</span>
+  <span class="p">})</span>
+
+<span class="c1">## cop - copulation</span>
+<span class="kp">system.time</span><span class="p">(</span>gm0 <span class="o">&lt;-</span> glmer<span class="p">(</span>cop <span class="o">~</span>   sizediff_scl2   <span class="o">+</span> <span class="p">(</span><span class="m">1</span> <span class="o">|</span> Series<span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="m">1</span> <span class="o">|</span> Male<span class="p">)</span>  <span class="o">+</span> <span class="p">(</span><span class="m">1</span> <span class="o">|</span> Female<span class="p">)</span> <span class="p">,</span>
+               data<span class="o">=</span>d2<span class="p">,</span> family<span class="o">=</span><span class="s">&#39;binomial&#39;</span><span class="p">))</span>
+
+<span class="c1">## Warning in checkConv(attr(opt, &quot;derivs&quot;), opt$par, ctrl = control</span>
+<span class="c1">## $checkConv, : unable to evaluate scaled gradient</span>
+
+<span class="c1">## Warning in checkConv(attr(opt, &quot;derivs&quot;), opt$par, ctrl = control</span>
+<span class="c1">## $checkConv, : Hessian is numerically singular: parameters are not uniquely</span>
+<span class="c1">## determined</span>
+
+<span class="c1">##    user  system elapsed </span>
+<span class="c1">##   0.517   0.001   0.517</span>
+
+<span class="kp">system.time</span><span class="p">(</span>gm1 <span class="o">&lt;-</span> glmer<span class="p">(</span>cop <span class="o">~</span> gendist_scl <span class="o">+</span> geodist_scl <span class="o">+</span>  sizediff_scl2 <span class="o">+</span> <span class="p">(</span><span class="m">1</span> <span class="o">|</span> Series<span class="p">)</span> <span class="o">+</span>
+                         <span class="p">(</span><span class="m">1</span> <span class="o">|</span> Male<span class="p">)</span>  <span class="o">+</span> <span class="p">(</span><span class="m">1</span> <span class="o">|</span> Female<span class="p">)</span> <span class="p">,</span> data<span class="o">=</span>d2<span class="p">,</span> family<span class="o">=</span><span class="s">&#39;binomial&#39;</span><span class="p">))</span>
+
+<span class="c1">## Warning in checkConv(attr(opt, &quot;derivs&quot;), opt$par, ctrl = control$checkConv, : Model is nearly unidentifiable: large eigenvalue ratio</span>
+<span class="c1">##  - Rescale variables?</span>
+
+<span class="c1">##    user  system elapsed </span>
+<span class="c1">##   1.513   0.010   1.528</span>
+
+anova<span class="p">(</span>gm1<span class="p">,</span> gm0<span class="p">)</span> <span class="c1"># no need for non-size predictors</span>
+
+<span class="c1">## Data: d2</span>
+<span class="c1">## Models:</span>
+<span class="c1">## gm0: cop ~ sizediff_scl2 + (1 | Series) + (1 | Male) + (1 | Female)</span>
+<span class="c1">## gm1: cop ~ gendist_scl + geodist_scl + sizediff_scl2 + (1 | Series) + </span>
+<span class="c1">## gm1:     (1 | Male) + (1 | Female)</span>
+<span class="c1">##     Df    AIC    BIC  logLik deviance  Chisq Chi Df Pr(&gt;Chisq)</span>
+<span class="c1">## gm0  5 159.34 176.47 -74.673   149.34                         </span>
+<span class="c1">## gm1  7 162.92 186.90 -74.460   148.92 0.4251      2     0.8085</span>
+
+plot<span class="p">(</span>gm0<span class="p">,</span> type<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;p&quot;</span><span class="p">),</span> id <span class="o">=</span> <span class="m">0.05</span> <span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/lizard-crit-1.svg" /><!-- --></p>
+<div class="highlight"><pre>## non useful visually but with id = 0.05 gives sense of outlier
+## see ?plot.merMod for explanation of test run
+
+## it&#39;s more useful to plot residuals in GLM logistic combined across grouping factors
+## or binned fitted values
+plot(gm0,  factor(Trial) ~ resid(., type=&#39;pearson&#39;),  abline=c(v=0), lty=2)
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/lizard-crit-2.svg" /><!-- --></p>
+<div class="highlight"><pre>plot(gm0,  factor(Series) ~ resid(., type=&#39;pearson&#39;),  abline=c(v=0), lty=2)
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/lizard-crit-3.svg" /><!-- --></p>
+<div class="highlight"><pre>## better than default eh
+
+## second plot suggests some issue with series, indicating we may want to
+## fit a model accounting for differences between trial series
+## (in fact, Richmond et al did fit such a model)
+## you can see the outliers here too with
+## plot(gm0, resid(., type=&#39;pearson&#39;) ~ fitted(.) | factor(Series), id = 0.05)
+
+## main thing on pearson or deviance residuals is they&#39;re mostly less than 2
+## (as assessed in first plot above -- second is the sqrt
+## we could later drop these outlier and see if they change
+
+if(require(gridExtra)) {
+    do.call(gridExtra::grid.arrange, c(lattice::qqmath(ranef(gm0, condVar=TRUE)), list(nrow=1)))
+} else {
+    lattice::qqmath(ranef(gm0, condVar=TRUE))
+  }
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/lizard-crit-4.svg" /><!-- --></p>
+<div class="highlight"><pre><span class="c1">## useful if you have a lot of RE to draw attention to strong ones</span>
+<span class="c1">## maybe latter == dot = sample size?</span>
+
+<span class="c1">## no reason to retain RE on Male, but also drop Female</span>
+<span class="c1">## no real justification, just very slow profiling for many RE</span>
+gm0noindre <span class="o">&lt;-</span> glmer<span class="p">(</span>cop <span class="o">~</span>   sizediff_scl2   <span class="o">+</span> <span class="p">(</span><span class="m">1</span> <span class="o">|</span> Series<span class="p">),</span> data<span class="o">=</span>d2<span class="p">,</span> family<span class="o">=</span><span class="s">&#39;binomial&#39;</span><span class="p">)</span>
+
+<span class="c1">## Warning in checkConv(attr(opt, &quot;derivs&quot;), opt$par, ctrl = control</span>
+<span class="c1">## $checkConv, : unable to evaluate scaled gradient</span>
+
+<span class="c1">## Warning in checkConv(attr(opt, &quot;derivs&quot;), opt$par, ctrl = control</span>
+<span class="c1">## $checkConv, : Hessian is numerically singular: parameters are not uniquely</span>
+<span class="c1">## determined</span>
+
+<span class="kp">system.time</span><span class="p">(</span><span class="c1">#</span>
+    gm0.prall <span class="o">&lt;-</span> profile<span class="p">(</span>gm0noindre<span class="p">,</span> devtol<span class="o">=</span><span class="m">1e-6</span><span class="p">)</span> <span class="c1"># see https://stat.ethz.ch/pipermail/r-sig-mixed-models/2014q3/022394.html</span>
+<span class="p">)</span>
+
+<span class="c1">## Warning in vcov.merMod(object, use.hessian = use.hessian): variance-covariance matrix computed from finite-difference Hessian is</span>
+<span class="c1">## not positive definite or contains NA values: falling back to var-cov estimated from RX</span>
+
+<span class="c1">## Warning in vcov.merMod(object, correlation = correlation, sigm = sig): variance-covariance matrix computed from finite-difference Hessian is</span>
+<span class="c1">## not positive definite or contains NA values: falling back to var-cov estimated from RX</span>
+
+<span class="c1">##    user  system elapsed </span>
+<span class="c1">##   9.569   0.039   9.634</span>
+
+<span class="c1">#system.time(</span>
+<span class="c1">#    gm0_full.prall &lt;- profile(gm0, devtol=1e-6)</span>
+<span class="c1">#)</span>
+<span class="c1">#   user  system elapsed</span>
+<span class="c1">#344.092   0.539 344.613</span>
+
+lattice<span class="o">::</span>xyplot<span class="p">(</span>logProf<span class="p">(</span>gm0.prall<span class="p">))</span>
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/lizard-plotting-1.svg" /><!-- --></p>
+<div class="highlight"><pre>lattice::densityplot(gm0.prall)
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/lizard-plotting-2.svg" /><!-- --></p>
+<div class="highlight"><pre>lattice::splom(gm0.prall)
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/lizard-plotting-3.svg" /><!-- --></p>
+<h1>Confidence intervals</h1>
+<div class="highlight"><pre><span class="err">##</span> <span class="k">if</span> <span class="nx">residuals</span> <span class="nx">looking</span> <span class="nx">OK</span> <span class="o">--</span> <span class="nx">fastest</span> <span class="nx">way</span> <span class="nx">to</span> <span class="nx">get</span> <span class="nx">a</span> <span class="nx">quick</span> <span class="nx">look</span> <span class="nx">at</span> <span class="nx">coefficient</span> <span class="nx">uncertainty</span>
+<span class="nx">ci_dat</span> <span class="o">&lt;-</span> <span class="nx">confint</span><span class="p">(</span><span class="nx">gm0</span><span class="p">,</span> <span class="nx">method</span><span class="o">=</span><span class="s1">&#39;Wald&#39;</span><span class="p">)</span>
+<span class="nx">ci_dat</span> <span class="o">&lt;-</span> <span class="nx">cbind</span><span class="p">(</span><span class="nx">ci_dat</span><span class="p">,</span> <span class="nx">mean</span><span class="o">=</span><span class="nx">rowMeans</span><span class="p">(</span><span class="nx">ci_dat</span><span class="p">))</span>
+<span class="nx">ci_df</span> <span class="o">&lt;-</span> <span class="nx">data</span><span class="p">.</span><span class="nx">frame</span><span class="p">(</span><span class="nx">coef</span><span class="o">=</span><span class="nx">row</span><span class="p">.</span><span class="nx">names</span><span class="p">(</span><span class="nx">ci_dat</span><span class="p">),</span> <span class="nx">ci_dat</span><span class="p">)</span>
+<span class="nx">names</span><span class="p">(</span><span class="nx">ci_df</span><span class="p">)</span><span class="cp">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="cp">]</span> <span class="o">&lt;-</span> <span class="nx">c</span><span class="p">(</span><span class="s1">&#39;lwr&#39;</span><span class="p">,</span> <span class="s1">&#39;upr&#39;</span><span class="p">)</span>
+
+
+<span class="nx">lattice</span><span class="o">::</span><span class="nx">dotplot</span><span class="p">(</span><span class="nx">coef</span> <span class="o">~</span> <span class="nx">mean</span><span class="p">,</span> <span class="nx">ci_df</span><span class="p">,</span>
+        <span class="nx">panel</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">panel</span><span class="p">.</span><span class="nx">xyplot</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">pch</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+            <span class="nx">panel</span><span class="p">.</span><span class="nx">segments</span><span class="p">(</span><span class="nx">ci_df$lwr</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">ci_df$upr</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span>
+            <span class="nx">panel</span><span class="p">.</span><span class="nx">abline</span><span class="p">(</span><span class="nx">v</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nx">lty</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="p">})</span>
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/quick-ci-1.svg" /><!-- --></p>
+<p>Rolling your own again</p>
+<div class="highlight"><pre><span class="kr">if</span><span class="p">(</span><span class="kn">require</span><span class="p">(</span>ggplot2<span class="p">))</span> <span class="p">{</span>
+  gm0_ci <span class="o">&lt;-</span> compare_CI_df<span class="p">(</span>gm0.prall<span class="p">,</span> gm0<span class="p">)</span>
+  gm0_mean <span class="o">&lt;-</span> gm0_ci<span class="p">[[</span><span class="s">&#39;mean&#39;</span><span class="p">]]</span>
+  gm0_bnd <span class="o">&lt;-</span> gm0_ci<span class="p">[[</span><span class="s">&#39;bounds&#39;</span><span class="p">]]</span>
+  g <span class="o">&lt;-</span> ggplot<span class="p">(</span>gm0_bnd<span class="p">[</span>gm0_bnd<span class="o">$</span>parameter <span class="o">!=</span> <span class="s">&#39;(Intercept)&#39;</span><span class="p">,</span> <span class="p">])</span> <span class="o">+</span>
+    geom_linerange<span class="p">(</span>aes<span class="p">(</span>parameter<span class="p">,</span> ymax<span class="o">=</span><span class="sb">`97.5 %`</span><span class="p">,</span> ymin<span class="o">=</span><span class="sb">`2.5 %`</span><span class="p">,</span> color<span class="o">=</span>type<span class="p">),</span>
+                   position<span class="o">=</span>position_dodge<span class="p">(</span>w<span class="o">=</span><span class="m">.5</span><span class="p">),</span> size<span class="o">=</span><span class="m">1.5</span><span class="p">)</span> <span class="o">+</span>
+    geom_hline<span class="p">(</span>yintercept<span class="o">=</span><span class="m">0</span><span class="p">,</span> linetype<span class="o">=</span><span class="m">2</span><span class="p">)</span> <span class="o">+</span>
+    coord_flip<span class="p">()</span> <span class="o">+</span> theme_minimal<span class="p">()</span> <span class="o">+</span>
+    geom_point<span class="p">(</span>aes<span class="p">(</span>parameter<span class="p">,</span> value<span class="p">),</span>
+               size<span class="o">=</span><span class="m">3</span><span class="p">,</span> shape<span class="o">=</span><span class="m">3</span><span class="p">,</span>
+               data<span class="o">=</span>gm0_mean<span class="p">[</span>gm0_mean<span class="o">$</span>parameter <span class="o">!=</span> <span class="s">&#39;(Intercept)&#39;</span><span class="p">,</span> <span class="p">])</span>
+  g
+  <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+    lattice<span class="o">::</span>dotplot<span class="p">(</span>parameter <span class="o">~</span> <span class="kt">c</span><span class="p">(</span><span class="sb">`2.5 %`</span><span class="p">,</span> <span class="sb">`97.5 %`</span><span class="p">)</span> <span class="o">|</span> type <span class="p">,</span> gm0_bnd<span class="p">)</span>
+      <span class="p">}</span>
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/ryo-lizard-ci-1.svg" /><!-- --></p>
+<p>Because the fixed effect parameter on size difference and the random
+effect variance are on such different scales, I make two plots</p>
+<div class="highlight"><pre>if(require(ggplot2))
+    g + scale_y_log10()
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/low-magnitude-param-1.svg" /><!-- --></p>
+<h2>quick predictions</h2>
+<p>Again, the quickest way to visualize predictions is with <code>lsmeans</code>. Two
+things are different here:</p>
+<ul>
+<li>to plot GLM predictions on a meaningful scale, you need to pass
+    <code>type = 'response'</code> to the <code>plot</code> function.</li>
+<li>for a quantitative predictor, the default will plot a single point
+    at the mean of the predictor, to see prediction across the range,
+    pass a list to the <code>at</code> argument</li>
+<li>for more meaningful plots, we should label the plot y-axis with
+    unscaled size differences (but I didn't do this)</li>
+<li>note that you can produce plots at various levels of interacting
+    quantitative predictors using this technique</li>
+</ul>
+<!-- -->
+
+<div class="highlight"><pre><span class="kr">if</span><span class="p">(</span><span class="kn">require</span><span class="p">(</span>lsmeans<span class="p">))</span>
+
+gm0_lsm <span class="o">&lt;-</span>    lsmeans<span class="p">(</span>gm0<span class="p">,</span> <span class="o">~</span> sizediff_scl2<span class="p">,</span>
+                  at <span class="o">=</span> <span class="kt">list</span><span class="p">(</span>sizediff_scl2 <span class="o">=</span> <span class="kp">seq</span><span class="p">(</span>from<span class="o">=</span><span class="m">0</span><span class="p">,</span>
+                              to <span class="o">=</span> <span class="m">1.5</span> <span class="o">*</span> median<span class="p">(</span>d2<span class="o">$</span>sizediff_scl2<span class="p">),</span> length.out <span class="o">=</span> <span class="m">10</span><span class="p">)))</span>
+
+<span class="c1">## Warning in vcov.merMod(object): variance-covariance matrix computed from finite-difference Hessian is</span>
+<span class="c1">## not positive definite or contains NA values: falling back to var-cov estimated from RX</span>
+
+plot<span class="p">(</span>gm0_lsm<span class="p">,</span> type <span class="o">=</span> <span class="s">&#39;response&#39;</span><span class="p">,</span> ylab <span class="o">=</span> <span class="s">&#39;scaled size diff&#39;</span><span class="p">,</span> xlab <span class="o">=</span> <span class="s">&#39;probability of copulation&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/quick-vis-glmm-1.svg" /><!-- -->
+## customized predictions</p>
+<p>The quick plots using <code>lsmeans</code> are great, but they assume Wald
+confidence intervals and don't account for random effects. To deal with
+the former, we need to bootstrap, which I won't cover here, but the
+problem of random effects is easily examined using the <code>re.form</code>
+argument of <code>predict.merMod</code> in <code>lme4</code>. Here I look at predictions
+accounting for all,, none, or some of random effects fitted:</p>
+<div class="highlight"><pre><span class="c1">## predicted effect</span>
+d2<span class="o">$</span>pred_overall_gen <span class="o">&lt;-</span> predict<span class="p">(</span>gm0<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;response&#39;</span><span class="p">,</span> re.form<span class="o">=</span><span class="kc">NA</span><span class="p">)</span>
+d2<span class="o">$</span>pred_overall <span class="o">&lt;-</span> predict<span class="p">(</span>gm0<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;response&#39;</span><span class="p">)</span>
+d2<span class="o">$</span>pred_ind <span class="o">&lt;-</span> predict<span class="p">(</span>gm0<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;response&#39;</span><span class="p">,</span> re.form<span class="o">=~</span> <span class="p">(</span><span class="m">1</span><span class="o">|</span>Female<span class="p">))</span>
+d2<span class="o">$</span>pred_trial <span class="o">&lt;-</span> predict<span class="p">(</span>gm0<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;response&#39;</span><span class="p">,</span> re.form<span class="o">=~</span><span class="p">(</span><span class="m">1</span><span class="o">|</span>Series<span class="p">))</span>
+
+<span class="c1">## NB this changes row order from the fit!!!</span>
+d2_pred <span class="o">&lt;-</span> <span class="kp">merge</span><span class="p">(</span>d2<span class="p">,</span> <span class="kp">as.data.frame</span><span class="p">(</span><span class="kp">table</span><span class="p">(</span>Series<span class="o">=</span>d2<span class="o">$</span>Series<span class="p">)))</span>
+
+<span class="kr">if</span><span class="p">(</span><span class="kn">require</span><span class="p">(</span>ggplot2<span class="p">))</span> <span class="p">{</span>
+
+g <span class="o">&lt;-</span> ggplot<span class="p">(</span>d2_pred<span class="p">)</span> <span class="o">+</span>
+     geom_point<span class="p">(</span>aes<span class="p">(</span>SizeDiff<span class="p">,</span> cop<span class="p">),</span>
+                position<span class="o">=</span>position_jitter<span class="p">(</span>h<span class="o">=</span><span class="m">0.025</span><span class="p">,</span> w<span class="o">=</span><span class="m">0</span><span class="p">))</span> <span class="o">+</span>
+     theme_minimal<span class="p">()</span> <span class="o">+</span>
+     ylab<span class="p">(</span><span class="s">&quot;Probability copulation&quot;</span><span class="p">)</span>
+
+
+g1 <span class="o">&lt;-</span> g <span class="o">+</span> geom_line<span class="p">(</span>aes<span class="p">(</span>SizeDiff<span class="p">,</span> pred_trial<span class="p">,</span> color<span class="o">=</span>Series<span class="p">))</span>
+
+g2 <span class="o">&lt;-</span> g <span class="o">+</span> geom_line<span class="p">(</span>aes<span class="p">(</span>SizeDiff<span class="p">,</span> pred_overall_gen<span class="p">),</span> color<span class="o">=</span><span class="s">&#39;orange&#39;</span><span class="p">,</span> size <span class="o">=</span> <span class="m">1.5</span><span class="p">)</span> <span class="o">+</span>
+    geom_point<span class="p">(</span>aes<span class="p">(</span>SizeDiff<span class="p">,</span> pred_ind<span class="p">,</span> alpha<span class="o">=</span><span class="kp">as.numeric</span><span class="p">(</span>Female<span class="p">)),</span> color <span class="o">=</span> <span class="s">&#39;blue&#39;</span><span class="p">)</span> <span class="o">+</span>
+    theme<span class="p">(</span>legend.position <span class="o">=</span> <span class="s">&quot;none&quot;</span><span class="p">)</span>
+
+gridExtra<span class="o">::</span>grid.arrange<span class="p">(</span>g1<span class="p">,</span> g2<span class="p">,</span> ncol<span class="o">=</span><span class="m">2</span><span class="p">)</span>
+
+<span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+    plot<span class="p">(</span>cop <span class="o">~</span> SizeDiff<span class="p">,</span> d2_pred<span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Probability copulation&quot;</span><span class="p">)</span>
+    points<span class="p">(</span>pred_ind <span class="o">~</span> SizeDiff<span class="p">,</span> d2_pred<span class="p">,</span> pch<span class="o">=</span><span class="m">19</span><span class="p">,</span> cex<span class="o">=</span><span class="m">.5</span><span class="p">,</span> col<span class="o">=</span><span class="s">&#39;darkgray&#39;</span><span class="p">)</span>
+    points<span class="p">(</span>pred_overall_gen <span class="o">~</span> SizeDiff<span class="p">,</span> d2_pred<span class="p">,</span> pch<span class="o">=</span><span class="m">19</span><span class="p">,</span> cex<span class="o">=</span><span class="m">.5</span><span class="p">)</span>
+    <span class="p">}</span>
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/prediction-visual-1.svg" /><!-- --></p>
+<p>The plot on the left above shows predictions for various series of
+experimental trials, and the raw data. The plot on the right shows the
+overall fit (orange line -- the grand mean with no random effects
+influencing the prediction), the predictions accounting just for random
+effects at the level of individual females (blue dots), and the raw
+data.</p>
+<div class="highlight"><pre>## could plot them all together -- code below gives some insight ## into the
+## ggplot2 fortify method
+if (require(ggplot2)) {
+  g +  geom_point(aes(SizeDiff, plogis(.fitted)), color=&#39;darkgray&#39;, size=3,
+                  data=fortify(gm0, d2))
+
+## nb -- same as predict with all RE!
+  with(fortify(gm0, d2),
+       unique(pred_overall - plogis(.fitted)))
+}
+</pre></div>
+
+
+<h2>Checking model adequacy</h2>
+<p>With `<code>lme4</code>, you can also easily produce something akin to
+posterior-predictive checks, <a href="http://andrewgelman.com/2014/08/11/discussion-sander-greenland-posterior-predictive-checks/">a Bayesian
+tool</a>
+for model criticism.</p>
+<p>Using <code>simulate</code> on an <code>lme4</code> produces a set of response data implied by
+the model. By examining summary statistics of this dataset, and
+comparing them to the actual data, you can examine how well, or poorly,
+the model fits. Note that these checks are less rigorous than something
+like cross-validation. See <code>?simulate.merMod</code> for additional
+information.</p>
+<p>The upshot: these are relatively quick, and can provide a warning that
+your model isn't capturing some aspect of the data. But, be aware there
+is controversy about their use for anything other than seeing how the
+model is capturing the data. Often, we're interested in making more
+formal, frequentist inference. Though these checks are valuable, the
+p-like-values implied by them <a href="http://andrewgelman.com/2009/02/07/confusions_abou/">do not satisfy assumptions necessary for
+this kind of
+inference</a> (i.e.,
+don't use them for model comparison or parameter inference).</p>
+<div class="highlight"><pre><span class="err">##</span> <span class="nx">without</span> <span class="nx">RE</span>
+<span class="nx">set</span><span class="p">.</span><span class="nx">seed</span><span class="p">(</span><span class="mi">1141</span><span class="p">)</span>
+<span class="nx">gm0</span><span class="p">.</span><span class="nx">sim_wo</span> <span class="o">&lt;-</span> <span class="nx">simulate</span><span class="p">(</span><span class="nx">gm0</span><span class="p">,</span> <span class="nx">nsim</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="nx">re</span><span class="p">.</span><span class="nx">form</span><span class="o">=</span><span class="nx">NA</span><span class="p">)</span>
+<span class="nx">sims</span> <span class="o">&lt;-</span> <span class="nx">sapply</span><span class="p">(</span><span class="nx">gm0</span><span class="p">.</span><span class="nx">sim_wo</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span>  <span class="nx">x</span><span class="p">)</span>
+<span class="nx">ones</span> <span class="o">&lt;-</span> <span class="nx">colSums</span><span class="p">(</span><span class="nx">sims</span><span class="p">)</span>
+<span class="nx">zeros</span> <span class="o">&lt;-</span> <span class="o">-</span><span class="nx">colSums</span><span class="p">(</span><span class="nx">sims</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nx">perc</span> <span class="o">&lt;-</span> <span class="nx">ones</span><span class="o">/</span><span class="nx">nrow</span><span class="p">(</span><span class="nx">d2</span><span class="p">)</span>
+<span class="nx">cvar</span> <span class="o">&lt;-</span> <span class="nx">apply</span><span class="p">(</span><span class="nx">sims</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kd">var</span><span class="p">)</span>
+
+<span class="err">##</span> <span class="kd">with</span> <span class="nx">RE</span>
+<span class="nx">gm0</span><span class="p">.</span><span class="nx">sim</span> <span class="o">&lt;-</span> <span class="nx">simulate</span><span class="p">(</span><span class="nx">gm0</span><span class="p">,</span> <span class="mi">1000</span> <span class="p">)</span>
+<span class="nx">sims</span> <span class="o">&lt;-</span> <span class="nx">sapply</span><span class="p">(</span><span class="nx">gm0</span><span class="p">.</span><span class="nx">sim</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span>  <span class="nx">x</span><span class="p">)</span>
+<span class="nx">re_ones</span> <span class="o">&lt;-</span> <span class="nx">colSums</span><span class="p">(</span><span class="nx">sims</span><span class="p">)</span>
+<span class="nx">re_zeros</span> <span class="o">&lt;-</span> <span class="o">-</span><span class="nx">colSums</span><span class="p">(</span><span class="nx">sims</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nx">re_perc</span> <span class="o">&lt;-</span> <span class="nx">re_ones</span><span class="o">/</span><span class="nx">nrow</span><span class="p">(</span><span class="nx">d2</span><span class="p">)</span>
+<span class="nx">re_cvar</span> <span class="o">&lt;-</span> <span class="nx">apply</span><span class="p">(</span><span class="nx">sims</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kd">var</span><span class="p">)</span>
+
+<span class="nx">pp_comp</span> <span class="o">&lt;-</span> <span class="kd">function</span><span class="p">(</span><span class="nx">dist</span><span class="p">,</span> <span class="nx">cmp_fn</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="p">...)</span> <span class="p">{</span>
+  <span class="nx">hist</span><span class="p">(</span><span class="nx">dist</span><span class="p">,</span> <span class="nx">col</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="nx">xlab</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="p">...)</span>
+  <span class="nx">abline</span><span class="p">(</span><span class="nx">v</span><span class="o">=</span><span class="nx">cmp_fn</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span> <span class="nx">lwd</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="nx">col</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="nx">lty</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+  <span class="nx">abline</span><span class="p">(</span><span class="nx">v</span><span class="o">=</span><span class="nx">mean</span><span class="p">(</span><span class="nx">dist</span><span class="p">),</span> <span class="nx">lwd</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nx">op</span> <span class="o">&lt;-</span> <span class="nx">par</span><span class="p">(</span><span class="nx">mfrow</span><span class="o">=</span><span class="nx">c</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+  <span class="nx">pp_comp</span><span class="p">(</span><span class="nx">ones</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">x$cop</span><span class="p">),</span>
+          <span class="nx">d2</span><span class="p">,</span> <span class="nx">main</span><span class="o">=</span><span class="s1">&#39;ones - no RE&#39;</span><span class="p">,</span> <span class="nx">xlim</span><span class="o">=</span><span class="nx">c</span><span class="p">(</span><span class="mi">45</span><span class="p">,</span> <span class="mi">110</span><span class="p">))</span>
+  <span class="nx">pp_comp</span><span class="p">(</span><span class="nx">zeros</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="o">-</span><span class="nx">sum</span><span class="p">(</span><span class="nx">x$cop</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span>
+          <span class="nx">d2</span><span class="p">,</span> <span class="nx">main</span><span class="o">=</span><span class="s1">&#39;zeros -no RE&#39;</span><span class="p">,</span> <span class="nx">xlim</span><span class="o">=</span><span class="nx">c</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="mi">185</span><span class="p">))</span>
+  <span class="nx">pp_comp</span><span class="p">(</span><span class="nx">perc</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">x$cop</span><span class="p">)</span><span class="o">/</span><span class="nx">nrow</span><span class="p">(</span><span class="nx">d2</span><span class="p">),</span>
+          <span class="nx">d2</span><span class="p">,</span> <span class="nx">main</span><span class="o">=</span><span class="s1">&#39;% cop - no RE&#39;</span><span class="p">,</span> <span class="nx">xlim</span><span class="o">=</span><span class="nx">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">.</span><span class="mi">8</span><span class="p">))</span>
+  <span class="nx">pp_comp</span><span class="p">(</span><span class="nx">cvar</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="kd">var</span><span class="p">(</span><span class="nx">x$cop</span><span class="p">),</span>
+          <span class="nx">d2</span><span class="p">,</span> <span class="nx">main</span><span class="o">=</span><span class="s1">&#39;var - no RE&#39;</span><span class="p">)</span>
+
+<span class="nx">pp_comp</span><span class="p">(</span><span class="nx">re_ones</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">x$cop</span><span class="p">),</span>
+          <span class="nx">d2</span><span class="p">,</span> <span class="nx">main</span><span class="o">=</span><span class="s1">&#39;ones - all RE&#39;</span><span class="p">,</span> <span class="nx">xlim</span><span class="o">=</span><span class="nx">c</span><span class="p">(</span><span class="mi">45</span><span class="p">,</span> <span class="mi">110</span><span class="p">))</span>
+  <span class="nx">pp_comp</span><span class="p">(</span><span class="nx">re_zeros</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="o">-</span><span class="nx">sum</span><span class="p">(</span><span class="nx">x$cop</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span>
+          <span class="nx">d2</span><span class="p">,</span> <span class="nx">main</span><span class="o">=</span><span class="s1">&#39;zeros - all RE&#39;</span><span class="p">,</span> <span class="nx">xlim</span><span class="o">=</span><span class="nx">c</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="mi">185</span><span class="p">))</span>
+  <span class="nx">pp_comp</span><span class="p">(</span><span class="nx">re_perc</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">x$cop</span><span class="p">)</span><span class="o">/</span><span class="nx">nrow</span><span class="p">(</span><span class="nx">d2</span><span class="p">),</span>
+          <span class="nx">d2</span><span class="p">,</span> <span class="nx">main</span><span class="o">=</span><span class="s1">&#39;% cop - RE&#39;</span><span class="p">,</span> <span class="nx">xlim</span><span class="o">=</span><span class="nx">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">.</span><span class="mi">8</span><span class="p">))</span>
+  <span class="nx">pp_comp</span><span class="p">(</span><span class="nx">re_cvar</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="kd">var</span><span class="p">(</span><span class="nx">x$cop</span><span class="p">),</span>
+          <span class="nx">d2</span><span class="p">,</span> <span class="nx">main</span><span class="o">=</span><span class="s1">&#39;var - all RE&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="" src="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/mixedeffects_viz_files/figure-markdown_strict/post-pred-1.svg" /><!-- --></p>
+<div class="highlight"><pre>par(op)
+</pre></div>
+
+
+<p>In this case I've plotted the simulated distributions of the number of
+ones, zeros, the proportion of copulations, and the variance in observed
+copulations -- all with and without accounting for all the random
+effects. For each of these, I show the distribution of the statistic,
+its mean (black line), and the mean of the same statistic in the
+observed data.</p>
+<p>All test quantities have broader distributions when we account for the
+random effects.</p>
+<h2><code>glmmADMB</code> version (not run)</h2>
+<p>You can run many of the same graphical procedures (including the quick
+plots from <code>lsmeans</code>!) on output from other frequentist fitting
+packages. Try it!</p>
+<div class="highlight"><pre><span class="c1">## look at glmmadmb too -- not evaluated</span>
+gm1admb <span class="o">&lt;-</span> glmmadmb<span class="p">(</span>cop <span class="o">~</span> geodist_scl <span class="o">+</span>  sizediff_scl2<span class="p">,</span> random<span class="o">=</span> <span class="o">~</span><span class="m">1</span> <span class="o">|</span> Series <span class="o">+</span> <span class="m">1</span> <span class="o">|</span> Female <span class="p">,</span> data<span class="o">=</span>d2<span class="p">,</span> family<span class="o">=</span><span class="s">&#39;binomial&#39;</span><span class="p">)</span>
+
+d2 <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span>d2<span class="p">,</span> predict<span class="p">(</span>gm1admb<span class="p">,</span> interval<span class="o">=</span><span class="s">&#39;confidence&#39;</span><span class="p">,</span> type<span class="o">=</span><span class="s">&#39;link&#39;</span><span class="p">))</span>
+
+plot<span class="p">(</span>cop <span class="o">~</span> SizeDiff<span class="p">,</span> d2<span class="p">,</span> ylim <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
+lines<span class="p">(</span>plogis<span class="p">(</span>fit<span class="p">)</span> <span class="o">~</span> SizeDiff<span class="p">,</span> d2<span class="p">,</span> lwd<span class="o">=</span><span class="m">2</span><span class="p">)</span>
+lines<span class="p">(</span>plogis<span class="p">(</span>lwr<span class="p">)</span> <span class="o">~</span> SizeDiff<span class="p">,</span> d2<span class="p">,</span> lty<span class="o">=</span><span class="m">2</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">2</span><span class="p">)</span>
+lines<span class="p">(</span>plogis<span class="p">(</span>upr<span class="p">)</span> <span class="o">~</span> SizeDiff<span class="p">,</span> d2<span class="p">,</span> lty<span class="o">=</span><span class="m">2</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">2</span><span class="p">)</span>
+      geom_line<span class="p">(</span>aes<span class="p">(</span>SizeDiff<span class="p">,</span> plogis<span class="p">(</span>lwr<span class="p">)),</span> color<span class="o">=</span><span class="s">&#39;orange&#39;</span><span class="p">,</span> size<span class="o">=</span><span class="m">1</span><span class="p">,</span> linetype<span class="o">=</span><span class="m">2</span><span class="p">)</span> <span class="o">+</span>
+    geom_line<span class="p">(</span>aes<span class="p">(</span>SizeDiff<span class="p">,</span> plogis<span class="p">(</span>upr<span class="p">)),</span> color<span class="o">=</span><span class="s">&#39;orange&#39;</span><span class="p">,</span> size<span class="o">=</span><span class="m">1</span><span class="p">,</span> linetype<span class="o">=</span><span class="m">2</span><span class="p">)</span> <span class="o">+</span>
+</pre></div>
+
+
+<p>[1] <em>I haven't read this simulation study carefully yet</em> but a quick
+look implies the main problems occurred when fitting a model that gets
+the hierarchy wrong (e.g., a GLM to data generated from a hierarchical
+process under-performs relative to a transform + LMM)</p>
+<p>[2] Stroup also authored the CRC Press book <em>Generalized Linear Mixed
+Models</em></p>
+<p>[3] Discussions with and classes from colleagues, including Scott
+Burgess, Andrew Latimer, Richard McElreath, and Will Wetzel, have also
+greatly improved my understanding of plotting and fitting mixed models.</p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h2> Comments? </h2>
+
+    Mention me <a href="https://twitter.com/jaimedash">@jaimedash</a> on twitter or
+<a href="https://github.com/ashander/ashander.github.io">file an issue</a>.
+Contributions
+<a href="https://github.com/ashander/ashander.github.io/tree/content">(via pull request to the content branch)</a>
+are also welcome.
+</section><section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/">Easy alternatives to bar charts in native R graphics</a></li>
+        <li><a href="http://www.ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/">So, you did some GLMs & compared with AIC. Congrats!</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-clock-o fa-lg"></i><span class="icon-label">Recent</span></h4>
+              <ul class="list-group" id="recentposts">
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/">
+                            So, you did some GLMs & compared with AIC. Congrats!
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/">
+                            Easy alternatives to bar charts in native R graphics
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/">
+                            Visualizing fits, inference, implications of (G)LMMs
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2015/01/between-generation-bet-hedging/">
+                            Between-generation bet-hedging
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2011/07/Unhealth-plain/">
+                            The Central Valley long ago
+                        </a>
+                    </li>
+                </ul>
+            </li>
+          <li class="list-group-item">
+                  <h4> <i class="fa fa-paper-plane fa-lg"></i><span class="icon-label">Contact</span></h4>
+              <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://twitter.com/jaimedash"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
+    <li class="list-group-item"><a href="https://github.com/ashander"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+    <li class="list-group-item"><a href="http://figshare.com/authors/Jaime_Ashander/505494"><i class="fa fa-spinner"></i> figshare</a></li>
+                </ul>
+    </ul>
+</section>            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2009-2015 Jaime Ashander
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://www.ashander.info/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://www.ashander.info/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://www.ashander.info/theme/js/respond.min.js"></script>
+
+    <script src="http://www.ashander.info/theme/js/bodypadding.js"></script>
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-60354418-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <!-- End Google Analytics Code -->
+
+</body>
+</html>

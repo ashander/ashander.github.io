@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>So, you did some GLMs & compared with AIC. Congrats! - Jaime Ashander</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="http://www.ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/">
+
+        <meta name="author" content="Jaime Ashander" />
+        <meta name="keywords" content="R,statistics,model selection,GLM,AIC,deviance" />
+        <meta name="description" content="Here&#39;s what you need to report in a paper about the model comparison: residual deviance residual df delta AIC AIC weight You should also report the null deviance and degrees of freedom, maybe in a table caption. Thanks to Emilio Bruna for prompting this post and suggesting its title ..." />
+
+        <meta property="og:site_name" content="Jaime Ashander" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="So, you did some GLMs &amp; compared with AIC. Congrats!"/>
+        <meta property="og:url" content="http://www.ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/"/>
+        <meta property="og:description" content="Here&#39;s what you need to report in a paper about the model comparison: residual deviance residual df delta AIC AIC weight You should also report the null deviance and degrees of freedom, maybe in a table caption. Thanks to Emilio Bruna for prompting this post and suggesting its title ..."/>
+        <meta property="article:published_time" content="2015-10-26" />
+            <meta property="article:section" content="notes" />
+            <meta property="article:tag" content="R" />
+            <meta property="article:tag" content="statistics" />
+            <meta property="article:tag" content="model selection" />
+            <meta property="article:tag" content="GLM" />
+            <meta property="article:tag" content="AIC" />
+            <meta property="article:tag" content="deviance" />
+            <meta property="article:author" content="Jaime Ashander" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://www.ashander.info/theme/css/bootstrap.yeti.min.css" type="text/css"/>
+    <link href="http://www.ashander.info/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://www.ashander.info/theme/css/pygments/solarizedlight.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://www.ashander.info/theme/css/style.css" type="text/css"/>
+        <link href="http://www.ashander.info/static/custom.css" rel="stylesheet">
+
+        <link href="http://www.ashander.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Jaime Ashander ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://www.ashander.info/" class="navbar-brand">
+                <i class="fa fa-home fa-fw"></i>
+            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="http://www.ashander.info/category/themes">Themes</a>
+                        </li>
+                        <li >
+                            <a href="http://www.ashander.info/category/results">Results</a>
+                        </li>
+                        <li class="active">
+                            <a href="http://www.ashander.info/category/notes">Notes</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://www.ashander.info/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://www.ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/"
+                       rel="bookmark"
+                       title="Permalink to So, you did some GLMs & compared with AIC. Congrats!">
+                        So, you did some GLMs & compared with AIC. Congrats!
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<div>
+  <a href="http://www.ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/">
+<i class="fa fa-send-o fa-fw"></i>
+  </a>
+  in   <a href="http://www.ashander.info/tag/r/">R</a>
+  /
+  <a href="http://www.ashander.info/tag/statistics/">statistics</a>
+  /
+  <a href="http://www.ashander.info/tag/model-selection/">model selection</a>
+  /
+  <a href="http://www.ashander.info/tag/glm/">GLM</a>
+  /
+  <a href="http://www.ashander.info/tag/aic/">AIC</a>
+  /
+  <a href="http://www.ashander.info/tag/deviance/">deviance</a>
+  on Mon 26 October 2015
+</div>
+
+                     </div>
+                </div>
+                <p>Here's what you need to report in a paper about the model comparison:</p>
+<ul>
+<li>residual deviance</li>
+<li>residual df</li>
+<li>delta AIC</li>
+<li>AIC weight</li>
+</ul>
+<p>You should also report the null deviance and degrees of freedom, maybe
+in a table caption.</p>
+<p>Thanks to <a href="http://brunalab.org/">Emilio Bruna</a> for prompting this post
+and suggesting its title. (<strong>Update 2015-12-14</strong>: thanks also to Ben
+Bolker for <a href="https://github.com/ashander/ashander.github.io/commit/b25af179befbfdcdf013f7b484092296a0324bf6">pointing out some issues in the first version of this
+post</a>.)
+Below I'll explain why you should include at least these numbers, do a
+worked example, and mention some situations where it's better to use
+something other than AIC.</p>
+<h3>What to report</h3>
+<p>For model selection, a model's AIC is only meaningful relative to that
+of other models, so Akaike and others recommend reporting differences in
+AIC from the best model, <em>Δ</em><em>AIC</em>, and AIC <em>weight</em>. The latter can be
+viewed as an estimate of the proportion of the time a model will give
+the best predictions on new data (conditional on the models considered
+and assuming the same process generates the data; this heuristic view
+appears justified by simulations, e.g., Burnham and Anderson 2002 pp.
+348). Also, neither differences in AIC less than 0.1 nor differences in
+AIC weights below 0.01 are really meaningful, so round the reported
+numbers appropriately.</p>
+<p>Finally, even if using an information criterion include the residual
+deviance and degrees of freedom for each model. These provide a (rough)
+goodness of fit.</p>
+<h3>Example: UC Berkeley admissions and gender</h3>
+<p>Let's look at the built-in <code>UCBAdmissions</code> data. As R will tell you,
+these data are often used to illustrate Simpson's paradox (see
+<code>?UCBAdmissions</code> and Bickel <em>et al.</em> 1975 or my PPS below).</p>
+<div class="highlight"><pre>d <span class="o">&lt;-</span> <span class="kp">as.data.frame</span><span class="p">(</span>UCBAdmissions<span class="p">)</span>
+d <span class="o">&lt;-</span> tidyr<span class="o">::</span>spread<span class="p">(</span>d<span class="p">,</span> Admit<span class="p">,</span> Freq<span class="p">)</span> <span class="c1"># use Hadley&#39;s excellent tidyr to reshape</span>
+d<span class="p">[</span><span class="kp">order</span><span class="p">(</span>d<span class="o">$</span>Dept<span class="p">),</span> <span class="p">]</span>
+
+<span class="c1">##    Gender Dept Admitted Rejected</span>
+<span class="c1">## 1    Male    A      512      313</span>
+<span class="c1">## 7  Female    A       89       19</span>
+<span class="c1">## 2    Male    B      353      207</span>
+<span class="c1">## 8  Female    B       17        8</span>
+<span class="c1">## 3    Male    C      120      205</span>
+<span class="c1">## 9  Female    C      202      391</span>
+<span class="c1">## 4    Male    D      138      279</span>
+<span class="c1">## 10 Female    D      131      244</span>
+<span class="c1">## 5    Male    E       53      138</span>
+<span class="c1">## 11 Female    E       94      299</span>
+<span class="c1">## 6    Male    F       22      351</span>
+<span class="c1">## 12 Female    F       24      317</span>
+</pre></div>
+
+
+<p>Using logistic regression, encode several models for the effect of
+applicant gender, department identity, or both on admission.</p>
+<div class="highlight"><pre>m1 <span class="o">&lt;-</span> glm<span class="p">(</span><span class="kp">cbind</span><span class="p">(</span>Admitted<span class="p">,</span> Rejected<span class="p">)</span> <span class="o">~</span> Gender<span class="p">,</span> d<span class="p">,</span> family<span class="o">=</span><span class="s">&#39;binomial&#39;</span><span class="p">)</span>
+m2 <span class="o">&lt;-</span> glm<span class="p">(</span><span class="kp">cbind</span><span class="p">(</span>Admitted<span class="p">,</span> Rejected<span class="p">)</span> <span class="o">~</span> Dept<span class="p">,</span> d<span class="p">,</span> family <span class="o">=</span> <span class="s">&#39;binomial&#39;</span><span class="p">)</span>
+m3 <span class="o">&lt;-</span> glm<span class="p">(</span><span class="kp">cbind</span><span class="p">(</span>Admitted<span class="p">,</span> Rejected<span class="p">)</span> <span class="o">~</span> Dept <span class="o">+</span> Gender<span class="p">,</span> d<span class="p">,</span> family <span class="o">=</span> <span class="s">&#39;binomial&#39;</span><span class="p">)</span>
+model.names <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;1 Gender&quot;</span><span class="p">,</span> <span class="s">&quot;2 Dept&quot;</span><span class="p">,</span> <span class="s">&quot;3 Gender + Dept&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>(Note: although we might like to allow for an interaction between gender
+and department, the data here are insufficient to fit such a model.)</p>
+<p>Running <code>summary</code> on any one of the fits yields a bunch of stats: AIC,
+Residual and null deviance, as well as coefficients, their standard
+errors, and significance.</p>
+<h3>How to do it in <code>R</code></h3>
+<p>We could type by hand the AIC and other stats. No fun!</p>
+<p>There are two other options.</p>
+<p>First is to use <a href="http://varianceexplained.org/">David Robinson</a>'s
+<code>broom</code> which gives tidy summaries of model objects. The second is to
+use <a href="http://ms.mcmaster.ca/~bolker/">Ben Bolker</a>'s <code>bbmle</code> which
+provides methods for generating pretty tables of xIC values.</p>
+<h4>Using broom</h4>
+<div class="highlight"><pre>summ.table <span class="o">&lt;-</span> <span class="kp">do.call</span><span class="p">(</span><span class="kp">rbind</span><span class="p">,</span> <span class="kp">lapply</span><span class="p">(</span><span class="kt">list</span><span class="p">(</span>m1<span class="p">,</span> m2<span class="p">,</span> m3<span class="p">),</span> broom<span class="o">::</span>glance<span class="p">))</span>
+</pre></div>
+
+
+<p>If we take a look at <code>summ.table</code>, we'll see it has all the ingredients
+we might like to report from model selection, whether via AIC, BIC, or
+just the deviance. These are, in order, null.deviance, df.null, logLik,
+AIC, BIC, deviance, df.residual.</p>
+<p>Creating a table with our own desired columns in an appropriate order is
+easy.</p>
+<div class="highlight"><pre>table.cols <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;df.residual&quot;</span><span class="p">,</span> <span class="s">&quot;deviance&quot;</span><span class="p">,</span> <span class="s">&quot;AIC&quot;</span><span class="p">)</span>
+reported.table <span class="o">&lt;-</span> summ.table<span class="p">[</span>table.cols<span class="p">]</span>
+<span class="kp">names</span><span class="p">(</span>reported.table<span class="p">)</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Resid. Df&quot;</span><span class="p">,</span> <span class="s">&quot;Resid. Dev&quot;</span><span class="p">,</span> <span class="s">&quot;AIC&quot;</span><span class="p">)</span>
+
+reported.table<span class="p">[[</span><span class="s">&#39;dAIC&#39;</span><span class="p">]]</span> <span class="o">&lt;-</span>  <span class="kp">with</span><span class="p">(</span>reported.table<span class="p">,</span> AIC <span class="o">-</span> <span class="kp">min</span><span class="p">(</span>AIC<span class="p">))</span>
+reported.table<span class="p">[[</span><span class="s">&#39;weight&#39;</span><span class="p">]]</span> <span class="o">&lt;-</span> <span class="kp">with</span><span class="p">(</span>reported.table<span class="p">,</span> <span class="kp">exp</span><span class="p">(</span><span class="o">-</span> <span class="m">0.5</span> <span class="o">*</span> dAIC<span class="p">)</span> <span class="o">/</span> <span class="kp">sum</span><span class="p">(</span><span class="kp">exp</span><span class="p">(</span><span class="o">-</span> <span class="m">0.5</span> <span class="o">*</span> dAIC<span class="p">)))</span>
+reported.table<span class="o">$</span>AIC <span class="o">&lt;-</span> <span class="kc">NULL</span>
+reported.table<span class="o">$</span>weight <span class="o">&lt;-</span> <span class="kp">round</span><span class="p">(</span>reported.table<span class="o">$</span>weight<span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+reported.table<span class="o">$</span>dAIC <span class="o">&lt;-</span> <span class="kp">round</span><span class="p">(</span>reported.table<span class="o">$</span>dAIC<span class="p">,</span> <span class="m">1</span><span class="p">)</span>
+<span class="kp">row.names</span><span class="p">(</span>reported.table<span class="p">)</span> <span class="o">&lt;-</span> model.names
+</pre></div>
+
+
+<p>With my advice above in mind, here's <em>a minimal table for reporting
+model selection on GLMs</em> using fitting results extracted with
+<code>broom::glance</code>:</p>
+<p>Caption: Model selection for the effect gender (model 1), department
+(model 2), and both gender and department (model 3) on admission
+probability fit to 12 observations (i.e., total degrees of freedom) with
+877.056 null deviance.</p>
+<div class="highlight"><pre>reported.table
+
+##                 Resid. Df Resid. Dev  dAIC weight
+## 1 Gender               10      783.6 753.9   0.00
+## 2 Dept                  6       21.7   0.0   0.56
+## 3 Gender + Dept         5       20.2   0.5   0.44
+</pre></div>
+
+
+<h4>Using <code>bbmle</code></h4>
+<div class="highlight"><pre>reported.table2 <span class="o">&lt;-</span> bbmle<span class="o">::</span>AICtab<span class="p">(</span>m1<span class="p">,</span> m2<span class="p">,</span> m3<span class="p">,</span> weights <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> sort <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> mnames <span class="o">=</span> model.names<span class="p">)</span>
+reported.table2<span class="p">[[</span><span class="s">&quot;Resid. Dev&quot;</span><span class="p">]]</span>  <span class="o">&lt;-</span> summ.table<span class="p">[[</span><span class="s">&quot;deviance&quot;</span><span class="p">]]</span> <span class="c1"># get the deviance from broom&#39;d table</span>
+</pre></div>
+
+
+<p>Caption: Model selection for the effect gender (model 1), department
+(model 2), and both gender and department (model 3) on admission
+probability fit to 12 observations (i.e., total degrees of freedom) with
+877.056 null deviance.</p>
+<div class="highlight"><pre>reported.table2
+
+##                 dAIC  df weight Resid. Dev
+## 1 Gender        753.9 2  &lt;0.001 783.6     
+## 2 Dept            0.0 6  0.56    21.7     
+## 3 Gender + Dept   0.5 7  0.44    20.2
+</pre></div>
+
+
+<p>Of course, model selection is just the beginning of reporting your
+results. See the PPS below for some thoughts on reporting results of the
+best model(s).</p>
+<p>And, before you even did model selection, you should have asked
+yourself...</p>
+<h3>Is AIC the right criterion?</h3>
+<ul>
+<li>For small data and frequentist inference, you should use AICc -- the
+    small sample correction which provides greater penalty for each
+    parameter but approaches AIC as <em>n</em> becomes large. If it makes a
+    difference, you should use it. (I probably should have used
+    it above.)</li>
+<li>For large data and frequentist inference , consider BIC, which is
+    asymptotically consistent while AIC is not (see Hastie <em>et al.</em>
+    2009, which is available online). AIC typically favors
+    overly-complex models with large <em>n</em> relative to BIC. Note, however,
+    that this is not an issue for prediction, only inference of a <em>true</em>
+    model (if one exists; Sec. 6.4 McElreath 2015).</li>
+<li>For Bayesian models, consider <a href="http://andrewgelman.com/2015/07/16/new-papers-on-loowaic-and-stan/">WAIC or
+    LOO</a>
+    (instead of DIC, which has issues with non-Gaussian posteriors
+    McElreath 2015).</li>
+<li>Don't use information criteria for model selection between GLMs with
+    different link functions</li>
+</ul>
+<h3>Further Reading &amp; References</h3>
+<ul>
+<li><a href="http://ms.mcmaster.ca/~bolker/misc/GLMM_results_report.pdf">Ben Bolker on reporting results in the text for
+    GLMMs</a>
+    this is a piece of a larger chapter <a href="http://ms.mcmaster.ca/~bolker/R/misc/foxchapter/bolker_chap.html">GLMMs: worked
+    examples</a>
+    that approaches inference as model checking and improvement (as
+    opposed to multi-model inference <em>sensu</em> Burnham and Anderson 2004)</li>
+<li><a href="https://dx.doi.org/10.1177/0049124104268644">Burnham, and Anderson.
+    2004.</a> Multimodel
+    Inference: Understanding AIC and BIC in Model Selection.
+    <em>Sociological Methods &amp; Research</em> 33(2):261-304</li>
+<li>Burnham, and Anderson. 2002. <em>Model Selection and Multimodel
+    Inference: A Practical Information-Theoretic Approach.</em>
+    Second Edition. Springer.</li>
+<li><a href="https://dx.doi.org/10.1641/B570708">Elliot and Brook 2007</a> for a
+    short piece on the philosophical background of multiple working
+    hypotheses</li>
+<li><a href="http://statweb.stanford.edu/~tibs/ElemStatLearn/">Hastie, Tibshirani, and Friedman.
+    2009.</a> Elements of
+    Statistical Learning, Second Edition. Springer, New York, NY, USA.</li>
+<li><a href="https://www.crcpress.com/Statistical-Rethinking-A-Bayesian-Course-with-Examples-in-R-and-Stan/McElreath/9781482253443">McElreath. 2015.</a>
+    Statistical Rethinking. CRC Press.</li>
+<li><a href="http://brianomeara.info/tutorials/aic/">Brian O'Meara's AIC
+    tutorial</a></li>
+</ul>
+<h3>PS: Nested models</h3>
+<p>Reporting the residual deviance and degrees of freedom as above is
+relatively similar to R's output for conducting an ANOVA on a GLM (where
+you can optionally add a statistical test). For nested models, you may
+as well just do this and report the table:</p>
+<div class="highlight"><pre>m3.anova <span class="o">&lt;-</span> anova<span class="p">(</span>m3<span class="p">,</span> test<span class="o">=</span><span class="s">&quot;Chisq&quot;</span><span class="p">)</span>
+<span class="kp">round</span><span class="p">(</span>m3.anova<span class="p">,</span> digits <span class="o">=</span> <span class="m">4</span><span class="p">)</span>
+
+<span class="c1">## Analysis of Deviance Table</span>
+<span class="c1">## </span>
+<span class="c1">## Model: binomial, link: logit</span>
+<span class="c1">## </span>
+<span class="c1">## Response: cbind(Admitted, Rejected)</span>
+<span class="c1">## </span>
+<span class="c1">## Terms added sequentially (first to last)</span>
+<span class="c1">## </span>
+<span class="c1">## </span>
+<span class="c1">##        Df Deviance Resid. Df Resid. Dev Pr(&gt;Chi)    </span>
+<span class="c1">## NULL                      11        877             </span>
+<span class="c1">## Dept    5      855         6         22   &lt;2e-16 ***</span>
+<span class="c1">## Gender  1        2         5         20     0.22    </span>
+<span class="c1">## ---</span>
+<span class="c1">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
+</pre></div>
+
+
+<h3>PPS: Evaluating the best model(s)</h3>
+<p>For the best model(s), you should then go on to visualize the fit
+relative to the data (and report model results in the text).</p>
+<p>To visualize the admissions data and mean fits from models 2 and 3
+(which have approximately equal AIC weight), we can use <code>ggplot2</code> and
+<code>augment</code> from broom (which adds model predictions and statistics to the
+data).</p>
+<p>To provide model-averaged predictions is a bit more work:</p>
+<div class="highlight"><pre>m3.pred <span class="o">&lt;-</span> broom<span class="o">::</span>augment<span class="p">(</span>m3<span class="p">)</span>
+m2.pred <span class="o">&lt;-</span> broom<span class="o">::</span>augment<span class="p">(</span>m2<span class="p">)</span>
+m2.weight <span class="o">&lt;-</span> reported.table<span class="p">[</span><span class="m">2</span><span class="p">,</span> <span class="s">&quot;weight&quot;</span><span class="p">]</span>
+m3.weight <span class="o">&lt;-</span> reported.table<span class="p">[</span><span class="m">3</span><span class="p">,</span> <span class="s">&quot;weight&quot;</span><span class="p">]</span>
+mavg.pred <span class="o">&lt;-</span> m2.weight <span class="o">*</span> m2.pred<span class="p">[</span> <span class="p">,</span> <span class="o">-</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">)]</span> <span class="o">+</span> m3.weight <span class="o">*</span> m3.pred<span class="p">[</span> <span class="p">,</span> <span class="o">-</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">)]</span>
+mavg.pred <span class="o">&lt;-</span> <span class="kp">cbind</span><span class="p">(</span>m3.pred<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> mavg.pred<span class="p">)</span>
+
+<span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span>
+ggplot<span class="p">(</span>d<span class="p">)</span> <span class="o">+</span>
+    geom_point<span class="p">(</span>aes<span class="p">(</span>Dept<span class="p">,</span> Admitted <span class="o">/</span> <span class="p">(</span>Admitted <span class="o">+</span> Rejected<span class="p">),</span> color<span class="o">=</span>Gender<span class="p">,</span>
+           size<span class="o">=</span>Admitted <span class="o">+</span> Rejected<span class="p">),</span>
+           position <span class="o">=</span> position_dodge<span class="p">(</span>width <span class="o">=</span> <span class="m">0.5</span><span class="p">))</span> <span class="o">+</span>
+    geom_pointrange<span class="p">(</span>aes<span class="p">(</span>Dept<span class="p">,</span> plogis<span class="p">(</span><span class="m">.</span>fitted<span class="p">),</span>
+            ymin <span class="o">=</span> plogis<span class="p">(</span><span class="m">.</span>fitted <span class="o">-</span> <span class="m">2</span> <span class="o">*</span> <span class="m">.</span>se.fit<span class="p">),</span>
+            ymax <span class="o">=</span> plogis<span class="p">(</span><span class="m">.</span>fitted <span class="o">+</span> <span class="m">2</span> <span class="o">*</span> <span class="m">.</span>se.fit<span class="p">),</span>
+            shape<span class="o">=</span>Gender<span class="p">),</span>
+            position<span class="o">=</span>position_dodge<span class="p">(</span>width <span class="o">=</span> <span class="m">0.5</span><span class="p">),</span> data <span class="o">=</span>mavg.pred<span class="p">,</span> alpha<span class="o">=</span><span class="m">0.4</span><span class="p">)</span> <span class="o">+</span>
+    theme_minimal<span class="p">()</span> <span class="o">+</span> scale_color_manual<span class="p">(</span>values<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="s">&quot;orange&quot;</span><span class="p">))</span>
+
+<span class="c1">## ymax not defined: adjusting position using y instead</span>
+</pre></div>
+
+
+<p><img src="http://www.ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/model-selection-GLMs-AIC-what-to-report_files/figure-markdown_strict/model-viz-1.svg" alt="Admissions (open circles, size indicates total applicants) versus deparatment and predictions from model 2 (department only, diamonds) and model 3 (department and gender, dots and triangles)"  />
+<p class="caption">
+Admissions (open circles, size indicates total applicants) versus
+deparatment and predictions from model 2 (department only, diamonds) and
+model 3 (department and gender, dots and triangles)
+</p></p>
+<p>Admissions (colored dots, size indicates total applicants) versus
+department from UCB Admissions data (included in <code>R</code>), and averaged
+predictions (means  ±  2 SE) from model 2 (department only) and model 3
+(department and gender), with averaging by AIC weight.</p>
+<h4>Simpson's paradox</h4>
+<p>Comparing model 3 with model 1 illustrates Simpson's paradox. Without
+accounting for department, the apparent effect of female gender on
+admission is negative (female odds relative to male 0.543, <em>p</em> ≈ 0),
+whereas after accounting for department, the (within-department) effect
+is positive (but weak: female odds relative to male 1.105, <em>p</em> ≈  0.22).</p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h2> Comments? </h2>
+
+    Mention me <a href="https://twitter.com/jaimedash">@jaimedash</a> on twitter or
+<a href="https://github.com/ashander/ashander.github.io">file an issue</a>.
+Contributions
+<a href="https://github.com/ashander/ashander.github.io/tree/content">(via pull request to the content branch)</a>
+are also welcome.
+</section><section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/">Visualizing fits, inference, implications of (G)LMMs</a></li>
+        <li><a href="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/">Easy alternatives to bar charts in native R graphics</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-clock-o fa-lg"></i><span class="icon-label">Recent</span></h4>
+              <ul class="list-group" id="recentposts">
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/">
+                            So, you did some GLMs & compared with AIC. Congrats!
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/">
+                            Easy alternatives to bar charts in native R graphics
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2015/04/D-RUG-mixed-effects-viz/">
+                            Visualizing fits, inference, implications of (G)LMMs
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2015/01/between-generation-bet-hedging/">
+                            Between-generation bet-hedging
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.ashander.info/posts/2011/07/Unhealth-plain/">
+                            The Central Valley long ago
+                        </a>
+                    </li>
+                </ul>
+            </li>
+          <li class="list-group-item">
+                  <h4> <i class="fa fa-paper-plane fa-lg"></i><span class="icon-label">Contact</span></h4>
+              <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://twitter.com/jaimedash"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
+    <li class="list-group-item"><a href="https://github.com/ashander"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+    <li class="list-group-item"><a href="http://figshare.com/authors/Jaime_Ashander/505494"><i class="fa fa-spinner"></i> figshare</a></li>
+                </ul>
+    </ul>
+</section>            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2009-2015 Jaime Ashander
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://www.ashander.info/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://www.ashander.info/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://www.ashander.info/theme/js/respond.min.js"></script>
+
+    <script src="http://www.ashander.info/theme/js/bodypadding.js"></script>
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-60354418-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <!-- End Google Analytics Code -->
+
+</body>
+</html>
