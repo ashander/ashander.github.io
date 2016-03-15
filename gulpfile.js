@@ -11,7 +11,9 @@ gulp.task('default', function() {
       {removeViewBox: false},
       {cleanupIDs: false}
     ],
-    use: [pngquant(), imageminJpegoptim()]
+    use: [pngquant(),
+      imageminJpegoptim({max: 61})
+    ]
   }))
   .pipe(gulp.dest('output/images'));
 });
