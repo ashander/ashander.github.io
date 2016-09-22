@@ -6,6 +6,6 @@ Template: theme
 Image: /images/phd.png
 Results: phenology
 
-My Ph.D. is focused on modelling populations that exhibit rapid responses to enviornmental change.
+My Ph.D. is focused on modelling populations that exhibit rapid responses to environmental change.
 Potential applications include salmon, annual plants, and infectious disease.
 I'm particularly interested in transient dynamics, connecting models to data, and forecasting.
