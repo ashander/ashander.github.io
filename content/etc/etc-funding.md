@@ -1,6 +1,8 @@
 Title: Funding
 Template: etc
 
+My postdoctoral research in the Shaffer lab at UCLA is funded by the US Fish
+and Wildlife Service.
 
 My Ph.D. support has included a two-year traineeship with the <a
 href="http://reach.ucdavis.edu/" >REACH IGERT</a>, as well as a

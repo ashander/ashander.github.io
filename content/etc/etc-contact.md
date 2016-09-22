@@ -1,6 +1,6 @@
 Title: Contact
 Template: etc
 
-Current email (ucdavis dot edu):
+Current email (ucla dot edu):
 
-jashander
+ashander
