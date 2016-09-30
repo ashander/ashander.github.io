@@ -1,0 +1,54 @@
+==================================================================
+https://keybase.io/ashander
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://www.ashander.info
+  * I am ashander (https://keybase.io/ashander) on keybase.
+  * I have a public key ASB64liKYYs5Ynv_-hUY2oWx0u_J4KWK9CbksBDJliS7fgo
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "0101b7c646a3f4d04f0482e2618cbfa8769343625930d22c3b83fe3a69dcbbd88d590a",
+            "host": "keybase.io",
+            "kid": "01207ae2588a618b39627bfffa1518da85b1d2efc9e0a58af426e4b010c99624bb7e0a",
+            "uid": "78ef76e17f1608df3fd95cdd6b9a4319",
+            "username": "ashander"
+        },
+        "service": {
+            "hostname": "www.ashander.info",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "client": {
+        "name": "keybase.io go client",
+        "version": "1.0.17"
+    },
+    "ctime": 1473908934,
+    "expire_in": 504576000,
+    "merkle_root": {
+        "ctime": 1473908919,
+        "hash": "0d4e078b0462ed2b64b912a9fc17e216b6bfef47e1237e3afd3e49c7b89207ba85bbf8fdb67d6f1e3fac99fb0d402ffa8cba6169b50bb974f2c39333d7c49bd8",
+        "seqno": 637049
+    },
+    "prev": "02c7248109a1c45109bc8dff3c0c2c3cdcfe950e201a97e365215d485414a8b0",
+    "seqno": 14,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgeuJYimGLOWJ7//oVGNqFsdLvyeClivQm5LAQyZYku34Kp3BheWxvYWTFAvl7ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTAxYjdjNjQ2YTNmNGQwNGYwNDgyZTI2MThjYmZhODc2OTM0MzYyNTkzMGQyMmMzYjgzZmUzYTY5ZGNiYmQ4OGQ1OTBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwN2FlMjU4OGE2MThiMzk2MjdiZmZmYTE1MThkYTg1YjFkMmVmYzllMGE1OGFmNDI2ZTRiMDEwYzk5NjI0YmI3ZTBhIiwidWlkIjoiNzhlZjc2ZTE3ZjE2MDhkZjNmZDk1Y2RkNmI5YTQzMTkiLCJ1c2VybmFtZSI6ImFzaGFuZGVyIn0sInNlcnZpY2UiOnsiaG9zdG5hbWUiOiJ3d3cuYXNoYW5kZXIuaW5mbyIsInByb3RvY29sIjoiaHR0cDoifSwidHlwZSI6IndlYl9zZXJ2aWNlX2JpbmRpbmciLCJ2ZXJzaW9uIjoxfSwiY2xpZW50Ijp7Im5hbWUiOiJrZXliYXNlLmlvIGdvIGNsaWVudCIsInZlcnNpb24iOiIxLjAuMTcifSwiY3RpbWUiOjE0NzM5MDg5MzQsImV4cGlyZV9pbiI6NTA0NTc2MDAwLCJtZXJrbGVfcm9vdCI6eyJjdGltZSI6MTQ3MzkwODkxOSwiaGFzaCI6IjBkNGUwNzhiMDQ2MmVkMmI2NGI5MTJhOWZjMTdlMjE2YjZiZmVmNDdlMTIzN2UzYWZkM2U0OWM3Yjg5MjA3YmE4NWJiZjhmZGI2N2Q2ZjFlM2ZhYzk5ZmIwZDQwMmZmYThjYmE2MTY5YjUwYmI5NzRmMmMzOTMzM2Q3YzQ5YmQ4Iiwic2Vxbm8iOjYzNzA0OX0sInByZXYiOiIwMmM3MjQ4MTA5YTFjNDUxMDliYzhkZmYzYzBjMmMzY2RjZmU5NTBlMjAxYTk3ZTM2NTIxNWQ0ODU0MTRhOGIwIiwic2Vxbm8iOjE0LCJ0YWciOiJzaWduYXR1cmUifaNzaWfEQJUu/fNyqROSY/74/h0v+Om5/Au9shjLh8xP0UNAebP/wygr0PcKn+XagF84Faqu4BGW8o3KRuQavHwJd15cewSoc2lnX3R5cGUgpGhhc2iCpHR5cGUIpXZhbHVlxCDLgegxERIqumNHqTEUuouSAaUWhJi+XE8SAKGXr9cB36N0YWfNAgKndmVyc2lvbgE=
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/ashander
+
+==================================================================
