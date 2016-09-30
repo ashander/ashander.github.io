@@ -32,4 +32,10 @@ RUN pip install --no-cache-dir\
 RUN npm install -g gulp && ln -s /usr/bin/nodejs /usr/bin/node && \
     npm install gulp-imagemin imagemin-pngquant imagemin-jpegoptim
 
+RUN install2.r --error \
+	bbmle\
+	lsmeans\
+	gridExtra\
+	&& rm -rf /tmp/downloaded_packages/ /tmp/*.rds
+
 CMD ["bash"]
