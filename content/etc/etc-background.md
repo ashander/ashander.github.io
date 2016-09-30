@@ -1,7 +1,7 @@
 Title: Background
 Template: etc
 
-![face shot]({filename}/images/headshot_250x250.jpeg)
+![face shot]({filename}/images/headshot_250x333.jpeg)
 
 I am a Postdoctoral Scholar in <a href="https://www.eeb.ucla.edu/Faculty/Shaffer/">the Shaffer lab</a>
 at UCLA.
