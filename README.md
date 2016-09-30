@@ -13,3 +13,10 @@ git clone  https://github.com/getpelican/pelican-plugins.git plugins/pelican-plu
 # install my rmarkdown plugin
 ```
 
+
+# Docker deploy
+
+```sh
+# edit docker-compose to use ashander/ashander.github.io:fall-2016 image
+docker-compose run --rm serve
+```
