@@ -48,7 +48,7 @@ IGNORE_FILES = ['.#*', '*~', '#*#', '.*', '*cache*', '*.csv', '*.txt',
 # static paths copied without parsing
 STATIC_PATHS = ['images', 'extra/custom.css', 'extra/CNAME',
                 'extra/README', 'extra/LICENSE', 'presentations',
-                'code', 'notes']
+                'code', 'notes', 'extra/keybase.txt']
 STATIC_EXCLUDES = ['cache', ]
 EXTRA_PATH_METADATA = {
     'extra/custom.css': {'path': 'static/custom.css'},
