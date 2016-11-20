@@ -4,6 +4,3 @@
 [submodule "plugins/pelican-plugins"]
 	path = plugins/pelican-plugins
 	url = https://github.com/getpelican/pelican-plugins.git
-[submodule "plugins/rmarkdown"]
-	path = plugins/rmarkdown
-	url = git@github.com:ashander/rmarkdown.git
