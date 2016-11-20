@@ -25,7 +25,7 @@ CLOUDFILES_CONTAINER=my_cloudfiles_container
 
 DROPBOX_DIR=~/Dropbox/Public/
 
-GITHUB_PAGES_BRANCH=output
+GITHUB_PAGES_BRANCH=master
 
 DEBUG ?= 0
 ifeq ($(DEBUG), 1)
@@ -53,6 +53,10 @@ help:
 	@echo '   make figshare-results 	   build md posts from figshare       '
 	@echo '                                                                       '
 	@echo 'Set the DEBUG variable to 1 to enable debugging, e.g. make DEBUG=1 html'
+	@echo '                                                                       '
+	@echo 'Debug-helpers                                                          '
+	@echo '   make commit_to_output            commit to output branch pre-upload '
+	@echo '   make r_to_markdown 	           build md posts from r              '
 	@echo '                                                                       '
 
 figshare-results:
@@ -110,12 +114,14 @@ s3_upload: publish
 cf_upload: publish
 	cd $(OUTPUTDIR) && swift -v -A https://auth.api.rackspacecloud.com/v1.0 -U $(CLOUDFILES_USERNAME) -K $(CLOUDFILES_API_KEY) upload -c $(CLOUDFILES_CONTAINER) .
 
-github: gulp_images
-	ghp-import -m "Generate Pelican site" -b $(GITHUB_PAGES_BRANCH) $(OUTPUTDIR)
+github: commit_to_output
 	git push origin $(GITHUB_PAGES_BRANCH):master
+
+commit_to_output: gulp_images
+	ghp-import -m "Generate Pelican site" -b $(GITHUB_PAGES_BRANCH) $(OUTPUTDIR)
 
 gulp_images: publish
 	gulp optimize-images
 
 
-.PHONY: html help clean regenerate serve devserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload cf_upload github figshare-results r_to_markdown gulp_images
+.PHONY: html help clean regenerate serve devserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload cf_upload github figshare-results r_to_markdown gulp_images commit_to_output
