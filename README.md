@@ -5,8 +5,8 @@ Originally built during my masters and hosted at `http://www.math.ualberta.ca/~a
 # Deploy
 
 ```sh
-
-virtualenv site
+conda create -n site
+source activate site
 pip install pelican Markdown PyYAML RPy2 ghp-import
 mkdir plugins
 git clone  https://github.com/getpelican/pelican-plugins.git plugins/pelican-plugins
