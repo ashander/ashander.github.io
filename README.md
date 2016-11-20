@@ -1,7 +1,5 @@
 Github hosting for [my web site](http://ashander.github.com)
 
-Originally built during my masters and hosted at `http://www.math.ualberta.ca/~ashander/`.
-
 # Deploy
 
 ```sh
