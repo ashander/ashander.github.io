@@ -5,11 +5,12 @@ Originally built during my masters and hosted at `http://www.math.ualberta.ca/~a
 # Deploy
 
 ```sh
+git clone --recursive --j8 <this repo>
+cd <this repo>
 conda create -n site
 source activate site
-pip install pelican Markdown PyYAML RPy2 ghp-import
-mkdir plugins
-git clone  https://github.com/getpelican/pelican-plugins.git plugins/pelican-plugins
+pip install pelican Markdown ghp-import
+npm install .
 make publish
 make devserver # examine localhost:8000
 ```
