@@ -1,0 +1,41 @@
+{
+  "name": "ashander.github.io",
+  "version": "1.0.0",
+  "description": "website",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp-imagemin": "^3.0.3",
+    "gulp": "^3.9.1",
+    "imagemin-jpegoptim": "^5.0.0",
+    "imagemin-pngquant": "^5.0.0",
+    "r-script": "0.0.3",
+    "gulp-tap": "^0.1.3",
+
+  },
+  "devDependencies": {
+    "eslint": "^3.10.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.1",
+    "eslint-plugin-react": "^6.7.1",
+    "gulp-stats": "0.0.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashander/ashander.github.io.git"
+  },
+  "keywords": [
+    "website",
+    "Rscript",
+    "pelican"
+  ],
+  "author": "jaime ashander",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/ashander/ashander.github.io/issues"
+  },
+  "homepage": "https://github.com/ashander/ashander.github.io#readme"
+}

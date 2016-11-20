@@ -43,7 +43,7 @@ CACHE_CONTENT = True
 #CONTENT_CACHING_LAYER = 'generator'
 # WRITE_SELECTED = ['notes']
 IGNORE_FILES = ['.#*', '*~', '#*#', '.*', '*cache*', '*.csv', '*.txt',
-                '*figure-html*', '*.tmp']
+                '*figure-html*', '*.tmp', '*.Rmd', '*.rmd']
 
 # static paths copied without parsing
 STATIC_PATHS = ['images', 'extra/custom.css', 'extra/CNAME',
@@ -107,14 +107,13 @@ TEMPLATE_PAGES = {'index.html': 'index.html'}
 READERS = {'html': None}
 # direct
 
-EXTRA_TEMPLATES_PATHS = ['/site/templates/']
+EXTRA_TEMPLATES_PATHS = ['templates/']
 PAGE_PATHS = ['pages', 'etc']
 
 # Plugins
 PLUGIN_PATHS = ['plugins/pelican-plugins',
                 'plugins']
-PLUGINS = ['latex', 'summary', 'related_posts', 'render_math',
-           'rmarkdown']  # last is my own -- permits
+PLUGINS = ['latex', 'summary', 'related_posts', 'render_math']
 # https://github.com/getpelican/pelican-plugins/tree/master/render_math
 
 # pygments style
