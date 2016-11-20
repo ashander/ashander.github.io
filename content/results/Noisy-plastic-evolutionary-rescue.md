@@ -1,6 +1,6 @@
 Title: Predicting evolutionary rescue via evolving plasticity in stochastic environments
 Date: 2016-09-21
-Tags: peer reviewed, Ph.D., evolutionary rescue, stochasticity, plasticity
+Tags: peer reviewed, Ph.D., evolutionary rescue, stochasticity, plasticity, causes and consequences
 Authors: Jaime Ashander, Luis-Miguel Chevin, Marissa Baskett
 Journal: Proceedings of the Royal Society, B
 DOI: 10.1098/rspb.2016.1690
