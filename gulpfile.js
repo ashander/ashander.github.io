@@ -6,14 +6,16 @@ var exec = require('child_process').exec;
 var path = require('path');
 var tap = require('gulp-tap');
 var log = require('gulp-util').log;
+var changed = require('gulp-changed');
 
 
 gulp.task('r-to-markdown', function (cb) {
   var gulp_dir = process.cwd();
-  var content_dir = 'content/notes/';
-  var working_dir = gulp_dir + '/' + content_dir;
+  var SRC = 'content/notes/';
+  var working_dir = gulp_dir + '/' + SRC;
   var command = 'Rscript format_pelican.R ' + '"' + working_dir + '"';
-  return gulp.src(content_dir + '*.Rmd')
+  return gulp.src(SRC + '*.Rmd')
+    .pipe(changed(SRC, {extension: '.md'}))
     .pipe(tap(function(file, t) {
       var rel_path = path.relative(working_dir, file.path);
       exec(command + ' "' + rel_path + '"',
@@ -28,7 +30,6 @@ gulp.task('r-to-markdown', function (cb) {
           });
     }));
 });
-
 
 gulp.task('optimize-images', function () {
   return gulp.src('content/images/**/*')  // NB these globs break autoindent

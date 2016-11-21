@@ -4,12 +4,13 @@
   "description": "website",
   "main": "gulpfile.js",
   "dependencies": {
-    "gulp-imagemin": "^3.0.3",
     "gulp": "^3.9.1",
-    "imagemin-jpegoptim": "^5.0.0",
-    "imagemin-pngquant": "^5.0.0",
+    "gulp-changed": "^1.3.2",
+    "gulp-imagemin": "^3.0.3",
     "gulp-tap": "^0.1.3",
-    "gulp-util": "^3.0.7"
+    "gulp-util": "^3.0.7",
+    "imagemin-jpegoptim": "^5.0.0",
+    "imagemin-pngquant": "^5.0.0"
   },
   "devDependencies": {
     "eslint": "^3.10.2",
