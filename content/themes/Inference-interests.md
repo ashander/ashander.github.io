@@ -8,8 +8,9 @@ Results: phenology
 
 My current focus is inference of population processes from phenotypic and genomic data.
 
-During my postdoc with Brad Shaffer at UCLA, I am working in collaboration with <a href="http://ralphlab.usc.edu/">Peter Ralph</a>
-at University of Oregon, to developi methods that use genomic data to inform
+During my postdoc with <a href="https://www.eeb.ucla.edu/Faculty/Shaffer/">Brad Shaffer</a> at UCLA,
+I am working in collaboration with <a href="http://ralphlab.usc.edu/">Peter Ralph</a>
+at University of Oregon, to develop methods that use genomic data to inform
 demographic models of the desert tortoise (<em>Gopherus agassizii</em>).
 These models will enable us to analyze effects of scenarios for development in
 the Mojave desert on the tortoise's population viability.
