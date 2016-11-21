@@ -42,7 +42,7 @@ RELATIVE_URLS = True
 CACHE_CONTENT = True
 #CONTENT_CACHING_LAYER = 'generator'
 # WRITE_SELECTED = ['notes']
-IGNORE_FILES = ['.#*', '*~', '#*#', '.*', '*cache*', '*.csv', '*.txt',
+IGNORE_FILES = ['.#*', '*~', '#*#', '.*', '*cache*', '*.csv',
                 '*figure-html*', '*.tmp', '*.Rmd', '*.rmd']
 
 # static paths copied without parsing
@@ -53,6 +53,7 @@ STATIC_EXCLUDES = ['cache', ]
 EXTRA_PATH_METADATA = {
     'extra/custom.css': {'path': 'static/custom.css'},
     'extra/CNAME': {'path': 'CNAME'},
+    'extra/keybase.txt': {'path': 'keybase.txt'},
     'extra/README': {'path': 'README.md'},
     'extra/LICENSE': {'path': 'LICENSE.md'}
 }
