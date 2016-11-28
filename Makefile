@@ -94,7 +94,8 @@ publish: r_to_markdown
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
 
 r_to_markdown:
-	gulp r-to-markdown
+	gulp r-to-markdown-1
+	gulp r-to-markdown-2
 
 ssh_upload: publish
 	scp -P $(SSH_PORT) -r $(OUTPUTDIR)/* $(SSH_USER)@$(SSH_HOST):$(SSH_TARGET_DIR)

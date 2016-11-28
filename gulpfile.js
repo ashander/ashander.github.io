@@ -7,9 +7,10 @@ var path = require('path');
 var tap = require('gulp-tap');
 var log = require('gulp-util').log;
 var changed = require('gulp-changed');
+var replace = require('gulp-replace');
 
-
-gulp.task('r-to-markdown', function (cb) {
+gulp.task('r-to-markdown', ['r-to-markdown-1', 'r-to-markdown-2']);
+gulp.task('r-to-markdown-1', function (cb) {
   var gulp_dir = process.cwd();
   var SRC = 'content/notes/';
   var working_dir = gulp_dir + '/' + SRC;
@@ -29,6 +30,14 @@ gulp.task('r-to-markdown', function (cb) {
             }
           });
     }));
+});
+
+gulp.task('r-to-markdown-2', ['r-to-markdown-1'], function(cb) {
+  var SRC = 'content/notes/';
+  return gulp.src(SRC + '*.md')
+    .pipe(replace('%7B', '{'))
+    .pipe(replace('%7D', '}'))
+    .pipe(gulp.dest(SRC));
 });
 
 gulp.task('optimize-images', function () {

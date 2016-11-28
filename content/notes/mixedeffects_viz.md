@@ -14,9 +14,9 @@ output:
 
 In a live walk-through on April 10 at the Davis R-Users Group, I gave a
 brief presentation [motivating this
-topic](%7Bfilename%7D../presentations/mixedeffects_viz_motivation.html).
+topic]({filename}../presentations/mixedeffects_viz_motivation.html).
 This post expands and cleans up the code from that talk. If you just
-want the code: [download the .R file](%7Battach%7Dmixedeffects_viz.R).
+want the code: [download the .R file]({attach}mixedeffects_viz.R).
 
 **Updated 2015-04-28**
 
@@ -124,7 +124,7 @@ LMM: greenhouse full factorial (RCBD)
 -   4 (!) treatments -- full factorial blocked so 4-way interaction
     potential and hard to visualize (making a good test case here)
 
-![Maestre title image](%7Battach%7Dfigures/maestre.png)
+![Maestre title image]({attach}figures/maestre.png)
 
     d <- read.delim("http://datadryad.org/bitstream/handle/10255/dryad.41984/Maestre_Ecol88.txt?sequence=1")
     recode <- car::recode
@@ -179,33 +179,33 @@ LMM: greenhouse full factorial (RCBD)
 
     plot(m2, type = c("p", "smooth") , id = 0.05) # id outliers
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/lme-models-1.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/lme-models-1.svg)
 
     plot(m2, sqrt(abs(resid(.))) ~ fitted(.), type=c('p', 'smooth'))
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/lme-models-2.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/lme-models-2.svg)
 
     ## slight increase in resid w/ fitted
 
     plot(m2, resid(.) ~ fitted(.) | block, abline=c(h = 0),  lty = 1,  type = c("p", "smooth")) # per block
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/lme-models-3.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/lme-models-3.svg)
 
     plot(m2,  sqrt(abs(resid(.))) ~ fitted(.) | block,     type=c("p", "smooth")) # 2 blocks behave  badly
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/lme-models-4.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/lme-models-4.svg)
 
     ## block 4 is not great well behaved :(
     lattice::qqmath(m2)
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/lme-models-5.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/lme-models-5.svg)
 
     ## look at random effect
     lattice::dotplot(ranef(m2, condVar=TRUE))
 
     ## $block
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/lme-models-6.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/lme-models-6.svg)
 
     ##were we to have LOTS of RE, using lattice::qqmath for y axis spacing
     ##based on quantiles of standard normal -- is better to distinguish
@@ -245,7 +245,7 @@ LMM: greenhouse full factorial (RCBD)
 
     lattice::xyplot(m1.prall)
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/linear-profile-based-diagnostics-1.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/linear-profile-based-diagnostics-1.svg)
 
     # lattice::xyplot(m1.prre) # for only re
     # the 'profile zeta plot' linear indicates a quadratic
@@ -255,7 +255,7 @@ LMM: greenhouse full factorial (RCBD)
 
     lattice::densityplot(m1.prall)
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/linear-profile-based-diagnostics-2.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/linear-profile-based-diagnostics-2.svg)
 
     # the 'profile density plot'
     # approximate probability density functions of the parameters
@@ -264,7 +264,7 @@ LMM: greenhouse full factorial (RCBD)
 
     lattice::splom(m1.prre)
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/pairs-plot-1.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/pairs-plot-1.svg)
 
     # the 'profile pairs plot'
     # bivariate confidence regions based on profile
@@ -302,12 +302,12 @@ the full (4-way interacting) model
 
     ## Install package 'lmerTest' to obtain Satterthwaite degrees of freedom
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-1.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-1.svg)
 
     ## Loading required namespace: lmerTest
     ## Install package 'lmerTest' to obtain Satterthwaite degrees of freedom
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-2.svg)![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-3.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-2.svg)![]({attach}mixedeffects_viz_files/figure-markdown_strict/use-lsmeans-mean-plots-3.svg)
 
     if(require(lsmeans)){
         ## can also plot quickly mean estimates plus (Wald) confidence intervals
@@ -321,7 +321,7 @@ the full (4-way interacting) model
 
     ## Install package 'lmerTest' to obtain Satterthwaite degrees of freedom
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/ls-means-CI-plots-1.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/ls-means-CI-plots-1.svg)
 
         ## for the simpler
         lsmip(m1, nutrient_hetero ~  water_add | water_hetero * nutrient_add  , type='response')
@@ -370,7 +370,7 @@ quick & dirty
                        panel.abline(v=0, lty=2)
                      })
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/confint-lattice-1.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/confint-lattice-1.svg)
 
 Confidence Intervals -- rolling your own
 ----------------------------------------
@@ -427,7 +427,7 @@ in the plot below. The Wald method only estimates CIs for fixed effects.
 
     ## Warning: Removed 2 rows containing missing values (geom_linerange).
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/ryo-1.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/ryo-1.svg)
 
     ##   strong effect of nutrient homogeneity
     ##   effect of adding lots of water
@@ -522,7 +522,7 @@ Mechanisms of speciation -- cool question!
 
     plot(gm0, type=c("p"), id = 0.05 )
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/lizard-crit-1.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/lizard-crit-1.svg)
 
     ## non useful visually but with id = 0.05 gives sense of outlier
     ## see ?plot.merMod for explanation of test run
@@ -531,11 +531,11 @@ Mechanisms of speciation -- cool question!
     ## or binned fitted values
     plot(gm0,  factor(Trial) ~ resid(., type='pearson'),  abline=c(v=0), lty=2)
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/lizard-crit-2.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/lizard-crit-2.svg)
 
     plot(gm0,  factor(Series) ~ resid(., type='pearson'),  abline=c(v=0), lty=2)
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/lizard-crit-3.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/lizard-crit-3.svg)
 
     ## better than default eh
 
@@ -557,7 +557,7 @@ Mechanisms of speciation -- cool question!
 
     ## Loading required package: gridExtra
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/lizard-crit-4.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/lizard-crit-4.svg)
 
     ## useful if you have a lot of RE to draw attention to strong ones
     ## maybe latter == dot = sample size?
@@ -581,15 +581,15 @@ Mechanisms of speciation -- cool question!
 
     lattice::xyplot(logProf(gm0.prall))
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/lizard-plotting-1.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/lizard-plotting-1.svg)
 
     lattice::densityplot(gm0.prall)
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/lizard-plotting-2.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/lizard-plotting-2.svg)
 
     lattice::splom(gm0.prall)
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/lizard-plotting-3.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/lizard-plotting-3.svg)
 
 Confidence intervals
 ====================
@@ -608,7 +608,7 @@ Confidence intervals
                 panel.abline(v=0, lty=2)
             })
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/quick-ci-1.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/quick-ci-1.svg)
 
 Rolling your own again
 
@@ -629,7 +629,7 @@ Rolling your own again
         lattice::dotplot(parameter ~ c(`2.5 %`, `97.5 %`) | type , gm0_bnd)
           }
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/ryo-lizard-ci-1.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/ryo-lizard-ci-1.svg)
 
 Because the fixed effect parameter on size difference and the random
 effect variance are on such different scales, I make two plots
@@ -637,7 +637,7 @@ effect variance are on such different scales, I make two plots
     if(require(ggplot2))
         g + scale_y_log10()
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/low-magnitude-param-1.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/low-magnitude-param-1.svg)
 
 quick predictions
 -----------------
@@ -668,7 +668,7 @@ things are different here:
 
     plot(gm0_lsm, type = 'response', ylab = 'scaled size diff', xlab = 'probability of copulation')
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/quick-vis-glmm-1.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/quick-vis-glmm-1.svg)
 \#\# customized predictions
 
 The quick plots using `lsmeans` are great, but they assume Wald
@@ -710,7 +710,7 @@ accounting for all,, none, or some of random effects fitted:
         points(pred_overall_gen ~ SizeDiff, d2_pred, pch=19, cex=.5)
         }
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/prediction-visual-1.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/prediction-visual-1.svg)
 
 The plot on the left above shows predictions for various series of
 experimental trials, and the raw data. The plot on the right shows the
@@ -797,7 +797,7 @@ don't use them for model comparison or parameter inference).
       pp_comp(re_cvar, function(x) var(x$cop),
               d2, main='var - all RE')
 
-![](%7Battach%7Dmixedeffects_viz_files/figure-markdown_strict/post-pred-1.svg)
+![]({attach}mixedeffects_viz_files/figure-markdown_strict/post-pred-1.svg)
 
     par(op)
 

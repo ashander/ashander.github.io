@@ -15,15 +15,15 @@ date: 2015-04-25
     plot(params, rnorm(100))
 
 ![My
-alt1](%7Battach%7Dexample-rmd_files/figure-markdown_strict/my-fig-1.svg)
+alt1]({attach}example-rmd_files/figure-markdown_strict/my-fig-1.svg)
 
     cat("\n\n")
 
     hist(params)
 
-![alt2](%7Battach%7Dexample-rmd_files/figure-markdown_strict/my-fig-2.svg)
+![alt2]({attach}example-rmd_files/figure-markdown_strict/my-fig-2.svg)
 
-[intrasite link](%7Bfilename%7Dexample-yaml.md)
+[intrasite link]({filename}example-yaml.md)
 
     print(knitr::knit_hooks$get('plot'))
 

@@ -265,7 +265,7 @@ To provide model-averaged predictions is a bit more work:
 ![Admissions (open circles, size indicates total applicants) versus
 deparatment and predictions from model 2 (department only, diamonds) and
 model 3 (department and gender, dots and
-triangles)](%7Battach%7Dmodel-selection-GLMs-AIC-what-to-report_files/figure-markdown_strict/model-viz-1.svg)
+triangles)]({attach}model-selection-GLMs-AIC-what-to-report_files/figure-markdown_strict/model-viz-1.svg)
 
 Admissions (colored dots, size indicates total applicants) versus
 department from UCB Admissions data (included in `R`), and averaged

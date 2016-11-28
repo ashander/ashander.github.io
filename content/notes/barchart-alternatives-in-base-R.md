@@ -66,7 +66,7 @@ source region.
 First, a bad ol' dynamite, er bar plot:
 
 ![bad bar
-plot](%7Battach%7Dbarchart-alternatives-in-base-R_files/figure-markdown_strict/barplot-1.svg)
+plot]({attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/barplot-1.svg)
 
 (I'm not including the code for this, because it's what I'm recommending
 against. Nor did I add error bars, so it's not really a dynamite plot.
@@ -90,7 +90,7 @@ what R calls it:
                xlab='concentration', ylim=y_limits, vertical=TRUE)
 
 ![stripchart: a scatter plot v
-factors](%7Battach%7Dbarchart-alternatives-in-base-R_files/figure-markdown_strict/scatter-v-factors-1.svg)
+factors]({attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/scatter-v-factors-1.svg)
 
 It's easy to jitter the points, as Weissgerber *et al* recommend, by
 passing the argument `method='jitter'`. But there are other options. For
@@ -103,7 +103,7 @@ This more clearly shows the values that were observed more than once:
                xlab='concentration',  ylim=y_limits, vertical=TRUE)
 
 ![stripchart with
-stacking](%7Battach%7Dbarchart-alternatives-in-base-R_files/figure-markdown_strict/stripchart-wilkinson-1.svg)
+stacking]({attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/stripchart-wilkinson-1.svg)
 
 Box (and whisker) plots
 -----------------------
@@ -112,7 +112,7 @@ For box plots, R makes it very easy.
 
     boxplot( uptake ~ conc_f , CO2, ylab='uptake', xlab='concentration', ylim=y_limits)
 
-![boxplot](%7Battach%7Dbarchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-1.svg)
+![boxplot]({attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-1.svg)
 
 In this case, with small data the boxplot is a bit misleading. This is
 clear from the scatter plots above, but you can also overplot onto the
@@ -125,7 +125,7 @@ boxes using `stripchart` with `add = TRUE, vertical = TRUE`:
     }
 
 ![boxplot with points
-overplotted](%7Battach%7Dbarchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-overplotted-1.svg)
+overplotted]({attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/boxplot-overplotted-1.svg)
 
 Even with base graphics `boxplot`, you can pass functions of multiple
 independent variables. This means you can visualize interactions between
@@ -139,7 +139,7 @@ treatments in your raw data, and even overplot with `stripchart`!
     }
 
 ![complex bar
-plot](%7Battach%7Dbarchart-alternatives-in-base-R_files/figure-markdown_strict/complex-boxplot-1.svg)
+plot]({attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/complex-boxplot-1.svg)
 
 *Note* it would be easier to read the labels here if the plot were
 horizontal, for which there's an argument you can pass. The graphics
@@ -179,7 +179,7 @@ can use `split` and `lines`:
     }
 
 ![paired points connected by lines and marked by
-points](%7Battach%7Dbarchart-alternatives-in-base-R_files/figure-markdown_strict/paired-points-1.svg)
+points]({attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-points-1.svg)
 
 If you'd rather only have the lines, just suppress plotting of points
 within the initial call to `stripchart`:
@@ -192,7 +192,7 @@ within the initial call to `stripchart`:
     }
 
 ![paired locations connected by
-lines](%7Battach%7Dbarchart-alternatives-in-base-R_files/figure-markdown_strict/paired-lines-1.svg)
+lines]({attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/paired-lines-1.svg)
 
 Other plots
 ===========
@@ -210,7 +210,7 @@ uptake from the `CO2` data for grass plants receiving chilling or not:
       }
 
 ![histogram of
-uptake](%7Battach%7Dbarchart-alternatives-in-base-R_files/figure-markdown_strict/histo-1.svg)
+uptake]({attach}barchart-alternatives-in-base-R_files/figure-markdown_strict/histo-1.svg)
 
     par(op)
 
