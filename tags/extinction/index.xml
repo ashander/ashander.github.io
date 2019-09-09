@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>extinction on Jaime Ashander</title>
+    <link>https://ashander.info/tags/extinction/</link>
+    <description>Recent content in extinction on Jaime Ashander</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>ashander AT rff org (Jaime Ashander)</managingEditor>
+    <webMaster>ashander AT rff org (Jaime Ashander)</webMaster>
+    <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
+    <lastBuildDate>Wed, 22 Apr 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ashander.info/tags/extinction/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Overcoming the fear of failure to improve the conservation of extremely small populations</title>
+      <link>https://ashander.info/posts/2015/04/fear-of-failure-in-conservation/</link>
+      <pubDate>Wed, 22 Apr 2015 00:00:00 +0000</pubDate>
+      <author>ashander AT rff org (Jaime Ashander)</author>
+      <guid>https://ashander.info/posts/2015/04/fear-of-failure-in-conservation/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

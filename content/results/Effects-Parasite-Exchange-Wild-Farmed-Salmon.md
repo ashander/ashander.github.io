@@ -1,6 +1,19 @@
+---
 Title: Effects of Parasite Exchange Between Wild and Farmed Salmon
 Date: 2010-08-20
-Tags: thesis, M.Sc., line dominance, pink salmon, spillback, spillover, aquaculture, drug resistance, chemical resistance, mathematical modelling, migration, population genetics
+Tags:
+- thesis
+- M.Sc.
+- line dominance
+- pink salmon
+- spillback
+- spillover
+- aquaculture
+- drug resistance
+- chemical resistance
+- mathematical modelling
+- migration
+- population genetics
 Authors: Jaime Ashander
 Journal: M.Sc. Thesis, University of Alberta
 Link: http://hdl.handle.net/10048/1292
@@ -8,6 +21,8 @@ DOI: 10.6084/m9.figshare.1584651
 Image: /images/msc-thesis.png
 Year: 2010
 Template: result
+Slug: effects-parasite-exchange-wild-farmed-salmon
+---
 
 Human food production activities can dominate natural systems, altering
 ecological and evolutionary aspects of the environment. Disease-mediated

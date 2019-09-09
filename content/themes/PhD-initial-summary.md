@@ -1,10 +1,20 @@
+---
 Title: Causes and consequences of trait change
 Date: 2016-11-19
-Tags: Ph.D., evolution, stochasticity, plasticity, transient dynamics, population biology
+Tags:
+- Ph.D.
+- evolution
+- stochasticity
+- plasticity
+- transient dynamics
+- population biology
 Author: Jaime Ashander
 Template: theme 
 Image: /images/phd.png
-Results: causes and consequences
+Results:
+- causes and consequences
+Slug: phd-initial-summary
+---
 
 My Ph.D. is focused on modelling populations that exhibit rapid responses to environmental change.
     <p>I focus on understanding the consequences of trait change due

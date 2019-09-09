@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>climate on Jaime Ashander</title>
+    <link>https://ashander.info/tags/climate/</link>
+    <description>Recent content in climate on Jaime Ashander</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>ashander AT rff org (Jaime Ashander)</managingEditor>
+    <webMaster>ashander AT rff org (Jaime Ashander)</webMaster>
+    <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
+    <lastBuildDate>Fri, 04 Dec 2009 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ashander.info/tags/climate/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Science education and uncertainty</title>
+      <link>https://ashander.info/posts/2009/12/science-is-uncertain/</link>
+      <pubDate>Fri, 04 Dec 2009 00:00:00 +0000</pubDate>
+      <author>ashander AT rff org (Jaime Ashander)</author>
+      <guid>https://ashander.info/posts/2009/12/science-is-uncertain/</guid>
+      <description>A brand new &amp;ldquo;-gate&amp;rdquo; on the climate science front has me thinking about the relationship between science and the public. A big issue in communicating science stems from the fundamental disconnect between science as practiced and science as taught in introductory formats, e.g. in high school.
+Most people learn science as fact. The reality is emerging scientific knowledge (in fact all scientific knowledge) is uncertain. Those who disagree idealogically with the state of scientific knowlege highlight this uncertainty.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  
+  <meta charset="utf-8">
+  <title>Between-generation bet-hedging - Jaime Ashander</title>
+  <meta name="description" content="Between-generation bet-hedging">
+  <meta name="author" content="Jaime Ashander">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://ashander.info/css/font-awesome.min.css" rel="stylesheet">
+
+  
+  
+  <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.1/build/pure-min.css" integrity="sha384-CCTZv2q9I9m3UOxRLaJneXrrqKwUNOzZ6NGEUMwHtShDJ+nCoiXJCAgi05KfkLGY" crossorigin="anonymous">
+  
+  
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.1/build/grids-responsive-min.css">
+  
+  <link href="https://ashander.info/css/custom.css" rel="stylesheet" type="text/css" media="all" />
+
+  
+  
+  <link rel="stylesheet" href="https://ashander.info/highlight/styles/solarized_light.css">
+  
+  <script src="https://ashander.info/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  
+  <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+  <meta name="generator" content="Hugo 0.58.1" />
+  
+</head>
+<body>
+
+<div class="header pure-g" style="background-image: url(/images/themes/fishfarm.jpg)">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+    <div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="desktop pure-menu pure-menu-horizontal nav-menu">
+            
+            <a href="https://ashander.info/" class="site-title pure-menu-heading">Jaime Ashander</a>
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item">
+                    <a href="https://ashander.info/themes/" class="pure-menu-link">Research</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="https://ashander.info/results/" class="pure-menu-link">Publications</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="https://ashander.info/cv/ashander_cv.pdf" class="pure-menu-link">CV</a>
+                </li>
+            </ul>
+        </div>
+        <div class="mobile pure-menu nav-menu">
+            <a href="/" class="pure-menu-heading" id="toggle-home">Jaime Ashander</a>
+            <a href="#" id="toggle-btn">&#9776;</a>
+            <ul class="pure-menu-list" id="toggle-content" style="display:none;">
+                <li class="pure-menu-item">
+                    <a href="https://ashander.info/themes/" class="pure-menu-link">Research</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="https://ashander.info/results/" class="pure-menu-link">Publications</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="https://ashander.info/cv/ashander_cv.pdf" class="pure-menu-link">CV</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+
+<div class="pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+	<div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="post">
+
+            <div class="post-title">
+                <p class="footnote">
+                    <time class="">2015-01-12</time>
+		            
+                    
+                    |
+                    
+                    
+                    tags:<a href="https://ashander.info/tags/life-history">life history</a> <a href="https://ashander.info/tags/evolution">evolution</a> <a href="https://ashander.info/tags/stochasticity">stochasticity</a> 
+                    
+
+                    
+
+                    
+                </p>
+                <h1>Between-generation bet-hedging</h1>
+            </div>
+
+            <div class="post-content">
+                
+
+<p>Version of notes for discussion I led in
+<a href="http://www.eve.ucdavis.edu/sschreiber/">Sebastain Schreiber&rsquo;s</a> for
+PBG 271 Research Conference in Ecology on &ldquo;Life history evolution in
+stochastic environments&rdquo;.</p>
+
+<h3 id="reading-childs-et-al-and-stearn-s-piece-on-bernoulli">Reading Childs et al and Stearn&rsquo;s piece on Bernoulli</h3>
+
+<p><a href="doi:10.1098/rspb.2010.0707">Childs, Metcalf and Rees (2010)</a> present
+a plant-focused review of bet-hedging, including a review of essential
+theory.  As in many papers on bet-hedging, these authors distiguish
+between conservative and diversified strategies.</p>
+
+<h4 id="geometic-mean-fitness-concept">Geometic mean fitness concept</h4>
+
+<blockquote>
+<p>When fitness is temporally variable, the appropriate measure of
+evolutionary success is the expected geometric mean growth rate of a
+genotype. This is because fitness, like population growth, is an
+inherently multiplicative process that is very sensitive to
+occasional low values. &ndash; Childs et al 2011</p>
+</blockquote>
+
+<p>Let&rsquo;s remind ourselves why.</p>
+
+<p>Following roughly the notation of Frank and Slatkin (1990), let $x_i$ the frequency of genotype $i$ and $R_i(t)$ the mean fitness of genotype $i$ in year $t$, then
+genotype frequency $i$ changes as
+$$
+x_i(t+1) = \frac{R_i(t)x_i(t)}{R_1(t)x_1(t) + R_2(t)x_2(t)}
+$$
+Setting $y(t) = x_1(t)/x_2(t)$, we get
+$$
+y(t+1)=[R_1(t)/R<em>2(t)]y(t)
+$$
+Hence, $y(t) = y(0) \prod</em>{i=0}^{t-1} \lambda(i)$ where $\lambda(t) =
+R_1(t)/R_2(t)$ is a (non-standard) relative fitness measure.</p>
+
+<p>We can rearrange this and take logs to see $\tfrac{1}{t} \log
+(y(t)/y(0)) = \tfrac{1}{t} \sum_{i=0}^{t-1} \log \lambda(i)$. Applying
+the law of large numbers, $E[\log \lambda(t)]$ determines whether
+genotype 1 &ldquo;wins&rdquo; (i.e. expectation is &gt;0) or &ldquo;loses&rdquo;
+(i.e. expectation is &lt;0).But this ($(\prod_t
+\lambda(i))^{\tfrac{1}{t}}$) is the geometric mean fitness!</p>
+
+<!-- If so, please remind folks about the approximation of $E[\log R_1(t)]$
+when $R_1(t)=1+s_i(t)$ where $s_i(t)$ has mean zero and is "small". -->
+
+<h4 id="so-the-stochastic-growth-rate-is-the-geometric-mean-fitness">So the stochastic growth rate <em>is</em> the geometric mean fitness</h4>
+
+<p>And these are the appropriate measure of success for long-term evolution in a varying environment.
+Stochastic growth rate $\rho$ (in Childs&rsquo; notation) with $\lambda(i)$ fitness in generation $i$ is</p>
+
+<p>$$
+\rho = E [ \log (\lambda(i)) ]
+$$</p>
+
+<p>Which we just saw above is the geometic mean fitness.</p>
+
+<h4 id="so-how-does-this-lead-to-a-mean-variance-tradeoff">So how does this lead to a mean-variance tradeoff?</h4>
+
+<!-- The geometric mean fitness over $t$ generations
+is $(\prod_n \lambda(t))^{\tfrac{1}{t}}$.  Taking the logarithm of
+this, $\tfrac{1}{t} \sum_t \log(\lambda(i))$, which is $\rho$ above. -->
+
+<p>As Childs et al note, Jensen&rsquo;s inequality here implies the geometic
+mean fitness is less than the arithmetic mean $\rho \le \log
+E[\lambda(i)]$.</p>
+
+<p>More specifically, as Sebastian mentioned last week, we can take a
+Taylor approximation,</p>
+
+<p>$$
+E[f(x)] \approx f( E[x]) + \tfrac{1}{2}
+f&rdquo;(E[x]) {\rm Var}(x).
+$$</p>
+
+<p>With $f = \log$ this gives</p>
+
+<p>$$
+E[\log (\lambda)] \approx \log (E[\lambda]) - \tfrac{1}{2
+E[\lambda]^2} {\rm Var}(\lambda),
+$$</p>
+
+<p>implying the magnitude of the decrease from arithmetic to geometic
+mean fitness is proportional to the squared coefficient of variation
+in fitness.  In fact, if $\lambda(i) \approx 1 + \epsilon_i$ with
+$\epsilon$ a &ldquo;small&rdquo; random variable with mean zero this gives the
+common approximation to the stochastic growth rate $\lambda<em>S \approx
+\bar \lambda - \tfrac{1}{2} \sigma</em>\lambda^2$.</p>
+
+<p>This leads to Slatkin&rsquo;s (1974) coining of <em>evolutionary bet-hedging</em>
+to denote the resulting &ldquo;tradeoff&rdquo; where strategies with lower
+arithmetic mean fitness can invade against those with higher
+arithmetic mean fitness (if they have lower variance).</p>
+
+<h3 id="discussion-points">Discussion points</h3>
+
+<ul>
+<li>is &ldquo;tradeoff&rdquo; a good term here? doesn&rsquo;t evolution just favor the maximizer of geometric mean fitness?</li>
+<li>evidence for bet hedging in nature. what is needed and what has been shown?</li>
+<li>BH in structured populations &ndash; IPMs are suggested as means for analyzing, what are obstacles to getting there (e.g. data limitation)?</li>
+<li>conservative versus diversified BH: how to connect this terminology to
+our framework? Any concise model of &ldquo;conservative&rdquo; BH?</li>
+<li>whose fitness is it?</li>
+</ul>
+
+<!--
+```R
+code
+```
+
+\begin{equation}
+\exp{x}
+\end{equation}
+-->
+
+            </div>
+        </div>
+	</div>
+    <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+<div class="footer pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+    <div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="footer-content">
+		  <div class="pure-menu pure-menu-horizontal">
+              <ul>
+                  <li class="pure-menu-heading" id="foot-name">Contact:</li>
+				  
+                  
+                  <li class="pure-menu-item">
+                      <a href="mailto:ashander%20AT%20rff%20org" class="pure-menu-link"><i class="fa fa-envelope-o fa fw"></i></a>
+                  </li>
+                  
+          
+                  
+                  <li class="pure-menu-item">
+                      <a href="https://github.com/ashander" class="pure-menu-link"><i class="fa fa-github fa-fw"></i></a>
+                  </li>
+                  
+          
+                  
+                  <li class="pure-menu-item">
+                      <a href="https://twitter.com/jaimedash" class="pure-menu-link"><i class="fa fa-twitter fa-fw"></i></a>
+                  </li>
+                  
+
+                  
+                  <li class="pure-menu-item">
+                      <a href="https://scholar.google.com/citations?user=TsBxHjcAAAAJ" class="pure-menu-link"><i class="fa fa-mortar-board fa-fw"></i></a>
+                  </li>
+                  
+          
+              </ul>
+              <a href="#" class="pure-menu-heading pull-right" id="gototop-btn">↑↑</a>
+          </div>
+		  
+		  <p id="foot-copyright">Copyright (c) 2009 - 2019, Jaime Ashander</p>
+		  
+		</div>
+	  </div>
+      <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+
+<script src="https://ashander.info/js/jquery.min.js" type="text/javascript"></script>
+<script src="https://ashander.info/js/jquery.timeago.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $(function(){
+    $("time.timeago").timeago();
+  })
+  $("#toggle-btn").click(function(){
+    $("#toggle-content").toggle();
+    if($(this).html() === "☰") {
+        $(this).html("X")
+    } else {
+        $(this).html("☰")
+    }
+  });
+  $(window).resize(function(){
+    if(window.innerWidth > 768) {
+      $(".desktop").removeAttr("style");
+    }
+  });
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-60354418-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+

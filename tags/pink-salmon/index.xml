@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pink salmon on Jaime Ashander</title>
+    <link>https://ashander.info/tags/pink-salmon/</link>
+    <description>Recent content in pink salmon on Jaime Ashander</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>ashander AT rff org (Jaime Ashander)</managingEditor>
+    <webMaster>ashander AT rff org (Jaime Ashander)</webMaster>
+    <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
+    <lastBuildDate>Thu, 17 Mar 2011 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ashander.info/tags/pink-salmon/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Aquaculture-induced changes to dynamics of a migratory host and specialist parasite: a case study of pink salmon and sea lice</title>
+      <link>https://ashander.info/posts/2011/03/line-dominance-sea-lice/</link>
+      <pubDate>Thu, 17 Mar 2011 00:00:00 +0000</pubDate>
+      <author>ashander AT rff org (Jaime Ashander)</author>
+      <guid>https://ashander.info/posts/2011/03/line-dominance-sea-lice/</guid>
+      <description>Exchange of diseases between domesticated and wild animals is a rising concern for conservation. In the ocean, many species display life histories that separate juveniles from adults. For pink salmon (Oncorhynchus gorbuscha) and parasitic sea lice (Lepeophtheirus salmonis), infection of juvenile salmon in early marine life occurs near salmon sea-cage aquaculture sites and is associated with declining abundance of wild salmon. Here, we develop a theoretical model for the pink salmon/sea lice host–parasite system and use it to explore the effects of aquaculture hosts, acting as reservoirs, on dynamics.</description>
+    </item>
+    
+    <item>
+      <title>Effects of Parasite Exchange Between Wild and Farmed Salmon</title>
+      <link>https://ashander.info/posts/2010/08/effects-parasite-exchange-wild-farmed-salmon/</link>
+      <pubDate>Fri, 20 Aug 2010 00:00:00 +0000</pubDate>
+      <author>ashander AT rff org (Jaime Ashander)</author>
+      <guid>https://ashander.info/posts/2010/08/effects-parasite-exchange-wild-farmed-salmon/</guid>
+      <description>Human food production activities can dominate natural systems, altering ecological and evolutionary aspects of the environment. Disease-mediated interactions are of particular concern. For example, parasites may &amp;ldquo;spill-over&amp;rdquo; from farms to wildlife. Parasites isolated on farms can evolve resistance to treatment chemicals , but &amp;ldquo;spill-back&amp;rdquo; from wildlife to farms may alter evolutionary dynamics. Here, we consider exchange of parasites (Lepeophtheirus salmonis) between wild (Oncorhynchus gorbuscha) and farmed salmon. We derive and analyze discrete-time models that implicitly include wild salmon migrations.</description>
+    </item>
+    
+  </channel>
+</rss>

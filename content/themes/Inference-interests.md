@@ -1,10 +1,23 @@
+---
 Title: Inferring population processes from phenotypic and genomic data
 Date: 2016-11-19
-Tags: Ph.D., post doc, inference, stochasticity, transient dynamics, population genetics, genomics, conservation, plasticity
+Tags:
+- Ph.D.
+- post doc
+- inference
+- stochasticity
+- transient dynamics
+- population genetics
+- genomics
+- conservation
+- plasticity
 Author: Jaime Ashander
 Template: theme
 Image: /images/resize_tort.png
-Results: phenology
+Results:
+- phenology
+Slug: inference-interests
+---
 
 My current focus is inference of population processes from phenotypic and genomic data.
 

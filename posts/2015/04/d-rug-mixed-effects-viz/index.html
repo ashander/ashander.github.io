@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  
+  <meta charset="utf-8">
+  <title>Visualizing fits, inference, implications of (G)LMMs - Jaime Ashander</title>
+  <meta name="description" content="Visualizing fits, inference, implications of (G)LMMs">
+  <meta name="author" content="Jaime Ashander">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://ashander.info/css/font-awesome.min.css" rel="stylesheet">
+
+  
+  
+  <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.1/build/pure-min.css" integrity="sha384-CCTZv2q9I9m3UOxRLaJneXrrqKwUNOzZ6NGEUMwHtShDJ+nCoiXJCAgi05KfkLGY" crossorigin="anonymous">
+  
+  
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.1/build/grids-responsive-min.css">
+  
+  <link href="https://ashander.info/css/custom.css" rel="stylesheet" type="text/css" media="all" />
+
+  
+  
+  <link rel="stylesheet" href="https://ashander.info/highlight/styles/solarized_light.css">
+  
+  <script src="https://ashander.info/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  
+  <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+  <meta name="generator" content="Hugo 0.58.1" />
+  
+</head>
+<body>
+
+<div class="header pure-g" style="background-image: url(/images/themes/fishfarm.jpg)">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+    <div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="desktop pure-menu pure-menu-horizontal nav-menu">
+            
+            <a href="https://ashander.info/" class="site-title pure-menu-heading">Jaime Ashander</a>
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item">
+                    <a href="https://ashander.info/themes/" class="pure-menu-link">Research</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="https://ashander.info/results/" class="pure-menu-link">Publications</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="https://ashander.info/cv/ashander_cv.pdf" class="pure-menu-link">CV</a>
+                </li>
+            </ul>
+        </div>
+        <div class="mobile pure-menu nav-menu">
+            <a href="/" class="pure-menu-heading" id="toggle-home">Jaime Ashander</a>
+            <a href="#" id="toggle-btn">&#9776;</a>
+            <ul class="pure-menu-list" id="toggle-content" style="display:none;">
+                <li class="pure-menu-item">
+                    <a href="https://ashander.info/themes/" class="pure-menu-link">Research</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="https://ashander.info/results/" class="pure-menu-link">Publications</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="https://ashander.info/cv/ashander_cv.pdf" class="pure-menu-link">CV</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+
+<div class="pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+	<div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="post">
+
+            <div class="post-title">
+                <p class="footnote">
+                    <time class="">2015-04-10</time>
+		            
+                    
+                    |
+                    
+                    
+                    tags:<a href="https://ashander.info/tags/visualization">visualization</a> <a href="https://ashander.info/tags/lattice">lattice</a> <a href="https://ashander.info/tags/model-checking">model checking</a> <a href="https://ashander.info/tags/statistical-graphics">statistical graphics</a> <a href="https://ashander.info/tags/glmm">GLMM</a> <a href="https://ashander.info/tags/r">R</a> <a href="https://ashander.info/tags/ggplot2">ggplot2</a> 
+                    
+
+                    
+
+                    
+                </p>
+                <h1>Visualizing fits, inference, implications of (G)LMMs</h1>
+            </div>
+
+            <div class="post-content">
+                
+
+
+<p>In a live walk-through on April 10 at the Davis R-Users Group, I gave a brief presentation
+<a href="/presentations/mixedeffects_viz_motivation.html">motivating this topic</a>.
+This post expands and cleans up the code from that talk. If you just
+want the code: <a href="mixedeffects_viz.R">download the .R file</a>.</p>
+<p><strong>Updated 2015-04-28</strong></p>
+<p>The point of this post isn’t the statistics of mixed models. For that, learning
+the experimental design and statistics behind modern mixed models, I recommend
+some relatively recent papers below. In short, Schielzeth &amp; Nakagawa (2013)
+and Stroup (2015) provide especially good introduction for those coming from an
+ANOVA background.</p>
+<p>When working with generalized, hierarchical designs, ask yourself three
+questions:</p>
+<p>First (and maybe most important), “Do I <em>really</em> need these models?” Think
+carefully, and consult these references:</p>
+<ul>
+<li>Is nesting doing anything for your analysis? Example 1: Murtaugh 2007
+<em>Ecology</em> 88(1):56-62)</li>
+<li>For significance testing, transform + LMM might work as well as
+GLMM:
+<a href="doi:10.1111/2041-210X.12386">Ives 2015 “For testing the significance of regression coefficients, go ahead and log-transform count data” <em>Methods in Ecology and Evolution</em></a> <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></li>
+</ul>
+<p>Second, “What <em>is</em> my design (in the language of mixed models)?”. Baayen et al
+focus on designs with crossed random effects (a strong suit of <code>lme4</code>), while
+Schielzeth &amp; Nakagawa’s “Nested by Design” paper is a more general
+introduction. Finally, the Stroup paper provides a good entry point in
+ANOVA-speak <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. This could make or break the connection between an
+adviser that speaks only ANOVA, as is often the case for workers in crop and
+soil sciences, or experimental ecology and the GLMM that your unbalanced
+binomial regression demands.</p>
+<ul>
+<li><a href="http://onlinelibrary.wiley.com/doi/10.1111/j.2041-210x.2012.00251.x/full">Schielzeth &amp; Nakagawa 2013 Nested by design: model fitting and
+interpretation in a mixed model era. <em>Methods in Ecology and Evolution</em>
+4:14-24</a></li>
+<li><a href="http://www.sfs.uni-tuebingen.de/~hbaayen/publications/baayenDavidsonBates.pdf">Baayen, Davidson, &amp; Bates 2008 Mixed-effects modeling with crossed random
+effects for subjects and items. <em>Journal of Memory and Language</em>
+59:390-412</a>
+Note that Baayen et al present <code>lme4</code> code, but some (e.g., <code>mcmcsamp</code>will
+not work with current versions of the package).</li>
+<li><a href="https://dl.sciencesocieties.org/publications/aj/abstracts/107/2/811">Stroup 2015 Rethinking the Analysis of Non-Normal Data in Plant and Soil
+Science. <em>Agronomy Journal</em>
+107(2):811-827</a></li>
+</ul>
+<p>Third, "How do I specify and fit this model in <code>R</code>. The references below may
+also help with design and interpretation, but are primarily hands-on. The
+most thorough is Pinheiro &amp; Bates (2000). These four references also serve as a
+bibliography of sorts for this post <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
+<ul>
+<li>Pinheiro &amp; Bates 2000 <em>Mixed-effects models in S and S-PLUS</em> Springer, New
+York</li>
+<li><a href="http://lme4.r-forge.r-project.org/book/">Bates’ <code>lme4</code> book draft</a></li>
+<li><a href="http://arxiv.org/abs/1406.5823">the lme4 paper</a>:</li>
+<li>Ben Bolker’s forthcoming chapter on “Worked examples” <a href="https://rpubs.com/bbolker/glmmchapter">available on
+Rpubs</a></li>
+</ul>
+<div id="focus-of-this-post" class="section level3">
+<h3>Focus of this post</h3>
+<p>Given these preliminaries, here I <strong>focus on three things</strong>:</p>
+<ul>
+<li>criticizing the model and fit</li>
+<li>(graphically) assessing parameter inference</li>
+<li>illustrate predictions</li>
+</ul>
+<p><strong>emphasizing</strong></p>
+<ul>
+<li>working with frequentist library <code>lme4</code> for (G)LMM in R</li>
+<li>visualization for: criticism, inference, prediction</li>
+<li>using the native plotting capabilities (to the extent possible)</li>
+</ul>
+<p><strong>three facets</strong> of visualization</p>
+<ul>
+<li>quick diagnostic (plots <em>native</em> to fitting packages)</li>
+<li>slower model criticism (also <em>native</em>)</li>
+<li>inference &amp; prediction (generally lightweight external libraries / export capabilities)</li>
+</ul>
+<p>Finally, I’ll mention that example code and vignettes in documented packages are
+great resources for learning these things (as is google ;).
+Try these commands:</p>
+<pre class="r"><code>??lme4
+help(package=&#39;lme4&#39;)
+methods(class=&#39;merMod&#39;)
+vignette(package=&#39;lme4&#39;)</code></pre>
+<p>Packages:</p>
+<pre class="r"><code>library(lme4)</code></pre>
+<pre><code>## Warning: package &#39;lme4&#39; was built under R version 3.6.1</code></pre>
+<pre><code>## Loading required package: Matrix</code></pre>
+<pre class="r"><code>library(lattice) ## already loaded via namespace by lme4 -- may as well attach
+#library(ggplot2) # recommend
+#library(lsmeans) #recommend
+#library(gridExtra) #recommend</code></pre>
+<p>Below, much of the commentary is included in <code># comments</code> to the code blocks.</p>
+</div>
+<div id="lmm-greenhouse-full-factorial-rcbd" class="section level1">
+<h1>LMM: greenhouse full factorial (RCBD)</h1>
+<ul>
+<li>“Simple” greenhouse, linear mixed model</li>
+<li>Pattern and amount – cool question!</li>
+<li>balanced so perfect for traditional ANOVA</li>
+<li>4 (!) treatments – full factorial blocked so 4-way interaction potential and hard to visualize
+(making a good test case here)</li>
+</ul>
+<div class="figure">
+<img src="/images/maestre.png" alt="" />
+<p class="caption">Maestre title image</p>
+</div>
+<pre class="r"><code>d &lt;- read.delim(&quot;http://datadryad.org/bitstream/handle/10255/dryad.41984/Maestre_Ecol88.txt?sequence=1&quot;)
+recode &lt;- car::recode</code></pre>
+<pre><code>## Registered S3 methods overwritten by &#39;car&#39;:
+##   method                          from
+##   influence.merMod                lme4
+##   cooks.distance.influence.merMod lme4
+##   dfbeta.influence.merMod         lme4
+##   dfbetas.influence.merMod        lme4</code></pre>
+<pre class="r"><code>d &lt;- within(d, {
+    nutrient_hetero &lt;- recode(factor(nh), &quot;1=&#39;homogeneous&#39;; 2=&#39;heterogeneous&#39;&quot;)
+    nutrient_add &lt;- recode(factor(na), &quot;1=&#39;40 mg N&#39;; 2=&#39;80 mg N&#39;; 3=&#39;120 mg N&#39;&quot;)
+    water_hetero &lt;- recode(factor(wh), &quot;1=&#39;homogeneous&#39;; 2=&#39;pulse&#39;&quot;)
+    water_add &lt;- recode(factor(wa), &quot;1=&#39;125 mL&#39;; 2=&#39;250 mL&#39;;3=&#39;375 mL&#39;&quot;)
+    block &lt;- factor(block)
+  })
+d$nutrient_add &lt;- factor(d$nutrient_add, levels(d$nutrient_add)[c(2, 3, 1)])
+
+## centered?
+ctr &lt;- function(v, ...)
+    (v - mean(v, ...) ) #/ sd(v, ...)
+
+d &lt;- within(d, {
+    nhc &lt;- ctr(nh)
+    nac &lt;- ctr(na)
+    wac &lt;- ctr(wa)
+    whc &lt;- ctr(wh)
+})</code></pre>
+<pre class="r"><code>## bt - total biomass
+
+## we&#39;d like to use model that includes varying sopes
+## watering seems the most likely to have block-level differences ?
+m2 &lt;- lmer(log(bt) ~ nutrient_add * nutrient_hetero  *  water_add * water_hetero +
+               (water_hetero * water_add | block), data=d)</code></pre>
+<pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
+<pre class="r"><code>## first diagnostic -- very high correlation is bad -- can&#39;t really justify complex RE
+## structures you might like, if cause these type of fits!
+## could see bad performance in resid plots too if you wanted
+VarCorr(m2)</code></pre>
+<pre><code>##  Groups   Name                              Std.Dev. Corr                
+##  block    (Intercept)                       0.031293                     
+##           water_heteropulse                 0.041218 -0.741              
+##           water_add250 mL                   0.060201 -0.936  0.642       
+##           water_add375 mL                   0.059746 -0.612  0.231  0.845
+##           water_heteropulse:water_add250 mL 0.073590  0.937 -0.929 -0.852
+##           water_heteropulse:water_add375 mL 0.073299  0.415 -0.110 -0.706
+##  Residual                                   0.070228                     
+##               
+##               
+##               
+##               
+##               
+##  -0.461       
+##  -0.969  0.290
+## </code></pre>
+<pre class="r"><code>plot(m2, type = c(&quot;p&quot;, &quot;smooth&quot;) , id = 0.05) # id outliers</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lme-models-1.png" width="672" /></p>
+<pre class="r"><code>plot(m2, sqrt(abs(resid(.))) ~ fitted(.), type=c(&#39;p&#39;, &#39;smooth&#39;))</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lme-models-2.png" width="672" /></p>
+<pre class="r"><code>## slight increase in resid w/ fitted
+
+plot(m2, resid(.) ~ fitted(.) | block, abline=c(h = 0),  lty = 1,  type = c(&quot;p&quot;, &quot;smooth&quot;)) # per block</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lme-models-3.png" width="672" /></p>
+<pre class="r"><code>plot(m2,  sqrt(abs(resid(.))) ~ fitted(.) | block,     type=c(&quot;p&quot;, &quot;smooth&quot;)) # 2 blocks behave  badly</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lme-models-4.png" width="672" /></p>
+<pre class="r"><code>## block 4 is not great well behaved :(
+lattice::qqmath(m2)</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lme-models-5.png" width="672" /></p>
+<pre class="r"><code>## look at random effect
+lattice::dotplot(ranef(m2, condVar=TRUE))</code></pre>
+<pre><code>## $block</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lme-models-6.png" width="672" /></p>
+<pre class="r"><code>##were we to have LOTS of RE, using lattice::qqmath for y axis spacing
+##based on quantiles of standard normal -- is better to distinguish
+##important few from &quot;trivial many&quot;
+
+
+## want to look @ 4-way but profile diagnostics not working
+
+## for illustrating these, I fit a model with fewer interactions
+## use quick plot assess which fixef we can drop (in addition to the RE, unf)
+## run drop1(m2) and drop 4-way and water_hetero:nutrient_add
+m1 &lt;- lmer(log(bt) ~ nutrient_add * water_add * nutrient_hetero +
+           nutrient_hetero *  water_add  * water_hetero  +
+           (1 | block),
+           data=d)
+
+## Note: if you look at diagnostics for these, issues pointed out
+## above seem even worse. there is a greater increase in resid w/ fitted
+## several of the blocks are poorly behaved
+## plot(m1, type=c(&quot;p&quot;, &quot;smooth&quot;) , id=0.05) # id outliers
+## plot(m1, sqrt(abs(resid(.))) ~ fitted(.), type=c(&#39;p&#39;, &#39;smooth&#39;))
+## plot(m1, resid(.) ~ fitted(.) | block, abline=c(h=0), lty=1,  type=c(&quot;p&quot;, &quot;smooth&quot;)) # per block
+## plot(m1,  sqrt(abs(resid(.))) ~ fitted(.) | block,     type=c(&quot;p&quot;, &quot;smooth&quot;)) # 2 blocks behave  badly
+## lattice::qqmath(m1)
+## lattice::dotplot(ranef(m1, condVar=TRUE))</code></pre>
+<pre class="r"><code>## to get more informative diagnostics -- need to profile
+system.time(m1.prall &lt;- profile(m1))</code></pre>
+<pre><code>##    user  system elapsed 
+##    1.72    0.00    1.72</code></pre>
+<pre class="r"><code>system.time(m1.prre &lt;- profile(m1, which=&#39;theta_&#39;, maxmult=5)) ## lower maxmult to avoid step error</code></pre>
+<pre><code>##    user  system elapsed 
+##    0.27    0.00    0.26</code></pre>
+<pre class="r"><code>lattice::xyplot(m1.prall)</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/linear-profile-based-diagnostics-1.png" width="960" /></p>
+<pre class="r"><code># lattice::xyplot(m1.prre) # for only re
+# the &#39;profile zeta plot&#39; linear indicates a quadratic
+# likelihood profile, and so Wald approximations for CI will work well
+# random effects parameters on a standard deviation (or correlation)
+# scale
+
+lattice::densityplot(m1.prall)</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/linear-profile-based-diagnostics-2.png" width="960" /></p>
+<pre class="r"><code># the &#39;profile density plot&#39;
+# approximate probability density functions of the parameters
+# -- distros underlying profile confidence intervals
+# linear zeta plot &lt;==&gt; gaussian densities</code></pre>
+<pre class="r"><code>lattice::splom(m1.prre)</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/pairs-plot-1.png" width="672" /></p>
+<pre class="r"><code># the &#39;profile pairs plot&#39;
+# bivariate confidence regions based on profile
+# &#39;profile traces&#39; -- cross hairs -- are conditional estimates  of one parameter given the other
+# above-diag: estimated scale
+# below-diag: &#39;zeta&#39; scale, some sense, the best possible set of single-parameter transformations for assessing the contours&quot;
+# we just look at RE here</code></pre>
+<div id="implications-lsmeans" class="section level2">
+<h2>Implications – lsmeans</h2>
+<p>Understanding a complex model with high-order interactions is tough.
+The best tool is plotting, but quickly visualizing such models is
+not easy with flexible plotting libraries.</p>
+<p>Fortunately, <code>lsmeans</code>, although fairly inflexible in general, has
+plotting capabilities designed just for this purpose. Here’s a demo
+with the full (4-way interacting) model</p>
+<pre class="r"><code>## look at consequences
+if(require(lsmeans)){
+    ## here for 4-way interaction model (m2) -- mostly to see how can quickly plot response
+    ## at factor levels in complex models
+    ## relatively easy to plot mean prediction on response scale account for complex interaction
+    lsmip(m2, nutrient_hetero ~  water_add | water_hetero * nutrient_add  , type=&#39;response&#39;)
+    lsmip(m2, water_add ~ nutrient_add  | water_hetero * nutrient_hetero, type=&#39;response&#39;)
+    lsmip(m2, water_add ~ water_hetero  | nutrient_add * nutrient_hetero, type=&#39;response&#39;)
+}</code></pre>
+<pre><code>## Loading required package: lsmeans</code></pre>
+<pre><code>## Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
+## logical.return = TRUE, : there is no package called &#39;lsmeans&#39;</code></pre>
+<pre class="r"><code>if(require(lsmeans)){
+    ## can also plot quickly mean estimates plus (Wald) confidence intervals
+    ## not that it&#39;s possible to do finite size correction in lsmeans (but only for linear models)
+    ## steps take a min w/ lots of RE for some reason
+    m2.lsm &lt;- lsmeans(m2, ~ water_add * water_hetero   | nutrient_hetero  * nutrient_add)
+    plot(m2.lsm, layout =c(2, 3), horizontal=TRUE)
+}</code></pre>
+<pre><code>## Loading required package: lsmeans</code></pre>
+<pre><code>## Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
+## logical.return = TRUE, : there is no package called &#39;lsmeans&#39;</code></pre>
+<pre class="r"><code>    ## for the simpler
+    lsmip(m1, nutrient_hetero ~  water_add | water_hetero * nutrient_add  , type=&#39;response&#39;)
+    lsmip(m1, water_add ~ nutrient_add  | water_hetero * nutrient_hetero, type=&#39;response&#39;)
+    lsmip(m1, water_add ~ water_hetero  | nutrient_add * nutrient_hetero, type=&#39;response&#39;)
+
+    ## overall pattern doesn&#39;t differ too much from m1
+    m1.lsm &lt;- lsmeans(m1, ~ water_add * water_hetero   | nutrient_hetero  * nutrient_add)
+    plot(m1.lsm, layout =c(2, 3), horizontal=TRUE)</code></pre>
+</div>
+</div>
+<div id="confidence-intervals" class="section level1">
+<h1>Confidence intervals</h1>
+<div id="quick-dirty" class="section level2">
+<h2>quick &amp; dirty</h2>
+<pre class="r"><code>## OK -- back to the full model
+## if residuals looking OK -- fastest way to get a quick look at coefficient uncertainty
+## I&#39;ll make it a function for later use
+
+quick_CI_df &lt;- function(model, drop_intercept = TRUE,...) {
+  ## coef table using WALD CIs for a merMod
+  ci_dat &lt;- confint(model, method=&#39;Wald&#39;, ...)
+  ci_dat &lt;- cbind(ci_dat, mean=rowMeans(ci_dat))
+  ci_df &lt;- data.frame(coef=row.names(ci_dat), ci_dat)
+  names(ci_df)[2:3] &lt;- c(&#39;lwr&#39;, &#39;upr&#39;)
+  coef_colon &lt;-   gregexpr(&quot;\\:&quot;, ci_df$coef)
+  coef_order &lt;- sapply(coef_colon, function(x) {
+    if(x[1] == -1)
+      return(0)
+    else
+      return(length(x))
+  })
+  ci_df$coef &lt;- reorder(ci_df$coef, coef_order)
+  if (drop_intercept)
+    return(subset(ci_df, coef != &#39;(Intercept)&#39;))
+  ci_df
+}
+
+m1_wald_ci &lt;- quick_CI_df(m2)
+
+lattice::dotplot(coef ~ mean, m1_wald_ci,
+                 panel = function(x, y) {
+                   panel.xyplot(x, y, pch=19)
+                   panel.segments(m1_wald_ci$lwr, y, m1_wald_ci$upr, y)
+                   panel.abline(v=0, lty=2)
+                 })</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/confint-lattice-1.png" width="960" /></p>
+</div>
+<div id="confidence-intervals-rolling-your-own" class="section level2">
+<h2>Confidence Intervals – rolling your own</h2>
+<p>For more control than the simple plot above, you could use any of a variety of
+packages, e.g. <code>coefplot2</code>, <code>arm::coefplot</code>, here we just use builtin
+<code>lme4::confint</code> to build a dataframe.</p>
+<p>I make a dataframe with potentially several different types of confidence
+intervals: Wald (assume asymptotic multivariate normality of likelihood),
+profile, and bootstrap. For the random effects, the output of bootstrap and
+profile methods have different names – as you can see in the plot below. The
+Wald method only estimates CIs for fixed effects.</p>
+<pre class="r"><code>compare_CI_df &lt;- function(modprof, model, BOOT=FALSE, ...) {
+  ci &lt;- confint(model, method=&#39;Wald&#39;)
+  cip &lt;- confint(modprof)
+  if(BOOT) {
+      cib &lt;- confint(model, method=&quot;boot&quot;, ...)
+      cib_dat &lt;- data.frame(cib, parameter=row.names(cib), type=&#39;Boot&#39;)
+      names(cib_dat)[1:2] &lt;- colnames(cib)
+  }
+  ci_dat &lt;- data.frame(ci, parameter=row.names(ci), type=&#39;Wald&#39;)
+  names(ci_dat)[1:2] &lt;- colnames(ci)
+  cip_dat &lt;- data.frame(cip, parameter=row.names(cip), type=&#39;Prof&#39;)
+  names(cip_dat)[1:2] &lt;- colnames(cip)
+  if (!BOOT) {
+      ci_all_dat &lt;- rbind(ci_dat, cip_dat)
+  } else {
+      ci_all_dat &lt;- rbind(ci_dat, cip_dat, cib_dat)
+  }
+  fe_dat &lt;- data.frame(parameter=names(fixef(model)), value=fixef(model))
+  list(mean=fe_dat, bounds=ci_all_dat)
+}
+
+if(require(ggplot2)) {
+    m1_ci &lt;- compare_CI_df(m1.prall, m1, BOOT=TRUE, nsim=100)
+    m1_mean &lt;- m1_ci[[&#39;mean&#39;]]
+    m1_bnd &lt;- m1_ci[[&#39;bounds&#39;]]
+
+    ggplot(m1_bnd[m1_bnd$parameter != &#39;(Intercept)&#39;, ]) +
+    geom_linerange(aes(parameter, ymax=`97.5 %`, ymin=`2.5 %`, color=type),
+                   position=position_dodge(w=.5), size=1.5) +
+    geom_hline(yintercept=0, linetype=2) +
+    coord_flip() + theme_minimal() +
+    geom_point(aes(parameter, value), size=3, shape=3,
+               data=m1_mean[m1_mean$parameter != &#39;(Intercept)&#39;, ])
+
+} else {
+    lattice::dotplot(parameter ~ c(`2.5 %`, `97.5 %`) | type , m1_bnd, abline=c(v=0, lty=2))
+    }</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<pre><code>## Computing bootstrap confidence intervals ...</code></pre>
+<pre><code>## 
+## 38 message(s): boundary (singular) fit: see ?isSingular
+## 1 warning(s): Model failed to converge with max|grad| = 0.00445866 (tol = 0.002, component 1)</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_linerange).</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/ryo-1.png" width="960" /></p>
+<pre class="r"><code>##   strong effect of nutrient homogeneity
+##   effect of adding lots of water
+## nutrient has some effect</code></pre>
+</div>
+<div id="pulling-data-out-of-models-with-broom-or-ggplot2" class="section level2">
+<h2>Pulling data out of models with <code>broom</code> or <code>ggplot2</code></h2>
+<p>Method <code>ggplot2::fortify</code> adds fitted and resid to data frame. New-ish CRAN
+package <code>broom</code> generalizes this (and more), really aiming provide an interface
+for ‘tidy’ (i.e., easy to plot)representations of model objects from many R
+functions (including packages and base <code>R</code>). The <code>broom</code> method <code>augment</code>
+really generalized version of <code>fortify</code> and is recommended instead</p>
+<pre class="r"><code>if(require(ggplot2)) {
+    d_fort &lt;- ggplot2::fortify(m1, d)
+    ## adds .fortify, scresid, .resid
+    ##head(d_fort)
+}
+
+if(require(broom)) {
+    glm1 &lt;- glance(m1) # model summary
+    tdm1 &lt;- tidy(m1, effects=&#39;fixed&#39;) #model coefficient summary
+    augm1 &lt;- augment(m1, d, se.fit=TRUE, type.predict=&#39;response&#39;) # model data with fits
+    ## head(glm1)
+    ## head(tdm1)
+    ## head(augm1)
+}</code></pre>
+<pre><code>## Loading required package: broom</code></pre>
+<p>Unfortunately, the predict and confint methods for <code>merMod</code> aren’t yet
+integrated to <code>broom</code> or <code>ggplot</code> (or my code above for confidence intervals
+could be much cleaner at the slight cost of an additional package dependency).</p>
+</div>
+<div id="glmm-lizard-mate-choice" class="section level2">
+<h2>GLMM: Lizard mate choice</h2>
+<p>Mechanisms of speciation – cool question!</p>
+<ul>
+<li>mate compatibility trails</li>
+<li>western North American skinks (<em>Plestiodon skiltonianus</em> spp)</li>
+<li>Richmond, J. Q., E. L. Jockusch, and A. M. Latimer 2010. Mechanical
+reproductive isolation facilitates parallel speciation in western
+North American scincid lizards. <em>American Naturalist</em></li>
+</ul>
+<p><strong>Repeated measure of ind crossed with multiple trials, binary outcome</strong></p>
+<pre class="r"><code>d2 &lt;- read.delim(&quot;http://datadryad.org/bitstream/handle/10255/dryad.33579/Richmond%20et%20al%202011%20Datafile.txt?sequence=1&quot;)
+names(d2) &lt;- gsub(&#39;\\.&#39;, &#39;&#39;, names(d2))
+
+# rescale geo dist, sizediff
+d2 &lt;- within(d2, {
+    geodist_scl &lt;- (GeoDist - mean(GeoDist)) / var(GeoDist)
+    gendist_scl &lt;- (GenDist - mean(GenDist))
+    sizediff_scl2 &lt;- ((SizeDiff - mean(SizeDiff)) / var(SizeDiff))^2
+    Series &lt;- factor(Series)
+    Female &lt;- factor(Female)
+    Male &lt;- factor(Male)
+  })
+
+## cop - copulation
+system.time(gm0 &lt;- glmer(cop ~   sizediff_scl2   + (1 | Series) + (1 | Male)  + (1 | Female) ,
+               data=d2, family=&#39;binomial&#39;))</code></pre>
+<pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
+<pre><code>##    user  system elapsed 
+##    0.41    0.00    0.41</code></pre>
+<pre class="r"><code>system.time(gm1 &lt;- glmer(cop ~ gendist_scl + geodist_scl +  sizediff_scl2 + (1 | Series) +
+                         (1 | Male)  + (1 | Female) , data=d2, family=&#39;binomial&#39;))</code></pre>
+<pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
+<pre><code>##    user  system elapsed 
+##    1.03    0.00    1.03</code></pre>
+<pre class="r"><code>anova(gm1, gm0) # no need for non-size predictors</code></pre>
+<pre><code>## Data: d2
+## Models:
+## gm0: cop ~ sizediff_scl2 + (1 | Series) + (1 | Male) + (1 | Female)
+## gm1: cop ~ gendist_scl + geodist_scl + sizediff_scl2 + (1 | Series) + 
+## gm1:     (1 | Male) + (1 | Female)
+##     Df    AIC    BIC  logLik deviance  Chisq Chi Df Pr(&gt;Chisq)
+## gm0  5 159.34 176.47 -74.673   149.34                         
+## gm1  7 162.92 186.90 -74.460   148.92 0.4251      2     0.8085</code></pre>
+<pre class="r"><code>plot(gm0, type=c(&quot;p&quot;), id = 0.05 )</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lizard-crit-1.png" width="672" /></p>
+<pre class="r"><code>## non useful visually but with id = 0.05 gives sense of outlier
+## see ?plot.merMod for explanation of test run
+
+## it&#39;s more useful to plot residuals in GLM logistic combined across grouping factors
+## or binned fitted values
+plot(gm0,  factor(Trial) ~ resid(., type=&#39;pearson&#39;),  abline=c(v=0), lty=2)</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lizard-crit-2.png" width="672" /></p>
+<pre class="r"><code>plot(gm0,  factor(Series) ~ resid(., type=&#39;pearson&#39;),  abline=c(v=0), lty=2)</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lizard-crit-3.png" width="672" /></p>
+<pre class="r"><code>## better than default eh
+
+## second plot suggests some issue with series, indicating we may want to
+## fit a model accounting for differences between trial series
+## (in fact, Richmond et al did fit such a model)
+## you can see the outliers here too with
+## plot(gm0, resid(., type=&#39;pearson&#39;) ~ fitted(.) | factor(Series), id = 0.05)
+
+## main thing on pearson or deviance residuals is they&#39;re mostly less than 2
+## (as assessed in first plot above -- second is the sqrt
+## we could later drop these outlier and see if they change
+
+if(require(gridExtra)) {
+    do.call(gridExtra::grid.arrange, c(lattice::qqmath(ranef(gm0, condVar=TRUE)), list(nrow=1)))
+} else {
+    lattice::qqmath(ranef(gm0, condVar=TRUE))
+  }</code></pre>
+<pre><code>## Loading required package: gridExtra</code></pre>
+<pre><code>## Warning: package &#39;gridExtra&#39; was built under R version 3.6.1</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lizard-crit-4.png" width="672" /></p>
+<pre class="r"><code>## useful if you have a lot of RE to draw attention to strong ones
+## maybe latter == dot = sample size?
+
+## no reason to retain RE on Male, but also drop Female
+## no real justification, just very slow profiling for many RE
+gm0noindre &lt;- glmer(cop ~   sizediff_scl2   + (1 | Series), data=d2, family=&#39;binomial&#39;)
+
+system.time(#
+    gm0.prall &lt;- profile(gm0noindre, devtol=1e-6) # see https://stat.ethz.ch/pipermail/r-sig-mixed-models/2014q3/022394.html
+)</code></pre>
+<pre><code>##    user  system elapsed 
+##    5.66    0.00    5.67</code></pre>
+<pre class="r"><code>#system.time(
+#    gm0_full.prall &lt;- profile(gm0, devtol=1e-6)
+#)
+#   user  system elapsed
+#344.092   0.539 344.613</code></pre>
+<pre class="r"><code>lattice::xyplot(logProf(gm0.prall))</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lizard-plotting-1.png" width="672" /></p>
+<pre class="r"><code>lattice::densityplot(gm0.prall)</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lizard-plotting-2.png" width="672" /></p>
+<pre class="r"><code>lattice::splom(gm0.prall)</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lizard-plotting-3.png" width="672" /></p>
+</div>
+</div>
+<div id="confidence-intervals-1" class="section level1">
+<h1>Confidence intervals</h1>
+<pre class="r"><code>## if residuals looking OK -- fastest way to get a quick look at coefficient uncertainty
+ci_dat &lt;- confint(gm0, method=&#39;Wald&#39;)
+ci_dat &lt;- cbind(ci_dat, mean=rowMeans(ci_dat))
+ci_df &lt;- data.frame(coef=row.names(ci_dat), ci_dat)
+names(ci_df)[2:3] &lt;- c(&#39;lwr&#39;, &#39;upr&#39;)
+
+
+lattice::dotplot(coef ~ mean, ci_df,
+        panel = function(x, y) {
+            panel.xyplot(x, y, pch=19)
+            panel.segments(ci_df$lwr, y, ci_df$upr, y)
+            panel.abline(v=0, lty=2)
+        })</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/quick-ci-1.png" width="672" /></p>
+<p>Rolling your own again</p>
+<pre class="r"><code>if(require(ggplot2)) {
+  gm0_ci &lt;- compare_CI_df(gm0.prall, gm0)
+  gm0_mean &lt;- gm0_ci[[&#39;mean&#39;]]
+  gm0_bnd &lt;- gm0_ci[[&#39;bounds&#39;]]
+  g &lt;- ggplot(gm0_bnd[gm0_bnd$parameter != &#39;(Intercept)&#39;, ]) +
+    geom_linerange(aes(parameter, ymax=`97.5 %`, ymin=`2.5 %`, color=type),
+                   position=position_dodge(w=.5), size=1.5) +
+    geom_hline(yintercept=0, linetype=2) +
+    coord_flip() + theme_minimal() +
+    geom_point(aes(parameter, value),
+               size=3, shape=3,
+               data=gm0_mean[gm0_mean$parameter != &#39;(Intercept)&#39;, ])
+  g
+  } else {
+    lattice::dotplot(parameter ~ c(`2.5 %`, `97.5 %`) | type , gm0_bnd)
+      }</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/ryo-lizard-ci-1.png" width="672" /></p>
+<p>Because the fixed effect parameter on size difference and the random effect
+variance are on such different scales, I make two plots</p>
+<pre class="r"><code>if(require(ggplot2))
+    g + scale_y_log10()</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/low-magnitude-param-1.png" width="672" /></p>
+<div id="quick-predictions" class="section level2">
+<h2>quick predictions</h2>
+<p>Again, the quickest way to visualize predictions is with <code>lsmeans</code>.
+Two things are different here:</p>
+<ul>
+<li>to plot GLM predictions on a meaningful scale, you need to pass
+<code>type = 'response'</code> to the <code>plot</code> function.</li>
+<li>for a quantitative predictor, the default will plot a single point
+at the mean of the predictor, to see prediction across the range, pass
+a list to the <code>at</code> argument</li>
+<li>for more meaningful plots, we should label the plot y-axis with unscaled
+size differences (but I didn’t do this)</li>
+<li>note that you can produce plots at various levels of interacting quantitative
+predictors using this technique</li>
+</ul>
+<pre class="r"><code>if(require(lsmeans))
+
+gm0_lsm &lt;-    lsmeans(gm0, ~ sizediff_scl2,
+                  at = list(sizediff_scl2 = seq(from=0,
+                              to = 1.5 * median(d2$sizediff_scl2), length.out = 10)))</code></pre>
+<pre><code>## Loading required package: lsmeans</code></pre>
+<pre><code>## Warning: package &#39;lsmeans&#39; was built under R version 3.6.1</code></pre>
+<pre><code>## Loading required package: emmeans</code></pre>
+<pre><code>## Warning: package &#39;emmeans&#39; was built under R version 3.6.1</code></pre>
+<pre><code>## The &#39;lsmeans&#39; package is now basically a front end for &#39;emmeans&#39;.
+## Users are encouraged to switch the rest of the way.
+## See help(&#39;transition&#39;) for more information, including how to
+## convert old &#39;lsmeans&#39; objects and scripts to work with &#39;emmeans&#39;.</code></pre>
+<pre><code>## Warning in vcov.merMod(object, correlation = FALSE): variance-covariance matrix computed from finite-difference Hessian is
+## not positive definite or contains NA values: falling back to var-cov estimated from RX</code></pre>
+<pre class="r"><code>plot(gm0_lsm, type = &#39;response&#39;, ylab = &#39;scaled size diff&#39;, xlab = &#39;probability of copulation&#39;)</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/quick-vis-glmm-1.png" width="672" />
+## customized predictions</p>
+<p>The quick plots using <code>lsmeans</code> are great, but they assume Wald confidence intervals
+and don’t account for random effects.
+To deal with the former, we need to bootstrap, which I won’t cover here, but
+the problem of random effects is easily examined using the <code>re.form</code> argument
+of <code>predict.merMod</code> in <code>lme4</code>. Here I look at predictions accounting for all,,
+none, or some of random effects fitted:</p>
+<pre class="r"><code>## predicted effect
+d2$pred_overall_gen &lt;- predict(gm0, type=&#39;response&#39;, re.form=NA)
+d2$pred_overall &lt;- predict(gm0, type=&#39;response&#39;)
+d2$pred_ind &lt;- predict(gm0, type=&#39;response&#39;, re.form=~ (1|Female))
+d2$pred_trial &lt;- predict(gm0, type=&#39;response&#39;, re.form=~(1|Series))
+
+## NB this changes row order from the fit!!!
+d2_pred &lt;- merge(d2, as.data.frame(table(Series=d2$Series)))
+
+if(require(ggplot2)) {
+
+g &lt;- ggplot(d2_pred) +
+     geom_point(aes(SizeDiff, cop),
+                position=position_jitter(h=0.025, w=0)) +
+     theme_minimal() +
+     ylab(&quot;Probability copulation&quot;)
+
+
+g1 &lt;- g + geom_line(aes(SizeDiff, pred_trial, color=Series))
+
+g2 &lt;- g + geom_line(aes(SizeDiff, pred_overall_gen), color=&#39;orange&#39;, size = 1.5) +
+    geom_point(aes(SizeDiff, pred_ind, alpha=as.numeric(Female)), color = &#39;blue&#39;) +
+    theme(legend.position = &quot;none&quot;)
+
+gridExtra::grid.arrange(g1, g2, ncol=2)
+
+} else {
+    plot(cop ~ SizeDiff, d2_pred, ylab=&quot;Probability copulation&quot;)
+    points(pred_ind ~ SizeDiff, d2_pred, pch=19, cex=.5, col=&#39;darkgray&#39;)
+    points(pred_overall_gen ~ SizeDiff, d2_pred, pch=19, cex=.5)
+    }</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/prediction-visual-1.png" width="960" /></p>
+<p>The plot on the left above shows predictions for various series of experimental
+trials, and the raw data. The plot on the right shows the overall fit (orange line
+– the grand mean with no random effects influencing the prediction),
+the predictions accounting just for random effects at the level of individual
+females (blue dots), and the raw data.</p>
+<pre class="r"><code>## could plot them all together -- code below gives some insight ## into the
+## ggplot2 fortify method
+if (require(ggplot2)) {
+  g +  geom_point(aes(SizeDiff, plogis(.fitted)), color=&#39;darkgray&#39;, size=3,
+                  data=fortify(gm0, d2))
+
+## nb -- same as predict with all RE!
+  with(fortify(gm0, d2),
+       unique(pred_overall - plogis(.fitted)))
+}</code></pre>
+</div>
+<div id="checking-model-adequacy" class="section level2">
+<h2>Checking model adequacy</h2>
+<p>With `<code>lme4</code>, you can also easily produce something akin to posterior-predictive
+checks, <a href="http://andrewgelman.com/2014/08/11/discussion-sander-greenland-posterior-predictive-checks/">a Bayesian
+tool</a>
+for model criticism.</p>
+<p>Using <code>simulate</code> on an <code>lme4</code> produces a set of response data implied by the
+model. By examining summary statistics of this dataset, and comparing them to
+the actual data, you can examine how well, or poorly, the model fits. Note that
+these checks are less rigorous than something like cross-validation. See
+<code>?simulate.merMod</code> for additional information.</p>
+<p>The upshot: these are relatively quick, and can provide a warning that your
+model isn’t capturing some aspect of the data. But, be aware there is
+controversy about their use for anything other than seeing how the model is
+capturing the data. Often, we’re interested in making more formal, frequentist
+inference. Though these checks are valuable, the p-like-values implied by them
+<a href="http://andrewgelman.com/2009/02/07/confusions_abou/">do not satisfy assumptions necessary for this kind of
+inference</a> (i.e., don’t
+use them for model comparison or parameter inference).</p>
+<pre class="r"><code>## without RE
+set.seed(1141)
+gm0.sim_wo &lt;- simulate(gm0, nsim=1000, re.form=NA)
+sims &lt;- sapply(gm0.sim_wo, function(x)  x)
+ones &lt;- colSums(sims)
+zeros &lt;- -colSums(sims-1)
+perc &lt;- ones/nrow(d2)
+cvar &lt;- apply(sims, 2, var)
+
+## with RE
+gm0.sim &lt;- simulate(gm0, 1000 )
+sims &lt;- sapply(gm0.sim, function(x)  x)
+re_ones &lt;- colSums(sims)
+re_zeros &lt;- -colSums(sims-1)
+re_perc &lt;- re_ones/nrow(d2)
+re_cvar &lt;- apply(sims, 2, var)
+
+pp_comp &lt;- function(dist, cmp_fn, data, ...) {
+  hist(dist, col=&#39;orange&#39;, xlab=&#39;value&#39;, ...)
+  abline(v=cmp_fn(data), lwd=4, col=&#39;blue&#39;, lty=2)
+  abline(v=mean(dist), lwd=4)
+}
+
+op &lt;- par(mfrow=c(2,4))
+  pp_comp(ones, function(x) sum(x$cop),
+          d2, main=&#39;ones - no RE&#39;, xlim=c(45, 110))
+  pp_comp(zeros, function(x) -sum(x$cop - 1),
+          d2, main=&#39;zeros -no RE&#39;, xlim=c(120, 185))
+  pp_comp(perc, function(x) sum(x$cop)/nrow(d2),
+          d2, main=&#39;% cop - no RE&#39;, xlim=c(0, .8))
+  pp_comp(cvar, function(x) var(x$cop),
+          d2, main=&#39;var - no RE&#39;)
+
+pp_comp(re_ones, function(x) sum(x$cop),
+          d2, main=&#39;ones - all RE&#39;, xlim=c(45, 110))
+  pp_comp(re_zeros, function(x) -sum(x$cop - 1),
+          d2, main=&#39;zeros - all RE&#39;, xlim=c(120, 185))
+  pp_comp(re_perc, function(x) sum(x$cop)/nrow(d2),
+          d2, main=&#39;% cop - RE&#39;, xlim=c(0, .8))
+  pp_comp(re_cvar, function(x) var(x$cop),
+          d2, main=&#39;var - all RE&#39;)</code></pre>
+<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/post-pred-1.png" width="672" /></p>
+<pre class="r"><code>par(op)</code></pre>
+<p>In this case I’ve plotted the simulated distributions of the number of ones,
+zeros, the proportion of copulations, and the variance in observed copulations
+– all with and without accounting for all the random effects. For each of
+these, I show the distribution of the statistic, its mean (black line), and the
+mean of the same statistic in the observed data.</p>
+<p>All test quantities have broader distributions when we account for the random
+effects.</p>
+</div>
+<div id="glmmadmb-version-not-run" class="section level2">
+<h2><code>glmmADMB</code> version (not run)</h2>
+<p>You can run many of the same graphical procedures (including the quick plots
+from <code>lsmeans</code>!) on output from other frequentist fitting packages. Try it!</p>
+<pre class="r"><code>## look at glmmadmb too -- not evaluated
+gm1admb &lt;- glmmadmb(cop ~ geodist_scl +  sizediff_scl2, random= ~1 | Series + 1 | Female , data=d2, family=&#39;binomial&#39;)
+
+d2 &lt;- data.frame(d2, predict(gm1admb, interval=&#39;confidence&#39;, type=&#39;link&#39;))
+
+plot(cop ~ SizeDiff, d2, ylim = c(0, 1))
+lines(plogis(fit) ~ SizeDiff, d2, lwd=2)
+lines(plogis(lwr) ~ SizeDiff, d2, lty=2, lwd=2)
+lines(plogis(upr) ~ SizeDiff, d2, lty=2, lwd=2)
+      geom_line(aes(SizeDiff, plogis(lwr)), color=&#39;orange&#39;, size=1, linetype=2) +
+    geom_line(aes(SizeDiff, plogis(upr)), color=&#39;orange&#39;, size=1, linetype=2) +</code></pre>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><em>I haven’t read this simulation study carefully yet</em> but a quick look
+implies the main problems occurred when fitting a model that gets
+the hierarchy wrong (e.g., a GLM to data generated from a hierarchical
+process under-performs relative to a transform + LMM)<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Stroup also authored the CRC Press book <em>Generalized Linear Mixed
+Models</em><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Discussions with and classes from colleagues, including Scott Burgess,
+Andrew Latimer, Richard McElreath, and Will Wetzel, have also greatly improved
+my understanding of plotting and fitting mixed models.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+            </div>
+        </div>
+	</div>
+    <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+<div class="footer pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+    <div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="footer-content">
+		  <div class="pure-menu pure-menu-horizontal">
+              <ul>
+                  <li class="pure-menu-heading" id="foot-name">Contact:</li>
+				  
+                  
+                  <li class="pure-menu-item">
+                      <a href="mailto:ashander%20AT%20rff%20org" class="pure-menu-link"><i class="fa fa-envelope-o fa fw"></i></a>
+                  </li>
+                  
+          
+                  
+                  <li class="pure-menu-item">
+                      <a href="https://github.com/ashander" class="pure-menu-link"><i class="fa fa-github fa-fw"></i></a>
+                  </li>
+                  
+          
+                  
+                  <li class="pure-menu-item">
+                      <a href="https://twitter.com/jaimedash" class="pure-menu-link"><i class="fa fa-twitter fa-fw"></i></a>
+                  </li>
+                  
+
+                  
+                  <li class="pure-menu-item">
+                      <a href="https://scholar.google.com/citations?user=TsBxHjcAAAAJ" class="pure-menu-link"><i class="fa fa-mortar-board fa-fw"></i></a>
+                  </li>
+                  
+          
+              </ul>
+              <a href="#" class="pure-menu-heading pull-right" id="gototop-btn">↑↑</a>
+          </div>
+		  
+		  <p id="foot-copyright">Copyright (c) 2009 - 2019, Jaime Ashander</p>
+		  
+		</div>
+	  </div>
+      <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+
+<script src="https://ashander.info/js/jquery.min.js" type="text/javascript"></script>
+<script src="https://ashander.info/js/jquery.timeago.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $(function(){
+    $("time.timeago").timeago();
+  })
+  $("#toggle-btn").click(function(){
+    $("#toggle-content").toggle();
+    if($(this).html() === "☰") {
+        $(this).html("X")
+    } else {
+        $(this).html("☰")
+    }
+  });
+  $(window).resize(function(){
+    if(window.innerWidth > 768) {
+      $(".desktop").removeAttr("style");
+    }
+  });
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-60354418-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+

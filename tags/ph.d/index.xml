@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ph.D. on Jaime Ashander</title>
+    <link>https://ashander.info/tags/ph.d./</link>
+    <description>Recent content in Ph.D. on Jaime Ashander</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>ashander AT rff org (Jaime Ashander)</managingEditor>
+    <webMaster>ashander AT rff org (Jaime Ashander)</webMaster>
+    <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
+    <lastBuildDate>Wed, 06 Mar 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ashander.info/tags/ph.d./index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Optimal investment to enable evolutionary rescue</title>
+      <link>https://ashander.info/posts/2019/03/optimal-investement-evolutionary-rescue/</link>
+      <pubDate>Wed, 06 Mar 2019 00:00:00 +0000</pubDate>
+      <author>ashander AT rff org (Jaime Ashander)</author>
+      <guid>https://ashander.info/posts/2019/03/optimal-investement-evolutionary-rescue/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Management of freshwater-coupled human-natural systems</title>
+      <link>https://ashander.info/themes/population-biology-in-human-dominated/</link>
+      <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
+      <author>ashander AT rff org (Jaime Ashander)</author>
+      <guid>https://ashander.info/themes/population-biology-in-human-dominated/</guid>
+      <description>Human livelihoods and ecosystem fates are often linked by water.
+I have a longstanding interest in the population biology of rivers,
+and in using theory and methods from computational ecology to understand
+and manage rivers to sustain aquatic life and nature&amp;rsquo;s benefits to people.
+I am co-leading a SESYNC working group focused on
+systems where shallow aquifers link groundwater use to instream flows,
+leading to tradeoffs between users and potential tipping points.</description>
+    </item>
+    
+    <item>
+      <title>The mechanisms of phenology: the patterns and processes of phenological shifts</title>
+      <link>https://ashander.info/posts/2018/10/phenology-mechanisms-pattern-process/</link>
+      <pubDate>Fri, 12 Oct 2018 00:00:00 +0000</pubDate>
+      <author>ashander AT rff org (Jaime Ashander)</author>
+      <guid>https://ashander.info/posts/2018/10/phenology-mechanisms-pattern-process/</guid>
+      <description>From the abstract
+ Species across a wide range of taxa and habitats are shifting phenological events in response to climate change. While advances are common, shifts vary in magnitude and direction within and among species, and the basis for this variation is relatively unknown. We examine previously suggested patterns of variation in phenological shifts in order to understand the cue–response mechanisms that underlie phenological change. Here, we review what is known about the mechanistic basis for nine factors proposed to predict phenological change (latitude, elevation, habitat type, trophic level, migratory strategy, ecological specialization, species’ seasonality, thermoregulatory mode, and generation time).</description>
+    </item>
+    
+    <item>
+      <title>Inference in complex systems</title>
+      <link>https://ashander.info/themes/inference-interests/</link>
+      <pubDate>Sun, 23 Sep 2018 00:00:00 +0000</pubDate>
+      <author>ashander AT rff org (Jaime Ashander)</author>
+      <guid>https://ashander.info/themes/inference-interests/</guid>
+      <description>Inference of process from pattern is a major methodological challenge,
+yet increasingly available &amp;ldquo;big&amp;rdquo; phenotypic and genomic data promises to shed light on
+otherwise-difficult-to-collect vital rates in natural populations.
+I develop and apply methods to use this data to
+understand and conserve natural populations in human-dominated systems.</description>
+    </item>
+    
+    <item>
+      <title>Stochastic evolutionary demography under a fluctuating optimum phenotype</title>
+      <link>https://ashander.info/posts/2017/09/stochastic-evolutionary-rescue/</link>
+      <pubDate>Wed, 27 Sep 2017 00:00:00 +0000</pubDate>
+      <author>ashander AT rff org (Jaime Ashander)</author>
+      <guid>https://ashander.info/posts/2017/09/stochastic-evolutionary-rescue/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Wild salmon sustain the effectiveness of parasite control on salmon farms: conservation implications from an evolutionary ecosystem service</title>
+      <link>https://ashander.info/posts/2017/07/evosystem-services-in-salmon/</link>
+      <pubDate>Wed, 19 Jul 2017 00:00:00 +0000</pubDate>
+      <author>ashander AT rff org (Jaime Ashander)</author>
+      <guid>https://ashander.info/posts/2017/07/evosystem-services-in-salmon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Eco-evolutionary dynamics in human-dominated systems</title>
+      <link>https://ashander.info/themes/eco-evolutionary-dynamics-cnh/</link>
+      <pubDate>Sat, 19 Nov 2016 00:00:00 +0000</pubDate>
+      <author>ashander AT rff org (Jaime Ashander)</author>
+      <guid>https://ashander.info/themes/eco-evolutionary-dynamics-cnh/</guid>
+      <description>&lt;p&gt;In my Ph.D., I sought to understand the consequences of trait change due to
+evolutionary and plastic responses in changing environments, developing
+theory on population dynamics resulting from these processes in stochastic environments. Using this theory
+I showed how environmental autocorrelation controls the benefits to plasticity in new environments.
+Further, these theories provide predictions about the entire distribution of population sizes and fitness
+levels within a population.&lt;/p&gt;
+
+&lt;p&gt;My M.Sc. research focused on the evolutionary ecology of sea lice, farmed and
+wild salmon. Recently, I&amp;rsquo;ve become particularly interested in the ways in
+which the combination of wild salmon migrations and salmon farm management
+can influence chemical resistance evolution on farms, potentially providing a
+benefits to people (which some have called &amp;ldquo;EVOsystem services&amp;rdquo;).&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Predicting evolutionary rescue via evolving plasticity in stochastic environments</title>
+      <link>https://ashander.info/posts/2016/09/noisy-plastic-evolutionary-rescue/</link>
+      <pubDate>Wed, 21 Sep 2016 00:00:00 +0000</pubDate>
+      <author>ashander AT rff org (Jaime Ashander)</author>
+      <guid>https://ashander.info/posts/2016/09/noisy-plastic-evolutionary-rescue/</guid>
+      <description>Phenotypic plasticity and its evolution may help evolutionary rescue in a novel and stressful environment, especially if environmental novelty reveals cryptic genetic variation that enables the evolution of increased plasticity (panels a and b in the figure below). But the environmental stochasticity ubiquitous in natural systems may alter these predictions (panel c). This might occur, for example if high plasticity amplifies phenotype-environment mismatches. Although previous studies have highlighted this potential detrimental effect of plasticity in stochastic environments, they have not investigated how it affects extinction risk in the context of evolutionary rescue and with evolving plasticity.</description>
+    </item>
+    
+    <item>
+      <title>Overcoming the fear of failure to improve the conservation of extremely small populations</title>
+      <link>https://ashander.info/posts/2015/04/fear-of-failure-in-conservation/</link>
+      <pubDate>Wed, 22 Apr 2015 00:00:00 +0000</pubDate>
+      <author>ashander AT rff org (Jaime Ashander)</author>
+      <guid>https://ashander.info/posts/2015/04/fear-of-failure-in-conservation/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

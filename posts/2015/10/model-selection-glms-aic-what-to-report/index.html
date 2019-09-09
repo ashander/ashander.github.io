@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  
+  <meta charset="utf-8">
+  <title>So, you did some GLMs &amp; compared with AIC. Congrats! - Jaime Ashander</title>
+  <meta name="description" content="So, you did some GLMs &amp; compared with AIC. Congrats!">
+  <meta name="author" content="Jaime Ashander">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://ashander.info/css/font-awesome.min.css" rel="stylesheet">
+
+  
+  
+  <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.1/build/pure-min.css" integrity="sha384-CCTZv2q9I9m3UOxRLaJneXrrqKwUNOzZ6NGEUMwHtShDJ+nCoiXJCAgi05KfkLGY" crossorigin="anonymous">
+  
+  
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.1/build/grids-responsive-min.css">
+  
+  <link href="https://ashander.info/css/custom.css" rel="stylesheet" type="text/css" media="all" />
+
+  
+  
+  <link rel="stylesheet" href="https://ashander.info/highlight/styles/solarized_light.css">
+  
+  <script src="https://ashander.info/highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  
+  <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+  <meta name="generator" content="Hugo 0.58.1" />
+  
+</head>
+<body>
+
+<div class="header pure-g" style="background-image: url(/images/themes/fishfarm.jpg)">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+    <div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="desktop pure-menu pure-menu-horizontal nav-menu">
+            
+            <a href="https://ashander.info/" class="site-title pure-menu-heading">Jaime Ashander</a>
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item">
+                    <a href="https://ashander.info/themes/" class="pure-menu-link">Research</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="https://ashander.info/results/" class="pure-menu-link">Publications</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="https://ashander.info/cv/ashander_cv.pdf" class="pure-menu-link">CV</a>
+                </li>
+            </ul>
+        </div>
+        <div class="mobile pure-menu nav-menu">
+            <a href="/" class="pure-menu-heading" id="toggle-home">Jaime Ashander</a>
+            <a href="#" id="toggle-btn">&#9776;</a>
+            <ul class="pure-menu-list" id="toggle-content" style="display:none;">
+                <li class="pure-menu-item">
+                    <a href="https://ashander.info/themes/" class="pure-menu-link">Research</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="https://ashander.info/results/" class="pure-menu-link">Publications</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="https://ashander.info/cv/ashander_cv.pdf" class="pure-menu-link">CV</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+
+<div class="pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+	<div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="post">
+
+            <div class="post-title">
+                <p class="footnote">
+                    <time class="">2015-10-26</time>
+		            
+                    
+                    |
+                    
+                    
+                    tags:<a href="https://ashander.info/tags/r">R</a> <a href="https://ashander.info/tags/statistics">statistics</a> <a href="https://ashander.info/tags/model-selection">model selection</a> <a href="https://ashander.info/tags/glm">GLM</a> <a href="https://ashander.info/tags/aic">AIC</a> <a href="https://ashander.info/tags/deviance">deviance</a> 
+                    
+
+                    
+
+                    
+                </p>
+                <h1>So, you did some GLMs &amp; compared with AIC. Congrats!</h1>
+            </div>
+
+            <div class="post-content">
+                
+
+
+<p>Here’s what you need to report in a paper about the model comparison:</p>
+<ul>
+<li>residual deviance</li>
+<li>residual df</li>
+<li>delta AIC</li>
+<li>AIC weight</li>
+</ul>
+<p>You should also report the null deviance and degrees of freedom,
+maybe in a table caption.</p>
+<p>Thanks to <a href="http://brunalab.org/">Emilio Bruna</a> for prompting this post and
+suggesting its title. (<strong>Update 2015-12-14</strong>: thanks also to Ben Bolker for <a href="https://github.com/ashander/ashander.github.io/commit/b25af179befbfdcdf013f7b484092296a0324bf6">pointing out some issues in the first version of this post</a>.)
+Below I’ll explain why you should include at least these numbers, do a worked
+example, and mention some situations where it’s better to use something other
+than AIC.</p>
+<div id="what-to-report" class="section level3">
+<h3>What to report</h3>
+<p>For model selection, a model’s AIC is only meaningful relative to that of other
+models, so Akaike and others recommend reporting differences in AIC from the
+best model, <span class="math inline">\(\Delta\)</span><em>AIC</em>, and AIC <em>weight</em>. The latter can be viewed as
+an estimate of the proportion of the time a model will give the best predictions on new data
+(conditional on the models considered and assuming the same process generates
+the data; this heuristic view appears justified by simulations, e.g., Burnham
+and Anderson 2002 pp. 348).
+Also, neither differences in AIC less than 0.1 nor differences in AIC weights
+below 0.01 are really meaningful, so round the reported numbers appropriately.</p>
+<p>Finally, even if using an information criterion include the residual deviance and
+degrees of freedom for each model. These provide a (rough) goodness of fit.</p>
+</div>
+<div id="example-uc-berkeley-admissions-and-gender" class="section level3">
+<h3>Example: UC Berkeley admissions and gender</h3>
+<p>Let’s look at the built-in <code>UCBAdmissions</code> data. As R
+will tell you, these data are often used to illustrate Simpson’s paradox (see
+<code>?UCBAdmissions</code> and Bickel <em>et al.</em> 1975 or my PPS below).</p>
+<pre class="r"><code>d &lt;- as.data.frame(UCBAdmissions)
+d &lt;- tidyr::spread(d, Admit, Freq) # use Hadley&#39;s excellent tidyr to reshape
+d[order(d$Dept), ]</code></pre>
+<pre><code>##    Gender Dept Admitted Rejected
+## 1    Male    A      512      313
+## 7  Female    A       89       19
+## 2    Male    B      353      207
+## 8  Female    B       17        8
+## 3    Male    C      120      205
+## 9  Female    C      202      391
+## 4    Male    D      138      279
+## 10 Female    D      131      244
+## 5    Male    E       53      138
+## 11 Female    E       94      299
+## 6    Male    F       22      351
+## 12 Female    F       24      317</code></pre>
+<p>Using logistic regression, encode several models for the effect of applicant
+gender, department identity, or both on admission.</p>
+<pre class="r"><code>m1 &lt;- glm(cbind(Admitted, Rejected) ~ Gender, d, family=&#39;binomial&#39;)
+m2 &lt;- glm(cbind(Admitted, Rejected) ~ Dept, d, family = &#39;binomial&#39;)
+m3 &lt;- glm(cbind(Admitted, Rejected) ~ Dept + Gender, d, family = &#39;binomial&#39;)
+model.names &lt;- c(&quot;1 Gender&quot;, &quot;2 Dept&quot;, &quot;3 Gender + Dept&quot;)</code></pre>
+<p>(Note: although we might like to allow for an interaction between gender and
+department, the data here are insufficient to fit such a model.)</p>
+<p>Running <code>summary</code> on any one of the fits yields a bunch of stats: AIC, Residual
+and null deviance, as well as coefficients, their standard errors, and
+significance.</p>
+</div>
+<div id="how-to-do-it-in-r" class="section level3">
+<h3>How to do it in <code>R</code></h3>
+<p>We could type by hand the AIC and other stats. No fun!</p>
+<p>There are two other options.</p>
+<p>First is to use <a href="http://varianceexplained.org/">David Robinson</a>’s <code>broom</code> which gives tidy summaries of model objects. The second is to use <a href="http://ms.mcmaster.ca/~bolker/">Ben Bolker</a>’s <code>bbmle</code> which provides methods for generating pretty tables of xIC values.</p>
+<div id="using-broom" class="section level4">
+<h4>Using broom</h4>
+<pre class="r"><code>summ.table &lt;- do.call(rbind, lapply(list(m1, m2, m3), broom::glance))</code></pre>
+<p>If we take a look at <code>summ.table</code>, we’ll see it has all the ingredients we might like to report from model selection, whether via AIC, BIC, or just the deviance. These are, in order, null.deviance, df.null, logLik, AIC, BIC, deviance, df.residual.</p>
+<p>Creating a table with our own desired columns in an appropriate order is easy.</p>
+<pre class="r"><code>table.cols &lt;- c(&quot;df.residual&quot;, &quot;deviance&quot;, &quot;AIC&quot;)
+reported.table &lt;- summ.table[table.cols]
+names(reported.table) &lt;- c(&quot;Resid. Df&quot;, &quot;Resid. Dev&quot;, &quot;AIC&quot;)</code></pre>
+<pre class="r"><code>reported.table[[&#39;dAIC&#39;]] &lt;-  with(reported.table, AIC - min(AIC))
+reported.table[[&#39;weight&#39;]] &lt;- with(reported.table, exp(- 0.5 * dAIC) / sum(exp(- 0.5 * dAIC)))
+reported.table$AIC &lt;- NULL
+reported.table$weight &lt;- round(reported.table$weight, 2)
+reported.table$dAIC &lt;- round(reported.table$dAIC, 1)
+row.names(reported.table) &lt;- model.names</code></pre>
+<pre><code>## Warning: Setting row names on a tibble is deprecated.</code></pre>
+<p>With my advice above in mind, here’s <em>a minimal table for reporting model
+selection on GLMs</em> using fitting results extracted with <code>broom::glance</code>:</p>
+<p>Caption: Model selection for the effect gender (model 1), department (model 2),
+and both gender and department (model 3) on admission probability fit to 12
+observations (i.e., total degrees of freedom) with 877.056 null deviance.</p>
+<pre class="r"><code>reported.table</code></pre>
+<pre><code>## # A tibble: 3 x 4
+##   `Resid. Df` `Resid. Dev`  dAIC weight
+## *       &lt;int&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1          10        784.  754.    0   
+## 2           6         21.7   0     0.56
+## 3           5         20.2   0.5   0.44</code></pre>
+</div>
+<div id="using-bbmle" class="section level4">
+<h4>Using <code>bbmle</code></h4>
+<pre class="r"><code>reported.table2 &lt;- bbmle::AICtab(m1, m2, m3, weights = TRUE, sort = FALSE, mnames = model.names)
+reported.table2[[&quot;Resid. Dev&quot;]]  &lt;- summ.table[[&quot;deviance&quot;]] # get the deviance from broom&#39;d table</code></pre>
+<p>Caption: Model selection for the effect gender (model 1), department (model 2),
+and both gender and department (model 3) on admission probability fit to 12
+observations (i.e., total degrees of freedom) with 877.056 null deviance.</p>
+<pre class="r"><code>reported.table2</code></pre>
+<pre><code>##                 dAIC  df weight Resid. Dev
+## 1 Gender        753.9 2  &lt;0.001 783.6     
+## 2 Dept            0.0 6  0.56    21.7     
+## 3 Gender + Dept   0.5 7  0.44    20.2</code></pre>
+<p>Of course, model selection is just the beginning of reporting your results. See
+the PPS below for some thoughts on reporting results of the best model(s).</p>
+<p>And, before you even did model selection, you should have asked yourself…</p>
+</div>
+</div>
+<div id="is-aic-the-right-criterion" class="section level3">
+<h3>Is AIC the right criterion?</h3>
+<ul>
+<li>For small data and frequentist inference, you should use AICc – the small
+sample correction which provides greater penalty for each parameter but
+approaches AIC as <span class="math inline">\(n\)</span> becomes large. If it makes a difference, you should use
+it. (I probably should have used it above.)</li>
+<li>For large data and frequentist inference , consider BIC, which is
+asymptotically consistent while AIC is not (see Hastie <em>et al.</em> 2009, which
+is available online). AIC typically favors overly-complex models with large
+<span class="math inline">\(n\)</span> relative to BIC. Note, however, that this is not an issue for prediction,
+only inference of a <em>true</em> model (if one exists; Sec. 6.4 McElreath
+2015).</li>
+<li>For Bayesian models, consider <a href="http://andrewgelman.com/2015/07/16/new-papers-on-loowaic-and-stan/">WAIC or
+LOO</a>
+(instead of DIC, which has issues with non-Gaussian posteriors McElreath
+2015).</li>
+<li>Don’t use information criteria for model selection between GLMs with
+different link functions</li>
+</ul>
+</div>
+<div id="further-reading-references" class="section level3">
+<h3>Further Reading &amp; References</h3>
+<ul>
+<li><a href="http://ms.mcmaster.ca/~bolker/misc/GLMM_results_report.pdf">Ben Bolker on reporting results in the text for
+GLMMs</a> this is a
+piece of a larger chapter
+<a href="http://ms.mcmaster.ca/~bolker/R/misc/foxchapter/bolker_chap.html">GLMMs: worked examples</a>
+that approaches inference as model checking and improvement (as opposed to
+multi-model inference <em>sensu</em> Burnham and Anderson 2004)</li>
+<li><a href="https://dx.doi.org/10.1177/0049124104268644">Burnham, and Anderson. 2004.</a>
+Multimodel Inference: Understanding AIC and BIC in Model Selection.
+<em>Sociological Methods &amp; Research</em> 33(2):261-304</li>
+<li>Burnham, and Anderson. 2002. <em>Model Selection and Multimodel Inference: A
+Practical Information-Theoretic Approach.</em> Second Edition. Springer.</li>
+<li><a href="https://dx.doi.org/10.1641/B570708">Elliot and Brook 2007</a> for a short piece
+on the philosophical background of multiple working hypotheses</li>
+<li><a href="http://statweb.stanford.edu/~tibs/ElemStatLearn/">Hastie, Tibshirani, and Friedman. 2009.</a>
+Elements of Statistical Learning, Second Edition. Springer, New York, NY, USA.</li>
+<li><a href="https://www.crcpress.com/Statistical-Rethinking-A-Bayesian-Course-with-Examples-in-R-and-Stan/McElreath/9781482253443">McElreath. 2015.</a>
+Statistical Rethinking. CRC Press.</li>
+<li><a href="http://brianomeara.info/tutorials/aic/">Brian O’Meara’s AIC tutorial</a></li>
+</ul>
+</div>
+<div id="ps-nested-models" class="section level3">
+<h3>PS: Nested models</h3>
+<p>Reporting the residual deviance and degrees of freedom as above is relatively
+similar to R’s output for conducting an ANOVA on a GLM (where you can
+optionally add a statistical test). For nested models, you may as well just
+do this and report the table:</p>
+<pre class="r"><code>m3.anova &lt;- anova(m3, test=&quot;Chisq&quot;)
+round(m3.anova, digits = 4)</code></pre>
+<pre><code>## Analysis of Deviance Table
+## 
+## Model: binomial, link: logit
+## 
+## Response: cbind(Admitted, Rejected)
+## 
+## Terms added sequentially (first to last)
+## 
+## 
+##        Df Deviance Resid. Df Resid. Dev Pr(&gt;Chi)    
+## NULL                      11        877             
+## Dept    5      855         6         22   &lt;2e-16 ***
+## Gender  1        2         5         20     0.22    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="pps-evaluating-the-best-models" class="section level3">
+<h3>PPS: Evaluating the best model(s)</h3>
+<p>For the best model(s), you should then go on to visualize the fit relative to the data
+(and report model results in the text).</p>
+<p>To visualize the admissions data and mean fits from models 2 and 3 (which have
+approximately equal AIC weight), we can use <code>ggplot2</code> and <code>augment</code> from broom
+(which adds model predictions and statistics to the data).</p>
+<p>To provide model-averaged predictions is a bit more work:</p>
+<pre class="r"><code>m3.pred &lt;- broom::augment(m3)
+m2.pred &lt;- broom::augment(m2)
+m2.weight &lt;- reported.table[2, &quot;weight&quot;]
+m3.weight &lt;- reported.table[3, &quot;weight&quot;]
+mavg.pred &lt;- m2.weight$weight * m2.pred[ , -(1:2)] + m3.weight$weight * m3.pred[ , -(1:3)]
+mavg.pred &lt;- cbind(m3.pred[1:3], mavg.pred)
+
+library(ggplot2)
+ggplot(d) +
+    geom_point(aes(Dept, Admitted / (Admitted + Rejected), color=Gender,
+           size=Admitted + Rejected),
+           position = position_dodge(width = 0.5)) +
+    geom_pointrange(aes(Dept, plogis(.fitted),
+            ymin = plogis(.fitted - 2 * .se.fit),
+            ymax = plogis(.fitted + 2 * .se.fit),
+            shape=Gender),
+            position=position_dodge(width = 0.5), data =mavg.pred, alpha=0.4) +
+    theme_minimal() + scale_color_manual(values=c(&quot;blue&quot;, &quot;orange&quot;))</code></pre>
+<p>Admissions (colored dots, size indicates total applicants) versus department
+from UCB Admissions data (included in <code>R</code>), and averaged predictions (means <span class="math inline">\(\pm\)</span> 2 SE)
+from model 2 (department only) and model 3 (department and gender), with
+averaging by AIC weight.</p>
+<div id="simpsons-paradox" class="section level4">
+<h4>Simpson’s paradox</h4>
+<p>Comparing model 3 with model 1 illustrates Simpson’s paradox. Without
+accounting for department, the apparent effect of female gender on admission is
+negative (female odds relative to male 0.543, <span class="math inline">\(p \approx 0\)</span>), whereas after accounting for department, the (within-department) effect is positive
+(but weak: female odds relative to male 1.105, <span class="math inline">\(p \approx\)</span> 0.22).</p>
+</div>
+</div>
+
+            </div>
+        </div>
+	</div>
+    <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+<div class="footer pure-g">
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+    <div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="footer-content">
+		  <div class="pure-menu pure-menu-horizontal">
+              <ul>
+                  <li class="pure-menu-heading" id="foot-name">Contact:</li>
+				  
+                  
+                  <li class="pure-menu-item">
+                      <a href="mailto:ashander%20AT%20rff%20org" class="pure-menu-link"><i class="fa fa-envelope-o fa fw"></i></a>
+                  </li>
+                  
+          
+                  
+                  <li class="pure-menu-item">
+                      <a href="https://github.com/ashander" class="pure-menu-link"><i class="fa fa-github fa-fw"></i></a>
+                  </li>
+                  
+          
+                  
+                  <li class="pure-menu-item">
+                      <a href="https://twitter.com/jaimedash" class="pure-menu-link"><i class="fa fa-twitter fa-fw"></i></a>
+                  </li>
+                  
+
+                  
+                  <li class="pure-menu-item">
+                      <a href="https://scholar.google.com/citations?user=TsBxHjcAAAAJ" class="pure-menu-link"><i class="fa fa-mortar-board fa-fw"></i></a>
+                  </li>
+                  
+          
+              </ul>
+              <a href="#" class="pure-menu-heading pull-right" id="gototop-btn">↑↑</a>
+          </div>
+		  
+		  <p id="foot-copyright">Copyright (c) 2009 - 2019, Jaime Ashander</p>
+		  
+		</div>
+	  </div>
+      <div class="pure-u-1-24 pure-u-md-1-6"></div>
+</div>
+
+
+<script src="https://ashander.info/js/jquery.min.js" type="text/javascript"></script>
+<script src="https://ashander.info/js/jquery.timeago.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $(function(){
+    $("time.timeago").timeago();
+  })
+  $("#toggle-btn").click(function(){
+    $("#toggle-content").toggle();
+    if($(this).html() === "☰") {
+        $(this).html("X")
+    } else {
+        $(this).html("☰")
+    }
+  });
+  $(window).resize(function(){
+    if(window.innerWidth > 768) {
+      $(".desktop").removeAttr("style");
+    }
+  });
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-60354418-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+

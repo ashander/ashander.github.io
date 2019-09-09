@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bayesian methods on Jaime Ashander</title>
+    <link>https://ashander.info/tags/bayesian-methods/</link>
+    <description>Recent content in Bayesian methods on Jaime Ashander</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>ashander AT rff org (Jaime Ashander)</managingEditor>
+    <webMaster>ashander AT rff org (Jaime Ashander)</webMaster>
+    <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
+    <lastBuildDate>Sun, 23 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ashander.info/tags/bayesian-methods/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Demographic inference in a spatially-explicit ecological model from genomic data: a proof of concept for the Mojave Desert Tortoise</title>
+      <link>https://ashander.info/posts/2018/09/spatial-genomic-inference/</link>
+      <pubDate>Sun, 23 Sep 2018 00:00:00 +0000</pubDate>
+      <author>ashander AT rff org (Jaime Ashander)</author>
+      <guid>https://ashander.info/posts/2018/09/spatial-genomic-inference/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Understanding the joint effects of plastic and evolutionary change on demography from time series</title>
+      <link>https://ashander.info/posts/2014/01/understanding-joint-effects-plastic-evolutionary-poster/</link>
+      <pubDate>Wed, 01 Jan 2014 00:00:00 +0000</pubDate>
+      <author>ashander AT rff org (Jaime Ashander)</author>
+      <guid>https://ashander.info/posts/2014/01/understanding-joint-effects-plastic-evolutionary-poster/</guid>
+      <description>Background/Question/Methods
+In nature, selection often fluctuates, but observed changes in traits may owe not only to selection but plasticity. Further, changes in traits due to selection and to plasticity do not have equal demographic effects: the cost of selection is paid through declines in population number or growth rate. Thus, observed trajectories of trait value and population number can depend on interactions between plasticity, evolution and environment. The extent to which these interactions affect observed trajectories depends on the demographic context.</description>
+    </item>
+    
+  </channel>
+</rss>

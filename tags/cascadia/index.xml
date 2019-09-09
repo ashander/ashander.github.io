@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cascadia on Jaime Ashander</title>
+    <link>https://ashander.info/tags/cascadia/</link>
+    <description>Recent content in Cascadia on Jaime Ashander</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>ashander AT rff org (Jaime Ashander)</managingEditor>
+    <webMaster>ashander AT rff org (Jaime Ashander)</webMaster>
+    <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
+    <lastBuildDate>Sat, 31 Oct 2009 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ashander.info/tags/cascadia/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Salish Sea</title>
+      <link>https://ashander.info/posts/2009/10/salish-sea/</link>
+      <pubDate>Sat, 31 Oct 2009 00:00:00 +0000</pubDate>
+      <author>ashander AT rff org (Jaime Ashander)</author>
+      <guid>https://ashander.info/posts/2009/10/salish-sea/</guid>
+      <description>&amp;ldquo;Salish Sea&amp;rdquo; is on its way to being an official name in the U.S. and Canada. Can Cascadia be far behind?
+Stefan Freelan at WWU made the beautiful map of the region here. His page has lots of details about the region and the history of the term.</description>
+    </item>
+    
+  </channel>
+</rss>

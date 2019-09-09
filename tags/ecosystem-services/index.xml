@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ecosystem services on Jaime Ashander</title>
+    <link>https://ashander.info/tags/ecosystem-services/</link>
+    <description>Recent content in ecosystem services on Jaime Ashander</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>ashander AT rff org (Jaime Ashander)</managingEditor>
+    <webMaster>ashander AT rff org (Jaime Ashander)</webMaster>
+    <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
+    <lastBuildDate>Wed, 19 Jul 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ashander.info/tags/ecosystem-services/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Wild salmon sustain the effectiveness of parasite control on salmon farms: conservation implications from an evolutionary ecosystem service</title>
+      <link>https://ashander.info/posts/2017/07/evosystem-services-in-salmon/</link>
+      <pubDate>Wed, 19 Jul 2017 00:00:00 +0000</pubDate>
+      <author>ashander AT rff org (Jaime Ashander)</author>
+      <guid>https://ashander.info/posts/2017/07/evosystem-services-in-salmon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Eco-evolutionary dynamics in human-dominated systems</title>
+      <link>https://ashander.info/themes/eco-evolutionary-dynamics-cnh/</link>
+      <pubDate>Sat, 19 Nov 2016 00:00:00 +0000</pubDate>
+      <author>ashander AT rff org (Jaime Ashander)</author>
+      <guid>https://ashander.info/themes/eco-evolutionary-dynamics-cnh/</guid>
+      <description>&lt;p&gt;In my Ph.D., I sought to understand the consequences of trait change due to
+evolutionary and plastic responses in changing environments, developing
+theory on population dynamics resulting from these processes in stochastic environments. Using this theory
+I showed how environmental autocorrelation controls the benefits to plasticity in new environments.
+Further, these theories provide predictions about the entire distribution of population sizes and fitness
+levels within a population.&lt;/p&gt;
+
+&lt;p&gt;My M.Sc. research focused on the evolutionary ecology of sea lice, farmed and
+wild salmon. Recently, I&amp;rsquo;ve become particularly interested in the ways in
+which the combination of wild salmon migrations and salmon farm management
+can influence chemical resistance evolution on farms, potentially providing a
+benefits to people (which some have called &amp;ldquo;EVOsystem services&amp;rdquo;).&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

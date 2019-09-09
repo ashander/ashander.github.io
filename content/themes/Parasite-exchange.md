@@ -1,10 +1,20 @@
+---
 Title: Effects of parasite exchange among farm and wild salmon
 Date: 2010-08-29
-Tags: sea lice, salmon, resistance evolution, complex population dynamics, population biology, mathematical ecology
+Tags:
+- sea lice
+- salmon
+- resistance evolution
+- complex population dynamics
+- population biology
+- mathematical ecology
 Author: Jaime Ashander
 Template: theme
 Image: /images/msc.png
-Results: M.Sc.
+Results:
+- M.Sc.
+Slug: parasite-exchange
+---
 
 My master's research focused on the evolutionary ecology of sea lice,
    farmed and wild salmon. I'm particularly interested in the ways in

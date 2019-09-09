@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>science on Jaime Ashander</title>
+    <link>https://ashander.info/tags/science/</link>
+    <description>Recent content in science on Jaime Ashander</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>ashander AT rff org (Jaime Ashander)</managingEditor>
+    <webMaster>ashander AT rff org (Jaime Ashander)</webMaster>
+    <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
+    <lastBuildDate>Fri, 04 Dec 2009 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ashander.info/tags/science/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Science education and uncertainty</title>
+      <link>https://ashander.info/posts/2009/12/science-is-uncertain/</link>
+      <pubDate>Fri, 04 Dec 2009 00:00:00 +0000</pubDate>
+      <author>ashander AT rff org (Jaime Ashander)</author>
+      <guid>https://ashander.info/posts/2009/12/science-is-uncertain/</guid>
+      <description>A brand new &amp;ldquo;-gate&amp;rdquo; on the climate science front has me thinking about the relationship between science and the public. A big issue in communicating science stems from the fundamental disconnect between science as practiced and science as taught in introductory formats, e.g. in high school.
+Most people learn science as fact. The reality is emerging scientific knowledge (in fact all scientific knowledge) is uncertain. Those who disagree idealogically with the state of scientific knowlege highlight this uncertainty.</description>
+    </item>
+    
+    <item>
+      <title>Wrong, not confused</title>
+      <link>https://ashander.info/posts/2009/11/wrong-not-confused/</link>
+      <pubDate>Tue, 10 Nov 2009 00:00:00 +0000</pubDate>
+      <author>ashander AT rff org (Jaime Ashander)</author>
+      <guid>https://ashander.info/posts/2009/11/wrong-not-confused/</guid>
+      <description>Quoting Turchin (1998) quoting Hull (1988) quoting Bacon (?) :
+ In science it is better to be wrong than confused.
+ The point is, though a mathematical model that purports to repesent reality will be wrong, one with clear definitions and assumptions can be helpful. Mathematical modeling is a tool to move from confusion about a process to making clear (if wrong) statements about that process.</description>
+    </item>
+    
+    <item>
+      <title>Negative results or technical problems?</title>
+      <link>https://ashander.info/posts/2009/11/omitting-negative-results/</link>
+      <pubDate>Mon, 02 Nov 2009 00:00:00 +0000</pubDate>
+      <author>ashander AT rff org (Jaime Ashander)</author>
+      <guid>https://ashander.info/posts/2009/11/omitting-negative-results/</guid>
+      <description>True or false: &amp;ldquo;Non-publication of negative results is extraordinarily common in science&amp;hellip;.&amp;rdquo; ?
+This comes from biomed world, specifically protein design, where some awesome claims&amp;mdash;design of protein receptors to detect TNT (the explosive) among other things&amp;mdash;have come under scrutiny. The lab involved recently retracted some other work.
+The quotation above is from Loren Looger, who was a PhD student on the project. He&amp;rsquo;s referrring to unreported instances where a designed protein didn&amp;rsquo;t bind the target and concludes that the omission &amp;ldquo;did not seem inappropriate.</description>
+    </item>
+    
+    <item>
+      <title>Market substitution in aquaculture</title>
+      <link>https://ashander.info/posts/2009/10/market-substitution-aquaculture/</link>
+      <pubDate>Thu, 15 Oct 2009 00:00:00 +0000</pubDate>
+      <author>ashander AT rff org (Jaime Ashander)</author>
+      <guid>https://ashander.info/posts/2009/10/market-substitution-aquaculture/</guid>
+      <description>A recent article in BioScience [1] focused on the relationship between aquaculture and conservation. This topic is quite interesting to me, but it&amp;rsquo;s obviously subtle. I don&amp;rsquo;t have well-defined thoughts except that (i) aquaculture could theoretically relieve pressure on some wild fisheries and (ii) certain aquaculture operations have proven negative impacts on some ecosystems.
+This paper aims to highlight broad trends in capture and culture fisheries and quantify effects on biodiversity.</description>
+    </item>
+    
+  </channel>
+</rss>
