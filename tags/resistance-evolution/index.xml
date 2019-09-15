@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>resistance evolution on Jaime Ashander</title>
-    <link>https://ashander.info/tags/resistance-evolution/</link>
+    <link>http://ashander.info/tags/resistance-evolution/</link>
     <description>Recent content in resistance evolution on Jaime Ashander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
     <lastBuildDate>Sat, 19 Nov 2016 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://ashander.info/tags/resistance-evolution/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://ashander.info/tags/resistance-evolution/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Eco-evolutionary dynamics in human-dominated systems</title>
-      <link>https://ashander.info/themes/eco-evolutionary-dynamics-cnh/</link>
+      <link>http://ashander.info/themes/eco-evolutionary-dynamics-cnh/</link>
       <pubDate>Sat, 19 Nov 2016 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/themes/eco-evolutionary-dynamics-cnh/</guid>
+      <guid>http://ashander.info/themes/eco-evolutionary-dynamics-cnh/</guid>
       <description>&lt;p&gt;In my Ph.D., I sought to understand the consequences of trait change due to
 evolutionary and plastic responses in changing environments, developing
 theory on population dynamics resulting from these processes in stochastic environments. Using this theory

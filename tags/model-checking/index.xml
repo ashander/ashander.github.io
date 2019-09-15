@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>model checking on Jaime Ashander</title>
-    <link>https://ashander.info/tags/model-checking/</link>
+    <link>http://ashander.info/tags/model-checking/</link>
     <description>Recent content in model checking on Jaime Ashander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
     <lastBuildDate>Fri, 10 Apr 2015 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://ashander.info/tags/model-checking/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://ashander.info/tags/model-checking/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Visualizing fits, inference, implications of (G)LMMs</title>
-      <link>https://ashander.info/posts/2015/04/d-rug-mixed-effects-viz/</link>
+      <link>http://ashander.info/posts/2015/04/d-rug-mixed-effects-viz/</link>
       <pubDate>Fri, 10 Apr 2015 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2015/04/d-rug-mixed-effects-viz/</guid>
+      <guid>http://ashander.info/posts/2015/04/d-rug-mixed-effects-viz/</guid>
       <description>In a live walk-through on April 10 at the Davis R-Users Group, I gave a brief presentationmotivating this topic.This post expands and cleans up the code from that talk. If you justwant the code: download the .R file.
 Updated 2015-04-28
 The point of this post isn’t the statistics of mixed models. For that, learningthe experimental design and statistics behind modern mixed models, I recommendsome relatively recent papers below.</description>

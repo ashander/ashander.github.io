@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>global change on Jaime Ashander</title>
-    <link>https://ashander.info/tags/global-change/</link>
+    <link>http://ashander.info/tags/global-change/</link>
     <description>Recent content in global change on Jaime Ashander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,34 +11,34 @@
     <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
     <lastBuildDate>Mon, 13 May 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://ashander.info/tags/global-change/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://ashander.info/tags/global-change/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>EFI2019 talk: Ecological forecasts for integrated socio-environmental systems (SES)</title>
-      <link>https://ashander.info/posts/2019/05/ecological-forecasting-integrated-ses/</link>
+      <link>http://ashander.info/posts/2019/05/ecological-forecasting-integrated-ses/</link>
       <pubDate>Mon, 13 May 2019 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2019/05/ecological-forecasting-integrated-ses/</guid>
+      <guid>http://ashander.info/posts/2019/05/ecological-forecasting-integrated-ses/</guid>
       <description>&amp;lt;&amp;ndash; Click the link for a video of the talk!
 Forecasting or projecting involves a wide range of timescales and associated assumptions about human behavior. At one end of the spectrum are very-near-term physical forecasts (like the weather) and at another end are long-run, scenario-based projections (like global emissions pathways). Ecological forecasts span a range of timescales and assumptions about human behavior. The main message of this talk was that in developing and thinking about &amp;ldquo;ecological forecasting&amp;rdquo; as a discipline, we must be clear about whether and to what extent a forecast is incorporating human behavior.</description>
     </item>
     
     <item>
       <title>Optimal investment to enable evolutionary rescue</title>
-      <link>https://ashander.info/posts/2019/03/optimal-investement-evolutionary-rescue/</link>
+      <link>http://ashander.info/posts/2019/03/optimal-investement-evolutionary-rescue/</link>
       <pubDate>Wed, 06 Mar 2019 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2019/03/optimal-investement-evolutionary-rescue/</guid>
+      <guid>http://ashander.info/posts/2019/03/optimal-investement-evolutionary-rescue/</guid>
       <description></description>
     </item>
     
     <item>
       <title>The mechanisms of phenology: the patterns and processes of phenological shifts</title>
-      <link>https://ashander.info/posts/2018/10/phenology-mechanisms-pattern-process/</link>
+      <link>http://ashander.info/posts/2018/10/phenology-mechanisms-pattern-process/</link>
       <pubDate>Fri, 12 Oct 2018 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2018/10/phenology-mechanisms-pattern-process/</guid>
+      <guid>http://ashander.info/posts/2018/10/phenology-mechanisms-pattern-process/</guid>
       <description>From the abstract
  Species across a wide range of taxa and habitats are shifting phenological events in response to climate change. While advances are common, shifts vary in magnitude and direction within and among species, and the basis for this variation is relatively unknown. We examine previously suggested patterns of variation in phenological shifts in order to understand the cue–response mechanisms that underlie phenological change. Here, we review what is known about the mechanistic basis for nine factors proposed to predict phenological change (latitude, elevation, habitat type, trophic level, migratory strategy, ecological specialization, species’ seasonality, thermoregulatory mode, and generation time).</description>
     </item>

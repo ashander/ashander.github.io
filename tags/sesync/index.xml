@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>SESYNC on Jaime Ashander</title>
-    <link>https://ashander.info/tags/sesync/</link>
+    <link>http://ashander.info/tags/sesync/</link>
     <description>Recent content in SESYNC on Jaime Ashander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
     <lastBuildDate>Thu, 06 Jun 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://ashander.info/tags/sesync/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://ashander.info/tags/sesync/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Predictive tools for integrated socio-environmental systems</title>
-      <link>https://ashander.info/themes/predictive-ecology-ses/</link>
+      <link>http://ashander.info/themes/predictive-ecology-ses/</link>
       <pubDate>Thu, 06 Jun 2019 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/themes/predictive-ecology-ses/</guid>
+      <guid>http://ashander.info/themes/predictive-ecology-ses/</guid>
       <description>Combining dynamical population ecology models with policy scenarios is an
 important approach in both population biology and bioeconomics.
 At its best, this approach may provide predictive understanding of future behavior.
@@ -32,20 +32,20 @@ I am Co-leading a SESYNC working group focused on addressing this gap.</descript
     
     <item>
       <title>EFI2019 talk: Ecological forecasts for integrated socio-environmental systems (SES)</title>
-      <link>https://ashander.info/posts/2019/05/ecological-forecasting-integrated-ses/</link>
+      <link>http://ashander.info/posts/2019/05/ecological-forecasting-integrated-ses/</link>
       <pubDate>Mon, 13 May 2019 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2019/05/ecological-forecasting-integrated-ses/</guid>
+      <guid>http://ashander.info/posts/2019/05/ecological-forecasting-integrated-ses/</guid>
       <description>&amp;lt;&amp;ndash; Click the link for a video of the talk!
 Forecasting or projecting involves a wide range of timescales and associated assumptions about human behavior. At one end of the spectrum are very-near-term physical forecasts (like the weather) and at another end are long-run, scenario-based projections (like global emissions pathways). Ecological forecasts span a range of timescales and assumptions about human behavior. The main message of this talk was that in developing and thinking about &amp;ldquo;ecological forecasting&amp;rdquo; as a discipline, we must be clear about whether and to what extent a forecast is incorporating human behavior.</description>
     </item>
     
     <item>
       <title>Management of freshwater-coupled human-natural systems</title>
-      <link>https://ashander.info/themes/population-biology-in-human-dominated/</link>
+      <link>http://ashander.info/themes/population-biology-in-human-dominated/</link>
       <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/themes/population-biology-in-human-dominated/</guid>
+      <guid>http://ashander.info/themes/population-biology-in-human-dominated/</guid>
       <description>Human livelihoods and ecosystem fates are often linked by water.
 I have a longstanding interest in the population biology of rivers,
 and in using theory and methods from computational ecology to understand

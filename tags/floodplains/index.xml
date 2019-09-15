@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>floodplains on Jaime Ashander</title>
-    <link>https://ashander.info/tags/floodplains/</link>
+    <link>http://ashander.info/tags/floodplains/</link>
     <description>Recent content in floodplains on Jaime Ashander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
     <lastBuildDate>Tue, 01 Jan 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://ashander.info/tags/floodplains/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://ashander.info/tags/floodplains/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Management of freshwater-coupled human-natural systems</title>
-      <link>https://ashander.info/themes/population-biology-in-human-dominated/</link>
+      <link>http://ashander.info/themes/population-biology-in-human-dominated/</link>
       <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/themes/population-biology-in-human-dominated/</guid>
+      <guid>http://ashander.info/themes/population-biology-in-human-dominated/</guid>
       <description>Human livelihoods and ecosystem fates are often linked by water.
 I have a longstanding interest in the population biology of rivers,
 and in using theory and methods from computational ecology to understand

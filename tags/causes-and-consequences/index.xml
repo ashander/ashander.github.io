@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>causes and consequences on Jaime Ashander</title>
-    <link>https://ashander.info/tags/causes-and-consequences/</link>
+    <link>http://ashander.info/tags/causes-and-consequences/</link>
     <description>Recent content in causes and consequences on Jaime Ashander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,52 +11,52 @@
     <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
     <lastBuildDate>Wed, 06 Mar 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://ashander.info/tags/causes-and-consequences/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://ashander.info/tags/causes-and-consequences/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Optimal investment to enable evolutionary rescue</title>
-      <link>https://ashander.info/posts/2019/03/optimal-investement-evolutionary-rescue/</link>
+      <link>http://ashander.info/posts/2019/03/optimal-investement-evolutionary-rescue/</link>
       <pubDate>Wed, 06 Mar 2019 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2019/03/optimal-investement-evolutionary-rescue/</guid>
+      <guid>http://ashander.info/posts/2019/03/optimal-investement-evolutionary-rescue/</guid>
       <description></description>
     </item>
     
     <item>
       <title>The mechanisms of phenology: the patterns and processes of phenological shifts</title>
-      <link>https://ashander.info/posts/2018/10/phenology-mechanisms-pattern-process/</link>
+      <link>http://ashander.info/posts/2018/10/phenology-mechanisms-pattern-process/</link>
       <pubDate>Fri, 12 Oct 2018 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2018/10/phenology-mechanisms-pattern-process/</guid>
+      <guid>http://ashander.info/posts/2018/10/phenology-mechanisms-pattern-process/</guid>
       <description>From the abstract
  Species across a wide range of taxa and habitats are shifting phenological events in response to climate change. While advances are common, shifts vary in magnitude and direction within and among species, and the basis for this variation is relatively unknown. We examine previously suggested patterns of variation in phenological shifts in order to understand the cue–response mechanisms that underlie phenological change. Here, we review what is known about the mechanistic basis for nine factors proposed to predict phenological change (latitude, elevation, habitat type, trophic level, migratory strategy, ecological specialization, species’ seasonality, thermoregulatory mode, and generation time).</description>
     </item>
     
     <item>
       <title>Stochastic evolutionary demography under a fluctuating optimum phenotype</title>
-      <link>https://ashander.info/posts/2017/09/stochastic-evolutionary-rescue/</link>
+      <link>http://ashander.info/posts/2017/09/stochastic-evolutionary-rescue/</link>
       <pubDate>Wed, 27 Sep 2017 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2017/09/stochastic-evolutionary-rescue/</guid>
+      <guid>http://ashander.info/posts/2017/09/stochastic-evolutionary-rescue/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Wild salmon sustain the effectiveness of parasite control on salmon farms: conservation implications from an evolutionary ecosystem service</title>
-      <link>https://ashander.info/posts/2017/07/evosystem-services-in-salmon/</link>
+      <link>http://ashander.info/posts/2017/07/evosystem-services-in-salmon/</link>
       <pubDate>Wed, 19 Jul 2017 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2017/07/evosystem-services-in-salmon/</guid>
+      <guid>http://ashander.info/posts/2017/07/evosystem-services-in-salmon/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Predicting evolutionary rescue via evolving plasticity in stochastic environments</title>
-      <link>https://ashander.info/posts/2016/09/noisy-plastic-evolutionary-rescue/</link>
+      <link>http://ashander.info/posts/2016/09/noisy-plastic-evolutionary-rescue/</link>
       <pubDate>Wed, 21 Sep 2016 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2016/09/noisy-plastic-evolutionary-rescue/</guid>
+      <guid>http://ashander.info/posts/2016/09/noisy-plastic-evolutionary-rescue/</guid>
       <description>Phenotypic plasticity and its evolution may help evolutionary rescue in a novel and stressful environment, especially if environmental novelty reveals cryptic genetic variation that enables the evolution of increased plasticity (panels a and b in the figure below). But the environmental stochasticity ubiquitous in natural systems may alter these predictions (panel c). This might occur, for example if high plasticity amplifies phenotype-environment mismatches. Although previous studies have highlighted this potential detrimental effect of plasticity in stochastic environments, they have not investigated how it affects extinction risk in the context of evolutionary rescue and with evolving plasticity.</description>
     </item>
     

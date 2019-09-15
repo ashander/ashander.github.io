@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>evolutionary rescue on Jaime Ashander</title>
-    <link>https://ashander.info/tags/evolutionary-rescue/</link>
+    <link>http://ashander.info/tags/evolutionary-rescue/</link>
     <description>Recent content in evolutionary rescue on Jaime Ashander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,24 +11,24 @@
     <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
     <lastBuildDate>Wed, 27 Sep 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://ashander.info/tags/evolutionary-rescue/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://ashander.info/tags/evolutionary-rescue/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Stochastic evolutionary demography under a fluctuating optimum phenotype</title>
-      <link>https://ashander.info/posts/2017/09/stochastic-evolutionary-rescue/</link>
+      <link>http://ashander.info/posts/2017/09/stochastic-evolutionary-rescue/</link>
       <pubDate>Wed, 27 Sep 2017 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2017/09/stochastic-evolutionary-rescue/</guid>
+      <guid>http://ashander.info/posts/2017/09/stochastic-evolutionary-rescue/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Predicting evolutionary rescue via evolving plasticity in stochastic environments</title>
-      <link>https://ashander.info/posts/2016/09/noisy-plastic-evolutionary-rescue/</link>
+      <link>http://ashander.info/posts/2016/09/noisy-plastic-evolutionary-rescue/</link>
       <pubDate>Wed, 21 Sep 2016 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2016/09/noisy-plastic-evolutionary-rescue/</guid>
+      <guid>http://ashander.info/posts/2016/09/noisy-plastic-evolutionary-rescue/</guid>
       <description>Phenotypic plasticity and its evolution may help evolutionary rescue in a novel and stressful environment, especially if environmental novelty reveals cryptic genetic variation that enables the evolution of increased plasticity (panels a and b in the figure below). But the environmental stochasticity ubiquitous in natural systems may alter these predictions (panel c). This might occur, for example if high plasticity amplifies phenotype-environment mismatches. Although previous studies have highlighted this potential detrimental effect of plasticity in stochastic environments, they have not investigated how it affects extinction risk in the context of evolutionary rescue and with evolving plasticity.</description>
     </item>
     

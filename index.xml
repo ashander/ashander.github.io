@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>complex socio-environmental systems on Jaime Ashander</title>
-    <link>https://ashander.info/</link>
+    <link>http://ashander.info/</link>
     <description>Recent content in complex socio-environmental systems on Jaime Ashander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
     <lastBuildDate>Mon, 09 Sep 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://ashander.info/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://ashander.info/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Predictive tools for integrated socio-environmental systems</title>
-      <link>https://ashander.info/themes/predictive-ecology-ses/</link>
+      <link>http://ashander.info/themes/predictive-ecology-ses/</link>
       <pubDate>Thu, 06 Jun 2019 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/themes/predictive-ecology-ses/</guid>
+      <guid>http://ashander.info/themes/predictive-ecology-ses/</guid>
       <description>Combining dynamical population ecology models with policy scenarios is an
 important approach in both population biology and bioeconomics.
 At its best, this approach may provide predictive understanding of future behavior.
@@ -32,29 +32,29 @@ I am Co-leading a SESYNC working group focused on addressing this gap.</descript
     
     <item>
       <title>EFI2019 talk: Ecological forecasts for integrated socio-environmental systems (SES)</title>
-      <link>https://ashander.info/posts/2019/05/ecological-forecasting-integrated-ses/</link>
+      <link>http://ashander.info/posts/2019/05/ecological-forecasting-integrated-ses/</link>
       <pubDate>Mon, 13 May 2019 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2019/05/ecological-forecasting-integrated-ses/</guid>
+      <guid>http://ashander.info/posts/2019/05/ecological-forecasting-integrated-ses/</guid>
       <description>&amp;lt;&amp;ndash; Click the link for a video of the talk!
 Forecasting or projecting involves a wide range of timescales and associated assumptions about human behavior. At one end of the spectrum are very-near-term physical forecasts (like the weather) and at another end are long-run, scenario-based projections (like global emissions pathways). Ecological forecasts span a range of timescales and assumptions about human behavior. The main message of this talk was that in developing and thinking about &amp;ldquo;ecological forecasting&amp;rdquo; as a discipline, we must be clear about whether and to what extent a forecast is incorporating human behavior.</description>
     </item>
     
     <item>
       <title>Optimal investment to enable evolutionary rescue</title>
-      <link>https://ashander.info/posts/2019/03/optimal-investement-evolutionary-rescue/</link>
+      <link>http://ashander.info/posts/2019/03/optimal-investement-evolutionary-rescue/</link>
       <pubDate>Wed, 06 Mar 2019 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2019/03/optimal-investement-evolutionary-rescue/</guid>
+      <guid>http://ashander.info/posts/2019/03/optimal-investement-evolutionary-rescue/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Management of freshwater-coupled human-natural systems</title>
-      <link>https://ashander.info/themes/population-biology-in-human-dominated/</link>
+      <link>http://ashander.info/themes/population-biology-in-human-dominated/</link>
       <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/themes/population-biology-in-human-dominated/</guid>
+      <guid>http://ashander.info/themes/population-biology-in-human-dominated/</guid>
       <description>Human livelihoods and ecosystem fates are often linked by water.
 I have a longstanding interest in the population biology of rivers,
 and in using theory and methods from computational ecology to understand
@@ -66,38 +66,38 @@ leading to tradeoffs between users and potential tipping points.</description>
     
     <item>
       <title>Efficient pedigree recording for fast population genetics simulation</title>
-      <link>https://ashander.info/posts/2018/11/tree-sequence-recording-in-forward-simulations/</link>
+      <link>http://ashander.info/posts/2018/11/tree-sequence-recording-in-forward-simulations/</link>
       <pubDate>Thu, 01 Nov 2018 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2018/11/tree-sequence-recording-in-forward-simulations/</guid>
+      <guid>http://ashander.info/posts/2018/11/tree-sequence-recording-in-forward-simulations/</guid>
       <description>We describe a way to record all of the gene-trees along a segment of genome, as well as how genetic material is passed down through the pedigree, during a forwards-time population genetic simulation. To make effective use of this information, we describe both efficient storage methods for this embellished pedigree as well as a way to remove all information that is irrelevant to the genetic history of a given set of individuals, which dramatically reduces the required amount of storage space.</description>
     </item>
     
     <item>
       <title>The mechanisms of phenology: the patterns and processes of phenological shifts</title>
-      <link>https://ashander.info/posts/2018/10/phenology-mechanisms-pattern-process/</link>
+      <link>http://ashander.info/posts/2018/10/phenology-mechanisms-pattern-process/</link>
       <pubDate>Fri, 12 Oct 2018 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2018/10/phenology-mechanisms-pattern-process/</guid>
+      <guid>http://ashander.info/posts/2018/10/phenology-mechanisms-pattern-process/</guid>
       <description>From the abstract
  Species across a wide range of taxa and habitats are shifting phenological events in response to climate change. While advances are common, shifts vary in magnitude and direction within and among species, and the basis for this variation is relatively unknown. We examine previously suggested patterns of variation in phenological shifts in order to understand the cue–response mechanisms that underlie phenological change. Here, we review what is known about the mechanistic basis for nine factors proposed to predict phenological change (latitude, elevation, habitat type, trophic level, migratory strategy, ecological specialization, species’ seasonality, thermoregulatory mode, and generation time).</description>
     </item>
     
     <item>
       <title>Demographic inference in a spatially-explicit ecological model from genomic data: a proof of concept for the Mojave Desert Tortoise</title>
-      <link>https://ashander.info/posts/2018/09/spatial-genomic-inference/</link>
+      <link>http://ashander.info/posts/2018/09/spatial-genomic-inference/</link>
       <pubDate>Sun, 23 Sep 2018 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2018/09/spatial-genomic-inference/</guid>
+      <guid>http://ashander.info/posts/2018/09/spatial-genomic-inference/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Inference in complex systems</title>
-      <link>https://ashander.info/themes/inference-interests/</link>
+      <link>http://ashander.info/themes/inference-interests/</link>
       <pubDate>Sun, 23 Sep 2018 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/themes/inference-interests/</guid>
+      <guid>http://ashander.info/themes/inference-interests/</guid>
       <description>Inference of process from pattern is a major methodological challenge,
 yet increasingly available &amp;ldquo;big&amp;rdquo; phenotypic and genomic data promises to shed light on
 otherwise-difficult-to-collect vital rates in natural populations.
@@ -107,28 +107,28 @@ understand and conserve natural populations in human-dominated systems.</descrip
     
     <item>
       <title>Stochastic evolutionary demography under a fluctuating optimum phenotype</title>
-      <link>https://ashander.info/posts/2017/09/stochastic-evolutionary-rescue/</link>
+      <link>http://ashander.info/posts/2017/09/stochastic-evolutionary-rescue/</link>
       <pubDate>Wed, 27 Sep 2017 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2017/09/stochastic-evolutionary-rescue/</guid>
+      <guid>http://ashander.info/posts/2017/09/stochastic-evolutionary-rescue/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Wild salmon sustain the effectiveness of parasite control on salmon farms: conservation implications from an evolutionary ecosystem service</title>
-      <link>https://ashander.info/posts/2017/07/evosystem-services-in-salmon/</link>
+      <link>http://ashander.info/posts/2017/07/evosystem-services-in-salmon/</link>
       <pubDate>Wed, 19 Jul 2017 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2017/07/evosystem-services-in-salmon/</guid>
+      <guid>http://ashander.info/posts/2017/07/evosystem-services-in-salmon/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Eco-evolutionary dynamics in human-dominated systems</title>
-      <link>https://ashander.info/themes/eco-evolutionary-dynamics-cnh/</link>
+      <link>http://ashander.info/themes/eco-evolutionary-dynamics-cnh/</link>
       <pubDate>Sat, 19 Nov 2016 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/themes/eco-evolutionary-dynamics-cnh/</guid>
+      <guid>http://ashander.info/themes/eco-evolutionary-dynamics-cnh/</guid>
       <description>&lt;p&gt;In my Ph.D., I sought to understand the consequences of trait change due to
 evolutionary and plastic responses in changing environments, developing
 theory on population dynamics resulting from these processes in stochastic environments. Using this theory
@@ -146,19 +146,19 @@ benefits to people (which some have called &amp;ldquo;EVOsystem services&amp;rdq
     
     <item>
       <title>Predicting evolutionary rescue via evolving plasticity in stochastic environments</title>
-      <link>https://ashander.info/posts/2016/09/noisy-plastic-evolutionary-rescue/</link>
+      <link>http://ashander.info/posts/2016/09/noisy-plastic-evolutionary-rescue/</link>
       <pubDate>Wed, 21 Sep 2016 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2016/09/noisy-plastic-evolutionary-rescue/</guid>
+      <guid>http://ashander.info/posts/2016/09/noisy-plastic-evolutionary-rescue/</guid>
       <description>Phenotypic plasticity and its evolution may help evolutionary rescue in a novel and stressful environment, especially if environmental novelty reveals cryptic genetic variation that enables the evolution of increased plasticity (panels a and b in the figure below). But the environmental stochasticity ubiquitous in natural systems may alter these predictions (panel c). This might occur, for example if high plasticity amplifies phenotype-environment mismatches. Although previous studies have highlighted this potential detrimental effect of plasticity in stochastic environments, they have not investigated how it affects extinction risk in the context of evolutionary rescue and with evolving plasticity.</description>
     </item>
     
     <item>
       <title>So, you did some GLMs &amp; compared with AIC. Congrats!</title>
-      <link>https://ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/</link>
+      <link>http://ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/</link>
       <pubDate>Mon, 26 Oct 2015 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/</guid>
+      <guid>http://ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/</guid>
       <description>Here’s what you need to report in a paper about the model comparison:
 residual devianceresidual dfdelta AICAIC weightYou should also report the null deviance and degrees of freedom,maybe in a table caption.
 Thanks to Emilio Bruna for prompting this post andsuggesting its title. (Update 2015-12-14: thanks also to Ben Bolker for pointing out some issues in the first version of this post.</description>
@@ -166,28 +166,28 @@ Thanks to Emilio Bruna for prompting this post andsuggesting its title. (Update
     
     <item>
       <title>Easy alternatives to bar charts in native R graphics</title>
-      <link>https://ashander.info/posts/2015/04/barchart-alternatives-in-base-r/</link>
+      <link>http://ashander.info/posts/2015/04/barchart-alternatives-in-base-r/</link>
       <pubDate>Tue, 28 Apr 2015 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2015/04/barchart-alternatives-in-base-r/</guid>
+      <guid>http://ashander.info/posts/2015/04/barchart-alternatives-in-base-r/</guid>
       <description>It’s a long tradition in statistical graphics going from Tufte back toTukey andClevelandto advise against using bar charts. Many folks, includingme, have pejorativelycalled the common (in ecology, at least) bar chart + SE a “dynamite plot”.Although Ben Bolker has questionedthe wisdom of this sentiment, I think in most cases they’re worth avoiding. (I discuss this morein “When and here are dynamite plots appropriate” below.</description>
     </item>
     
     <item>
       <title>Overcoming the fear of failure to improve the conservation of extremely small populations</title>
-      <link>https://ashander.info/posts/2015/04/fear-of-failure-in-conservation/</link>
+      <link>http://ashander.info/posts/2015/04/fear-of-failure-in-conservation/</link>
       <pubDate>Wed, 22 Apr 2015 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2015/04/fear-of-failure-in-conservation/</guid>
+      <guid>http://ashander.info/posts/2015/04/fear-of-failure-in-conservation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Visualizing fits, inference, implications of (G)LMMs</title>
-      <link>https://ashander.info/posts/2015/04/d-rug-mixed-effects-viz/</link>
+      <link>http://ashander.info/posts/2015/04/d-rug-mixed-effects-viz/</link>
       <pubDate>Fri, 10 Apr 2015 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2015/04/d-rug-mixed-effects-viz/</guid>
+      <guid>http://ashander.info/posts/2015/04/d-rug-mixed-effects-viz/</guid>
       <description>In a live walk-through on April 10 at the Davis R-Users Group, I gave a brief presentationmotivating this topic.This post expands and cleans up the code from that talk. If you justwant the code: download the .R file.
 Updated 2015-04-28
 The point of this post isn’t the statistics of mixed models. For that, learningthe experimental design and statistics behind modern mixed models, I recommendsome relatively recent papers below.</description>
@@ -195,10 +195,10 @@ The point of this post isn’t the statistics of mixed models. For that, learnin
     
     <item>
       <title>Between-generation bet-hedging</title>
-      <link>https://ashander.info/posts/2015/01/between-generation-bet-hedging/</link>
+      <link>http://ashander.info/posts/2015/01/between-generation-bet-hedging/</link>
       <pubDate>Mon, 12 Jan 2015 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2015/01/between-generation-bet-hedging/</guid>
+      <guid>http://ashander.info/posts/2015/01/between-generation-bet-hedging/</guid>
       <description>Version of notes for discussion I led in Sebastain Schreiber&amp;rsquo;s for PBG 271 Research Conference in Ecology on &amp;ldquo;Life history evolution in stochastic environments&amp;rdquo;.
 Reading Childs et al and Stearn&amp;rsquo;s piece on Bernoulli Childs, Metcalf and Rees (2010) present a plant-focused review of bet-hedging, including a review of essential theory. As in many papers on bet-hedging, these authors distiguish between conservative and diversified strategies.
 Geometic mean fitness concept  When fitness is temporally variable, the appropriate measure of evolutionary success is the expected geometric mean growth rate of a genotype.</description>
@@ -206,106 +206,106 @@ Geometic mean fitness concept  When fitness is temporally variable, the appropri
     
     <item>
       <title>Response of fish biota to dams in the Lower Colorado River Basin: empirical findings and utility for predicting responses to climate and water use change</title>
-      <link>https://ashander.info/posts/2014/05/response-fish-biota-lower-colorado-river/</link>
+      <link>http://ashander.info/posts/2014/05/response-fish-biota-lower-colorado-river/</link>
       <pubDate>Thu, 01 May 2014 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2014/05/response-fish-biota-lower-colorado-river/</guid>
+      <guid>http://ashander.info/posts/2014/05/response-fish-biota-lower-colorado-river/</guid>
       <description>The biologists have done their jobs. We know the life cycles and habitat requirements of endangered western fishes&amp;hellip; [A] successful management program could be devised and implemented for the Grand Canyon region. Current politics stand in the way, just as surely as politics of the 1960s aided and abetted our efforts to learn enough to save this fauna. &amp;ndash; W. L. Minckley (1991)
 Over the past century, development of the Colorado River Basin for water resources changed a dynamic river into a managed system.</description>
     </item>
     
     <item>
       <title>Understanding the joint effects of plastic and evolutionary change on demography from time series</title>
-      <link>https://ashander.info/posts/2014/01/understanding-joint-effects-plastic-evolutionary-poster/</link>
+      <link>http://ashander.info/posts/2014/01/understanding-joint-effects-plastic-evolutionary-poster/</link>
       <pubDate>Wed, 01 Jan 2014 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2014/01/understanding-joint-effects-plastic-evolutionary-poster/</guid>
+      <guid>http://ashander.info/posts/2014/01/understanding-joint-effects-plastic-evolutionary-poster/</guid>
       <description>Background/Question/Methods
 In nature, selection often fluctuates, but observed changes in traits may owe not only to selection but plasticity. Further, changes in traits due to selection and to plasticity do not have equal demographic effects: the cost of selection is paid through declines in population number or growth rate. Thus, observed trajectories of trait value and population number can depend on interactions between plasticity, evolution and environment. The extent to which these interactions affect observed trajectories depends on the demographic context.</description>
     </item>
     
     <item>
       <title>Allee effect from parasite spill-back</title>
-      <link>https://ashander.info/posts/2013/09/allee-effect-spillback/</link>
+      <link>http://ashander.info/posts/2013/09/allee-effect-spillback/</link>
       <pubDate>Thu, 05 Sep 2013 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2013/09/allee-effect-spillback/</guid>
+      <guid>http://ashander.info/posts/2013/09/allee-effect-spillback/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Modifying River-Floodplain Systems: A Historical and Ecological Perspective</title>
-      <link>https://ashander.info/posts/2012/10/igert-workshop-pres/</link>
+      <link>http://ashander.info/posts/2012/10/igert-workshop-pres/</link>
       <pubDate>Mon, 01 Oct 2012 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2012/10/igert-workshop-pres/</guid>
+      <guid>http://ashander.info/posts/2012/10/igert-workshop-pres/</guid>
       <description>This presentation made 9&amp;frasl;14 at the UC Davis REACH IGERT Floodplains workshop, by Jaime Ashander, Kelly Gravuer, Megan Kelso, Mary E. Mendoza, Noam Ross</description>
     </item>
     
     <item>
       <title>Trade-Offs and Synergies in Floodplain Management — A Historical-Ecological Approach</title>
-      <link>https://ashander.info/posts/2012/05/trade-offs-synergies-floodplain-management-historical-ecological/</link>
+      <link>http://ashander.info/posts/2012/05/trade-offs-synergies-floodplain-management-historical-ecological/</link>
       <pubDate>Fri, 11 May 2012 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2012/05/trade-offs-synergies-floodplain-management-historical-ecological/</guid>
+      <guid>http://ashander.info/posts/2012/05/trade-offs-synergies-floodplain-management-historical-ecological/</guid>
       <description>This video and poster introduces our project, &amp;ldquo;Trade-Offs and Synergies in Floodplain Management - A Historical-Ecological Approach&amp;rdquo;
 Floodplains have long been favored sites for agriculture and settlement due to their fertility, flat topography, and proximity to rivers for easy transport of goods. To reduce flood risk attendant with flood plain settlement, extensive flood protection structures have been built, including elaborate networks of levees. These modifications have greatly reduced the ecological benefits that intact river-flood plain systems provide.</description>
     </item>
     
     <item>
       <title>The Central Valley long ago</title>
-      <link>https://ashander.info/posts/2011/07/unhealth-plain/</link>
+      <link>http://ashander.info/posts/2011/07/unhealth-plain/</link>
       <pubDate>Mon, 25 Jul 2011 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2011/07/unhealth-plain/</guid>
+      <guid>http://ashander.info/posts/2011/07/unhealth-plain/</guid>
       <description> The plain is unhealthy and infested with mosquitos in incredible numbers and of unparalleled ferocity &amp;mdash; William Brewer, 1861
  </description>
     </item>
     
     <item>
       <title>Aquaculture-induced changes to dynamics of a migratory host and specialist parasite: a case study of pink salmon and sea lice</title>
-      <link>https://ashander.info/posts/2011/03/line-dominance-sea-lice/</link>
+      <link>http://ashander.info/posts/2011/03/line-dominance-sea-lice/</link>
       <pubDate>Thu, 17 Mar 2011 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2011/03/line-dominance-sea-lice/</guid>
+      <guid>http://ashander.info/posts/2011/03/line-dominance-sea-lice/</guid>
       <description>Exchange of diseases between domesticated and wild animals is a rising concern for conservation. In the ocean, many species display life histories that separate juveniles from adults. For pink salmon (Oncorhynchus gorbuscha) and parasitic sea lice (Lepeophtheirus salmonis), infection of juvenile salmon in early marine life occurs near salmon sea-cage aquaculture sites and is associated with declining abundance of wild salmon. Here, we develop a theoretical model for the pink salmon/sea lice host–parasite system and use it to explore the effects of aquaculture hosts, acting as reservoirs, on dynamics.</description>
     </item>
     
     <item>
       <title>Effects of Parasite Exchange Between Wild and Farmed Salmon</title>
-      <link>https://ashander.info/posts/2010/08/effects-parasite-exchange-wild-farmed-salmon/</link>
+      <link>http://ashander.info/posts/2010/08/effects-parasite-exchange-wild-farmed-salmon/</link>
       <pubDate>Fri, 20 Aug 2010 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2010/08/effects-parasite-exchange-wild-farmed-salmon/</guid>
+      <guid>http://ashander.info/posts/2010/08/effects-parasite-exchange-wild-farmed-salmon/</guid>
       <description>Human food production activities can dominate natural systems, altering ecological and evolutionary aspects of the environment. Disease-mediated interactions are of particular concern. For example, parasites may &amp;ldquo;spill-over&amp;rdquo; from farms to wildlife. Parasites isolated on farms can evolve resistance to treatment chemicals , but &amp;ldquo;spill-back&amp;rdquo; from wildlife to farms may alter evolutionary dynamics. Here, we consider exchange of parasites (Lepeophtheirus salmonis) between wild (Oncorhynchus gorbuscha) and farmed salmon. We derive and analyze discrete-time models that implicitly include wild salmon migrations.</description>
     </item>
     
     <item>
       <title>Jobless recovery and growth-signalling autonomy</title>
-      <link>https://ashander.info/posts/2010/01/jobless-recovery/</link>
+      <link>http://ashander.info/posts/2010/01/jobless-recovery/</link>
       <pubDate>Thu, 14 Jan 2010 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2010/01/jobless-recovery/</guid>
+      <guid>http://ashander.info/posts/2010/01/jobless-recovery/</guid>
       <description>We help companies to grow by helping them to raise capital&amp;hellip; Companies that grow create wealth. This, in turn, allows people to have jobs that create more growth and more wealth. It&amp;rsquo;s a virtuous cycle. We have a social purpose. &amp;mdash; Lloyd Blankfein
  Ed Abbey wrote that Blankfein&amp;rsquo;s virtuous cycle, growth for the sake of growth, is &amp;ldquo;the logic of the cancer cell&amp;rdquo;. Whether or not you buy this anti-captialist mumbo jumbo, there is something cancerous about a jobless, finance-led recovery.</description>
     </item>
     
     <item>
       <title>Science education and uncertainty</title>
-      <link>https://ashander.info/posts/2009/12/science-is-uncertain/</link>
+      <link>http://ashander.info/posts/2009/12/science-is-uncertain/</link>
       <pubDate>Fri, 04 Dec 2009 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2009/12/science-is-uncertain/</guid>
+      <guid>http://ashander.info/posts/2009/12/science-is-uncertain/</guid>
       <description>A brand new &amp;ldquo;-gate&amp;rdquo; on the climate science front has me thinking about the relationship between science and the public. A big issue in communicating science stems from the fundamental disconnect between science as practiced and science as taught in introductory formats, e.g. in high school.
 Most people learn science as fact. The reality is emerging scientific knowledge (in fact all scientific knowledge) is uncertain. Those who disagree idealogically with the state of scientific knowlege highlight this uncertainty.</description>
     </item>
     
     <item>
       <title>Wrong, not confused</title>
-      <link>https://ashander.info/posts/2009/11/wrong-not-confused/</link>
+      <link>http://ashander.info/posts/2009/11/wrong-not-confused/</link>
       <pubDate>Tue, 10 Nov 2009 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2009/11/wrong-not-confused/</guid>
+      <guid>http://ashander.info/posts/2009/11/wrong-not-confused/</guid>
       <description>Quoting Turchin (1998) quoting Hull (1988) quoting Bacon (?) :
  In science it is better to be wrong than confused.
  The point is, though a mathematical model that purports to repesent reality will be wrong, one with clear definitions and assumptions can be helpful. Mathematical modeling is a tool to move from confusion about a process to making clear (if wrong) statements about that process.</description>
@@ -313,10 +313,10 @@ Most people learn science as fact. The reality is emerging scientific knowledge 
     
     <item>
       <title>Negative results or technical problems?</title>
-      <link>https://ashander.info/posts/2009/11/omitting-negative-results/</link>
+      <link>http://ashander.info/posts/2009/11/omitting-negative-results/</link>
       <pubDate>Mon, 02 Nov 2009 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2009/11/omitting-negative-results/</guid>
+      <guid>http://ashander.info/posts/2009/11/omitting-negative-results/</guid>
       <description>True or false: &amp;ldquo;Non-publication of negative results is extraordinarily common in science&amp;hellip;.&amp;rdquo; ?
 This comes from biomed world, specifically protein design, where some awesome claims&amp;mdash;design of protein receptors to detect TNT (the explosive) among other things&amp;mdash;have come under scrutiny. The lab involved recently retracted some other work.
 The quotation above is from Loren Looger, who was a PhD student on the project. He&amp;rsquo;s referrring to unreported instances where a designed protein didn&amp;rsquo;t bind the target and concludes that the omission &amp;ldquo;did not seem inappropriate.</description>
@@ -324,60 +324,60 @@ The quotation above is from Loren Looger, who was a PhD student on the project. 
     
     <item>
       <title>Salish Sea</title>
-      <link>https://ashander.info/posts/2009/10/salish-sea/</link>
+      <link>http://ashander.info/posts/2009/10/salish-sea/</link>
       <pubDate>Sat, 31 Oct 2009 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2009/10/salish-sea/</guid>
+      <guid>http://ashander.info/posts/2009/10/salish-sea/</guid>
       <description>&amp;ldquo;Salish Sea&amp;rdquo; is on its way to being an official name in the U.S. and Canada. Can Cascadia be far behind?
 Stefan Freelan at WWU made the beautiful map of the region here. His page has lots of details about the region and the history of the term.</description>
     </item>
     
     <item>
       <title>Whisker as integral</title>
-      <link>https://ashander.info/posts/2009/10/whisker-integral/</link>
+      <link>http://ashander.info/posts/2009/10/whisker-integral/</link>
       <pubDate>Sun, 25 Oct 2009 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2009/10/whisker-integral/</guid>
+      <guid>http://ashander.info/posts/2009/10/whisker-integral/</guid>
       <description>An NYT column reports on fur seal whiskers serving as biogeochemical records. This kind of data is more and more common, e.g. otoliths, feathers, shells. What can scientists do with it?
 I&amp;rsquo;ve mainly seen biogeochemical markers used to infer relatively static traits of individual like origin and age or to make coarse-scale statements about diet (trophic level). The fur seal study got trophic information at a bit finer scale (within-year variation), connecting that to yearly migrations.</description>
     </item>
     
     <item>
       <title>Par avion</title>
-      <link>https://ashander.info/posts/2009/10/voting-from-canada/</link>
+      <link>http://ashander.info/posts/2009/10/voting-from-canada/</link>
       <pubDate>Fri, 23 Oct 2009 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2009/10/voting-from-canada/</guid>
+      <guid>http://ashander.info/posts/2009/10/voting-from-canada/</guid>
       <description>Today I mailed my absentee ballot for the S.F. municipal election. The Good People footed the bill to send it up here to me in Edmonton, I&amp;rsquo;m not sure whether they intended to spring for the return journey.
 The only clue was the cryptic (to me) &amp;ldquo;U.S. Postage Paid. 39 USC 3406. PAR AVION&amp;rdquo; printed in the upper right hand corner of the return envelope. I&amp;rsquo;m not sure why it would say &amp;lsquo;par avion&amp;rsquo; if they weren&amp;rsquo;t intending to pay, but if they were why would it say &amp;lsquo;U.</description>
     </item>
     
     <item>
       <title>Market substitution in aquaculture</title>
-      <link>https://ashander.info/posts/2009/10/market-substitution-aquaculture/</link>
+      <link>http://ashander.info/posts/2009/10/market-substitution-aquaculture/</link>
       <pubDate>Thu, 15 Oct 2009 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2009/10/market-substitution-aquaculture/</guid>
+      <guid>http://ashander.info/posts/2009/10/market-substitution-aquaculture/</guid>
       <description>A recent article in BioScience [1] focused on the relationship between aquaculture and conservation. This topic is quite interesting to me, but it&amp;rsquo;s obviously subtle. I don&amp;rsquo;t have well-defined thoughts except that (i) aquaculture could theoretically relieve pressure on some wild fisheries and (ii) certain aquaculture operations have proven negative impacts on some ecosystems.
 This paper aims to highlight broad trends in capture and culture fisheries and quantify effects on biodiversity.</description>
     </item>
     
     <item>
       <title>Canadian lag</title>
-      <link>https://ashander.info/posts/2009/09/canadian-lag/</link>
+      <link>http://ashander.info/posts/2009/09/canadian-lag/</link>
       <pubDate>Tue, 01 Sep 2009 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2009/09/canadian-lag/</guid>
+      <guid>http://ashander.info/posts/2009/09/canadian-lag/</guid>
       <description>The Coastal Voices blog at Living Oceans had an intersting post up remarking on the disparity between Canadian&amp;rsquo;s self-image as environmental progressives and reality&amp;mdash;that they appeaer to lag the U.S. in marine protection and other conservation issues. The author wondered why this might be. I left a comment, which I&amp;rsquo;ll expand on here.
 I&amp;rsquo;ve had similar thoughts and my guess is this blind spot for domestic environmental issues owes to Canada&amp;rsquo;s: (i) vast wild-lands (natural resources), (ii) very low population and (iii) long-standing economic dependence on extraction of those resources.</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://ashander.info/etc/etc-background/</link>
+      <link>http://ashander.info/etc/etc-background/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/etc/etc-background/</guid>
+      <guid>http://ashander.info/etc/etc-background/</guid>
       <description>Title: Background Template: etc
 I am a Postdoctoral Scholar in the Shaffer lab at UCLA. Working in collaboration with Peter Ralph (now at U of Oregon), we are developing methods that use genomic data to inform demographic models of the desert tortoise (Gopherus agassizii). These models will enable us to analyze effects of scenarios for development in the Mojave desert on the population viability of the tortoise.
 In September 2016, I received my Ph.</description>
@@ -385,10 +385,10 @@ In September 2016, I received my Ph.</description>
     
     <item>
       <title></title>
-      <link>https://ashander.info/etc/etc-colaphon/</link>
+      <link>http://ashander.info/etc/etc-colaphon/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/etc/etc-colaphon/</guid>
+      <guid>http://ashander.info/etc/etc-colaphon/</guid>
       <description> Title: This site Template: etc
 A long-overdue website redesign. My overall goal is to combine personal academic website (papers, projects, CV, etc) along with a platform for quick blog-like entries (perhaps later adding disqus integration, share buttons etc).
 Currently, pull data from figshare for results. Eventually I&amp;rsquo;d like to automatically pull data from other sources (eg github).
@@ -397,10 +397,10 @@ Details  templated (jinja2) index to pull from results (papers, preprints), them
     
     <item>
       <title></title>
-      <link>https://ashander.info/etc/etc-conflicts-funding/</link>
+      <link>http://ashander.info/etc/etc-conflicts-funding/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/etc/etc-conflicts-funding/</guid>
+      <guid>http://ashander.info/etc/etc-conflicts-funding/</guid>
       <description>Title: Funding Template: etc
 My postdoctoral research in the Shaffer lab at UCLA is funded by the US Fish and Wildlife Service.
 My Ph.D. support has included a two-year traineeship with the REACH IGERT, as well as a one-year Bridge RA-ship funded through the same program.
@@ -409,10 +409,10 @@ My M.Sc. was supported largely by the Pacific Institute of Mathematical Sciences
     
     <item>
       <title></title>
-      <link>https://ashander.info/etc/etc-contact/</link>
+      <link>http://ashander.info/etc/etc-contact/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/etc/etc-contact/</guid>
+      <guid>http://ashander.info/etc/etc-contact/</guid>
       <description>Title: Contact Template: etc
 Current email (ucla dot edu):
 ashander</description>
@@ -420,10 +420,10 @@ ashander</description>
     
     <item>
       <title></title>
-      <link>https://ashander.info/presentations/mixedeffects_viz_motivation/</link>
+      <link>http://ashander.info/presentations/mixedeffects_viz_motivation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/presentations/mixedeffects_viz_motivation/</guid>
+      <guid>http://ashander.info/presentations/mixedeffects_viz_motivation/</guid>
       <description>(G)LMMs Visualization: why and howvar SLIDE_CONFIG = {// Slide settingssettings: {title: &#39;(G)LMMs Visualization: why and how&#39;,useBuilds: true,usePrettify: true,enableSlideAreas: true,enableTouch: true,},// Author informationpresenters: [{name: &#39;Jaime Ashander&#39; ,company: &#39;&#39;,gplus: &#39;&#39;,twitter: &#39;&#39;,www: &#39;&#39;,github: &#39;&#39;},]};b, strong {font-weight: bold;}em {font-style: italic;}slides  slide {-webkit-transition: all 0.</description>
     </item>
     

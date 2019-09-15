@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>post doc on Jaime Ashander</title>
-    <link>https://ashander.info/tags/post-doc/</link>
+    <link>http://ashander.info/tags/post-doc/</link>
     <description>Recent content in post doc on Jaime Ashander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
     <lastBuildDate>Thu, 06 Jun 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://ashander.info/tags/post-doc/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://ashander.info/tags/post-doc/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Predictive tools for integrated socio-environmental systems</title>
-      <link>https://ashander.info/themes/predictive-ecology-ses/</link>
+      <link>http://ashander.info/themes/predictive-ecology-ses/</link>
       <pubDate>Thu, 06 Jun 2019 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/themes/predictive-ecology-ses/</guid>
+      <guid>http://ashander.info/themes/predictive-ecology-ses/</guid>
       <description>Combining dynamical population ecology models with policy scenarios is an
 important approach in both population biology and bioeconomics.
 At its best, this approach may provide predictive understanding of future behavior.
@@ -32,10 +32,10 @@ I am Co-leading a SESYNC working group focused on addressing this gap.</descript
     
     <item>
       <title>Management of freshwater-coupled human-natural systems</title>
-      <link>https://ashander.info/themes/population-biology-in-human-dominated/</link>
+      <link>http://ashander.info/themes/population-biology-in-human-dominated/</link>
       <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/themes/population-biology-in-human-dominated/</guid>
+      <guid>http://ashander.info/themes/population-biology-in-human-dominated/</guid>
       <description>Human livelihoods and ecosystem fates are often linked by water.
 I have a longstanding interest in the population biology of rivers,
 and in using theory and methods from computational ecology to understand
@@ -47,10 +47,10 @@ leading to tradeoffs between users and potential tipping points.</description>
     
     <item>
       <title>Inference in complex systems</title>
-      <link>https://ashander.info/themes/inference-interests/</link>
+      <link>http://ashander.info/themes/inference-interests/</link>
       <pubDate>Sun, 23 Sep 2018 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/themes/inference-interests/</guid>
+      <guid>http://ashander.info/themes/inference-interests/</guid>
       <description>Inference of process from pattern is a major methodological challenge,
 yet increasingly available &amp;ldquo;big&amp;rdquo; phenotypic and genomic data promises to shed light on
 otherwise-difficult-to-collect vital rates in natural populations.

@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>stochasticity on Jaime Ashander</title>
-    <link>https://ashander.info/tags/stochasticity/</link>
+    <link>http://ashander.info/tags/stochasticity/</link>
     <description>Recent content in stochasticity on Jaime Ashander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,24 +11,24 @@
     <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
     <lastBuildDate>Sun, 23 Sep 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://ashander.info/tags/stochasticity/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://ashander.info/tags/stochasticity/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Demographic inference in a spatially-explicit ecological model from genomic data: a proof of concept for the Mojave Desert Tortoise</title>
-      <link>https://ashander.info/posts/2018/09/spatial-genomic-inference/</link>
+      <link>http://ashander.info/posts/2018/09/spatial-genomic-inference/</link>
       <pubDate>Sun, 23 Sep 2018 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2018/09/spatial-genomic-inference/</guid>
+      <guid>http://ashander.info/posts/2018/09/spatial-genomic-inference/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Inference in complex systems</title>
-      <link>https://ashander.info/themes/inference-interests/</link>
+      <link>http://ashander.info/themes/inference-interests/</link>
       <pubDate>Sun, 23 Sep 2018 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/themes/inference-interests/</guid>
+      <guid>http://ashander.info/themes/inference-interests/</guid>
       <description>Inference of process from pattern is a major methodological challenge,
 yet increasingly available &amp;ldquo;big&amp;rdquo; phenotypic and genomic data promises to shed light on
 otherwise-difficult-to-collect vital rates in natural populations.
@@ -38,19 +38,19 @@ understand and conserve natural populations in human-dominated systems.</descrip
     
     <item>
       <title>Stochastic evolutionary demography under a fluctuating optimum phenotype</title>
-      <link>https://ashander.info/posts/2017/09/stochastic-evolutionary-rescue/</link>
+      <link>http://ashander.info/posts/2017/09/stochastic-evolutionary-rescue/</link>
       <pubDate>Wed, 27 Sep 2017 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2017/09/stochastic-evolutionary-rescue/</guid>
+      <guid>http://ashander.info/posts/2017/09/stochastic-evolutionary-rescue/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Eco-evolutionary dynamics in human-dominated systems</title>
-      <link>https://ashander.info/themes/eco-evolutionary-dynamics-cnh/</link>
+      <link>http://ashander.info/themes/eco-evolutionary-dynamics-cnh/</link>
       <pubDate>Sat, 19 Nov 2016 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/themes/eco-evolutionary-dynamics-cnh/</guid>
+      <guid>http://ashander.info/themes/eco-evolutionary-dynamics-cnh/</guid>
       <description>&lt;p&gt;In my Ph.D., I sought to understand the consequences of trait change due to
 evolutionary and plastic responses in changing environments, developing
 theory on population dynamics resulting from these processes in stochastic environments. Using this theory
@@ -68,19 +68,19 @@ benefits to people (which some have called &amp;ldquo;EVOsystem services&amp;rdq
     
     <item>
       <title>Predicting evolutionary rescue via evolving plasticity in stochastic environments</title>
-      <link>https://ashander.info/posts/2016/09/noisy-plastic-evolutionary-rescue/</link>
+      <link>http://ashander.info/posts/2016/09/noisy-plastic-evolutionary-rescue/</link>
       <pubDate>Wed, 21 Sep 2016 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2016/09/noisy-plastic-evolutionary-rescue/</guid>
+      <guid>http://ashander.info/posts/2016/09/noisy-plastic-evolutionary-rescue/</guid>
       <description>Phenotypic plasticity and its evolution may help evolutionary rescue in a novel and stressful environment, especially if environmental novelty reveals cryptic genetic variation that enables the evolution of increased plasticity (panels a and b in the figure below). But the environmental stochasticity ubiquitous in natural systems may alter these predictions (panel c). This might occur, for example if high plasticity amplifies phenotype-environment mismatches. Although previous studies have highlighted this potential detrimental effect of plasticity in stochastic environments, they have not investigated how it affects extinction risk in the context of evolutionary rescue and with evolving plasticity.</description>
     </item>
     
     <item>
       <title>Between-generation bet-hedging</title>
-      <link>https://ashander.info/posts/2015/01/between-generation-bet-hedging/</link>
+      <link>http://ashander.info/posts/2015/01/between-generation-bet-hedging/</link>
       <pubDate>Mon, 12 Jan 2015 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2015/01/between-generation-bet-hedging/</guid>
+      <guid>http://ashander.info/posts/2015/01/between-generation-bet-hedging/</guid>
       <description>Version of notes for discussion I led in Sebastain Schreiber&amp;rsquo;s for PBG 271 Research Conference in Ecology on &amp;ldquo;Life history evolution in stochastic environments&amp;rdquo;.
 Reading Childs et al and Stearn&amp;rsquo;s piece on Bernoulli Childs, Metcalf and Rees (2010) present a plant-focused review of bet-hedging, including a review of essential theory. As in many papers on bet-hedging, these authors distiguish between conservative and diversified strategies.
 Geometic mean fitness concept  When fitness is temporally variable, the appropriate measure of evolutionary success is the expected geometric mean growth rate of a genotype.</description>

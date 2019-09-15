@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>migration on Jaime Ashander</title>
-    <link>https://ashander.info/tags/migration/</link>
+    <link>http://ashander.info/tags/migration/</link>
     <description>Recent content in migration on Jaime Ashander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
     <lastBuildDate>Fri, 20 Aug 2010 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://ashander.info/tags/migration/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://ashander.info/tags/migration/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Effects of Parasite Exchange Between Wild and Farmed Salmon</title>
-      <link>https://ashander.info/posts/2010/08/effects-parasite-exchange-wild-farmed-salmon/</link>
+      <link>http://ashander.info/posts/2010/08/effects-parasite-exchange-wild-farmed-salmon/</link>
       <pubDate>Fri, 20 Aug 2010 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2010/08/effects-parasite-exchange-wild-farmed-salmon/</guid>
+      <guid>http://ashander.info/posts/2010/08/effects-parasite-exchange-wild-farmed-salmon/</guid>
       <description>Human food production activities can dominate natural systems, altering ecological and evolutionary aspects of the environment. Disease-mediated interactions are of particular concern. For example, parasites may &amp;ldquo;spill-over&amp;rdquo; from farms to wildlife. Parasites isolated on farms can evolve resistance to treatment chemicals , but &amp;ldquo;spill-back&amp;rdquo; from wildlife to farms may alter evolutionary dynamics. Here, we consider exchange of parasites (Lepeophtheirus salmonis) between wild (Oncorhynchus gorbuscha) and farmed salmon. We derive and analyze discrete-time models that implicitly include wild salmon migrations.</description>
     </item>
     

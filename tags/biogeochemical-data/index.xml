@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>biogeochemical data on Jaime Ashander</title>
-    <link>https://ashander.info/tags/biogeochemical-data/</link>
+    <link>http://ashander.info/tags/biogeochemical-data/</link>
     <description>Recent content in biogeochemical data on Jaime Ashander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
     <lastBuildDate>Sun, 25 Oct 2009 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://ashander.info/tags/biogeochemical-data/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://ashander.info/tags/biogeochemical-data/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Whisker as integral</title>
-      <link>https://ashander.info/posts/2009/10/whisker-integral/</link>
+      <link>http://ashander.info/posts/2009/10/whisker-integral/</link>
       <pubDate>Sun, 25 Oct 2009 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2009/10/whisker-integral/</guid>
+      <guid>http://ashander.info/posts/2009/10/whisker-integral/</guid>
       <description>An NYT column reports on fur seal whiskers serving as biogeochemical records. This kind of data is more and more common, e.g. otoliths, feathers, shells. What can scientists do with it?
 I&amp;rsquo;ve mainly seen biogeochemical markers used to infer relatively static traits of individual like origin and age or to make coarse-scale statements about diet (trophic level). The fur seal study got trophic information at a bit finer scale (within-year variation), connecting that to yearly migrations.</description>
     </item>

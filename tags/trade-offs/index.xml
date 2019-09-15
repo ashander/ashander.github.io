@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Trade Offs on Jaime Ashander</title>
-    <link>https://ashander.info/tags/trade-offs/</link>
+    <link>http://ashander.info/tags/trade-offs/</link>
     <description>Recent content in Trade Offs on Jaime Ashander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
     <lastBuildDate>Fri, 11 May 2012 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://ashander.info/tags/trade-offs/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://ashander.info/tags/trade-offs/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Trade-Offs and Synergies in Floodplain Management — A Historical-Ecological Approach</title>
-      <link>https://ashander.info/posts/2012/05/trade-offs-synergies-floodplain-management-historical-ecological/</link>
+      <link>http://ashander.info/posts/2012/05/trade-offs-synergies-floodplain-management-historical-ecological/</link>
       <pubDate>Fri, 11 May 2012 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>https://ashander.info/posts/2012/05/trade-offs-synergies-floodplain-management-historical-ecological/</guid>
+      <guid>http://ashander.info/posts/2012/05/trade-offs-synergies-floodplain-management-historical-ecological/</guid>
       <description>This video and poster introduces our project, &amp;ldquo;Trade-Offs and Synergies in Floodplain Management - A Historical-Ecological Approach&amp;rdquo;
 Floodplains have long been favored sites for agriculture and settlement due to their fertility, flat topography, and proximity to rivers for easy transport of goods. To reduce flood risk attendant with flood plain settlement, extensive flood protection structures have been built, including elaborate networks of levees. These modifications have greatly reduced the ecological benefits that intact river-flood plain systems provide.</description>
     </item>
