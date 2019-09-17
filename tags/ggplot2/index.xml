@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ggplot2 on Jaime Ashander</title>
-    <link>http://ashander.info/tags/ggplot2/</link>
+    <link>https://www.ashander.info/tags/ggplot2/</link>
     <description>Recent content in ggplot2 on Jaime Ashander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,24 +11,24 @@
     <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
     <lastBuildDate>Tue, 28 Apr 2015 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://ashander.info/tags/ggplot2/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.ashander.info/tags/ggplot2/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Easy alternatives to bar charts in native R graphics</title>
-      <link>http://ashander.info/posts/2015/04/barchart-alternatives-in-base-r/</link>
+      <link>https://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/</link>
       <pubDate>Tue, 28 Apr 2015 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2015/04/barchart-alternatives-in-base-r/</guid>
+      <guid>https://www.ashander.info/posts/2015/04/barchart-alternatives-in-base-r/</guid>
       <description>It’s a long tradition in statistical graphics going from Tufte back toTukey andClevelandto advise against using bar charts. Many folks, includingme, have pejorativelycalled the common (in ecology, at least) bar chart + SE a “dynamite plot”.Although Ben Bolker has questionedthe wisdom of this sentiment, I think in most cases they’re worth avoiding. (I discuss this morein “When and here are dynamite plots appropriate” below.</description>
     </item>
     
     <item>
       <title>Visualizing fits, inference, implications of (G)LMMs</title>
-      <link>http://ashander.info/posts/2015/04/d-rug-mixed-effects-viz/</link>
+      <link>https://www.ashander.info/posts/2015/04/d-rug-mixed-effects-viz/</link>
       <pubDate>Fri, 10 Apr 2015 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2015/04/d-rug-mixed-effects-viz/</guid>
+      <guid>https://www.ashander.info/posts/2015/04/d-rug-mixed-effects-viz/</guid>
       <description>In a live walk-through on April 10 at the Davis R-Users Group, I gave a brief presentationmotivating this topic.This post expands and cleans up the code from that talk. If you justwant the code: download the .R file.
 Updated 2015-04-28
 The point of this post isn’t the statistics of mixed models. For that, learningthe experimental design and statistics behind modern mixed models, I recommendsome relatively recent papers below.</description>

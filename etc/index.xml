@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Etcs on Jaime Ashander</title>
-    <link>http://ashander.info/etc/</link>
+    <link>https://www.ashander.info/etc/</link>
     <description>Recent content in Etcs on Jaime Ashander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,15 +10,15 @@
     <webMaster>ashander AT rff org (Jaime Ashander)</webMaster>
     <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
     
-	<atom:link href="http://ashander.info/etc/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.ashander.info/etc/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title></title>
-      <link>http://ashander.info/etc/etc-background/</link>
+      <link>https://www.ashander.info/etc/etc-background/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/etc/etc-background/</guid>
+      <guid>https://www.ashander.info/etc/etc-background/</guid>
       <description>Title: Background Template: etc
 I am a Postdoctoral Scholar in the Shaffer lab at UCLA. Working in collaboration with Peter Ralph (now at U of Oregon), we are developing methods that use genomic data to inform demographic models of the desert tortoise (Gopherus agassizii). These models will enable us to analyze effects of scenarios for development in the Mojave desert on the population viability of the tortoise.
 In September 2016, I received my Ph.</description>
@@ -26,10 +26,10 @@ In September 2016, I received my Ph.</description>
     
     <item>
       <title></title>
-      <link>http://ashander.info/etc/etc-colaphon/</link>
+      <link>https://www.ashander.info/etc/etc-colaphon/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/etc/etc-colaphon/</guid>
+      <guid>https://www.ashander.info/etc/etc-colaphon/</guid>
       <description> Title: This site Template: etc
 A long-overdue website redesign. My overall goal is to combine personal academic website (papers, projects, CV, etc) along with a platform for quick blog-like entries (perhaps later adding disqus integration, share buttons etc).
 Currently, pull data from figshare for results. Eventually I&amp;rsquo;d like to automatically pull data from other sources (eg github).
@@ -38,10 +38,10 @@ Details  templated (jinja2) index to pull from results (papers, preprints), them
     
     <item>
       <title></title>
-      <link>http://ashander.info/etc/etc-conflicts-funding/</link>
+      <link>https://www.ashander.info/etc/etc-conflicts-funding/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/etc/etc-conflicts-funding/</guid>
+      <guid>https://www.ashander.info/etc/etc-conflicts-funding/</guid>
       <description>Title: Funding Template: etc
 My postdoctoral research in the Shaffer lab at UCLA is funded by the US Fish and Wildlife Service.
 My Ph.D. support has included a two-year traineeship with the REACH IGERT, as well as a one-year Bridge RA-ship funded through the same program.
@@ -50,10 +50,10 @@ My M.Sc. was supported largely by the Pacific Institute of Mathematical Sciences
     
     <item>
       <title></title>
-      <link>http://ashander.info/etc/etc-contact/</link>
+      <link>https://www.ashander.info/etc/etc-contact/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/etc/etc-contact/</guid>
+      <guid>https://www.ashander.info/etc/etc-contact/</guid>
       <description>Title: Contact Template: etc
 Current email (ucla dot edu):
 ashander</description>

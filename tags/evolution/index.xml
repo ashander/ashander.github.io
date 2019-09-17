@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>evolution on Jaime Ashander</title>
-    <link>http://ashander.info/tags/evolution/</link>
+    <link>https://www.ashander.info/tags/evolution/</link>
     <description>Recent content in evolution on Jaime Ashander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,52 +11,52 @@
     <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
     <lastBuildDate>Wed, 06 Mar 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://ashander.info/tags/evolution/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.ashander.info/tags/evolution/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Optimal investment to enable evolutionary rescue</title>
-      <link>http://ashander.info/posts/2019/03/optimal-investement-evolutionary-rescue/</link>
+      <link>https://www.ashander.info/posts/2019/03/optimal-investement-evolutionary-rescue/</link>
       <pubDate>Wed, 06 Mar 2019 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2019/03/optimal-investement-evolutionary-rescue/</guid>
+      <guid>https://www.ashander.info/posts/2019/03/optimal-investement-evolutionary-rescue/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Efficient pedigree recording for fast population genetics simulation</title>
-      <link>http://ashander.info/posts/2018/11/tree-sequence-recording-in-forward-simulations/</link>
+      <link>https://www.ashander.info/posts/2018/11/tree-sequence-recording-in-forward-simulations/</link>
       <pubDate>Thu, 01 Nov 2018 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2018/11/tree-sequence-recording-in-forward-simulations/</guid>
+      <guid>https://www.ashander.info/posts/2018/11/tree-sequence-recording-in-forward-simulations/</guid>
       <description>We describe a way to record all of the gene-trees along a segment of genome, as well as how genetic material is passed down through the pedigree, during a forwards-time population genetic simulation. To make effective use of this information, we describe both efficient storage methods for this embellished pedigree as well as a way to remove all information that is irrelevant to the genetic history of a given set of individuals, which dramatically reduces the required amount of storage space.</description>
     </item>
     
     <item>
       <title>The mechanisms of phenology: the patterns and processes of phenological shifts</title>
-      <link>http://ashander.info/posts/2018/10/phenology-mechanisms-pattern-process/</link>
+      <link>https://www.ashander.info/posts/2018/10/phenology-mechanisms-pattern-process/</link>
       <pubDate>Fri, 12 Oct 2018 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2018/10/phenology-mechanisms-pattern-process/</guid>
+      <guid>https://www.ashander.info/posts/2018/10/phenology-mechanisms-pattern-process/</guid>
       <description>From the abstract
  Species across a wide range of taxa and habitats are shifting phenological events in response to climate change. While advances are common, shifts vary in magnitude and direction within and among species, and the basis for this variation is relatively unknown. We examine previously suggested patterns of variation in phenological shifts in order to understand the cue–response mechanisms that underlie phenological change. Here, we review what is known about the mechanistic basis for nine factors proposed to predict phenological change (latitude, elevation, habitat type, trophic level, migratory strategy, ecological specialization, species’ seasonality, thermoregulatory mode, and generation time).</description>
     </item>
     
     <item>
       <title>Wild salmon sustain the effectiveness of parasite control on salmon farms: conservation implications from an evolutionary ecosystem service</title>
-      <link>http://ashander.info/posts/2017/07/evosystem-services-in-salmon/</link>
+      <link>https://www.ashander.info/posts/2017/07/evosystem-services-in-salmon/</link>
       <pubDate>Wed, 19 Jul 2017 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2017/07/evosystem-services-in-salmon/</guid>
+      <guid>https://www.ashander.info/posts/2017/07/evosystem-services-in-salmon/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Eco-evolutionary dynamics in human-dominated systems</title>
-      <link>http://ashander.info/themes/eco-evolutionary-dynamics-cnh/</link>
+      <link>https://www.ashander.info/themes/eco-evolutionary-dynamics-cnh/</link>
       <pubDate>Sat, 19 Nov 2016 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/themes/eco-evolutionary-dynamics-cnh/</guid>
+      <guid>https://www.ashander.info/themes/eco-evolutionary-dynamics-cnh/</guid>
       <description>&lt;p&gt;In my Ph.D., I sought to understand the consequences of trait change due to
 evolutionary and plastic responses in changing environments, developing
 theory on population dynamics resulting from these processes in stochastic environments. Using this theory
@@ -74,10 +74,10 @@ benefits to people (which some have called &amp;ldquo;EVOsystem services&amp;rdq
     
     <item>
       <title>Between-generation bet-hedging</title>
-      <link>http://ashander.info/posts/2015/01/between-generation-bet-hedging/</link>
+      <link>https://www.ashander.info/posts/2015/01/between-generation-bet-hedging/</link>
       <pubDate>Mon, 12 Jan 2015 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2015/01/between-generation-bet-hedging/</guid>
+      <guid>https://www.ashander.info/posts/2015/01/between-generation-bet-hedging/</guid>
       <description>Version of notes for discussion I led in Sebastain Schreiber&amp;rsquo;s for PBG 271 Research Conference in Ecology on &amp;ldquo;Life history evolution in stochastic environments&amp;rdquo;.
 Reading Childs et al and Stearn&amp;rsquo;s piece on Bernoulli Childs, Metcalf and Rees (2010) present a plant-focused review of bet-hedging, including a review of essential theory. As in many papers on bet-hedging, these authors distiguish between conservative and diversified strategies.
 Geometic mean fitness concept  When fitness is temporally variable, the appropriate measure of evolutionary success is the expected geometric mean growth rate of a genotype.</description>

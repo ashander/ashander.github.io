@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Publications on Jaime Ashander</title>
-    <link>http://ashander.info/results/</link>
+    <link>https://www.ashander.info/results/</link>
     <description>Recent content in Publications on Jaime Ashander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,7 +10,7 @@
     <webMaster>ashander AT rff org (Jaime Ashander)</webMaster>
     <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
     
-	<atom:link href="http://ashander.info/results/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.ashander.info/results/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

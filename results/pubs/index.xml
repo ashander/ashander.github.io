@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Publications on Jaime Ashander</title>
-    <link>http://ashander.info/results/pubs/</link>
+    <link>https://www.ashander.info/results/pubs/</link>
     <description>Recent content in Publications on Jaime Ashander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,88 +11,88 @@
     <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
     <lastBuildDate>Wed, 06 Mar 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://ashander.info/results/pubs/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.ashander.info/results/pubs/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Optimal investment to enable evolutionary rescue</title>
-      <link>http://ashander.info/posts/2019/03/optimal-investement-evolutionary-rescue/</link>
+      <link>https://www.ashander.info/posts/2019/03/optimal-investement-evolutionary-rescue/</link>
       <pubDate>Wed, 06 Mar 2019 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2019/03/optimal-investement-evolutionary-rescue/</guid>
+      <guid>https://www.ashander.info/posts/2019/03/optimal-investement-evolutionary-rescue/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Efficient pedigree recording for fast population genetics simulation</title>
-      <link>http://ashander.info/posts/2018/11/tree-sequence-recording-in-forward-simulations/</link>
+      <link>https://www.ashander.info/posts/2018/11/tree-sequence-recording-in-forward-simulations/</link>
       <pubDate>Thu, 01 Nov 2018 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2018/11/tree-sequence-recording-in-forward-simulations/</guid>
+      <guid>https://www.ashander.info/posts/2018/11/tree-sequence-recording-in-forward-simulations/</guid>
       <description>We describe a way to record all of the gene-trees along a segment of genome, as well as how genetic material is passed down through the pedigree, during a forwards-time population genetic simulation. To make effective use of this information, we describe both efficient storage methods for this embellished pedigree as well as a way to remove all information that is irrelevant to the genetic history of a given set of individuals, which dramatically reduces the required amount of storage space.</description>
     </item>
     
     <item>
       <title>The mechanisms of phenology: the patterns and processes of phenological shifts</title>
-      <link>http://ashander.info/posts/2018/10/phenology-mechanisms-pattern-process/</link>
+      <link>https://www.ashander.info/posts/2018/10/phenology-mechanisms-pattern-process/</link>
       <pubDate>Fri, 12 Oct 2018 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2018/10/phenology-mechanisms-pattern-process/</guid>
+      <guid>https://www.ashander.info/posts/2018/10/phenology-mechanisms-pattern-process/</guid>
       <description>From the abstract
  Species across a wide range of taxa and habitats are shifting phenological events in response to climate change. While advances are common, shifts vary in magnitude and direction within and among species, and the basis for this variation is relatively unknown. We examine previously suggested patterns of variation in phenological shifts in order to understand the cue–response mechanisms that underlie phenological change. Here, we review what is known about the mechanistic basis for nine factors proposed to predict phenological change (latitude, elevation, habitat type, trophic level, migratory strategy, ecological specialization, species’ seasonality, thermoregulatory mode, and generation time).</description>
     </item>
     
     <item>
       <title>Stochastic evolutionary demography under a fluctuating optimum phenotype</title>
-      <link>http://ashander.info/posts/2017/09/stochastic-evolutionary-rescue/</link>
+      <link>https://www.ashander.info/posts/2017/09/stochastic-evolutionary-rescue/</link>
       <pubDate>Wed, 27 Sep 2017 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2017/09/stochastic-evolutionary-rescue/</guid>
+      <guid>https://www.ashander.info/posts/2017/09/stochastic-evolutionary-rescue/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Wild salmon sustain the effectiveness of parasite control on salmon farms: conservation implications from an evolutionary ecosystem service</title>
-      <link>http://ashander.info/posts/2017/07/evosystem-services-in-salmon/</link>
+      <link>https://www.ashander.info/posts/2017/07/evosystem-services-in-salmon/</link>
       <pubDate>Wed, 19 Jul 2017 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2017/07/evosystem-services-in-salmon/</guid>
+      <guid>https://www.ashander.info/posts/2017/07/evosystem-services-in-salmon/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Predicting evolutionary rescue via evolving plasticity in stochastic environments</title>
-      <link>http://ashander.info/posts/2016/09/noisy-plastic-evolutionary-rescue/</link>
+      <link>https://www.ashander.info/posts/2016/09/noisy-plastic-evolutionary-rescue/</link>
       <pubDate>Wed, 21 Sep 2016 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2016/09/noisy-plastic-evolutionary-rescue/</guid>
+      <guid>https://www.ashander.info/posts/2016/09/noisy-plastic-evolutionary-rescue/</guid>
       <description>Phenotypic plasticity and its evolution may help evolutionary rescue in a novel and stressful environment, especially if environmental novelty reveals cryptic genetic variation that enables the evolution of increased plasticity (panels a and b in the figure below). But the environmental stochasticity ubiquitous in natural systems may alter these predictions (panel c). This might occur, for example if high plasticity amplifies phenotype-environment mismatches. Although previous studies have highlighted this potential detrimental effect of plasticity in stochastic environments, they have not investigated how it affects extinction risk in the context of evolutionary rescue and with evolving plasticity.</description>
     </item>
     
     <item>
       <title>Overcoming the fear of failure to improve the conservation of extremely small populations</title>
-      <link>http://ashander.info/posts/2015/04/fear-of-failure-in-conservation/</link>
+      <link>https://www.ashander.info/posts/2015/04/fear-of-failure-in-conservation/</link>
       <pubDate>Wed, 22 Apr 2015 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2015/04/fear-of-failure-in-conservation/</guid>
+      <guid>https://www.ashander.info/posts/2015/04/fear-of-failure-in-conservation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Allee effect from parasite spill-back</title>
-      <link>http://ashander.info/posts/2013/09/allee-effect-spillback/</link>
+      <link>https://www.ashander.info/posts/2013/09/allee-effect-spillback/</link>
       <pubDate>Thu, 05 Sep 2013 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2013/09/allee-effect-spillback/</guid>
+      <guid>https://www.ashander.info/posts/2013/09/allee-effect-spillback/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Aquaculture-induced changes to dynamics of a migratory host and specialist parasite: a case study of pink salmon and sea lice</title>
-      <link>http://ashander.info/posts/2011/03/line-dominance-sea-lice/</link>
+      <link>https://www.ashander.info/posts/2011/03/line-dominance-sea-lice/</link>
       <pubDate>Thu, 17 Mar 2011 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2011/03/line-dominance-sea-lice/</guid>
+      <guid>https://www.ashander.info/posts/2011/03/line-dominance-sea-lice/</guid>
       <description>Exchange of diseases between domesticated and wild animals is a rising concern for conservation. In the ocean, many species display life histories that separate juveniles from adults. For pink salmon (Oncorhynchus gorbuscha) and parasitic sea lice (Lepeophtheirus salmonis), infection of juvenile salmon in early marine life occurs near salmon sea-cage aquaculture sites and is associated with declining abundance of wild salmon. Here, we develop a theoretical model for the pink salmon/sea lice host–parasite system and use it to explore the effects of aquaculture hosts, acting as reservoirs, on dynamics.</description>
     </item>
     

@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>GLM on Jaime Ashander</title>
-    <link>http://ashander.info/tags/glm/</link>
+    <link>https://www.ashander.info/tags/glm/</link>
     <description>Recent content in GLM on Jaime Ashander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
     <lastBuildDate>Mon, 26 Oct 2015 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://ashander.info/tags/glm/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.ashander.info/tags/glm/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>So, you did some GLMs &amp; compared with AIC. Congrats!</title>
-      <link>http://ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/</link>
+      <link>https://www.ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/</link>
       <pubDate>Mon, 26 Oct 2015 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/</guid>
+      <guid>https://www.ashander.info/posts/2015/10/model-selection-glms-aic-what-to-report/</guid>
       <description>Here’s what you need to report in a paper about the model comparison:
 residual devianceresidual dfdelta AICAIC weightYou should also report the null deviance and degrees of freedom,maybe in a table caption.
 Thanks to Emilio Bruna for prompting this post andsuggesting its title. (Update 2015-12-14: thanks also to Ben Bolker for pointing out some issues in the first version of this post.</description>

@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Selected Presentations on Jaime Ashander</title>
-    <link>http://ashander.info/results/talks/</link>
+    <link>https://www.ashander.info/results/talks/</link>
     <description>Recent content in Selected Presentations on Jaime Ashander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,44 +11,44 @@
     <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
     <lastBuildDate>Mon, 13 May 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://ashander.info/results/talks/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.ashander.info/results/talks/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>EFI2019 talk: Ecological forecasts for integrated socio-environmental systems (SES)</title>
-      <link>http://ashander.info/posts/2019/05/ecological-forecasting-integrated-ses/</link>
+      <link>https://www.ashander.info/posts/2019/05/ecological-forecasting-integrated-ses/</link>
       <pubDate>Mon, 13 May 2019 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2019/05/ecological-forecasting-integrated-ses/</guid>
+      <guid>https://www.ashander.info/posts/2019/05/ecological-forecasting-integrated-ses/</guid>
       <description>&amp;lt;&amp;ndash; Click the link for a video of the talk!
 Forecasting or projecting involves a wide range of timescales and associated assumptions about human behavior. At one end of the spectrum are very-near-term physical forecasts (like the weather) and at another end are long-run, scenario-based projections (like global emissions pathways). Ecological forecasts span a range of timescales and assumptions about human behavior. The main message of this talk was that in developing and thinking about &amp;ldquo;ecological forecasting&amp;rdquo; as a discipline, we must be clear about whether and to what extent a forecast is incorporating human behavior.</description>
     </item>
     
     <item>
       <title>Understanding the joint effects of plastic and evolutionary change on demography from time series</title>
-      <link>http://ashander.info/posts/2014/01/understanding-joint-effects-plastic-evolutionary-poster/</link>
+      <link>https://www.ashander.info/posts/2014/01/understanding-joint-effects-plastic-evolutionary-poster/</link>
       <pubDate>Wed, 01 Jan 2014 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2014/01/understanding-joint-effects-plastic-evolutionary-poster/</guid>
+      <guid>https://www.ashander.info/posts/2014/01/understanding-joint-effects-plastic-evolutionary-poster/</guid>
       <description>Background/Question/Methods
 In nature, selection often fluctuates, but observed changes in traits may owe not only to selection but plasticity. Further, changes in traits due to selection and to plasticity do not have equal demographic effects: the cost of selection is paid through declines in population number or growth rate. Thus, observed trajectories of trait value and population number can depend on interactions between plasticity, evolution and environment. The extent to which these interactions affect observed trajectories depends on the demographic context.</description>
     </item>
     
     <item>
       <title>Modifying River-Floodplain Systems: A Historical and Ecological Perspective</title>
-      <link>http://ashander.info/posts/2012/10/igert-workshop-pres/</link>
+      <link>https://www.ashander.info/posts/2012/10/igert-workshop-pres/</link>
       <pubDate>Mon, 01 Oct 2012 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2012/10/igert-workshop-pres/</guid>
+      <guid>https://www.ashander.info/posts/2012/10/igert-workshop-pres/</guid>
       <description>This presentation made 9&amp;frasl;14 at the UC Davis REACH IGERT Floodplains workshop, by Jaime Ashander, Kelly Gravuer, Megan Kelso, Mary E. Mendoza, Noam Ross</description>
     </item>
     
     <item>
       <title>Trade-Offs and Synergies in Floodplain Management — A Historical-Ecological Approach</title>
-      <link>http://ashander.info/posts/2012/05/trade-offs-synergies-floodplain-management-historical-ecological/</link>
+      <link>https://www.ashander.info/posts/2012/05/trade-offs-synergies-floodplain-management-historical-ecological/</link>
       <pubDate>Fri, 11 May 2012 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2012/05/trade-offs-synergies-floodplain-management-historical-ecological/</guid>
+      <guid>https://www.ashander.info/posts/2012/05/trade-offs-synergies-floodplain-management-historical-ecological/</guid>
       <description>This video and poster introduces our project, &amp;ldquo;Trade-Offs and Synergies in Floodplain Management - A Historical-Ecological Approach&amp;rdquo;
 Floodplains have long been favored sites for agriculture and settlement due to their fertility, flat topography, and proximity to rivers for easy transport of goods. To reduce flood risk attendant with flood plain settlement, extensive flood protection structures have been built, including elaborate networks of levees. These modifications have greatly reduced the ecological benefits that intact river-flood plain systems provide.</description>
     </item>

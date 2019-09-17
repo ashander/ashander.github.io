@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ethics on Jaime Ashander</title>
-    <link>http://ashander.info/tags/ethics/</link>
+    <link>https://www.ashander.info/tags/ethics/</link>
     <description>Recent content in ethics on Jaime Ashander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
     <lastBuildDate>Mon, 02 Nov 2009 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://ashander.info/tags/ethics/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.ashander.info/tags/ethics/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Negative results or technical problems?</title>
-      <link>http://ashander.info/posts/2009/11/omitting-negative-results/</link>
+      <link>https://www.ashander.info/posts/2009/11/omitting-negative-results/</link>
       <pubDate>Mon, 02 Nov 2009 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2009/11/omitting-negative-results/</guid>
+      <guid>https://www.ashander.info/posts/2009/11/omitting-negative-results/</guid>
       <description>True or false: &amp;ldquo;Non-publication of negative results is extraordinarily common in science&amp;hellip;.&amp;rdquo; ?
 This comes from biomed world, specifically protein design, where some awesome claims&amp;mdash;design of protein receptors to detect TNT (the explosive) among other things&amp;mdash;have come under scrutiny. The lab involved recently retracted some other work.
 The quotation above is from Loren Looger, who was a PhD student on the project. He&amp;rsquo;s referrring to unreported instances where a designed protein didn&amp;rsquo;t bind the target and concludes that the omission &amp;ldquo;did not seem inappropriate.</description>

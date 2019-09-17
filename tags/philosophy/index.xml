@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>philosophy on Jaime Ashander</title>
-    <link>http://ashander.info/tags/philosophy/</link>
+    <link>https://www.ashander.info/tags/philosophy/</link>
     <description>Recent content in philosophy on Jaime Ashander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>Copyright (c) 2009 - 2019, Jaime Ashander</copyright>
     <lastBuildDate>Tue, 10 Nov 2009 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://ashander.info/tags/philosophy/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.ashander.info/tags/philosophy/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Wrong, not confused</title>
-      <link>http://ashander.info/posts/2009/11/wrong-not-confused/</link>
+      <link>https://www.ashander.info/posts/2009/11/wrong-not-confused/</link>
       <pubDate>Tue, 10 Nov 2009 00:00:00 +0000</pubDate>
       <author>ashander AT rff org (Jaime Ashander)</author>
-      <guid>http://ashander.info/posts/2009/11/wrong-not-confused/</guid>
+      <guid>https://www.ashander.info/posts/2009/11/wrong-not-confused/</guid>
       <description>Quoting Turchin (1998) quoting Hull (1988) quoting Bacon (?) :
  In science it is better to be wrong than confused.
  The point is, though a mathematical model that purports to repesent reality will be wrong, one with clear definitions and assumptions can be helpful. Mathematical modeling is a tool to move from confusion about a process to making clear (if wrong) statements about that process.</description>
