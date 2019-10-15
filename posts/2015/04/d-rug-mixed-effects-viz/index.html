@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link href="https://www.ashander.info/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://www.ashander.infocss/font-awesome.min.css" rel="stylesheet">
 
   
   
@@ -20,13 +20,13 @@
   
     <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.1/build/grids-responsive-min.css">
   
-  <link href="https://www.ashander.info/css/custom.css" rel="stylesheet" type="text/css" media="all" />
+  <link href="https://www.ashander.infocss/custom.css" rel="stylesheet" type="text/css" media="all" />
 
   
   
-  <link rel="stylesheet" href="https://www.ashander.info/highlight/styles/solarized_light.css">
+  <link rel="stylesheet" href="https://www.ashander.infohighlight/styles/solarized_light.css">
   
-  <script src="https://www.ashander.info/highlight/highlight.pack.js"></script>
+  <script src="https://www.ashander.infohighlight/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
 
   
@@ -43,16 +43,16 @@
     <div class="pure-u-11-12 pure-u-md-5-8">
         <div class="desktop pure-menu pure-menu-horizontal nav-menu">
             
-            <a href="https://www.ashander.info/" class="site-title pure-menu-heading">Jaime Ashander</a>
+            <a href="https://www.ashander.info" class="site-title pure-menu-heading">Jaime Ashander</a>
             <ul class="pure-menu-list">
                 <li class="pure-menu-item">
-                    <a href="https://www.ashander.info/themes/" class="pure-menu-link">Research</a>
+                    <a href="https://www.ashander.infothemes/" class="pure-menu-link">Research</a>
                 </li>
                 <li class="pure-menu-item">
-                    <a href="https://www.ashander.info/results/" class="pure-menu-link">Publications</a>
+                    <a href="https://www.ashander.inforesults/" class="pure-menu-link">Publications</a>
                 </li>
                 <li class="pure-menu-item">
-                    <a href="https://www.ashander.info/cv/ashander_cv.pdf" class="pure-menu-link">CV</a>
+                    <a href="https://www.ashander.infocv/ashander_cv.pdf" class="pure-menu-link">CV</a>
                 </li>
             </ul>
         </div>
@@ -61,13 +61,13 @@
             <a href="#" id="toggle-btn">&#9776;</a>
             <ul class="pure-menu-list" id="toggle-content" style="display:none;">
                 <li class="pure-menu-item">
-                    <a href="https://www.ashander.info/themes/" class="pure-menu-link">Research</a>
+                    <a href="https://www.ashander.infothemes/" class="pure-menu-link">Research</a>
                 </li>
                 <li class="pure-menu-item">
-                    <a href="https://www.ashander.info/results/" class="pure-menu-link">Publications</a>
+                    <a href="https://www.ashander.inforesults/" class="pure-menu-link">Publications</a>
                 </li>
                 <li class="pure-menu-item">
-                    <a href="https://www.ashander.info/cv/ashander_cv.pdf" class="pure-menu-link">CV</a>
+                    <a href="https://www.ashander.infocv/ashander_cv.pdf" class="pure-menu-link">CV</a>
                 </li>
             </ul>
         </div>
@@ -89,7 +89,7 @@
                     |
                     
                     
-                    tags:<a href="https://www.ashander.info/tags/visualization">visualization</a> <a href="https://www.ashander.info/tags/lattice">lattice</a> <a href="https://www.ashander.info/tags/model-checking">model checking</a> <a href="https://www.ashander.info/tags/statistical-graphics">statistical graphics</a> <a href="https://www.ashander.info/tags/glmm">GLMM</a> <a href="https://www.ashander.info/tags/r">R</a> <a href="https://www.ashander.info/tags/ggplot2">ggplot2</a> 
+                    tags:<a href="https://www.ashander.infotags/visualization">visualization</a> <a href="https://www.ashander.infotags/lattice">lattice</a> <a href="https://www.ashander.infotags/model-checking">model checking</a> <a href="https://www.ashander.infotags/statistical-graphics">statistical graphics</a> <a href="https://www.ashander.infotags/glmm">GLMM</a> <a href="https://www.ashander.infotags/r">R</a> <a href="https://www.ashander.infotags/ggplot2">ggplot2</a> 
                     
 
                     
@@ -262,22 +262,22 @@ VarCorr(m2)</code></pre>
 ##  -0.969  0.290
 ## </code></pre>
 <pre class="r"><code>plot(m2, type = c(&quot;p&quot;, &quot;smooth&quot;) , id = 0.05) # id outliers</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lme-models-1.png" width="672" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/lme-models-1.png" width="672" /></p>
 <pre class="r"><code>plot(m2, sqrt(abs(resid(.))) ~ fitted(.), type=c(&#39;p&#39;, &#39;smooth&#39;))</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lme-models-2.png" width="672" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/lme-models-2.png" width="672" /></p>
 <pre class="r"><code>## slight increase in resid w/ fitted
 
 plot(m2, resid(.) ~ fitted(.) | block, abline=c(h = 0),  lty = 1,  type = c(&quot;p&quot;, &quot;smooth&quot;)) # per block</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lme-models-3.png" width="672" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/lme-models-3.png" width="672" /></p>
 <pre class="r"><code>plot(m2,  sqrt(abs(resid(.))) ~ fitted(.) | block,     type=c(&quot;p&quot;, &quot;smooth&quot;)) # 2 blocks behave  badly</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lme-models-4.png" width="672" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/lme-models-4.png" width="672" /></p>
 <pre class="r"><code>## block 4 is not great well behaved :(
 lattice::qqmath(m2)</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lme-models-5.png" width="672" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/lme-models-5.png" width="672" /></p>
 <pre class="r"><code>## look at random effect
 lattice::dotplot(ranef(m2, condVar=TRUE))</code></pre>
 <pre><code>## $block</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lme-models-6.png" width="672" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/lme-models-6.png" width="672" /></p>
 <pre class="r"><code>##were we to have LOTS of RE, using lattice::qqmath for y axis spacing
 ##based on quantiles of standard normal -- is better to distinguish
 ##important few from &quot;trivial many&quot;
@@ -310,7 +310,7 @@ system.time(m1.prall &lt;- profile(m1))</code></pre>
 <pre><code>##    user  system elapsed 
 ##    0.27    0.00    0.26</code></pre>
 <pre class="r"><code>lattice::xyplot(m1.prall)</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/linear-profile-based-diagnostics-1.png" width="960" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/linear-profile-based-diagnostics-1.png" width="960" /></p>
 <pre class="r"><code># lattice::xyplot(m1.prre) # for only re
 # the &#39;profile zeta plot&#39; linear indicates a quadratic
 # likelihood profile, and so Wald approximations for CI will work well
@@ -318,13 +318,13 @@ system.time(m1.prall &lt;- profile(m1))</code></pre>
 # scale
 
 lattice::densityplot(m1.prall)</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/linear-profile-based-diagnostics-2.png" width="960" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/linear-profile-based-diagnostics-2.png" width="960" /></p>
 <pre class="r"><code># the &#39;profile density plot&#39;
 # approximate probability density functions of the parameters
 # -- distros underlying profile confidence intervals
 # linear zeta plot &lt;==&gt; gaussian densities</code></pre>
 <pre class="r"><code>lattice::splom(m1.prre)</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/pairs-plot-1.png" width="672" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/pairs-plot-1.png" width="672" /></p>
 <pre class="r"><code># the &#39;profile pairs plot&#39;
 # bivariate confidence regions based on profile
 # &#39;profile traces&#39; -- cross hairs -- are conditional estimates  of one parameter given the other
@@ -406,7 +406,7 @@ lattice::dotplot(coef ~ mean, m1_wald_ci,
                    panel.segments(m1_wald_ci$lwr, y, m1_wald_ci$upr, y)
                    panel.abline(v=0, lty=2)
                  })</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/confint-lattice-1.png" width="960" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/confint-lattice-1.png" width="960" /></p>
 </div>
 <div id="confidence-intervals-rolling-your-own" class="section level2">
 <h2>Confidence Intervals – rolling your own</h2>
@@ -461,7 +461,7 @@ if(require(ggplot2)) {
 ## 38 message(s): boundary (singular) fit: see ?isSingular
 ## 1 warning(s): Model failed to converge with max|grad| = 0.00445866 (tol = 0.002, component 1)</code></pre>
 <pre><code>## Warning: Removed 2 rows containing missing values (geom_linerange).</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/ryo-1.png" width="960" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/ryo-1.png" width="960" /></p>
 <pre class="r"><code>##   strong effect of nutrient homogeneity
 ##   effect of adding lots of water
 ## nutrient has some effect</code></pre>
@@ -537,16 +537,16 @@ system.time(gm0 &lt;- glmer(cop ~   sizediff_scl2   + (1 | Series) + (1 | Male) 
 ## gm0  5 159.34 176.47 -74.673   149.34                         
 ## gm1  7 162.92 186.90 -74.460   148.92 0.4251      2     0.8085</code></pre>
 <pre class="r"><code>plot(gm0, type=c(&quot;p&quot;), id = 0.05 )</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lizard-crit-1.png" width="672" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/lizard-crit-1.png" width="672" /></p>
 <pre class="r"><code>## non useful visually but with id = 0.05 gives sense of outlier
 ## see ?plot.merMod for explanation of test run
 
 ## it&#39;s more useful to plot residuals in GLM logistic combined across grouping factors
 ## or binned fitted values
 plot(gm0,  factor(Trial) ~ resid(., type=&#39;pearson&#39;),  abline=c(v=0), lty=2)</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lizard-crit-2.png" width="672" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/lizard-crit-2.png" width="672" /></p>
 <pre class="r"><code>plot(gm0,  factor(Series) ~ resid(., type=&#39;pearson&#39;),  abline=c(v=0), lty=2)</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lizard-crit-3.png" width="672" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/lizard-crit-3.png" width="672" /></p>
 <pre class="r"><code>## better than default eh
 
 ## second plot suggests some issue with series, indicating we may want to
@@ -566,7 +566,7 @@ if(require(gridExtra)) {
   }</code></pre>
 <pre><code>## Loading required package: gridExtra</code></pre>
 <pre><code>## Warning: package &#39;gridExtra&#39; was built under R version 3.6.1</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lizard-crit-4.png" width="672" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/lizard-crit-4.png" width="672" /></p>
 <pre class="r"><code>## useful if you have a lot of RE to draw attention to strong ones
 ## maybe latter == dot = sample size?
 
@@ -585,11 +585,11 @@ system.time(#
 #   user  system elapsed
 #344.092   0.539 344.613</code></pre>
 <pre class="r"><code>lattice::xyplot(logProf(gm0.prall))</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lizard-plotting-1.png" width="672" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/lizard-plotting-1.png" width="672" /></p>
 <pre class="r"><code>lattice::densityplot(gm0.prall)</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lizard-plotting-2.png" width="672" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/lizard-plotting-2.png" width="672" /></p>
 <pre class="r"><code>lattice::splom(gm0.prall)</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/lizard-plotting-3.png" width="672" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/lizard-plotting-3.png" width="672" /></p>
 </div>
 </div>
 <div id="confidence-intervals-1" class="section level1">
@@ -607,7 +607,7 @@ lattice::dotplot(coef ~ mean, ci_df,
             panel.segments(ci_df$lwr, y, ci_df$upr, y)
             panel.abline(v=0, lty=2)
         })</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/quick-ci-1.png" width="672" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/quick-ci-1.png" width="672" /></p>
 <p>Rolling your own again</p>
 <pre class="r"><code>if(require(ggplot2)) {
   gm0_ci &lt;- compare_CI_df(gm0.prall, gm0)
@@ -625,12 +625,12 @@ lattice::dotplot(coef ~ mean, ci_df,
   } else {
     lattice::dotplot(parameter ~ c(`2.5 %`, `97.5 %`) | type , gm0_bnd)
       }</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/ryo-lizard-ci-1.png" width="672" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/ryo-lizard-ci-1.png" width="672" /></p>
 <p>Because the fixed effect parameter on size difference and the random effect
 variance are on such different scales, I make two plots</p>
 <pre class="r"><code>if(require(ggplot2))
     g + scale_y_log10()</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/low-magnitude-param-1.png" width="672" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/low-magnitude-param-1.png" width="672" /></p>
 <div id="quick-predictions" class="section level2">
 <h2>quick predictions</h2>
 <p>Again, the quickest way to visualize predictions is with <code>lsmeans</code>.
@@ -662,7 +662,7 @@ gm0_lsm &lt;-    lsmeans(gm0, ~ sizediff_scl2,
 <pre><code>## Warning in vcov.merMod(object, correlation = FALSE): variance-covariance matrix computed from finite-difference Hessian is
 ## not positive definite or contains NA values: falling back to var-cov estimated from RX</code></pre>
 <pre class="r"><code>plot(gm0_lsm, type = &#39;response&#39;, ylab = &#39;scaled size diff&#39;, xlab = &#39;probability of copulation&#39;)</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/quick-vis-glmm-1.png" width="672" />
+<p><img src="/notes/mixedeffects_viz_files/figure-html/quick-vis-glmm-1.png" width="672" />
 ## customized predictions</p>
 <p>The quick plots using <code>lsmeans</code> are great, but they assume Wald confidence intervals
 and don’t account for random effects.
@@ -701,7 +701,7 @@ gridExtra::grid.arrange(g1, g2, ncol=2)
     points(pred_ind ~ SizeDiff, d2_pred, pch=19, cex=.5, col=&#39;darkgray&#39;)
     points(pred_overall_gen ~ SizeDiff, d2_pred, pch=19, cex=.5)
     }</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/prediction-visual-1.png" width="960" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/prediction-visual-1.png" width="960" /></p>
 <p>The plot on the left above shows predictions for various series of experimental
 trials, and the raw data. The plot on the right shows the overall fit (orange line
 – the grand mean with no random effects influencing the prediction),
@@ -778,7 +778,7 @@ pp_comp(re_ones, function(x) sum(x$cop),
           d2, main=&#39;% cop - RE&#39;, xlim=c(0, .8))
   pp_comp(re_cvar, function(x) var(x$cop),
           d2, main=&#39;var - all RE&#39;)</code></pre>
-<p><img src="/newsite/notes/mixedeffects_viz_files/figure-html/post-pred-1.png" width="672" /></p>
+<p><img src="/notes/mixedeffects_viz_files/figure-html/post-pred-1.png" width="672" /></p>
 <pre class="r"><code>par(op)</code></pre>
 <p>In this case I’ve plotted the simulated distributions of the number of ones,
 zeros, the proportion of copulations, and the variance in observed copulations
@@ -870,8 +870,8 @@ my understanding of plotting and fitting mixed models.<a href="#fnref3" class="f
 </div>
 
 
-<script src="https://www.ashander.info/js/jquery.min.js" type="text/javascript"></script>
-<script src="https://www.ashander.info/js/jquery.timeago.js" type="text/javascript"></script>
+<script src="https://www.ashander.infojs/jquery.min.js" type="text/javascript"></script>
+<script src="https://www.ashander.infojs/jquery.timeago.js" type="text/javascript"></script>
 <script type="text/javascript">
   $(function(){
     $("time.timeago").timeago();

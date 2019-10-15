@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link href="https://www.ashander.info/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://www.ashander.infocss/font-awesome.min.css" rel="stylesheet">
 
   
   
@@ -20,13 +20,13 @@
   
     <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.1/build/grids-responsive-min.css">
   
-  <link href="https://www.ashander.info/css/custom.css" rel="stylesheet" type="text/css" media="all" />
+  <link href="https://www.ashander.infocss/custom.css" rel="stylesheet" type="text/css" media="all" />
 
   
   
-  <link rel="stylesheet" href="https://www.ashander.info/highlight/styles/solarized_light.css">
+  <link rel="stylesheet" href="https://www.ashander.infohighlight/styles/solarized_light.css">
   
-  <script src="https://www.ashander.info/highlight/highlight.pack.js"></script>
+  <script src="https://www.ashander.infohighlight/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
 
   
@@ -43,16 +43,16 @@
     <div class="pure-u-11-12 pure-u-md-5-8">
         <div class="desktop pure-menu pure-menu-horizontal nav-menu">
             
-            <a href="https://www.ashander.info/" class="site-title pure-menu-heading">Jaime Ashander</a>
+            <a href="https://www.ashander.info" class="site-title pure-menu-heading">Jaime Ashander</a>
             <ul class="pure-menu-list">
                 <li class="pure-menu-item">
-                    <a href="https://www.ashander.info/themes/" class="pure-menu-link">Research</a>
+                    <a href="https://www.ashander.infothemes/" class="pure-menu-link">Research</a>
                 </li>
                 <li class="pure-menu-item">
-                    <a href="https://www.ashander.info/results/" class="pure-menu-link">Publications</a>
+                    <a href="https://www.ashander.inforesults/" class="pure-menu-link">Publications</a>
                 </li>
                 <li class="pure-menu-item">
-                    <a href="https://www.ashander.info/cv/ashander_cv.pdf" class="pure-menu-link">CV</a>
+                    <a href="https://www.ashander.infocv/ashander_cv.pdf" class="pure-menu-link">CV</a>
                 </li>
             </ul>
         </div>
@@ -61,13 +61,13 @@
             <a href="#" id="toggle-btn">&#9776;</a>
             <ul class="pure-menu-list" id="toggle-content" style="display:none;">
                 <li class="pure-menu-item">
-                    <a href="https://www.ashander.info/themes/" class="pure-menu-link">Research</a>
+                    <a href="https://www.ashander.infothemes/" class="pure-menu-link">Research</a>
                 </li>
                 <li class="pure-menu-item">
-                    <a href="https://www.ashander.info/results/" class="pure-menu-link">Publications</a>
+                    <a href="https://www.ashander.inforesults/" class="pure-menu-link">Publications</a>
                 </li>
                 <li class="pure-menu-item">
-                    <a href="https://www.ashander.info/cv/ashander_cv.pdf" class="pure-menu-link">CV</a>
+                    <a href="https://www.ashander.infocv/ashander_cv.pdf" class="pure-menu-link">CV</a>
                 </li>
             </ul>
         </div>
@@ -89,7 +89,7 @@
                     |
                     
                     
-                    tags:<a href="https://www.ashander.info/tags/r">R</a> <a href="https://www.ashander.info/tags/statistical-graphics">statistical graphics</a> <a href="https://www.ashander.info/tags/visualization">visualization</a> <a href="https://www.ashander.info/tags/ggplot2">ggplot2</a> <a href="https://www.ashander.info/tags/lattice">lattice</a> 
+                    tags:<a href="https://www.ashander.infotags/r">R</a> <a href="https://www.ashander.infotags/statistical-graphics">statistical graphics</a> <a href="https://www.ashander.infotags/visualization">visualization</a> <a href="https://www.ashander.infotags/ggplot2">ggplot2</a> <a href="https://www.ashander.infotags/lattice">lattice</a> 
                     
 
                     
@@ -145,7 +145,7 @@ regions, but the specifics here don’t matter. The data were first published in
 region.</p>
 <p>First, a bad ol’ dynamite, er bar plot:</p>
 <div class="figure"><span id="fig:barplot"></span>
-<img src="/newsite/notes/barchart-alternatives-in-base-R_files/figure-html/barplot-1.png" alt="bad bar plot" width="672" />
+<img src="/notes/barchart-alternatives-in-base-R_files/figure-html/barplot-1.png" alt="bad bar plot" width="672" />
 <p class="caption">
 Figure 1: bad bar plot
 </p>
@@ -167,7 +167,7 @@ point_col &lt;- gray(0.4)
 stripchart(uptake ~ conc_f, CO2, method=&#39;jitter&#39;, pch=19, col=point_col,
            xlab=&#39;concentration&#39;, ylim=y_limits, vertical=TRUE)</code></pre>
 <div class="figure"><span id="fig:scatter-v-factors"></span>
-<img src="/newsite/notes/barchart-alternatives-in-base-R_files/figure-html/scatter-v-factors-1.png" alt="stripchart: a scatter plot v factors" width="672" />
+<img src="/notes/barchart-alternatives-in-base-R_files/figure-html/scatter-v-factors-1.png" alt="stripchart: a scatter plot v factors" width="672" />
 <p class="caption">
 Figure 2: stripchart: a scatter plot v factors
 </p>
@@ -180,7 +180,7 @@ This more clearly shows the values that were observed more than once:</p>
 <pre class="r"><code>stripchart(uptake ~ conc_f, CO2, method=&#39;stack&#39;, pch=19, col=point_col,
            xlab=&#39;concentration&#39;,  ylim=y_limits, vertical=TRUE)</code></pre>
 <div class="figure"><span id="fig:stripchart-wilkinson"></span>
-<img src="/newsite/notes/barchart-alternatives-in-base-R_files/figure-html/stripchart-wilkinson-1.png" alt="stripchart with stacking" width="672" />
+<img src="/notes/barchart-alternatives-in-base-R_files/figure-html/stripchart-wilkinson-1.png" alt="stripchart with stacking" width="672" />
 <p class="caption">
 Figure 3: stripchart with stacking
 </p>
@@ -191,7 +191,7 @@ Figure 3: stripchart with stacking
 <p>For box plots, R makes it very easy.</p>
 <pre class="r"><code>boxplot( uptake ~ conc_f , CO2, ylab=&#39;uptake&#39;, xlab=&#39;concentration&#39;, ylim=y_limits)</code></pre>
 <div class="figure"><span id="fig:boxplot"></span>
-<img src="/newsite/notes/barchart-alternatives-in-base-R_files/figure-html/boxplot-1.png" alt="boxplot" width="672" />
+<img src="/notes/barchart-alternatives-in-base-R_files/figure-html/boxplot-1.png" alt="boxplot" width="672" />
 <p class="caption">
 Figure 4: boxplot
 </p>
@@ -205,7 +205,7 @@ boxes using <code>stripchart</code> with <code>add = TRUE, vertical = TRUE</code
              pch = 19)
 }</code></pre>
 <div class="figure"><span id="fig:boxplot-overplotted"></span>
-<img src="/newsite/notes/barchart-alternatives-in-base-R_files/figure-html/boxplot-overplotted-1.png" alt="boxplot with points overplotted" width="672" />
+<img src="/notes/barchart-alternatives-in-base-R_files/figure-html/boxplot-overplotted-1.png" alt="boxplot with points overplotted" width="672" />
 <p class="caption">
 Figure 5: boxplot with points overplotted
 </p>
@@ -220,7 +220,7 @@ treatments in your raw data, and even overplot with <code>stripchart</code>!</p>
              pch = 19)
 }</code></pre>
 <div class="figure"><span id="fig:complex-boxplot"></span>
-<img src="/newsite/notes/barchart-alternatives-in-base-R_files/figure-html/complex-boxplot-1.png" alt="complex bar plot" width="672" />
+<img src="/notes/barchart-alternatives-in-base-R_files/figure-html/complex-boxplot-1.png" alt="complex bar plot" width="672" />
 <p class="caption">
 Figure 6: complex bar plot
 </p>
@@ -254,7 +254,7 @@ use <code>split</code> and <code>lines</code>:</p>
     lines(extra ~ group, ID)
 }</code></pre>
 <div class="figure"><span id="fig:paired-points"></span>
-<img src="/newsite/notes/barchart-alternatives-in-base-R_files/figure-html/paired-points-1.png" alt="paired points connected by lines and marked by points" width="672" />
+<img src="/notes/barchart-alternatives-in-base-R_files/figure-html/paired-points-1.png" alt="paired points connected by lines and marked by points" width="672" />
 <p class="caption">
 Figure 7: paired points connected by lines and marked by points
 </p>
@@ -268,7 +268,7 @@ the initial call to <code>stripchart</code>:</p>
     lines(extra ~ group, ID)
 }</code></pre>
 <div class="figure"><span id="fig:paired-lines"></span>
-<img src="/newsite/notes/barchart-alternatives-in-base-R_files/figure-html/paired-lines-1.png" alt="paired locations connected by lines" width="672" />
+<img src="/notes/barchart-alternatives-in-base-R_files/figure-html/paired-lines-1.png" alt="paired locations connected by lines" width="672" />
 <p class="caption">
 Figure 8: paired locations connected by lines
 </p>
@@ -287,7 +287,7 @@ for(v in levels(CO2$Treatment)) {
   hist(subs$uptake, main = v, col = point_col, xlab = &#39;uptake&#39;, xlim = y_limits)
   }</code></pre>
 <div class="figure"><span id="fig:histo"></span>
-<img src="/newsite/notes/barchart-alternatives-in-base-R_files/figure-html/histo-1.png" alt="histogram of uptake" width="672" />
+<img src="/notes/barchart-alternatives-in-base-R_files/figure-html/histo-1.png" alt="histogram of uptake" width="672" />
 <p class="caption">
 Figure 9: histogram of uptake
 </p>
@@ -381,8 +381,8 @@ to zero.</p>
 </div>
 
 
-<script src="https://www.ashander.info/js/jquery.min.js" type="text/javascript"></script>
-<script src="https://www.ashander.info/js/jquery.timeago.js" type="text/javascript"></script>
+<script src="https://www.ashander.infojs/jquery.min.js" type="text/javascript"></script>
+<script src="https://www.ashander.infojs/jquery.timeago.js" type="text/javascript"></script>
 <script type="text/javascript">
   $(function(){
     $("time.timeago").timeago();

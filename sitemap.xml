@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>https://www.ashander.info/themes/</loc>
+    <lastmod>2019-06-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.ashander.info/tags/applied-ecology/</loc>
     <lastmod>2019-06-06T00:00:00+00:00</lastmod>
   </url>
@@ -34,11 +39,6 @@
   
   <url>
     <loc>https://www.ashander.info/themes/predictive-ecology-ses/</loc>
-    <lastmod>2019-06-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.ashander.info/themes/</loc>
     <lastmod>2019-06-06T00:00:00+00:00</lastmod>
   </url>
   
@@ -713,15 +713,15 @@
   </url>
   
   <url>
+    <loc>https://www.ashander.info/results/</loc>
+  </url>
+  
+  <url>
     <loc>https://www.ashander.info/etc/</loc>
   </url>
   
   <url>
     <loc>https://www.ashander.info/presentations/</loc>
-  </url>
-  
-  <url>
-    <loc>https://www.ashander.info/results/</loc>
   </url>
   
 </urlset>
